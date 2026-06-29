@@ -78,8 +78,7 @@ https://www.progressoffices.com/
 ### 🧩 Entity Relationship Diagram (ERD)
 
 ```
-<img width="1536" height="1024" alt="progressCenter ERD" src="https://github.com/user-attachments/assets/078754c3-2618-4bb2-b6e3-9563c978a0a1" />
-
+![ERD](images/ERD.png)
 ```
 
 ## 🚀 Planned Models
@@ -111,10 +110,3 @@ https://www.progressoffices.com/
 * Admin analytics and reporting
 * Online payments for office services
 
----
-
-## 👩‍💻 Developer
-
-**Manar Khalil**
-
-Software Engineering Intern
