@@ -78,7 +78,8 @@ https://www.progressoffices.com/
 ### 🧩 Entity Relationship Diagram (ERD)
 
 ```
-![Progress Business Center ERD](assets/erd.png)
+<img width="1536" height="1024" alt="progressCenter ERD"
+src="https://github.com/user-attachments/assets/a862b5bf-00ed-4a55-b063-f95ada98bf91" />
 ```
 
 ## 🚀 Planned Models
