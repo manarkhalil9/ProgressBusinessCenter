@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Progress Business Center</title>
+
+    <!-- Simple styling (you can upgrade later) -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/about/">About</a>
+    </nav>
+
+    <hr>
+
+    <!-- PAGE CONTENT WILL GO HERE -->
+    {% block content %}
+    {% endblock %}
+
+    <hr>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Progress Business Centre. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
