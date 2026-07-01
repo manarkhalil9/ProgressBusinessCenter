@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>
+    <a href="{% url 'service_detail' service.id %}">
+        {{ service.title }}
+    </a>
+</h2>
+<p>{{ service.description }}</p>
+<p><strong>Available:</strong>{{ service.available }}</p>
+
+{% endblock %}

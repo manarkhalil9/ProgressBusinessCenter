@@ -4,4 +4,18 @@
 
 <h1>Our Services</h1>
 
+{% for service in services %}
+
+<div>
+    <h2>{{ service.title }}</h2>
+    <p>{{ service.description }}</p>
+
+    <hr>
+</div>
+
+{% empty %}
+<p>No services are curently available.</p>
+
+{% endfor %}
+
 {% endblock %}

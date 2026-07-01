@@ -13,4 +13,9 @@ def about(request):
 def services_index(request):
     services = Service.objects.all()
 
-    return render(request, 'services/index.html', {'services':services})
+    return render(request, 'services/index.html', {'services' : services})
+
+def service_detail(request, service_id):
+    service = Service.objects.get(id=service_id)
+
+    return render(request, 'services/detail.html', {'service' : service})
