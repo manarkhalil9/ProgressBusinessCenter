@@ -2,12 +2,13 @@
 
 {% block content %}
 
-<h2>
-    <a href="{% url 'service_detail' service.id %}">
-        {{ service.title }}
-    </a>
-</h2>
+<h1>{{ service.title }}</h1>
 <p>{{ service.description }}</p>
-<p><strong>Available:</strong>{{ service.available }}</p>
+
+{% if service.available %}
+<p>Available</p>
+{% else %}
+<p>Unavailable</p>
+{% endif %}
 
 {% endblock %}

@@ -1,21 +1,26 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import Service
 
 # Create your views here.
 
-
+# home page
 def home(request):
     return render(request, 'index.html')
 
+#about page
 def about(request):
     return render(request, 'about.html')
 
-def services_index(request):
-    services = Service.objects.all()
+#services
 
-    return render(request, 'services/index.html', {'services' : services})
+#list services 
+class ServiceList(ListView):
+    model = Service
+    template_name = 'services/index.html'
+    context_object_name = 'services'
 
-def service_detail(request, service_id):
-    service = Service.objects.get(id=service_id)
-
-    return render(request, 'services/detail.html', {'service' : service})
+class ServiceDetail(DetailView):
+    model = Service
+    template_name = 'services/detail.html'
+    context_object_name = 'service'

@@ -6,12 +6,15 @@
 
 {% for service in services %}
 
+<a href="{% url 'service_detail' service.id %}">
+
 <div>
     <h2>{{ service.title }}</h2>
     <p>{{ service.description }}</p>
 
     <hr>
 </div>
+</a>
 
 {% empty %}
 <p>No services are curently available.</p>
