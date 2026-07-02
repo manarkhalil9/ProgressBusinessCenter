@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+
 # services
 class Service(models.Model):
     title = models.CharField(max_length=100)
@@ -31,3 +33,93 @@ class Branch(models.Model):
         return self.name
     
 # meeting rooms
+class MeetingRoom(models.Model):
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, related_name='meeting_rooms')
+    name = models.CharField(max_length=100)
+    capacity = models.PositiveIntegerField()
+    price_per_hour = models.DecimalField(max_digits=8, decimal_places=2)
+    available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+    
+# events
+class Event(models.Model):
+    title = models.CharField(max_length=150)
+    description = models.TextField()
+    event_date = models.DateField()
+    location = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.title
+    
+# gallery
+class GalleryImage(models.Model):
+    title = models.CharField(max_length=100)
+    image_url = models.URLField()
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+# FAQ
+class FAQ(models.Model):
+    question = models.CharField(max_length=250)
+    answer = models.TextField()
+
+    def __str__(self):
+        return self.question
+    
+# contact messages
+class ContactMessage(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name
+    
+# visit requests
+class VisitRequest(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+
+    preferred_date = models.DateField()
+    preferred_time = models.TimeField()
+
+    notes = models.TextField(blank=True)
+
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name
+    
+# business registrations
+class BusinessRegistration(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=150)
+    owner_name = models.CharField(max_length=100)
+    commercial_registration = models.CharField(max_length=100)
+    business_type = models.CharField(max_length=100)
+    services = models.ManyToManyField(Service, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.company_name
+
+# referrals
+class Referral(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+
+    referred_company = models.CharField(max_length=150)
+
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name
