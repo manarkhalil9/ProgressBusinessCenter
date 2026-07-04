@@ -15,6 +15,10 @@
     <!-- NAVBAR -->
 <nav>
 
+    {% if user.is_authenticated %}
+
+    <a href="/accounts/logout/">Logout</a>
+
     <a href="{% url 'home' %}">Home</a> |
 
     <a href="{% url 'about' %}">About</a> |
@@ -32,6 +36,13 @@
     <a href="{% url 'gallery' %}">Gallery</a> |
 
     <a href="{% url 'faqs' %}">FAQ</a>
+
+    {% else %}
+
+        <a href="/accounts/login/">Login</a>
+        <a href="/accounts/signup/">Signup</a>
+
+    {% endif %}
 
 </nav>
 

@@ -67,4 +67,7 @@ urlpatterns = [
 
     # referral
     path('referral/', views.ReferralCreateView.as_view(), name='referral'),
+
+    # signup
+    path('accounts/signup', views.signup, name='signup'),
 ]
