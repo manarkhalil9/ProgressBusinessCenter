@@ -4,16 +4,31 @@
 
 <h1>Meeting Rooms</h1>
 
-{% for room in rooms %}
-
-<div>
-    <h2>{{ room.name }}</h2>
-    <p>Capacity: {{ room.capacity }}</p>
-    <p>Price: {{ room.price_per_hour }}</p>
-    <p>Available: {{ room.available }}</p>
-</div>
+<a href="{% url 'room_create' %}">Create Room</a>
 
 <hr>
+
+{% for room in rooms %}
+
+<h2>
+
+<a href="{% url 'room_detail' room.pk %}">
+
+{{ room.name }}
+
+</a>
+
+</h2>
+
+<p>Capacity: {{ room.capacity }}</p>
+
+<p>Price: {{ room.price_per_hour }}</p>
+
+<hr>
+
+{% empty %}
+
+<p>No rooms available.</p>
 
 {% endfor %}
 

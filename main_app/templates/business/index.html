@@ -4,15 +4,25 @@
 
 <h1>Business Registrations</h1>
 
-{% for biz in businesses %}
+{% for business in businesses %}
 
-<div>
-    <h2>{{ biz.company_name }}</h2>
-    <p>{{ biz.owner_name }}</p>
-    <p>{{ biz.business_type }}</p>
-</div>
+<h2>
+
+<a href="{% url 'business_detail' business.pk %}">
+
+{{ business.company_name }}
+
+</a>
+
+</h2>
+
+<p>{{ business.owner_name }}</p>
 
 <hr>
+
+{% empty %}
+
+<p>No businesses.</p>
 
 {% endfor %}
 

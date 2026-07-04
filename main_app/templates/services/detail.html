@@ -3,12 +3,29 @@
 {% block content %}
 
 <h1>{{ service.title }}</h1>
+
 <p>{{ service.description }}</p>
 
+<p>
+
 {% if service.available %}
-<p>Available</p>
+
+Available
+
 {% else %}
-<p>Unavailable</p>
+
+Unavailable
+
 {% endif %}
+
+</p>
+
+<hr>
+
+<a href="{% url 'service_update' service.pk %}">Edit</a>
+
+|
+
+<a href="{% url 'service_delete' service.pk %}">Delete</a>
 
 {% endblock %}

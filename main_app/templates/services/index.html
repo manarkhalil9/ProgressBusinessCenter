@@ -2,22 +2,31 @@
 
 {% block content %}
 
-<h1>Our Services</h1>
+<h1>Services</h1>
+
+<a href="{% url 'service_create' %}">Create Service</a>
+
+<hr>
 
 {% for service in services %}
 
-<a href="{% url 'service_detail' service.id %}">
-
 <div>
-    <h2>{{ service.title }}</h2>
-    <p>{{ service.description }}</p>
 
-    <hr>
-</div>
+<h2>
+<a href="{% url 'service_detail' service.pk %}">
+{{ service.title }}
 </a>
+</h2>
+
+<p>{{ service.description }}</p>
+
+</div>
+
+<hr>
 
 {% empty %}
-<p>No services are curently available.</p>
+
+<p>No services available.</p>
 
 {% endfor %}
 

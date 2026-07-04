@@ -4,17 +4,29 @@
 
 <h1>Branches</h1>
 
-{% for branch in branches %}
-
-<div>
-    <h2>{{ branch.name }}</h2>
-    <p>{{ branch.address }}</p>
-    <p>{{ branch.phone }}</p>
-
-    <a href="/branches/{{ branch.id }}/">View Details</a>
-</div>
+<a href="{% url 'branch_create' %}">Create Branch</a>
 
 <hr>
+
+{% for branch in branches %}
+
+<h2>
+
+<a href="{% url 'branch_detail' branch.pk %}">
+
+{{ branch.name }}
+
+</a>
+
+</h2>
+
+<p>{{ branch.address }}</p>
+
+<hr>
+
+{% empty %}
+
+<p>No branches found.</p>
 
 {% endfor %}
 

@@ -104,7 +104,7 @@ class BusinessRegistration(models.Model):
     owner_name = models.CharField(max_length=100)
     commercial_registration = models.CharField(max_length=100)
     business_type = models.CharField(max_length=100)
-    services = models.ManyToManyField(Service, blank=True)
+    services = models.ManyToManyField(Service, blank=True, related_name='businesses')
 
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -4,14 +4,29 @@
 
 <h1>Features</h1>
 
-{% for feature in features %}
-
-<div>
-    <h2>{{ feature.title }}</h2>
-    <p>{{ feature.description }}</p>
-</div>
+<a href="{% url 'feature_create' %}">Create Feature</a>
 
 <hr>
+
+{% for feature in features %}
+
+<h2>
+
+<a href="{% url 'feature_detail' feature.pk %}">
+
+{{ feature.title }}
+
+</a>
+
+</h2>
+
+<p>{{ feature.description }}</p>
+
+<hr>
+
+{% empty %}
+
+<p>No features found.</p>
 
 {% endfor %}
 

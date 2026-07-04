@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>FAQ</h1>
+
+{% for faq in faqs %}
+
+<h3>
+
+<a href="{% url 'faq_detail' faq.pk %}">
+
+{{ faq.question }}
+
+</a>
+
+</h3>
+
+<hr>
+
+{% empty %}
+
+<p>No FAQs.</p>
+
+{% endfor %}
+
+{% endblock %}

@@ -4,16 +4,29 @@
 
 <h1>Events</h1>
 
-{% for event in events %}
-
-<div>
-    <h2>{{ event.title }}</h2>
-    <p>{{ event.description }}</p>
-    <p>Date: {{ event.event_date }}</p>
-    <p>Location: {{ event.location }}</p>
-</div>
+<a href="{% url 'event_create' %}">Create Event</a>
 
 <hr>
+
+{% for event in events %}
+
+<h2>
+
+<a href="{% url 'event_detail' event.pk %}">
+
+{{ event.title }}
+
+</a>
+
+</h2>
+
+<p>{{ event.event_date }}</p>
+
+<hr>
+
+{% empty %}
+
+<p>No events.</p>
 
 {% endfor %}
 

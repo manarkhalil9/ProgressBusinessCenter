@@ -4,14 +4,21 @@
 
 <h1>Gallery</h1>
 
-{% for image in images %}
+{% for image in gallery %}
 
-<div>
-    <h3>{{ image.title }}</h3>
-    <img src="{{ image.image_url }}" width="300">
-</div>
+<a href="{% url 'gallery_detail' image.pk %}">
+
+<img src="{{ image.image_url }}" width="300">
+
+</a>
+
+<p>{{ image.title }}</p>
 
 <hr>
+
+{% empty %}
+
+<p>No images.</p>
 
 {% endfor %}
 
