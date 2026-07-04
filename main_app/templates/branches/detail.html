@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ branch.name }}</h1>
+
+<p>{{ branch.address }}</p>
+<p>{{ branch.phone }}</p>
+<p>{{ branch.email }}</p>
+<p>{{ branch.opening_hours }}</p>
+
+<h3>Meeting Rooms:</h3>
+{% for room in branch.meeting_rooms.all %}
+    <p>{{ room.name }} - {{ room.capacity }} people</p>
+{% endfor %}
+
+{% endblock %}

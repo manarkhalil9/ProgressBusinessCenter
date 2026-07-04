@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Referrals</h1>
+
+{% for ref in referrals %}
+
+<div>
+    <h3>{{ ref.full_name }}</h3>
+    <p>{{ ref.referred_company }}</p>
+</div>
+
+<hr>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,19 +1,19 @@
-<h2>{{ object.company_name }}</h2>
+{% extends 'base.html' %}
 
-<h3>Selected Services</h3>
-{% for service in object.services.all %}
-    <p>
-        {{ service.title }}
-        <a href="{% url 'remove_service' object.id service.id %}">Remove</a>
-    </p>
-{% endfor %}
+{% block content %}
+
+<h1>Business Registrations</h1>
+
+{% for biz in businesses %}
+
+<div>
+    <h2>{{ biz.company_name }}</h2>
+    <p>{{ biz.owner_name }}</p>
+    <p>{{ biz.business_type }}</p>
+</div>
 
 <hr>
 
-<h3>Available Services</h3>
-{% for service in services %}
-    <p>
-        {{ service.title }}
-        <a href="{% url 'add_service' object.id service.id %}">Add</a>
-    </p>
 {% endfor %}
+
+{% endblock %}

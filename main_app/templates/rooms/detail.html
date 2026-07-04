@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ room.name }}</h1>
+
+<p>Capacity: {{ room.capacity }}</p>
+<p>Price: {{ room.price_per_hour }}</p>
+<p>Available: {{ room.available }}</p>
+
+<p>Branch: {{ room.branch.name }}</p>
+
+{% endblock %}

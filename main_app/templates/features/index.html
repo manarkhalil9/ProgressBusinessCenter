@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Features</h1>
+
+{% for feature in features %}
+
+<div>
+    <h2>{{ feature.title }}</h2>
+    <p>{{ feature.description }}</p>
+</div>
+
+<hr>
+
+{% endfor %}
+
+{% endblock %}
