@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, ContactMessage, VisitRequest, BusinessRegistration, Referral)
+from django.views.generic import ListView, DetailView, CreateView
+from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral)
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -29,26 +29,6 @@ class ServiceDetail(DetailView):
     template_name = 'services/detail.html'
     context_object_name = 'service'
 
-# create
-class ServiceCreateView(LoginRequiredMixin, CreateView):
-    model = Service
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('services_index')
-
-# update
-class ServiceUpdateView(LoginRequiredMixin, UpdateView):
-    model = Service
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('services_index')
-
-# delete
-class ServiceDeleteView(LoginRequiredMixin, DeleteView):
-    model = Service
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('services_index')
-
 # features
 # list
 class FeatureListView(ListView):
@@ -61,26 +41,6 @@ class FeatureDetailView(DetailView):
     model = Feature
     template_name = 'features/detail.html'
     context_object_name = 'feature'
-
-# create
-class FeatureCreateView(LoginRequiredMixin, CreateView):
-    model = Feature
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('features')
-
-# update
-class FeatureUpdateView(LoginRequiredMixin, UpdateView):
-    model = Feature
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('features')
-
-# delete
-class FeatureDeleteView(LoginRequiredMixin, DeleteView):
-    model = Feature
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('features')
 
 # branches
 # list
@@ -95,26 +55,6 @@ class BranchDetailView(DetailView):
     template_name = 'branches/detail.html'
     context_object_name = 'branch'
 
-# create
-class BranchCreateView(LoginRequiredMixin, CreateView):
-    model = Branch
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('branches')
-
-# update
-class BranchUpdateView(LoginRequiredMixin, UpdateView):
-    model = Branch
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('branches')
-
-# delete
-class BranchDeleteView(LoginRequiredMixin, DeleteView):
-    model = Branch
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('branches')
-
 # meeting rooms
 # list
 class MeetingRoomListView(ListView):
@@ -128,26 +68,6 @@ class MeetingRoomDetailView(DetailView):
     template_name = 'rooms/detail.html'
     context_object_name = 'room'
 
-# create
-class MeetingRoomCreateView(LoginRequiredMixin, CreateView):
-    model = MeetingRoom
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('rooms')
-
-# update
-class MeetingRoomUpdateView(LoginRequiredMixin, UpdateView):
-    model = MeetingRoom
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('rooms')
-
-# delete
-class MeetingRoomDeleteView(LoginRequiredMixin, DeleteView):
-    model = MeetingRoom
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('rooms')
-
 # events
 # list
 class EventListView(ListView):
@@ -160,26 +80,6 @@ class EventDetailView(DetailView):
     model = Event
     template_name = 'events/detail.html'
     context_object_name = 'event'
-
-# create
-class EventCreateView(LoginRequiredMixin, CreateView):
-    model = Event
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('events')
-
-# update
-class EventUpdateView(LoginRequiredMixin, UpdateView):
-    model = Event
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('events')
-
-# delete
-class EventDeleteView(LoginRequiredMixin, DeleteView):
-    model = Event
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('events')
 
 # gallery
 # list
@@ -207,59 +107,64 @@ class FAQDetailView(DetailView):
     template_name = 'faq/detail.html'
     context_object_name = 'faq'
 
-# contact, visit, referral
-# create
-class ContactCreateView(LoginRequiredMixin, CreateView):
-    model = ContactMessage
-    fields = '__all__'
-    template_name = 'form.html'
-    success_url = reverse_lazy('home')
+# contact detail
+class ContactView(DetailView):
+    model = Contact
+    template_name = 'contact/detail.html'
+    context_object_name = 'contact'
 
+    def get_object(self):
+        return Contact.objects.first()
+
+# create visit
 class VisitCreateView(LoginRequiredMixin, CreateView):
     model = VisitRequest
-    fields = '__all__'
+    fields = ['full_name', 'email', 'phone', 'preferred_date', 'preferred_time', 'notes']
     template_name = 'form.html'
     success_url = reverse_lazy('home')
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+# create referral
 class ReferralCreateView(LoginRequiredMixin, CreateView):
     model = Referral
-    fields = '__all__'
+    fields = ['full_name', 'email', 'phone', 'referred_company']
     template_name = 'form.html'
     success_url = reverse_lazy('home')
 
-# business
-# list
-class BusinessListView(ListView):
-    model = BusinessRegistration
-    template_name = 'business/index.html'
-    context_object_name = 'businesses'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
+# business
 # detail
-class BusinessDetailView(DetailView):
+class BusinessDetailView(LoginRequiredMixin, DetailView):
     model = BusinessRegistration
     template_name = 'business/detail.html'
     context_object_name = 'business'
 
+    def get_queryset(self):
+        return BusinessRegistration.objects.filter(user=self.request.user)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context['services'] = Service.objects.exclude(
             id__in=self.object.services.all()
         )
-
         return context
 
-# many to many 'business - services'
-def add_service(request, business_id, service_id):
-    business = get_object_or_404(BusinessRegistration, id=business_id)
-    business.services.add(service_id)
-    return redirect('business_detail', pk=business_id)
+# create
+class BusinessCreateView(LoginRequiredMixin, CreateView):
+    model = BusinessRegistration
+    fields = ['company_name', 'owner_name', 'commercial_registration', 'business_type', 'services']
+    template_name = 'form.html'
+    success_url = reverse_lazy('home')
 
-
-def remove_service(request, business_id, service_id):
-    business = get_object_or_404(BusinessRegistration, id=business_id)
-    business.services.remove(service_id)
-    return redirect('business_detail', pk=business_id)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 # signup
 def signup(request):
@@ -267,13 +172,9 @@ def signup(request):
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
-        
+
     return render(request, 'registration/signup.html', {'form': form})
-
-
-    

@@ -11,7 +11,7 @@ class Service(models.Model):
     available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.title 
+        return self.title
     
 # features
 class Feature(models.Model):
@@ -70,28 +70,26 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
     
-# contact messages
-class ContactMessage(models.Model):
-    full_name = models.CharField(max_length=100)
+# contact
+class Contact(models.Model):
+    phone = models.CharField(max_length=20)
+    whatsapp = models.CharField(max_length=20)
     email = models.EmailField()
-    subject = models.CharField(max_length=150)
-    message = models.TextField()
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    address = models.TextField()
+    google_map = models.URLField(blank=True)
 
     def __str__(self):
-        return self.full_name
+        return self.phone
     
 # visit requests
 class VisitRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-
     preferred_date = models.DateField()
     preferred_time = models.TimeField()
-
     notes = models.TextField(blank=True)
-
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -105,7 +103,6 @@ class BusinessRegistration(models.Model):
     commercial_registration = models.CharField(max_length=100)
     business_type = models.CharField(max_length=100)
     services = models.ManyToManyField(Service, blank=True, related_name='businesses')
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -113,12 +110,11 @@ class BusinessRegistration(models.Model):
 
 # referrals
 class Referral(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-
     referred_company = models.CharField(max_length=150)
-
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

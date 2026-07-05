@@ -12,6 +12,10 @@ Modern office solutions for businesses and startups.
 
 <h2>Explore Our Website</h2>
 
+{% if user.is_authenticated %}
+<p>Welcome back, {{ user.username }}</p>
+{% endif %}
+
 <ul>
     <li><a href="{% url 'services_index' %}">Services</a></li>
     <li><a href="{% url 'features' %}">Features</a></li>

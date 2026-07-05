@@ -1,31 +1,13 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h1>{{ service.title }}</h1>
-
 <p>{{ service.description }}</p>
 
-<p>
-
 {% if service.available %}
-
-Available
-
+    <p>Available</p>
 {% else %}
-
-Unavailable
-
+    <p>Not Available</p>
 {% endif %}
-
-</p>
-
-<hr>
-
-<a href="{% url 'service_update' service.pk %}">Edit</a>
-
-|
-
-<a href="{% url 'service_delete' service.pk %}">Delete</a>
 
 {% endblock %}

@@ -1,33 +1,14 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h1>Services</h1>
 
-<a href="{% url 'service_create' %}">Create Service</a>
-
-<hr>
-
 {% for service in services %}
-
-<div>
-
-<h2>
-<a href="{% url 'service_detail' service.pk %}">
-{{ service.title }}
-</a>
-</h2>
-
-<p>{{ service.description }}</p>
-
-</div>
-
-<hr>
-
-{% empty %}
-
-<p>No services available.</p>
-
+    <a href="{% url 'service_detail' service.id %}">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+    </a>
+    <hr>
 {% endfor %}
 
 {% endblock %}

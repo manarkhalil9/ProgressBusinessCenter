@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>Progress Business Center</title>
 
-    <!-- Simple styling (you can upgrade later) -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
@@ -17,42 +16,35 @@
 
     {% if user.is_authenticated %}
 
-    <a href="/accounts/logout/">Logout</a>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'about' %}">About</a> |
+        <a href="{% url 'services' %}">Services</a> |
+        <a href="{% url 'features' %}">Features</a> |
+        <a href="{% url 'branches' %}">Branches</a> |
+        <a href="{% url 'rooms' %}">Rooms</a> |
+        <a href="{% url 'events' %}">Events</a> |
+        <a href="{% url 'gallery' %}">Gallery</a> |
+        <a href="{% url 'faqs' %}">FAQ</a> |
+        <a href="{% url 'business_create' %}">My Business</a> |
 
-    <a href="{% url 'home' %}">Home</a> |
-
-    <a href="{% url 'about' %}">About</a> |
-
-    <a href="{% url 'services_index' %}">Services</a> |
-
-    <a href="{% url 'features' %}">Features</a> |
-
-    <a href="{% url 'branches' %}">Branches</a> |
-
-    <a href="{% url 'rooms' %}">Meeting Rooms</a> |
-
-    <a href="{% url 'events' %}">Events</a> |
-
-    <a href="{% url 'gallery' %}">Gallery</a> |
-
-    <a href="{% url 'faqs' %}">FAQ</a>
+        <a href="/accounts/logout/">Logout</a>
 
     {% else %}
 
-        <a href="/accounts/login/">Login</a>
-        <a href="/accounts/signup/">Signup</a>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="/accounts/login/">Login</a> |
+        <a href="{% url 'signup' %}">Signup</a>
 
     {% endif %}
 
 </nav>
 
-    <hr>
+<hr>
 
-    <!-- PAGE CONTENT WILL GO HERE -->
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 
-    <hr>
+<hr>
 
     <!-- FOOTER -->
     <footer>
