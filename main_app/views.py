@@ -146,13 +146,15 @@ class BusinessDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'business'
 
     def get_object(self):
-        return BusinessRegistration.objects.get(user=self.request.user)
+        return self.request.user.business
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['available_services'] = Service.objects.exclude(
             id__in=self.object.services.all()
         )
+
         return context
 
 # create
@@ -168,31 +170,30 @@ class BusinessDetailView(LoginRequiredMixin, DetailView):
     
 # add service
 def add_service(request, service_id):
-    business = get_object_or_404(BusinessRegistration, user=request.user)
+    business = request.user.business
     business.services.add(service_id)
     return redirect('business_detail')
 
-
 # remove service
 def remove_service(request, service_id):
-    business = get_object_or_404(BusinessRegistration, user=request.user)
+    business = request.user.business
     business.services.remove(service_id)
     return redirect('business_detail')
 
 # signup
 def signup(request):
+    form = UserCreationForm()
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+
         if form.is_valid():
             user = form.save()
 
-            # auto create business profile
+            # create business automatically
             BusinessRegistration.objects.create(user=user)
 
             login(request, user)
             return redirect('business_detail')
-
-    else:
-        form = UserCreationForm()
 
     return render(request, 'registration/signup.html', {'form': form})

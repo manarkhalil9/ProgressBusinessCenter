@@ -13,7 +13,7 @@
 {% for service in business.services.all %}
     <p>
         {{ service.title }}
-        <a href="{% url 'remove_service' business.id service.id %}">Remove</a>
+        <a href="{% url 'remove_service' service.id %}">Remove</a>
     </p>
 {% empty %}
     <p>No services selected yet.</p>
@@ -26,7 +26,7 @@
 {% for service in available_services %}
     <p>
         {{ service.title }}
-        <a href="{% url 'add_service' business.id service.id %}">Add</a>
+        <a href="{% url 'add_service' service.id %}">Add</a>
     </p>
 {% endfor %}
 

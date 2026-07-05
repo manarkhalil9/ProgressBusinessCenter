@@ -2,8 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
     # home
     path('', views.home, name='home'),
+
     # about
     path('about/', views.about, name='about'),
 
@@ -38,13 +40,14 @@ urlpatterns = [
     # contact
     path('contact/', views.ContactView.as_view(), name='contact'),
 
-    # visit + referral
+    # visit / referral
     path('visit/', views.VisitCreateView.as_view(), name='visit'),
     path('referral/', views.ReferralCreateView.as_view(), name='referral'),
 
     # business
     path('business/', views.BusinessDetailView.as_view(), name='business_detail'),
 
+    # services actions
     path('business/add/<int:service_id>/', views.add_service, name='add_service'),
     path('business/remove/<int:service_id>/', views.remove_service, name='remove_service'),
 
