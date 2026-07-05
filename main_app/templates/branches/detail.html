@@ -1,45 +1,15 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h1>{{ branch.name }}</h1>
 
 <p>{{ branch.address }}</p>
-
 <p>{{ branch.phone }}</p>
-
 <p>{{ branch.email }}</p>
 
-<p>{{ branch.opening_hours }}</p>
-
-<hr>
-
-<h2>Meeting Rooms</h2>
-
+<h3>Meeting Rooms</h3>
 {% for room in branch.meeting_rooms.all %}
-
-<p>
-
-<a href="{% url 'room_detail' room.pk %}">
-
-{{ room.name }}
-
-</a>
-
-</p>
-
-{% empty %}
-
-<p>No meeting rooms.</p>
-
+    <p>{{ room.name }} - {{ room.capacity }}</p>
 {% endfor %}
-
-<hr>
-
-<a href="{% url 'branch_update' branch.pk %}">Edit</a>
-
-|
-
-<a href="{% url 'branch_delete' branch.pk %}">Delete</a>
 
 {% endblock %}

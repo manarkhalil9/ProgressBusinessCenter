@@ -25,9 +25,12 @@
         <a href="{% url 'events' %}">Events</a> |
         <a href="{% url 'gallery' %}">Gallery</a> |
         <a href="{% url 'faqs' %}">FAQ</a> |
-        <a href="{% url 'business_create' %}">My Business</a> |
-
-        <a href="/accounts/logout/">Logout</a>
+        <a href="{% url 'business_detail' %}">My Business</a>
+        
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+    </form>
 
     {% else %}
 

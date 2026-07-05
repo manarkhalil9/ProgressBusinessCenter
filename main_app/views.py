@@ -145,36 +145,54 @@ class BusinessDetailView(LoginRequiredMixin, DetailView):
     template_name = 'business/detail.html'
     context_object_name = 'business'
 
-    def get_queryset(self):
-        return BusinessRegistration.objects.filter(user=self.request.user)
+    def get_object(self):
+        return BusinessRegistration.objects.get(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['services'] = Service.objects.exclude(
+        context['available_services'] = Service.objects.exclude(
             id__in=self.object.services.all()
         )
         return context
 
 # create
-class BusinessCreateView(LoginRequiredMixin, CreateView):
-    model = BusinessRegistration
-    fields = ['company_name', 'owner_name', 'commercial_registration', 'business_type', 'services']
-    template_name = 'form.html'
-    success_url = reverse_lazy('home')
+# class BusinessCreateView(LoginRequiredMixin, CreateView):
+#     model = BusinessRegistration
+#     fields = ['company_name', 'owner_name', 'commercial_registration', 'business_type', 'services']
+#     template_name = 'form.html'
+#     success_url = reverse_lazy('home')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
+    
+# add service
+def add_service(request, service_id):
+    business = get_object_or_404(BusinessRegistration, user=request.user)
+    business.services.add(service_id)
+    return redirect('business_detail')
+
+
+# remove service
+def remove_service(request, service_id):
+    business = get_object_or_404(BusinessRegistration, user=request.user)
+    business.services.remove(service_id)
+    return redirect('business_detail')
 
 # signup
 def signup(request):
-    form = UserCreationForm()
-
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+
+            # auto create business profile
+            BusinessRegistration.objects.create(user=user)
+
             login(request, user)
-            return redirect('home')
+            return redirect('business_detail')
+
+    else:
+        form = UserCreationForm()
 
     return render(request, 'registration/signup.html', {'form': form})

@@ -1,25 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h1>Gallery</h1>
 
 {% for image in gallery %}
-
-<a href="{% url 'gallery_detail' image.pk %}">
-
-<img src="{{ image.image_url }}" width="300">
-
-</a>
-
-<p>{{ image.title }}</p>
-
-<hr>
-
-{% empty %}
-
-<p>No images.</p>
-
+    <h3>{{ image.title }}</h3>
+    <img src="{{ image.image_url }}" width="300">
+    <hr>
 {% endfor %}
 
 {% endblock %}

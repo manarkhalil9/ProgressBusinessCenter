@@ -1,33 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h1>Features</h1>
 
-<a href="{% url 'feature_create' %}">Create Feature</a>
-
-<hr>
-
 {% for feature in features %}
-
-<h2>
-
-<a href="{% url 'feature_detail' feature.pk %}">
-
-{{ feature.title }}
-
-</a>
-
-</h2>
-
-<p>{{ feature.description }}</p>
-
-<hr>
-
-{% empty %}
-
-<p>No features found.</p>
-
+    <h3>{{ feature.title }}</h3>
+    <p>{{ feature.description }}</p>
+    <hr>
 {% endfor %}
 
 {% endblock %}

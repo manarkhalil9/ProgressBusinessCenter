@@ -97,7 +97,7 @@ class VisitRequest(models.Model):
     
 # business registrations
 class BusinessRegistration(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=150)
     owner_name = models.CharField(max_length=100)
     commercial_registration = models.CharField(max_length=100)

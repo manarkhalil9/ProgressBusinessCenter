@@ -1,59 +1,33 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h1>{{ business.company_name }}</h1>
 
 <p>Owner: {{ business.owner_name }}</p>
-
-<p>Business Type: {{ business.business_type }}</p>
+<p>Type: {{ business.business_type }}</p>
 
 <hr>
 
-<h2>Selected Services</h2>
+<h2>My Services</h2>
 
 {% for service in business.services.all %}
-
-<p>
-
-{{ service.title }}
-
-<a href="{% url 'remove_service' business.pk service.pk %}">
-
-Remove
-
-</a>
-
-</p>
-
+    <p>
+        {{ service.title }}
+        <a href="{% url 'remove_service' business.id service.id %}">Remove</a>
+    </p>
 {% empty %}
-
-<p>No services selected.</p>
-
+    <p>No services selected yet.</p>
 {% endfor %}
 
 <hr>
 
 <h2>Available Services</h2>
 
-{% for service in services %}
-
-<p>
-
-{{ service.title }}
-
-<a href="{% url 'add_service' business.pk service.pk %}">
-
-Add
-
-</a>
-
-</p>
-
-{% empty %}
-
-<p>No more services available.</p>
-
+{% for service in available_services %}
+    <p>
+        {{ service.title }}
+        <a href="{% url 'add_service' business.id service.id %}">Add</a>
+    </p>
 {% endfor %}
 
 {% endblock %}

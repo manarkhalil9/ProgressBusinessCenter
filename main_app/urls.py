@@ -43,8 +43,10 @@ urlpatterns = [
     path('referral/', views.ReferralCreateView.as_view(), name='referral'),
 
     # business
-    path('business/<int:pk>/', views.BusinessDetailView.as_view(), name='business_detail'),
-    path('business/create/', views.BusinessCreateView.as_view(), name='business_create'),
+    path('business/', views.BusinessDetailView.as_view(), name='business_detail'),
+
+    path('business/add/<int:service_id>/', views.add_service, name='add_service'),
+    path('business/remove/<int:service_id>/', views.remove_service, name='remove_service'),
 
     # auth
     path('accounts/signup/', views.signup, name='signup'),
