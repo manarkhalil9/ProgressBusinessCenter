@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Register Your Business</h1>
+
+<p>
+Complete the form below to register your business with
+Progress Business Centre.
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <div>
+        <label>Company Name</label><br>
+        {{ form.company_name }}
+    </div>
+
+    <br>
+
+    <div>
+        <label>Owner Name</label><br>
+        {{ form.owner_name }}
+    </div>
+
+    <br>
+
+    <div>
+        <label>Commercial Registration</label><br>
+        {{ form.commercial_registration }}
+    </div>
+
+    <br>
+
+    <div>
+        <label>Business Type</label><br>
+        {{ form.business_type }}
+    </div>
+
+    <br>
+
+    <h3>Select Office Services</h3>
+
+    {% for checkbox in form.services %}
+    <div>
+        {{ checkbox.tag }}
+        <label>{{ checkbox.choice_label }}</label>
+    </div>
+    {% endfor %}
+
+    <br><br>
+
+    <button type="submit">
+        Register Business
+    </button>
+
+</form>
+
+{% endblock %}

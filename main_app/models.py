@@ -97,12 +97,12 @@ class VisitRequest(models.Model):
     
 # business registrations
 class BusinessRegistration(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="business")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='business')
     company_name = models.CharField(max_length=150)
     owner_name = models.CharField(max_length=100)
     commercial_registration = models.CharField(max_length=100)
     business_type = models.CharField(max_length=100)
-    services = models.ManyToManyField(Service, blank=True, related_name='businesses')
+    services = models.ManyToManyField(Service, blank=True, related_name='business_registrations')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

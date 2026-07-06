@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import BusinessRegistrationForm
 
 # Create your views here.
 
@@ -139,61 +140,39 @@ class ReferralCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 # business
-# detail
-class BusinessDetailView(LoginRequiredMixin, DetailView):
-    model = BusinessRegistration
-    template_name = 'business/detail.html'
-    context_object_name = 'business'
-
-    def get_object(self):
-        return self.request.user.business
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['available_services'] = Service.objects.exclude(
-            id__in=self.object.services.all()
-        )
-
-        return context
-
 # create
-# class BusinessCreateView(LoginRequiredMixin, CreateView):
-#     model = BusinessRegistration
-#     fields = ['company_name', 'owner_name', 'commercial_registration', 'business_type', 'services']
-#     template_name = 'form.html'
-#     success_url = reverse_lazy('home')
+class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
+    model = BusinessRegistration
+    form_class = BusinessRegistrationForm
+    template_name = "business/register.html"
+    success_url = reverse_lazy("business_success")
 
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
+    def dispatch(self, request, *args, **kwargs):
+        if hasattr(request.user, "business"):
+            return redirect("business_success")
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
-# add service
-def add_service(request, service_id):
-    business = request.user.business
-    business.services.add(service_id)
-    return redirect('business_detail')
-
-# remove service
-def remove_service(request, service_id):
-    business = request.user.business
-    business.services.remove(service_id)
-    return redirect('business_detail')
+def business_success(request):
+    return render(request, "business/success.html")
 
 # signup
 def signup(request):
     form = UserCreationForm()
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UserCreationForm(request.POST)
 
         if form.is_valid():
             user = form.save()
-
-            # create business automatically
-            BusinessRegistration.objects.create(user=user)
-
             login(request, user)
-            return redirect('business_detail')
+            return redirect("business_register")
 
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(
+        request,
+        "registration/signup.html",
+        {"form": form},
+    )
