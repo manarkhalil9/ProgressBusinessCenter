@@ -40,13 +40,17 @@ urlpatterns = [
     # contact
     path('contact/', views.ContactView.as_view(), name='contact'),
 
-    # visit / referral
+    # visit
     path('visit/', views.VisitCreateView.as_view(), name='visit'),
+    path('visit/success/', views.visit_success, name='visit_success'),
+
+    # referral
     path('referral/', views.ReferralCreateView.as_view(), name='referral'),
+    path('referral/success/', views.referral_success, name='referral_success'),
 
     # business
-path('register/', views.BusinessRegistrationCreateView.as_view(), name='business_register'),
-path('register/success/',views.business_success, name='business_success'),
+    path('register/', views.BusinessRegistrationCreateView.as_view(), name='business_register'),
+    path('register/success/',views.business_success, name='business_success'),
 
     # auth
     path('accounts/signup/', views.signup, name='signup'),

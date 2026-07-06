@@ -1,5 +1,5 @@
 from django import forms
-from .models import BusinessRegistration
+from .models import BusinessRegistration, VisitRequest
 
 
 class BusinessRegistrationForm(forms.ModelForm):
@@ -17,4 +17,25 @@ class BusinessRegistrationForm(forms.ModelForm):
 
         widgets = {
             "services": forms.CheckboxSelectMultiple(),
+        }
+
+class VisitRequestForm(forms.ModelForm):
+    class Meta:
+        model = VisitRequest
+        fields = [
+            'full_name',
+            'email',
+            'phone',
+            'preferred_date',
+            'preferred_time',
+            'notes',
+        ]
+
+        widgets = {
+            'preferred_date': forms.DateInput(
+                attrs={'type': 'date'}
+            ),
+            'preferred_time': forms.TimeInput(
+                attrs={'type': 'time'}
+            ),
         }

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Meeting Request Submitted</h1>
+
+<p>
+Thank you for your request.
+
+Our team will review your preferred date and contact you shortly to confirm your meeting.
+</p>
+
+<a href="{% url 'home' %}">
+    Back to Home
+</a>
+
+{% endblock %}

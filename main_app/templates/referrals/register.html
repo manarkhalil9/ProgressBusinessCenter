@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Referral Registration</h1>
+
+<p>
+Submit the details of the client or business you are referring.
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Submit Referral
+    </button>
+
+</form>
+
+{% endblock %}

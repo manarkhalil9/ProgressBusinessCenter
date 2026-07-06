@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import BusinessRegistrationForm
+from .forms import BusinessRegistrationForm, VisitRequestForm
 
 # Create your views here.
 
@@ -120,24 +120,30 @@ class ContactView(DetailView):
 # create visit
 class VisitCreateView(LoginRequiredMixin, CreateView):
     model = VisitRequest
-    fields = ['full_name', 'email', 'phone', 'preferred_date', 'preferred_time', 'notes']
-    template_name = 'form.html'
-    success_url = reverse_lazy('home')
+    form_class = VisitRequestForm
+    template_name = "visits/register.html"
+    success_url = reverse_lazy("visit_success")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+def visit_success(request):
+    return render(request, "visits/success.html")
 
 # create referral
 class ReferralCreateView(LoginRequiredMixin, CreateView):
     model = Referral
     fields = ['full_name', 'email', 'phone', 'referred_company']
-    template_name = 'form.html'
-    success_url = reverse_lazy('home')
+    template_name = "referrals/register.html"
+    success_url = reverse_lazy("referral_success")
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+def referral_success(request):
+    return render(request, "referrals/success.html")
 
 # business
 # create

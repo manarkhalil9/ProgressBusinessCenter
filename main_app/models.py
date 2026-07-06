@@ -56,7 +56,7 @@ class Event(models.Model):
 # gallery
 class GalleryImage(models.Model):
     title = models.CharField(max_length=100)
-    image_url = models.URLField()
+    image = models.ImageField(upload_to='gallery/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

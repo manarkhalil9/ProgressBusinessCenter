@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Arrange a Meeting</h1>
+
+<p>
+Complete the form below and choose your preferred meeting date and time.
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Arrange Meeting
+    </button>
+
+</form>
+
+{% endblock %}
