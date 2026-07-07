@@ -1,29 +1,21 @@
-{% extends "base.html" %}
-
-{% block content %}
+<section class="page-header">
 
 <h1>Gallery</h1>
 
-<div>
+</section>
+
+<section class="gallery-grid">
 
 {% for image in gallery %}
 
-    <div>
+<a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
 
-        <a href="{% url 'gallery_detail' image.id %}">
-            <img src="{{ image.image.url }}" width="300">
-        </a>
+<img src="{{ image.image.url }}">
 
-        <h3>{{ image.title }}</h3>
+<h3>{{ image.title }}</h3>
 
-    </div>
-
-{% empty %}
-
-<p>No images available.</p>
+</a>
 
 {% endfor %}
 
-</div>
-
-{% endblock %}
+</section>

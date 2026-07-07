@@ -1,14 +1,36 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<h1>Services</h1>
+<section class="page-header">
+
+<h1>Our Services</h1>
+
+<p>
+Explore our professional office solutions designed for startups,
+entrepreneurs and growing businesses.
+</p>
+
+</section>
+
+<section class="card-grid">
 
 {% for service in services %}
-    <a href="{% url 'service_detail' service.id %}">
-        <h3>{{ service.title }}</h3>
-        <p>{{ service.description }}</p>
-    </a>
-    <hr>
+
+<div class="service-card">
+
+<h3>{{ service.title }}</h3>
+
+<p>{{ service.description }}</p>
+
+<a class="btn" href="{% url 'service_detail' service.id %}">
+Learn More
+</a>
+
+</div>
+
 {% endfor %}
+
+</section>
 
 {% endblock %}

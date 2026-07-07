@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<section class="page-header">
+
 <h1>Meeting Rooms</h1>
 
+</section>
+
+<section class="card-grid">
+
 {% for room in rooms %}
-    <h3>{{ room.name }}</h3>
-    <p>Capacity: {{ room.capacity }}</p>
-    <p>Price: {{ room.price_per_hour }}</p>
-    <a href="{% url 'room_detail' room.id %}">View</a>
-    <hr>
+
+<div class="service-card">
+
+<h2>{{ room.name }}</h2>
+
+<p>Capacity: {{ room.capacity }}</p>
+
+<p>$ {{ room.price_per_hour }}</p>
+
+<a class="btn"
+href="{% url 'room_detail' room.id %}">
+View Room
+</a>
+
+</div>
+
 {% endfor %}
+
+</section>
 
 {% endblock %}

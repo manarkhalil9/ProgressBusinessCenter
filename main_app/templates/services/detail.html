@@ -1,13 +1,27 @@
-{% extends 'base.html' %}
-{% block content %}
+<section class="detail-card">
 
 <h1>{{ service.title }}</h1>
+
 <p>{{ service.description }}</p>
 
+<p>
+
+<strong>Status:</strong>
+
 {% if service.available %}
-    <p>Available</p>
+
+<span class="available">
+Available
+</span>
+
 {% else %}
-    <p>Not Available</p>
+
+<span class="not-available">
+Not Available
+</span>
+
 {% endif %}
 
-{% endblock %}
+</p>
+
+</section>
