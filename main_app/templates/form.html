@@ -1,13 +1,36 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
-<h1>Form</h1>
+
+<section class="form-card">
+
+
+<h1>
+Form
+</h1>
+
 
 <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
+
+
+{% csrf_token %}
+
+
+{{ form.as_p }}
+
+
+
+<button class="btn" type="submit">
+Submit
+</button>
+
+
 </form>
+
+
+</section>
+
 
 {% endblock %}

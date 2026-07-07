@@ -1,12 +1,64 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
 
-<h1>Features</h1>
+
+<section class="page-header">
+
+<h1>Office Features</h1>
+
+<p>
+Everything you need for a productive workspace.
+</p>
+
+</section>
+
+
+
+<section class="features-section">
+
+
+<div class="card-grid">
+
 
 {% for feature in features %}
-    <h3>{{ feature.title }}</h3>
-    <p>{{ feature.description }}</p>
-    <hr>
+
+
+<div class="feature-card">
+
+
+<h3>
+⭐
+</h3>
+
+
+<h4>
+{{ feature.title }}
+</h4>
+
+
+<p>
+{{ feature.description }}
+</p>
+
+
+
+<a class="btn" href="{% url 'feature_detail' feature.id %}">
+More
+</a>
+
+
+</div>
+
+
 {% endfor %}
+
+
+</div>
+
+
+</section>
+
 
 {% endblock %}

@@ -1,15 +1,80 @@
 {% extends 'base.html' %}
+
 {% block content %}
+
+
+<section class="detail-card">
+
 
 <h1>{{ branch.name }}</h1>
 
-<p>{{ branch.address }}</p>
-<p>{{ branch.phone }}</p>
-<p>{{ branch.email }}</p>
 
-<h3>Meeting Rooms</h3>
+<p>
+<strong>Address:</strong>
+{{ branch.address }}
+</p>
+
+
+<p>
+<strong>Phone:</strong>
+{{ branch.phone }}
+</p>
+
+
+<p>
+<strong>Email:</strong>
+{{ branch.email }}
+</p>
+
+
+<p>
+<strong>Opening Hours:</strong>
+{{ branch.opening_hours }}
+</p>
+
+
+
+<h2>Meeting Rooms</h2>
+
+
+<div class="card-grid">
+
+
 {% for room in branch.meeting_rooms.all %}
-    <p>{{ room.name }} - {{ room.capacity }}</p>
+
+
+<div class="service-card">
+
+<h3>
+{{ room.name }}
+</h3>
+
+
+<p>
+Capacity: {{ room.capacity }} people
+</p>
+
+
+<p>
+Price:
+{{ room.price_per_hour }}
+</p>
+
+
+</div>
+
+
+{% empty %}
+
+<p>No meeting rooms available.</p>
+
 {% endfor %}
+
+
+</div>
+
+
+</section>
+
 
 {% endblock %}

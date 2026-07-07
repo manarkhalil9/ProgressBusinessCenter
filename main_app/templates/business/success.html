@@ -2,15 +2,19 @@
 
 {% block content %}
 
-<h1>Registration Submitted</h1>
+<section class="success-card">
+
+<h1>✅ Registration Submitted</h1>
 
 <p>
-Thank you for registering your business.
-Our team will review your application and contact you soon.
+Thank you for your submission.
+Our team will contact you shortly.
 </p>
 
-<a href="{% url 'home' %}">
-Back to Home
+<a href="{% url 'home' %}" class="btn">
+Back Home
 </a>
+
+</section>
 
 {% endblock %}

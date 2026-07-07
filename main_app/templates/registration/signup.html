@@ -1,45 +1,111 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
-<h1>Create Account</h1>
+
+<section class="form-card">
+
+
+<h1>
+Create Account
+</h1>
+
 
 <form method="post">
-    {% csrf_token %}
 
-    <!-- Username -->
-    <p>
-        Username:<br>
-        {{ form.username }}
-        {% for error in form.username.errors %}
-            <small style="color:red;">{{ error }}</small>
-        {% endfor %}
-    </p>
 
-    <!-- Password -->
-    <p>
-        Password:<br>
-        {{ form.password1 }}
-        {% for error in form.password1.errors %}
-            <small style="color:red;">{{ error }}</small>
-        {% endfor %}
-    </p>
+{% csrf_token %}
 
-    <!-- Confirm Password -->
-    <p>
-        Confirm Password:<br>
-        {{ form.password2 }}
-        {% for error in form.password2.errors %}
-            <small style="color:red;">{{ error }}</small>
-        {% endfor %}
-    </p>
-
-    <button type="submit">Sign Up</button>
-</form>
 
 <p>
-    Already have an account?
-    <a href="{% url 'login' %}">Login</a>
+<label>
+Username
+</label>
+
+{{ form.username }}
+
+{% for error in form.username.errors %}
+
+<span class="error">
+{{ error }}
+</span>
+
+{% endfor %}
+
 </p>
+
+
+
+<p>
+
+<label>
+Password
+</label>
+
+{{ form.password1 }}
+
+
+{% for error in form.password1.errors %}
+
+<span class="error">
+{{ error }}
+</span>
+
+{% endfor %}
+
+
+</p>
+
+
+
+
+<p>
+
+<label>
+Confirm Password
+</label>
+
+
+{{ form.password2 }}
+
+
+{% for error in form.password2.errors %}
+
+<span class="error">
+{{ error }}
+</span>
+
+
+{% endfor %}
+
+
+</p>
+
+
+
+<button class="btn" type="submit">
+Create Account
+</button>
+
+
+</form>
+
+
+
+<p>
+
+Already have an account?
+
+<a href="{% url 'login' %}">
+Login
+</a>
+
+
+</p>
+
+
+</section>
+
 
 {% endblock %}

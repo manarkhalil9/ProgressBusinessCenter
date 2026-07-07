@@ -286,3 +286,187 @@ object-fit:cover;
 padding:20px;
 
 }
+
+/* form */
+.form-card{
+    max-width:700px;
+    margin:70px auto;
+    background:white;
+    padding:40px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.form-card input,
+.form-card textarea,
+.form-card select{
+    width:100%;
+    padding:14px;
+    margin-top:8px;
+    margin-bottom:20px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus{
+    border-color:#005792;
+    outline:none;
+    box-shadow:0 0 8px rgba(0,87,146,.2);
+}
+
+/* success */
+.success-card{
+    max-width:650px;
+    margin:80px auto;
+    background:white;
+    text-align:center;
+    padding:50px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.page-header{
+    background:#f4f8fc;
+    padding:70px 10%;
+    text-align:center;
+}
+
+.page-header h1{
+    color:#003366;
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.page-header p{
+    max-width:700px;
+    margin:auto;
+    color:#666;
+}
+
+.detail-card{
+    max-width:850px;
+    margin:70px auto;
+    background:white;
+    padding:40px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.available{
+    color:#1f9d55;
+    font-weight:bold;
+}
+
+.not-available{
+    color:#d62828;
+    font-weight:bold;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a{
+    color:#005792;
+}
+
+
+a:hover{
+    color:#ff9800;
+}
+
+
+/* =========================
+   BUTTONS INSIDE FORMS
+========================= */
+
+
+.form-card button{
+
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:16px;
+
+}
+
+
+.form-card button:hover{
+
+    background:#e68900;
+
+}
+
+
+/* =========================
+   FORM ERRORS
+========================= */
+
+
+.error{
+
+    display:block;
+    color:#d62828;
+    font-size:14px;
+    margin-top:5px;
+
+}
+
+
+/* =========================
+   DETAIL TITLES
+========================= */
+
+
+.detail-card h2{
+
+    color:#003366;
+    margin-top:40px;
+
+}
+
+
+/* =========================
+   EMPTY STATES
+========================= */
+
+
+.empty{
+
+    text-align:center;
+    color:#666;
+
+}
+
+/* =========================
+   FORM BUTTONS
+========================= */
+
+.form-card button{
+
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:16px;
+    transition:.3s;
+
+}
+
+
+.form-card button:hover{
+
+    background:#e68900;
+    transform:translateY(-3px);
+
+}

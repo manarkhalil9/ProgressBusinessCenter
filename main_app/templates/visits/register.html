@@ -2,22 +2,36 @@
 
 {% block content %}
 
-<h1>Arrange a Meeting</h1>
+<section class="page-header">
+
+<h1>Arrange a Visit</h1>
 
 <p>
-Complete the form below and choose your preferred meeting date and time.
+Complete the form below and choose your preferred date and time.
 </p>
+
+</section>
+
+
+<section class="form-card">
+
 
 <form method="POST">
 
-    {% csrf_token %}
+{% csrf_token %}
 
-    {{ form.as_p }}
+{{ form.as_p }}
 
-    <button type="submit">
-        Arrange Meeting
-    </button>
+
+<button type="submit">
+Arrange Visit
+</button>
+
 
 </form>
+
+
+</section>
+
 
 {% endblock %}

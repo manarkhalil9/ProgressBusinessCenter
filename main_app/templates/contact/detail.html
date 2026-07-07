@@ -1,36 +1,62 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
-<h1>Contact Us</h1>
+
+<section class="page-header">
+
+<h1>
+Contact Us
+</h1>
 
 <p>
-    <strong>Phone:</strong>
-    {{ contact.phone }}
+Get in touch with Progress Business Centre.
 </p>
 
-<p>
-    <strong>WhatsApp:</strong>
-    <a href="https://wa.me/{{ contact.whatsapp }}">
-        {{ contact.whatsapp }}
-    </a>
-</p>
+
+</section>
+
+
+
+<section class="detail-card">
+
 
 <p>
-    <strong>Email:</strong>
-    {{ contact.email }}
+<strong>Phone:</strong>
+{{ contact.phone }}
 </p>
 
-<p>
-    <strong>Address:</strong>
-    {{ contact.address }}
-</p>
 
 <p>
-    <strong>Google Maps:</strong>
-    <a href="{{ contact.google_map }}" target="_blank">
-        View Location
-    </a>
+<strong>WhatsApp:</strong>
+
+<a href="https://wa.me/{{ contact.whatsapp }}">
+{{ contact.whatsapp }}
+</a>
+
 </p>
+
+
+<p>
+<strong>Email:</strong>
+{{ contact.email }}
+</p>
+
+
+<p>
+<strong>Address:</strong>
+{{ contact.address }}
+</p>
+
+
+<a class="btn" href="{{ contact.google_map }}" target="_blank">
+View Location
+</a>
+
+
+</section>
+
+
 
 {% endblock %}

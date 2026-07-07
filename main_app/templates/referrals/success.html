@@ -2,16 +2,19 @@
 
 {% block content %}
 
-<h1>Referral Submitted</h1>
+<section class="success-card">
+
+<h1>✅ Referral Submitted</h1>
 
 <p>
-Thank you for your referral.
-
-Our team has received your submission and will contact the referred company if appropriate.
+Thank you for your submission.
+Our team will contact you shortly.
 </p>
 
-<a href="{% url 'home' %}">
-    Back to Home
+<a href="{% url 'home' %}" class="btn">
+Back Home
 </a>
+
+</section>
 
 {% endblock %}

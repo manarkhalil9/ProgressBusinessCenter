@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<h1>Branches</h1>
+<section class="page-header">
+
+<h1>Our Locations</h1>
+
+<p>
+Explore our business centers and available branches.
+</p>
+
+</section>
+
+
+<section class="features-section">
+
+<div class="card-grid">
 
 {% for branch in branches %}
-    <h3>{{ branch.name }}</h3>
-    <p>{{ branch.address }}</p>
-    <a href="{% url 'branch_detail' branch.id %}">View</a>
-    <hr>
+
+<div class="feature-card">
+
+<h3>📍 {{ branch.name }}</h3>
+
+<p>
+{{ branch.address }}
+</p>
+
+<a class="btn" href="{% url 'branch_detail' branch.id %}">
+View Branch
+</a>
+
+</div>
+
 {% endfor %}
+
+</div>
+
+</section>
+
 
 {% endblock %}
