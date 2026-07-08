@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 
 {% block content %}
 
 
 <section class="page-header">
 
-<h1>Office Features</h1>
+<h1>{% trans "Office Features" %}</h1>
 
 <p>
-Everything you need for a productive workspace.
+{% trans "Everything you need for a productive workspace." %}
 </p>
 
 </section>
@@ -45,7 +45,7 @@ Everything you need for a productive workspace.
 
 
 <a class="btn" href="{% url 'feature_detail' feature.id %}">
-More
+{% trans "More" %}
 </a>
 
 

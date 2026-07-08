@@ -470,3 +470,54 @@ a:hover{
     transform:translateY(-3px);
 
 }
+
+/* =========================
+   LANGUAGE BUTTON
+========================= */
+
+.language-btn{
+
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:10px 35px 10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:15px;
+    transition:.3s;
+
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    background-size:16px;
+
+}
+
+
+.language-btn:hover{
+
+    background-color:#e68900;
+
+}
+
+
+.language-btn:focus{
+
+    outline:none;
+    box-shadow:0 0 8px rgba(255,152,0,.4);
+
+}
+
+
+.language-btn option{
+
+    background:white;
+    color:#333;
+    padding:10px;
+
+}

@@ -1,39 +1,20 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
-<section class="page-header">
+<section class="success-card">
 
-<h1>Referral Registration</h1>
+<h1>✅ {% trans "Referral Submitted" %}</h1>
 
 <p>
-Submit the details of the client or business you are referring.
+{% trans "Thank you for your submission. Our team will contact you shortly." %}
 </p>
 
-</section>
-
-
-<section class="form-card">
-
-
-<form method="POST">
-
-{% csrf_token %}
-
-
-{{ form.as_p }}
-
-
-
-<button type="submit">
-Submit Referral
-</button>
-
-
-</form>
-
+<a href="{% url 'home' %}" class="btn">
+{% trans "Back Home" %}
+</a>
 
 </section>
-
 
 {% endblock %}

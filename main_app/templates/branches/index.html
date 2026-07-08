@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
+
 <section class="page-header">
 
-<h1>Our Locations</h1>
+<h1>{% trans "Our Locations" %}</h1>
 
 <p>
-Explore our business centers and available branches.
+{% trans "Explore our business centers and available branches." %}
 </p>
 
 </section>
@@ -28,7 +30,7 @@ Explore our business centers and available branches.
 </p>
 
 <a class="btn" href="{% url 'branch_detail' branch.id %}">
-View Branch
+{% trans "View Branch" %}
 </a>
 
 </div>

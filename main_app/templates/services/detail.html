@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
 {% block content %}
 
 <section class="detail-card">
@@ -9,18 +11,18 @@
 
 <p>
 
-<strong>Status:</strong>
+<strong>{% trans "Status:" %}</strong>
 
 {% if service.available %}
 
 <span class="available">
-Available
+{% trans "Available" %}
 </span>
 
 {% else %}
 
 <span class="not-available">
-Not Available
+{% trans "Not Available" %}
 </span>
 
 {% endif %}

@@ -1,85 +1,90 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <section class="about-page">
 
-<h1>About Progress Business Centre</h1>
+<h1>{% trans "About Progress Business Centre" %}</h1>
 
 <p class="intro">
 
-Progress Business Centre is dedicated to helping entrepreneurs,
-freelancers and companies succeed by providing flexible workspace
-solutions in a professional environment.
+{% trans "Progress Business Centre is dedicated to helping entrepreneurs, freelancers and companies succeed by providing flexible workspace solutions in a professional environment." %}
 
 </p>
+
 
 <div class="about-grid">
 
+
 <div class="about-card">
 
-<h2>🎯 Our Mission</h2>
+<h2>🎯 {% trans "Our Mission" %}</h2>
 
 <p>
-
-To provide innovative office solutions that support business growth.
-
+{% trans "To provide innovative office solutions that support business growth." %}
 </p>
 
 </div>
 
+
+
 <div class="about-card">
 
-<h2>👁 Our Vision</h2>
+<h2>👁 {% trans "Our Vision" %}</h2>
 
 <p>
-
-To become Bahrain's preferred destination for flexible workspaces.
-
+{% trans "To become Bahrain's preferred destination for flexible workspaces." %}
 </p>
 
 </div>
 
+
+
 <div class="about-card">
 
-<h2>🏢 Our Services</h2>
+<h2>🏢 {% trans "Our Services" %}</h2>
 
 <ul>
 
-<li>Virtual Offices</li>
+<li>{% trans "Virtual Offices" %}</li>
 
-<li>Coworking Spaces</li>
+<li>{% trans "Coworking Spaces" %}</li>
 
-<li>Private Offices</li>
+<li>{% trans "Private Offices" %}</li>
 
-<li>Meeting Rooms</li>
+<li>{% trans "Meeting Rooms" %}</li>
 
-<li>Business Registration</li>
+<li>{% trans "Business Registration" %}</li>
 
 </ul>
 
 </div>
 
+
+
 <div class="about-card">
 
-<h2>⭐ Why Us?</h2>
+<h2>⭐ {% trans "Why Us?" %}</h2>
 
 <ul>
 
-<li>Professional Staff</li>
+<li>{% trans "Professional Staff" %}</li>
 
-<li>Prime Business Address</li>
+<li>{% trans "Prime Business Address" %}</li>
 
-<li>Affordable Pricing</li>
+<li>{% trans "Affordable Pricing" %}</li>
 
-<li>Networking Opportunities</li>
+<li>{% trans "Networking Opportunities" %}</li>
 
 </ul>
 
 </div>
+
 
 </div>
 
 </section>
+
 
 {% endblock %}

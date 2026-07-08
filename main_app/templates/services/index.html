@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <section class="page-header">
 
-<h1>Our Services</h1>
+<h1>{% trans "Our Services" %}</h1>
 
 <p>
-Explore our professional office solutions designed for startups,
-entrepreneurs and growing businesses.
+{% trans "Explore our professional office solutions designed for startups, entrepreneurs and growing businesses." %}
 </p>
 
 </section>
@@ -24,7 +24,7 @@ entrepreneurs and growing businesses.
 <p>{{ service.description }}</p>
 
 <a class="btn" href="{% url 'service_detail' service.id %}">
-Learn More
+{% trans "Learn More" %}
 </a>
 
 </div>

@@ -1,26 +1,23 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 
 {% block content %}
 
-
 <section class="form-card">
 
-
 <h1>
-Create Account
+{% trans "Create Account" %}
 </h1>
 
 
 <form method="post">
-
 
 {% csrf_token %}
 
 
 <p>
 <label>
-Username
+{% trans "Username" %}
 </label>
 
 {{ form.username }}
@@ -40,7 +37,7 @@ Username
 <p>
 
 <label>
-Password
+{% trans "Password" %}
 </label>
 
 {{ form.password1 }}
@@ -59,11 +56,10 @@ Password
 
 
 
-
 <p>
 
 <label>
-Confirm Password
+{% trans "Confirm Password" %}
 </label>
 
 
@@ -85,7 +81,7 @@ Confirm Password
 
 
 <button class="btn" type="submit">
-Create Account
+{% trans "Create Account" %}
 </button>
 
 
@@ -95,10 +91,10 @@ Create Account
 
 <p>
 
-Already have an account?
+{% trans "Already have an account?" %}
 
 <a href="{% url 'login' %}">
-Login
+{% trans "Login" %}
 </a>
 
 

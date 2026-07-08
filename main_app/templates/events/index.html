@@ -3,51 +3,76 @@
 {% block content %}
 
 
-<section class="page-header">
+<section class="detail-card">
 
-<h1>Events & Programs</h1>
+
+<h1>{{ branch.name }}</h1>
+
 
 <p>
-Join our business events and networking programs.
+<strong>Address:</strong>
+{{ branch.address }}
 </p>
 
-</section>
+
+<p>
+<strong>Phone:</strong>
+{{ branch.phone }}
+</p>
+
+
+<p>
+<strong>Email:</strong>
+{{ branch.email }}
+</p>
+
+
+<p>
+<strong>Opening Hours:</strong>
+{{ branch.opening_hours }}
+</p>
 
 
 
-<section class="features-section">
+<h2>Meeting Rooms</h2>
+
 
 <div class="card-grid">
 
 
-{% for event in events %}
+{% for room in branch.meeting_rooms.all %}
 
 
 <div class="service-card">
 
-
 <h3>
-{{ event.title }}
+{{ room.name }}
 </h3>
 
 
 <p>
-{{ event.event_date }}
+Capacity: {{ room.capacity }} people
 </p>
 
 
-<a class="btn" href="{% url 'event_detail' event.id %}">
-View Event
-</a>
+<p>
+Price:
+{{ room.price_per_hour }}
+</p>
 
 
 </div>
 
+
+{% empty %}
+
+<p>No meeting rooms available.</p>
 
 {% endfor %}
 
 
 </div>
+
 
 </section>
 

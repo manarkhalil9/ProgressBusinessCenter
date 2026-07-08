@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <section class="success-card">
 
-<h1>✅ Meeting Request Submitted</h1>
+<h1>✅ {% trans "Meeting Request Submitted" %}</h1>
 
 <p>
-Thank you for your submission.
-Our team will contact you shortly.
+{% trans "Thank you for your submission. Our team will contact you shortly." %}
 </p>
 
 <a href="{% url 'home' %}" class="btn">
-Back Home
+{% trans "Back Home" %}
 </a>
 
 </section>

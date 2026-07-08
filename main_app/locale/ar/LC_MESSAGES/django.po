@@ -1,0 +1,505 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-08 12:32+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\main_app\templates\about.html:8
+msgid "About Progress Business Centre"
+msgstr "عن مركز بروجريس للأعمال"
+
+#: .\main_app\templates\about.html:12
+msgid ""
+"Progress Business Centre is dedicated to helping entrepreneurs, freelancers "
+"and companies succeed by providing flexible workspace solutions in a "
+"professional environment."
+msgstr ""
+"يكرّس مركز بروجريس للأعمال جهوده لمساعدة رواد الأعمال والمستقلين والشركات على النجاح من خلال توفير حلول مساحات عمل مرنة في بيئة احترافية."
+
+#: .\main_app\templates\about.html:22 .\main_app\templates\index.html:157
+msgid "Our Mission"
+msgstr "مهمتنا"
+
+#: .\main_app\templates\about.html:25
+msgid "To provide innovative office solutions that support business growth."
+msgstr "توفير حلول مكتبية مبتكرة تدعم نمو الأعمال."
+
+#: .\main_app\templates\about.html:34
+msgid "Our Vision"
+msgstr "رؤيتنا"
+
+#: .\main_app\templates\about.html:37
+msgid "To become Bahrain's preferred destination for flexible workspaces."
+msgstr "أن نصبح الوجهة المفضلة في البحرين لمساحات العمل المرنة."
+
+#: .\main_app\templates\about.html:46 .\main_app\templates\index.html:19
+#: .\main_app\templates\services\index.html:8
+msgid "Our Services"
+msgstr "خدماتنا"
+
+#: .\main_app\templates\about.html:50
+msgid "Virtual Offices"
+msgstr "المكاتب الافتراضية"
+
+#: .\main_app\templates\about.html:52
+msgid "Coworking Spaces"
+msgstr "مساحات العمل المشتركة"
+
+#: .\main_app\templates\about.html:54
+msgid "Private Offices"
+msgstr "المكاتب الخاصة"
+
+#: .\main_app\templates\about.html:56
+#: .\main_app\templates\branches\detail.html:38
+#: .\main_app\templates\index.html:82 .\main_app\templates\index.html:138
+#: .\main_app\templates\rooms\detail.html:8
+#: .\main_app\templates\rooms\index.html:8
+msgid "Meeting Rooms"
+msgstr "غرف الاجتماعات"
+
+#: .\main_app\templates\about.html:58
+msgid "Business Registration"
+msgstr "تسجيل الأعمال"
+
+#: .\main_app\templates\about.html:68
+msgid "Why Us?"
+msgstr "لماذا نحن؟"
+
+#: .\main_app\templates\about.html:72
+msgid "Professional Staff"
+msgstr "فريق عمل محترف"
+
+#: .\main_app\templates\about.html:74
+msgid "Prime Business Address"
+msgstr "عنوان تجاري مميز"
+
+#: .\main_app\templates\about.html:76
+msgid "Affordable Pricing"
+msgstr "أسعار مناسبة"
+
+#: .\main_app\templates\about.html:78
+msgid "Networking Opportunities"
+msgstr "فرص التواصل"
+
+#: .\main_app\templates\base.html:9
+msgid "Progress Business Center"
+msgstr "مركز بروجريس للأعمال"
+
+#: .\main_app\templates\base.html:19 .\main_app\templates\index.html:10
+msgid "Progress Business Centre"
+msgstr "مركز بروجريس للأعمال"
+
+#: .\main_app\templates\base.html:26 .\main_app\templates\base.html:47
+msgid "Home"
+msgstr "الرئيسية"
+
+#: .\main_app\templates\base.html:27
+msgid "About"
+msgstr "من نحن"
+
+#: .\main_app\templates\base.html:28
+msgid "Services"
+msgstr "الخدمات"
+
+#: .\main_app\templates\base.html:29
+msgid "Features"
+msgstr "المميزات"
+
+#: .\main_app\templates\base.html:30
+msgid "Branches"
+msgstr "الفروع"
+
+#: .\main_app\templates\base.html:31
+msgid "Rooms"
+msgstr "الغرف"
+
+#: .\main_app\templates\base.html:32
+msgid "Events"
+msgstr "الفعاليات"
+
+#: .\main_app\templates\base.html:33 .\main_app\templates\gallery\index.html:8
+msgid "Gallery"
+msgstr "معرض الصور"
+
+#: .\main_app\templates\base.html:34 .\main_app\templates\faq\index.html:6
+msgid "FAQ"
+msgstr "الأسئلة الشائعة"
+
+#: .\main_app\templates\base.html:35
+msgid "Visit"
+msgstr "زيارة"
+
+#: .\main_app\templates\base.html:36
+msgid "Referral"
+msgstr "الإحالة"
+
+#: .\main_app\templates\base.html:37
+msgid "Register"
+msgstr "تسجيل"
+
+#: .\main_app\templates\base.html:38
+msgid "Contact"
+msgstr "اتصل بنا"
+
+#: .\main_app\templates\base.html:42
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: .\main_app\templates\base.html:48
+#: .\main_app\templates\registration\login.html:10
+#: .\main_app\templates\registration\login.html:22
+#: .\main_app\templates\registration\signup.html:97
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\main_app\templates\base.html:49
+msgid "Sign Up"
+msgstr "إنشاء حساب"
+
+#: .\main_app\templates\base.html:83
+msgid "© 2026 Progress Business Centre. All rights reserved."
+msgstr "© 2026 مركز بروجريس للأعمال. جميع الحقوق محفوظة."
+
+#: .\main_app\templates\branches\detail.html:14
+#: .\main_app\templates\contact\detail.html:48
+msgid "Address:"
+msgstr "العنوان:"
+
+#: .\main_app\templates\branches\detail.html:20
+#: .\main_app\templates\contact\detail.html:26
+msgid "Phone:"
+msgstr "الهاتف:"
+
+#: .\main_app\templates\branches\detail.html:26
+#: .\main_app\templates\contact\detail.html:42
+msgid "Email:"
+msgstr "البريد الإلكتروني:"
+
+#: .\main_app\templates\branches\detail.html:32
+msgid "Opening Hours:"
+msgstr "ساعات العمل:"
+
+#: .\main_app\templates\branches\detail.html:55
+#: .\main_app\templates\rooms\detail.html:20
+#: .\main_app\templates\rooms\index.html:20
+msgid "Capacity:"
+msgstr "السعة:"
+
+#: .\main_app\templates\branches\detail.html:55
+msgid "people"
+msgstr "أشخاص"
+
+#: .\main_app\templates\branches\detail.html:60
+msgid "Price:"
+msgstr "السعر:"
+
+#: .\main_app\templates\branches\detail.html:70
+msgid "No meeting rooms available."
+msgstr "لا توجد غرف اجتماعات متاحة."
+
+#: .\main_app\templates\branches\index.html:9
+msgid "Our Locations"
+msgstr "مواقعنا"
+
+#: .\main_app\templates\branches\index.html:12
+msgid "Explore our business centers and available branches."
+msgstr "استكشف مراكز الأعمال والفروع المتوفرة لدينا."
+
+#: .\main_app\templates\branches\index.html:33
+msgid "View Branch"
+msgstr "عرض الفرع"
+
+#: .\main_app\templates\business\register.html:6
+msgid "Register Your Business"
+msgstr "تسجيل عملك"
+
+#: .\main_app\templates\business\register.html:9
+msgid ""
+"Complete the form below to register your business with Progress Business "
+"Centre."
+msgstr ""
+"أكمل النموذج أدناه لتسجيل عملك لدى مركز بروجريس للأعمال."
+
+#: .\main_app\templates\business\register.html:17
+msgid "Company Name"
+msgstr "اسم الشركة"
+
+#: .\main_app\templates\business\register.html:24
+msgid "Owner Name"
+msgstr "اسم المالك"
+
+#: .\main_app\templates\business\register.html:31
+msgid "Commercial Registration"
+msgstr "السجل التجاري"
+
+#: .\main_app\templates\business\register.html:38
+msgid "Business Type"
+msgstr "نوع النشاط التجاري"
+
+#: .\main_app\templates\business\register.html:44
+msgid "Select Office Services"
+msgstr "اختر الخدمات المكتبية"
+
+#: .\main_app\templates\business\register.html:56
+msgid "Register Business"
+msgstr "تسجيل العمل"
+
+#: .\main_app\templates\business\success.html:8
+msgid "Registration Submitted"
+msgstr "تم إرسال التسجيل"
+
+#: .\main_app\templates\business\success.html:11
+#: .\main_app\templates\referrals\register.html:11
+#: .\main_app\templates\visits\success.html:11
+msgid "Thank you for your submission. Our team will contact you shortly."
+msgstr "شكرًا لتقديم طلبك. سيتواصل معك فريقنا قريبًا."
+
+#: .\main_app\templates\business\success.html:15
+#: .\main_app\templates\referrals\register.html:15
+#: .\main_app\templates\visits\success.html:15
+msgid "Back Home"
+msgstr "العودة للرئيسية"
+
+#: .\main_app\templates\contact\detail.html:10
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+#: .\main_app\templates\contact\detail.html:14
+msgid "Get in touch with Progress Business Centre."
+msgstr "تواصل مع مركز بروجريس للأعمال."
+
+#: .\main_app\templates\contact\detail.html:32
+msgid "WhatsApp:"
+msgstr "واتساب:"
+
+#: .\main_app\templates\contact\detail.html:54
+msgid "View Location"
+msgstr "عرض الموقع"
+
+#: .\main_app\templates\events\detail.html:21
+msgid "Date:"
+msgstr "التاريخ:"
+
+#: .\main_app\templates\events\detail.html:27
+msgid "Location:"
+msgstr "الموقع:"
+
+#: .\main_app\templates\features\index.html:9
+msgid "Office Features"
+msgstr "مميزات المكتب"
+
+#: .\main_app\templates\features\index.html:12
+msgid "Everything you need for a productive workspace."
+msgstr "كل ما تحتاجه للحصول على مساحة عمل منتجة."
+
+#: .\main_app\templates\features\index.html:48
+msgid "More"
+msgstr "المزيد"
+
+#: .\main_app\templates\form.html:11
+msgid "Form"
+msgstr "النموذج"
+
+#: .\main_app\templates\form.html:26
+msgid "Submit"
+msgstr "إرسال"
+
+#: .\main_app\templates\index.html:13
+msgid ""
+"Premium office solutions for startups, entrepreneurs and growing businesses "
+"in Bahrain."
+msgstr ""
+"حلول مكتبية متميزة للشركات الناشئة ورواد الأعمال والشركات المتنامية في البحرين."
+
+#: .\main_app\templates\index.html:23
+msgid "Arrange a Visit"
+msgstr "ترتيب زيارة"
+
+#: .\main_app\templates\index.html:35
+msgid "Why Choose Us"
+msgstr "لماذا تختارنا"
+
+#: .\main_app\templates\index.html:43
+msgid "Prime Location"
+msgstr "موقع مميز"
+
+#: .\main_app\templates\index.html:46
+msgid "Located in Seef, Bahrain with easy access."
+msgstr "يقع في السيف، البحرين مع سهولة الوصول."
+
+#: .\main_app\templates\index.html:56
+msgid "Flexible Offices"
+msgstr "مكاتب مرنة"
+
+#: .\main_app\templates\index.html:59
+msgid "Choose between virtual, coworking and serviced offices."
+msgstr "اختر بين المكاتب الافتراضية ومساحات العمل المشتركة والمكاتب المجهزة بالخدمات."
+
+#: .\main_app\templates\index.html:69 .\main_app\templates\index.html:193
+msgid "Business Support"
+msgstr "دعم الأعمال"
+
+#: .\main_app\templates\index.html:72
+msgid "Professional services for startups and companies."
+msgstr "خدمات احترافية للشركات الناشئة والمؤسسات."
+
+#: .\main_app\templates\index.html:85
+msgid "Book fully equipped meeting rooms whenever needed."
+msgstr "احجز غرف اجتماعات مجهزة بالكامل عند الحاجة."
+
+#: .\main_app\templates\index.html:98
+msgid "Our Office Solutions"
+msgstr "حلولنا المكتبية"
+
+#: .\main_app\templates\index.html:105
+msgid "Virtual Office"
+msgstr "مكتب افتراضي"
+
+#: .\main_app\templates\index.html:108
+msgid "Professional business address without renting physical space."
+msgstr "عنوان تجاري احترافي بدون الحاجة لاستئجار مساحة فعلية."
+
+#: .\main_app\templates\index.html:116
+msgid "Coworking Space"
+msgstr "مساحة عمل مشتركة"
+
+#: .\main_app\templates\index.html:119
+msgid "Collaborative workspaces designed for productivity."
+msgstr "مساحات عمل تعاونية مصممة لزيادة الإنتاجية."
+
+#: .\main_app\templates\index.html:127
+msgid "Private Office"
+msgstr "مكتب خاص"
+
+#: .\main_app\templates\index.html:130
+msgid "Fully serviced offices for companies of all sizes."
+msgstr "مكاتب مجهزة بالكامل بالخدمات للشركات من جميع الأحجام."
+
+#: .\main_app\templates\index.html:141
+msgid "Modern conference rooms equipped with everything you need."
+msgstr "غرف اجتماعات حديثة مجهزة بكل ما تحتاجه."
+
+#: .\main_app\templates\index.html:160
+msgid ""
+"To empower entrepreneurs and businesses with flexible office solutions that "
+"promote growth, innovation and collaboration."
+msgstr ""
+"تمكين رواد الأعمال والشركات من خلال حلول مكتبية مرنة تعزز النمو والابتكار والتعاون."
+
+#: .\main_app\templates\index.html:175
+msgid "Businesses Supported"
+msgstr "الشركات المدعومة"
+
+#: .\main_app\templates\index.html:184
+msgid "Office Solutions"
+msgstr "الحلول المكتبية"
+
+#: .\main_app\templates\index.html:202
+msgid "Professional Environment"
+msgstr "بيئة احترافية"
+
+#: .\main_app\templates\index.html:212
+msgid "Ready to Grow Your Business?"
+msgstr "هل أنت مستعد لتنمية أعمالك؟"
+
+#: .\main_app\templates\index.html:215
+msgid "Join entrepreneurs and companies that trust Progress Business Centre."
+msgstr "انضم إلى رواد الأعمال والشركات التي تثق بمركز بروجريس للأعمال."
+
+#: .\main_app\templates\index.html:221
+msgid "Register Now"
+msgstr "سجل الآن"
+
+#: .\main_app\templates\referrals\register.html:8
+msgid "Referral Submitted"
+msgstr "تم إرسال الإحالة"
+
+#: .\main_app\templates\registration\login.html:31
+msgid "Don't have an account?"
+msgstr "ليس لديك حساب؟"
+
+#: .\main_app\templates\registration\login.html:34
+msgid "Sign up"
+msgstr "إنشاء حساب"
+
+#: .\main_app\templates\registration\signup.html:9
+#: .\main_app\templates\registration\signup.html:84
+msgid "Create Account"
+msgstr "إنشاء حساب"
+
+#: .\main_app\templates\registration\signup.html:20
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#: .\main_app\templates\registration\signup.html:40
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: .\main_app\templates\registration\signup.html:62
+msgid "Confirm Password"
+msgstr "تأكيد كلمة المرور"
+
+#: .\main_app\templates\registration\signup.html:94
+msgid "Already have an account?"
+msgstr "لديك حساب بالفعل؟"
+
+#: .\main_app\templates\rooms\detail.html:26
+#: .\main_app\templates\rooms\index.html:26
+msgid "View Room"
+msgstr "عرض الغرفة"
+
+#: .\main_app\templates\services\detail.html:14
+msgid "Status:"
+msgstr "الحالة:"
+
+#: .\main_app\templates\services\detail.html:19
+msgid "Available"
+msgstr "متاح"
+
+#: .\main_app\templates\services\detail.html:25
+msgid "Not Available"
+msgstr "غير متاح"
+
+#: .\main_app\templates\services\index.html:11
+msgid ""
+"Explore our professional office solutions designed for startups, "
+"entrepreneurs and growing businesses."
+msgstr ""
+"استكشف حلولنا المكتبية الاحترافية المصممة للشركات الناشئة ورواد الأعمال والشركات المتنامية."
+
+#: .\main_app\templates\services\index.html:27
+msgid "Learn More"
+msgstr "اعرف المزيد"
+
+#: .\main_app\templates\visits\register.html:6
+msgid "Arrange a Meeting"
+msgstr "ترتيب اجتماع"
+
+#: .\main_app\templates\visits\register.html:9
+msgid ""
+"Complete the form below and choose your preferred meeting date and time."
+msgstr ""
+"أكمل النموذج أدناه واختر التاريخ والوقت المناسبين للاجتماع."
+
+#: .\main_app\templates\visits\register.html:19
+msgid "Arrange Meeting"
+msgstr "ترتيب الاجتماع"
+
+#: .\main_app\templates\visits\success.html:8
+msgid "Meeting Request Submitted"
+msgstr "تم إرسال طلب الاجتماع"

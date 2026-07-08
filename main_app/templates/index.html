@@ -1,28 +1,26 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-
-<!-- HERO -->
 
 <section class="hero">
 
     <div class="hero-content">
 
-        <h1>Progress Business Centre</h1>
+        <h1>{% trans "Progress Business Centre" %}</h1>
 
         <p>
-            Premium office solutions for startups,
-            entrepreneurs and growing businesses in Bahrain.
+            {% trans "Premium office solutions for startups, entrepreneurs and growing businesses in Bahrain." %}
         </p>
 
         <div class="hero-buttons">
 
             <a href="{% url 'services' %}" class="btn">
-                Our Services
+                {% trans "Our Services" %}
             </a>
 
             <a href="{% url 'visit' %}" class="btn btn-light">
-                Arrange a Visit
+                {% trans "Arrange a Visit" %}
             </a>
 
         </div>
@@ -32,11 +30,9 @@
 </section>
 
 
-<!-- FEATURES -->
-
 <section class="features-section">
 
-<h2>Why Choose Us</h2>
+<h2>{% trans "Why Choose Us" %}</h2>
 
 <div class="card-grid">
 
@@ -44,46 +40,49 @@
 
 <h3>🏢</h3>
 
-<h4>Prime Location</h4>
+<h4>{% trans "Prime Location" %}</h4>
 
 <p>
-Located in Seef, Bahrain with easy access.
+{% trans "Located in Seef, Bahrain with easy access." %}
 </p>
 
 </div>
+
 
 <div class="feature-card">
 
 <h3>💼</h3>
 
-<h4>Flexible Offices</h4>
+<h4>{% trans "Flexible Offices" %}</h4>
 
 <p>
-Choose between virtual, coworking and serviced offices.
+{% trans "Choose between virtual, coworking and serviced offices." %}
 </p>
 
 </div>
+
 
 <div class="feature-card">
 
 <h3>🤝</h3>
 
-<h4>Business Support</h4>
+<h4>{% trans "Business Support" %}</h4>
 
 <p>
-Professional services for startups and companies.
+{% trans "Professional services for startups and companies." %}
 </p>
 
 </div>
+
 
 <div class="feature-card">
 
 <h3>📅</h3>
 
-<h4>Meeting Rooms</h4>
+<h4>{% trans "Meeting Rooms" %}</h4>
 
 <p>
-Book fully equipped meeting rooms whenever needed.
+{% trans "Book fully equipped meeting rooms whenever needed." %}
 </p>
 
 </div>
@@ -93,72 +92,72 @@ Book fully equipped meeting rooms whenever needed.
 </section>
 
 
-<!-- SERVICES -->
 
 <section class="services-preview">
 
-<h2>Our Office Solutions</h2>
+<h2>{% trans "Our Office Solutions" %}</h2>
 
 <div class="card-grid">
 
+
 <div class="service-card">
 
-<h3>Virtual Office</h3>
+<h3>{% trans "Virtual Office" %}</h3>
 
 <p>
-Professional business address without renting physical space.
+{% trans "Professional business address without renting physical space." %}
 </p>
 
 </div>
 
+
 <div class="service-card">
 
-<h3>Coworking Space</h3>
+<h3>{% trans "Coworking Space" %}</h3>
 
 <p>
-Collaborative workspaces designed for productivity.
+{% trans "Collaborative workspaces designed for productivity." %}
 </p>
 
 </div>
 
+
 <div class="service-card">
 
-<h3>Private Office</h3>
+<h3>{% trans "Private Office" %}</h3>
 
 <p>
-Fully serviced offices for companies of all sizes.
+{% trans "Fully serviced offices for companies of all sizes." %}
 </p>
 
 </div>
 
+
 <div class="service-card">
 
-<h3>Meeting Rooms</h3>
+<h3>{% trans "Meeting Rooms" %}</h3>
 
 <p>
-Modern conference rooms equipped with everything you need.
+{% trans "Modern conference rooms equipped with everything you need." %}
 </p>
 
 </div>
+
 
 </div>
 
 </section>
 
 
-<!-- OUR MISSION -->
 
 <section class="about-home">
 
 <div>
 
-<h2>Our Mission</h2>
+<h2>{% trans "Our Mission" %}</h2>
 
 <p>
-
-To empower entrepreneurs and businesses with flexible office
-solutions that promote growth, innovation and collaboration.
-
+{% trans "To empower entrepreneurs and businesses with flexible office solutions that promote growth, innovation and collaboration." %}
 </p>
 
 </div>
@@ -166,7 +165,6 @@ solutions that promote growth, innovation and collaboration.
 </section>
 
 
-<!-- STATS -->
 
 <section class="stats">
 
@@ -174,55 +172,58 @@ solutions that promote growth, innovation and collaboration.
 
 <h2>500+</h2>
 
-<p>Businesses Supported</p>
+<p>{% trans "Businesses Supported" %}</p>
 
 </div>
+
 
 <div>
 
 <h2>4</h2>
 
-<p>Office Solutions</p>
+<p>{% trans "Office Solutions" %}</p>
 
 </div>
+
 
 <div>
 
 <h2>24/7</h2>
 
-<p>Business Support</p>
+<p>{% trans "Business Support" %}</p>
 
 </div>
+
 
 <div>
 
 <h2>100%</h2>
 
-<p>Professional Environment</p>
+<p>{% trans "Professional Environment" %}</p>
 
 </div>
 
 </section>
 
 
-<!-- CTA -->
 
 <section class="cta">
 
-<h2>Ready to Grow Your Business?</h2>
+<h2>{% trans "Ready to Grow Your Business?" %}</h2>
 
 <p>
-
-Join entrepreneurs and companies that trust Progress Business Centre.
-
+{% trans "Join entrepreneurs and companies that trust Progress Business Centre." %}
 </p>
+
 
 <a href="{% url 'business_register' %}" class="btn">
 
-Register Now
+{% trans "Register Now" %}
 
 </a>
 
+
 </section>
+
 
 {% endblock %}

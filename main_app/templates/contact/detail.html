@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 
 {% block content %}
 
@@ -7,11 +7,11 @@
 <section class="page-header">
 
 <h1>
-Contact Us
+{% trans "Contact Us" %}
 </h1>
 
 <p>
-Get in touch with Progress Business Centre.
+{% trans "Get in touch with Progress Business Centre." %}
 </p>
 
 
@@ -23,13 +23,13 @@ Get in touch with Progress Business Centre.
 
 
 <p>
-<strong>Phone:</strong>
+<strong>{% trans "Phone:" %}</strong>
 {{ contact.phone }}
 </p>
 
 
 <p>
-<strong>WhatsApp:</strong>
+<strong>{% trans "WhatsApp:" %}</strong>
 
 <a href="https://wa.me/{{ contact.whatsapp }}">
 {{ contact.whatsapp }}
@@ -39,19 +39,19 @@ Get in touch with Progress Business Centre.
 
 
 <p>
-<strong>Email:</strong>
+<strong>{% trans "Email:" %}</strong>
 {{ contact.email }}
 </p>
 
 
 <p>
-<strong>Address:</strong>
+<strong>{% trans "Address:" %}</strong>
 {{ contact.address }}
 </p>
 
 
 <a class="btn" href="{{ contact.google_map }}" target="_blank">
-View Location
+{% trans "View Location" %}
 </a>
 
 

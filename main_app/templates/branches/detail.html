@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -10,31 +11,31 @@
 
 
 <p>
-<strong>Address:</strong>
+<strong>{% trans "Address:" %}</strong>
 {{ branch.address }}
 </p>
 
 
 <p>
-<strong>Phone:</strong>
+<strong>{% trans "Phone:" %}</strong>
 {{ branch.phone }}
 </p>
 
 
 <p>
-<strong>Email:</strong>
+<strong>{% trans "Email:" %}</strong>
 {{ branch.email }}
 </p>
 
 
 <p>
-<strong>Opening Hours:</strong>
+<strong>{% trans "Opening Hours:" %}</strong>
 {{ branch.opening_hours }}
 </p>
 
 
 
-<h2>Meeting Rooms</h2>
+<h2>{% trans "Meeting Rooms" %}</h2>
 
 
 <div class="card-grid">
@@ -51,12 +52,12 @@
 
 
 <p>
-Capacity: {{ room.capacity }} people
+{% trans "Capacity:" %} {{ room.capacity }} {% trans "people" %}
 </p>
 
 
 <p>
-Price:
+{% trans "Price:" %}
 {{ room.price_per_hour }}
 </p>
 
@@ -66,7 +67,7 @@ Price:
 
 {% empty %}
 
-<p>No meeting rooms available.</p>
+<p>{% trans "No meeting rooms available." %}</p>
 
 {% endfor %}
 

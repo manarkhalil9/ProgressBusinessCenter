@@ -1,55 +1,75 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
 <head>
+    <meta name="google" content="translate">
     <meta charset="UTF-8">
-    <title>Progress Business Center</title>
+    <title>{% trans "Progress Business Center" %}</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
 <nav class="navbar">
 
     <div class="logo">
-        <a href="{% url 'home' %}">Progress Business Centre</a>
+        <a href="{% url 'home' %}">{% trans "Progress Business Centre" %}</a>
     </div>
 
     <div class="nav-links">
 
         {% if user.is_authenticated %}
 
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'services' %}">Services</a>
-        <a href="{% url 'features' %}">Features</a>
-        <a href="{% url 'branches' %}">Branches</a>
-        <a href="{% url 'rooms' %}">Rooms</a>
-        <a href="{% url 'events' %}">Events</a>
-        <a href="{% url 'gallery' %}">Gallery</a>
-        <a href="{% url 'faqs' %}">FAQ</a>
-        <a href="{% url 'visit' %}">Visit</a>
-        <a href="{% url 'referral' %}">Referral</a>
-        <a href="{% url 'business_register' %}">Register</a>
-        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'home' %}">{% trans "Home" %}</a>
+        <a href="{% url 'about' %}">{% trans "About" %}</a>
+        <a href="{% url 'services' %}">{% trans "Services" %}</a>
+        <a href="{% url 'features' %}">{% trans "Features" %}</a>
+        <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
+        <a href="{% url 'rooms' %}">{% trans "Rooms" %}</a>
+        <a href="{% url 'events' %}">{% trans "Events" %}</a>
+        <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
+        <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
+        <a href="{% url 'visit' %}">{% trans "Visit" %}</a>
+        <a href="{% url 'referral' %}">{% trans "Referral" %}</a>
+        <a href="{% url 'business_register' %}">{% trans "Register" %}</a>
+        <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
 
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button class="logout-btn">Logout</button>
+            <button class="logout-btn">{% trans "Logout" %}</button>
         </form>
 
         {% else %}
 
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'signup' %}" class="btn-small">Sign Up</a>
+        <a href="{% url 'home' %}">{% trans "Home" %}</a>
+        <a href="{% url 'login' %}">{% trans "Login" %}</a>
+        <a href="{% url 'signup' %}" class="btn-small">{% trans "Sign Up" %}</a>   
 
         {% endif %}
 
     </div>
+
+
+<form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+
+    <input type="hidden" name="next" value="{{ request.path }}">
+
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+
+    <select class="language-btn" name="language" onchange="this.form.submit()">
+        {% for lang in LANGUAGES %}
+            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                {{ lang.1 }}
+            </option>
+        {% endfor %}
+    </select>
+
+</form>
 
 </nav>
 
@@ -57,10 +77,12 @@
 {% block content %}
 {% endblock %}
 
-    <!-- FOOTER -->
-    <footer>
-        <p>© 2026 Progress Business Centre. All rights reserved.</p>
-    </footer>
+
+<footer>
+    <p>
+        {% trans "© 2026 Progress Business Centre. All rights reserved." %}
+    </p>
+</footer>
 
 </body>
 </html>

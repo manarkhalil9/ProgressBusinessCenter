@@ -1,61 +1,86 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 
-<h1>Register Your Business</h1>
+<section class="form-card">
+
+<h1>
+{% trans "Register Your Business" %}
+</h1>
 
 <p>
-Complete the form below to register your business with
-Progress Business Centre.
+{% trans "Complete the form below to register your business with Progress Business Centre." %}
 </p>
+
 
 <form method="POST">
 
-    {% csrf_token %}
+{% csrf_token %}
 
-    <div>
-        <label>Company Name</label><br>
-        {{ form.company_name }}
-    </div>
 
-    <br>
+<div>
+<label>{% trans "Company Name" %}</label><br>
+{{ form.company_name }}
+</div>
 
-    <div>
-        <label>Owner Name</label><br>
-        {{ form.owner_name }}
-    </div>
 
-    <br>
+<br>
 
-    <div>
-        <label>Commercial Registration</label><br>
-        {{ form.commercial_registration }}
-    </div>
 
-    <br>
+<div>
+<label>{% trans "Owner Name" %}</label><br>
+{{ form.owner_name }}
+</div>
 
-    <div>
-        <label>Business Type</label><br>
-        {{ form.business_type }}
-    </div>
 
-    <br>
+<br>
 
-    <h3>Select Office Services</h3>
 
-    {% for checkbox in form.services %}
-    <div>
-        {{ checkbox.tag }}
-        <label>{{ checkbox.choice_label }}</label>
-    </div>
-    {% endfor %}
+<div>
+<label>{% trans "Commercial Registration" %}</label><br>
+{{ form.commercial_registration }}
+</div>
 
-    <br><br>
 
-    <button type="submit">
-        Register Business
-    </button>
+<br>
+
+
+<div>
+<label>{% trans "Business Type" %}</label><br>
+{{ form.business_type }}
+</div>
+
+
+<br>
+
+
+<h3>
+{% trans "Select Office Services" %}
+</h3>
+
+
+{% for checkbox in form.services %}
+
+<div>
+{{ checkbox.tag }}
+<label>{{ checkbox.choice_label }}</label>
+</div>
+
+{% endfor %}
+
+
+<br><br>
+
+
+<button type="submit">
+{% trans "Register Business" %}
+</button>
+
 
 </form>
+
+
+</section>
 
 {% endblock %}

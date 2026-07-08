@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 
 {% block content %}
-
 
 <section class="form-card">
 
 
 <h1>
-Login
+{% trans "Login" %}
 </h1>
 
 
@@ -20,7 +19,7 @@ Login
 
 
 <button class="btn" type="submit">
-Login
+{% trans "Login" %}
 </button>
 
 
@@ -29,10 +28,10 @@ Login
 
 
 <p>
-Don't have an account?
+{% trans "Don't have an account?" %}
 
 <a href="{% url 'signup' %}">
-Sign up
+{% trans "Sign up" %}
 </a>
 
 </p>
