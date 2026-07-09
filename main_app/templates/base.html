@@ -6,19 +6,35 @@
 <head>
     <meta name="google" content="translate">
     <meta charset="UTF-8">
+
+    <!-- Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% trans "Progress Business Center" %}</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
+
 <body>
 
 <nav class="navbar">
 
+    <!-- Mobile Burger -->
+    <button class="mobile-menu-btn" onclick="toggleMenu()">
+        ☰
+    </button>
+
+
+    <!-- Logo -->
     <div class="logo">
-        <a href="{% url 'home' %}">{% trans "Progress Business Centre" %}</a>
+        <a href="{% url 'home' %}">
+            {% trans "Progress Business Centre" %}
+        </a>
     </div>
 
+
+    <!-- Desktop Menu -->
     <div class="nav-links">
 
         {% if user.is_authenticated %}
@@ -39,37 +55,135 @@
 
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-            <button class="logout-btn">{% trans "Logout" %}</button>
+            <button class="logout-btn">
+                {% trans "Logout" %}
+            </button>
         </form>
+
 
         {% else %}
 
-        <a href="{% url 'home' %}">{% trans "Home" %}</a>
-        <a href="{% url 'login' %}">{% trans "Login" %}</a>
-        <a href="{% url 'signup' %}" class="btn-small">{% trans "Sign Up" %}</a>   
+        <a href="{% url 'home' %}">
+            {% trans "Home" %}
+        </a>
+
+        <a href="{% url 'login' %}">
+            {% trans "Login" %}
+        </a>
+
+        <a href="{% url 'signup' %}" class="btn-small">
+            {% trans "Sign Up" %}
+        </a>
 
         {% endif %}
 
     </div>
 
 
-<form action="{% url 'set_language' %}" method="post">
-    {% csrf_token %}
 
-    <input type="hidden" name="next" value="{{ request.path }}">
+    <!-- Mobile/Desktop Authentication Buttons -->
+    {% if not user.is_authenticated %}
 
-    {% get_current_language as LANGUAGE_CODE %}
-    {% get_available_languages as LANGUAGES %}
+    <div class="auth-buttons">
 
-    <select class="language-btn" name="language" onchange="this.form.submit()">
-        {% for lang in LANGUAGES %}
-            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+        <a href="{% url 'login' %}">
+            {% trans "Login" %}
+        </a>
+
+        <a href="{% url 'signup' %}" class="btn-small">
+            {% trans "Sign Up" %}
+        </a>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- Language -->
+    <form action="{% url 'set_language' %}" method="post">
+
+        {% csrf_token %}
+
+        <input type="hidden" name="next" value="{{ request.path }}">
+
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+
+        <select class="language-btn" name="language" onchange="this.form.submit()">
+
+            {% for lang in LANGUAGES %}
+
+            <option value="{{ lang.0 }}" 
+            {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
                 {{ lang.1 }}
             </option>
-        {% endfor %}
-    </select>
 
-</form>
+            {% endfor %}
+
+        </select>
+
+    </form>
+
+
+
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+
+
+        {% if user.is_authenticated %}
+
+        <a href="{% url 'home' %}">
+            {% trans "Home" %}
+        </a>
+
+        <a href="{% url 'about' %}">
+            {% trans "About" %}
+        </a>
+
+        <a href="{% url 'services' %}">
+            {% trans "Services" %}
+        </a>
+
+        <a href="{% url 'branches' %}">
+            {% trans "Branches" %}
+        </a>
+
+        <a href="{% url 'rooms' %}">
+            {% trans "Rooms" %}
+        </a>
+
+        <a href="{% url 'events' %}">
+            {% trans "Events" %}
+        </a>
+
+        <a href="{% url 'gallery' %}">
+            {% trans "Gallery" %}
+        </a>
+
+        <a href="{% url 'faqs' %}">
+            {% trans "FAQ" %}
+        </a>
+
+        <a href="{% url 'contact' %}">
+            {% trans "Contact" %}
+        </a>
+
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="logout-btn">
+                {% trans "Logout" %}
+            </button>
+        </form>
+
+
+        {% endif %}
+
+
+    </div>
+
 
 </nav>
 
@@ -83,6 +197,20 @@
         {% trans "© 2026 Progress Business Centre. All rights reserved." %}
     </p>
 </footer>
+
+
+<script>
+
+function toggleMenu(){
+
+    const menu = document.getElementById("mobileMenu");
+
+    menu.classList.toggle("active");
+
+}
+
+</script>
+
 
 </body>
 </html>
