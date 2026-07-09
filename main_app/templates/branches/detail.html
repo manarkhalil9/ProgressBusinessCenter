@@ -15,6 +15,13 @@
 {{ branch.address }}
 </p>
 
+{% if branch.google_map %}
+
+<a class="map-btn" href="{{ branch.google_map }}" target="_blank">
+{% trans "View on Google Maps" %}
+</a>
+
+{% endif %}
 
 <p>
 <strong>{% trans "Phone:" %}</strong>

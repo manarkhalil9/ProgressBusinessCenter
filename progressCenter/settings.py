@@ -13,10 +13,12 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
-LANGUAGES = [
+LANGUAGES = (
     ('en', _('English')),
     ('ar', _('Arabic')),
-]
+)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -46,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_app',
+    'modeltranslation',
+    'main_app.apps.MainAppConfig',
 ]
 
 MIDDLEWARE = [

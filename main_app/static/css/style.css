@@ -521,3 +521,28 @@ a:hover{
     padding:10px;
 
 }
+
+/* Google Maps Button */
+
+.map-btn{
+
+    display:inline-block;
+    background:#ff9800;
+    color:white;
+    text-decoration:none;
+    padding:10px 20px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:15px;
+    margin:15px 0 25px;
+    transition:.3s;
+
+}
+
+
+.map-btn:hover{
+
+    background:#e68900;
+    transform:translateY(-2px);
+
+}
