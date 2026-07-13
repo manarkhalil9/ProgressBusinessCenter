@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import BusinessRegistrationForm, VisitRequestForm
+from django.db.models import Q
 
 # Create your views here.
 
@@ -164,6 +165,39 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
     
 def business_success(request):
     return render(request, "business/success.html")
+
+# search bar
+def search(request):
+    query = request.GET.get("q", "").strip()
+
+    services = Service.objects.none()
+    rooms = MeetingRoom.objects.none()
+    faqs = FAQ.objects.none()
+
+    if query:
+        services = Service.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+        rooms = MeetingRoom.objects.filter(
+            Q(name__icontains=query) |
+            Q(branch__name__icontains=query)
+        )
+
+        faqs = FAQ.objects.filter(
+            Q(question__icontains=query) |
+            Q(answer__icontains=query)
+        )
+
+    context = {
+        "query": query,
+        "services": services,
+        "rooms": rooms,
+        "faqs": faqs,
+    }
+
+    return render(request, "search/results.html", context)
 
 # signup
 def signup(request):

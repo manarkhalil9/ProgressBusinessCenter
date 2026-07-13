@@ -52,6 +52,9 @@ urlpatterns = [
     path('register/', views.BusinessRegistrationCreateView.as_view(), name='business_register'),
     path('register/success/',views.business_success, name='business_success'),
 
+    # search bar
+    path("search/", views.search, name="search"),
+
     # auth
     path('accounts/signup/', views.signup, name='signup'),
 ]

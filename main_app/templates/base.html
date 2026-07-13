@@ -20,6 +20,18 @@
 
 <nav class="navbar">
 
+    <form class="site-search" action="{% url 'search' %}" method="get">
+
+        <input
+    type="search"
+    name="q"
+    placeholder="{% trans 'Search' %}"
+    value="{{ request.GET.q }}"
+    aria-label="{% trans 'Search' %}"
+    >
+    <button type="submit">{% trans "Search" %}</button>
+    </form>
+
     <!-- Mobile Burger -->
     <button class="mobile-menu-btn" onclick="toggleMenu()">
         ☰

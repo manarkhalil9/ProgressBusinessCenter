@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<section class="search-results">
+
+    <div class="page-header">
+        <h1>{% trans "Search" %}</h1>
+
+        {% if query %}
+            <p>{% blocktrans %}Results for "{{ query }}"{% endblocktrans %}</p>
+        {% else %}
+            <p>{% trans "Search services, meeting rooms, and FAQs." %}</p>
+        {% endif %}
+    </div>
+
+    {% if query %}
+
+        {% if services or rooms or faqs %}
+        <div class="search-result-grid">
+
+            {% if services %}
+            <section class="search-group">
+                <h2>{% trans "Services" %}</h2>
+
+                {% for service in services %}
+                <a href="{% url 'service_detail' service.pk %}">
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description|truncatechars:140 }}</p>
+                </a>
+                {% endfor %}
+            </section>
+            {% endif %}
+
+            {% if rooms %}
+            <section class="search-group">
+                <h2>{% trans "Meeting Rooms" %}</h2>
+
+                {% for room in rooms %}
+                <a href="{% url 'room_detail' room.pk %}">
+                    <h3>{{ room.name }}</h3>
+                    <p>
+                        {{ room.branch.name }} ·
+                        {% trans "Capacity" %}: {{ room.capacity }}
+                    </p>
+                </a>
+                {% endfor %}
+            </section>
+            {% endif %}
+
+            {% if faqs %}
+            <section class="search-group">
+                <h2>{% trans "FAQ" %}</h2>
+
+                {% for faq in faqs %}
+                <a href="{% url 'faq_detail' faq.pk %}">
+                    <h3>{{ faq.question }}</h3>
+                    <p>{{ faq.answer|truncatechars:140 }}</p>
+                </a>
+                {% endfor %}
+            </section>
+            {% endif %}
+
+        </div>
+
+        {% else %}
+        <p class="empty">
+            {% trans "No results found. Try another search term." %}
+        </p>
+        {% endif %}
+
+    {% endif %}
+
+</section>
+{% endblock %}
