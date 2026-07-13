@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-13 12:08+0300\n"
+"POT-Creation-Date: 2026-07-13 13:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,92 +97,106 @@ msgstr "أسعار مناسبة"
 msgid "Networking Opportunities"
 msgstr "فرص التواصل"
 
-#: .\main_app\templates\base.html:13
+#: .\main_app\templates\base.html:11
 msgid "Progress Business Center"
 msgstr "مركز بروجريس للأعمال"
 
-#: .\main_app\templates\base.html:28 .\main_app\templates\base.html:30
-#: .\main_app\templates\base.html:32 .\main_app\templates\search\results.html:8
-msgid "Search"
-msgstr "بحث"
+#: .\main_app\templates\base.html:20
+msgid "Menu"
+msgstr "القائمة"
 
-#: .\main_app\templates\base.html:44 .\main_app\templates\index.html:10
+#: .\main_app\templates\base.html:26 .\main_app\templates\index.html:10
 msgid "Progress Business Centre"
 msgstr "مركز بروجريس للأعمال"
 
-#: .\main_app\templates\base.html:54 .\main_app\templates\base.html:79
-#: .\main_app\templates\base.html:150
+#: .\main_app\templates\base.html:32 .\main_app\templates\base.html:40
+#: .\main_app\templates\base.html:41 .\main_app\templates\base.html:44
+#: .\main_app\templates\search\results.html:8
+msgid "Search"
+msgstr "بحث"
+
+#: .\main_app\templates\base.html:49 .\main_app\templates\base.html:117
 msgid "Home"
 msgstr "الرئيسية"
 
-#: .\main_app\templates\base.html:55 .\main_app\templates\base.html:154
+#: .\main_app\templates\base.html:50 .\main_app\templates\base.html:118
 msgid "About"
 msgstr "من نحن"
 
-#: .\main_app\templates\base.html:56 .\main_app\templates\base.html:158
+#: .\main_app\templates\base.html:51 .\main_app\templates\base.html:119
 #: .\main_app\templates\search\results.html:24
 msgid "Services"
 msgstr "الخدمات"
 
-#: .\main_app\templates\base.html:57
-msgid "Features"
-msgstr "المميزات"
-
-#: .\main_app\templates\base.html:58 .\main_app\templates\base.html:162
-msgid "Branches"
-msgstr "الفروع"
-
-#: .\main_app\templates\base.html:59 .\main_app\templates\base.html:166
+#: .\main_app\templates\base.html:52 .\main_app\templates\base.html:122
 msgid "Rooms"
 msgstr "الغرف"
 
-#: .\main_app\templates\base.html:60 .\main_app\templates\base.html:170
-msgid "Events"
-msgstr "الفعاليات"
+#: .\main_app\templates\base.html:53 .\main_app\templates\base.html:121
+msgid "Branches"
+msgstr "الفروع"
 
-#: .\main_app\templates\base.html:61 .\main_app\templates\base.html:174
-#: .\main_app\templates\gallery\index.html:8
-msgid "Gallery"
-msgstr "معرض الصور"
-
-#: .\main_app\templates\base.html:62 .\main_app\templates\base.html:178
+#: .\main_app\templates\base.html:54 .\main_app\templates\base.html:125
 #: .\main_app\templates\faq\index.html:6
 #: .\main_app\templates\search\results.html:53
 msgid "FAQ"
 msgstr "الأسئلة الشائعة"
 
-#: .\main_app\templates\base.html:63
-msgid "Visit"
-msgstr "زيارة"
-
-#: .\main_app\templates\base.html:64
-msgid "Referral"
-msgstr "الإحالة"
-
-#: .\main_app\templates\base.html:65
-msgid "Register"
-msgstr "تسجيل"
-
-#: .\main_app\templates\base.html:66 .\main_app\templates\base.html:182
+#: .\main_app\templates\base.html:55 .\main_app\templates\base.html:126
 msgid "Contact"
 msgstr "اتصل بنا"
 
-#: .\main_app\templates\base.html:71 .\main_app\templates\base.html:189
+#: .\main_app\templates\base.html:59
+#: .\main_app\templates\features\index.html:43
+msgid "More"
+msgstr "المزيد"
+
+#: .\main_app\templates\base.html:62 .\main_app\templates\base.html:120
+msgid "Features"
+msgstr "المميزات"
+
+#: .\main_app\templates\base.html:63 .\main_app\templates\base.html:123
+msgid "Events"
+msgstr "الفعاليات"
+
+#: .\main_app\templates\base.html:64 .\main_app\templates\base.html:124
+#: .\main_app\templates\gallery\index.html:8
+msgid "Gallery"
+msgstr "معرض الصور"
+
+#: .\main_app\templates\base.html:65 .\main_app\templates\base.html:129
+msgid "Visit"
+msgstr "زيارة"
+
+#: .\main_app\templates\base.html:66 .\main_app\templates\base.html:130
+msgid "Referral"
+msgstr "الإحالة"
+
+#: .\main_app\templates\base.html:67 .\main_app\templates\base.html:131
+msgid "Register"
+msgstr "تسجيل"
+
+#: .\main_app\templates\base.html:78 .\main_app\templates\base.html:134
+#, python-format
+msgid "Welcome, %(username)s"
+msgstr "مرحبًا، %(username)s"
+
+#: .\main_app\templates\base.html:84 .\main_app\templates\base.html:140
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: .\main_app\templates\base.html:83 .\main_app\templates\base.html:102
+#: .\main_app\templates\base.html:89 .\main_app\templates\base.html:144
 #: .\main_app\templates\registration\login.html:10
 #: .\main_app\templates\registration\login.html:22
 #: .\main_app\templates\registration\signup.html:97
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: .\main_app\templates\base.html:87 .\main_app\templates\base.html:106
+#: .\main_app\templates\base.html:93 .\main_app\templates\base.html:145
 msgid "Sign Up"
 msgstr "إنشاء حساب"
 
-#: .\main_app\templates\base.html:209
+#: .\main_app\templates\base.html:156
 msgid "© 2026 Progress Business Centre. All rights reserved."
 msgstr "© 2026 مركز بروجريس للأعمال. جميع الحقوق محفوظة."
 
@@ -327,10 +341,6 @@ msgstr "مميزات المكتب"
 #: .\main_app\templates\features\index.html:12
 msgid "Everything you need for a productive workspace."
 msgstr "كل ما تحتاجه للحصول على مساحة عمل منتجة."
-
-#: .\main_app\templates\features\index.html:43
-msgid "More"
-msgstr "المزيد"
 
 #: .\main_app\templates\form.html:11
 msgid "Form"
