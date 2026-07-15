@@ -982,3 +982,74 @@ display:flex;
         grid-template-columns: 1fr;
     }
 }
+
+.nav-actions .btn-small {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.nav-actions .btn-small:hover {
+    color: #ff9800;
+}
+
+.room-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.detail-room-image {
+    height: 250px;
+    max-width: 650px;
+    display: block;
+    margin: 0 auto 25px;
+}
+
+.room-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+    justify-content: center;
+    padding: 50px 10%;
+}
+
+.room-grid .service-card {
+    width: 100%;
+    padding: 20px;
+}
+
+.room-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.office-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+    justify-content: center;
+    padding: 50px 10%;
+}
+
+.office-grid .service-card {
+    width: 100%;
+    padding: 20px;
+}
+
+.office-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.detail-office-image {
+    height: 250px;
+    max-width: 650px;
+    display: block;
+    margin: 0 auto 25px;
+}

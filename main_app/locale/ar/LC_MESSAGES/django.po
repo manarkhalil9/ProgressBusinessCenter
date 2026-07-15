@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-13 13:41+0300\n"
+"POT-Creation-Date: 2026-07-14 10:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,8 +67,7 @@ msgstr "المكاتب الخاصة"
 #: .\main_app\templates\about.html:56
 #: .\main_app\templates\branches\detail.html:45
 #: .\main_app\templates\index.html:82 .\main_app\templates\index.html:138
-#: .\main_app\templates\rooms\detail.html:8
-#: .\main_app\templates\rooms\index.html:8
+#: .\main_app\templates\rooms\index.html:7
 #: .\main_app\templates\search\results.html:37
 msgid "Meeting Rooms"
 msgstr "غرف الاجتماعات"
@@ -115,90 +114,138 @@ msgstr "مركز بروجريس للأعمال"
 msgid "Search"
 msgstr "بحث"
 
-#: .\main_app\templates\base.html:49 .\main_app\templates\base.html:117
+#: .\main_app\templates\base.html:49 .\main_app\templates\base.html:118
 msgid "Home"
 msgstr "الرئيسية"
 
-#: .\main_app\templates\base.html:50 .\main_app\templates\base.html:118
+#: .\main_app\templates\base.html:50 .\main_app\templates\base.html:119
 msgid "About"
 msgstr "من نحن"
 
-#: .\main_app\templates\base.html:51 .\main_app\templates\base.html:119
+#: .\main_app\templates\base.html:51 .\main_app\templates\base.html:120
 #: .\main_app\templates\search\results.html:24
 msgid "Services"
 msgstr "الخدمات"
 
-#: .\main_app\templates\base.html:52 .\main_app\templates\base.html:122
+#: .\main_app\templates\base.html:52 .\main_app\templates\base.html:123
 msgid "Rooms"
 msgstr "الغرف"
 
-#: .\main_app\templates\base.html:53 .\main_app\templates\base.html:121
+#: .\main_app\templates\base.html:53 .\main_app\templates\base.html:124
+#: .\main_app\templates\offices\index.html:7
+#, fuzzy
+#| msgid "Virtual Offices"
+msgid "Offices"
+msgstr "المكاتب الافتراضية"
+
+#: .\main_app\templates\base.html:54 .\main_app\templates\base.html:122
 msgid "Branches"
 msgstr "الفروع"
 
-#: .\main_app\templates\base.html:54 .\main_app\templates\base.html:125
+#: .\main_app\templates\base.html:55 .\main_app\templates\base.html:127
 #: .\main_app\templates\faq\index.html:6
 #: .\main_app\templates\search\results.html:53
 msgid "FAQ"
 msgstr "الأسئلة الشائعة"
 
-#: .\main_app\templates\base.html:55 .\main_app\templates\base.html:126
+#: .\main_app\templates\base.html:56 .\main_app\templates\base.html:128
 msgid "Contact"
 msgstr "اتصل بنا"
 
-#: .\main_app\templates\base.html:59
+#: .\main_app\templates\base.html:60
 #: .\main_app\templates\features\index.html:43
 msgid "More"
 msgstr "المزيد"
 
-#: .\main_app\templates\base.html:62 .\main_app\templates\base.html:120
+#: .\main_app\templates\base.html:63 .\main_app\templates\base.html:121
 msgid "Features"
 msgstr "المميزات"
 
-#: .\main_app\templates\base.html:63 .\main_app\templates\base.html:123
+#: .\main_app\templates\base.html:64 .\main_app\templates\base.html:125
 msgid "Events"
 msgstr "الفعاليات"
 
-#: .\main_app\templates\base.html:64 .\main_app\templates\base.html:124
+#: .\main_app\templates\base.html:65 .\main_app\templates\base.html:126
 #: .\main_app\templates\gallery\index.html:8
 msgid "Gallery"
 msgstr "معرض الصور"
 
-#: .\main_app\templates\base.html:65 .\main_app\templates\base.html:129
+#: .\main_app\templates\base.html:66 .\main_app\templates\base.html:131
 msgid "Visit"
 msgstr "زيارة"
 
-#: .\main_app\templates\base.html:66 .\main_app\templates\base.html:130
+#: .\main_app\templates\base.html:67 .\main_app\templates\base.html:132
 msgid "Referral"
 msgstr "الإحالة"
 
-#: .\main_app\templates\base.html:67 .\main_app\templates\base.html:131
+#: .\main_app\templates\base.html:68 .\main_app\templates\base.html:133
 msgid "Register"
 msgstr "تسجيل"
 
-#: .\main_app\templates\base.html:78 .\main_app\templates\base.html:134
+#: .\main_app\templates\base.html:79 .\main_app\templates\base.html:136
 #, python-format
 msgid "Welcome, %(username)s"
 msgstr "مرحبًا، %(username)s"
 
-#: .\main_app\templates\base.html:84 .\main_app\templates\base.html:140
+#: .\main_app\templates\base.html:85 .\main_app\templates\base.html:142
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: .\main_app\templates\base.html:89 .\main_app\templates\base.html:144
+#: .\main_app\templates\base.html:90 .\main_app\templates\base.html:146
 #: .\main_app\templates\registration\login.html:10
 #: .\main_app\templates\registration\login.html:22
 #: .\main_app\templates\registration\signup.html:97
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: .\main_app\templates\base.html:93 .\main_app\templates\base.html:145
+#: .\main_app\templates\base.html:94 .\main_app\templates\base.html:147
 msgid "Sign Up"
 msgstr "إنشاء حساب"
 
-#: .\main_app\templates\base.html:156
+#: .\main_app\templates\base.html:158
 msgid "© 2026 Progress Business Centre. All rights reserved."
 msgstr "© 2026 مركز بروجريس للأعمال. جميع الحقوق محفوظة."
+
+#: .\main_app\templates\bookings\create.html:7
+#: .\main_app\templates\offices\detail.html:32
+#: .\main_app\templates\rooms\detail.html:32
+msgid "Book Now"
+msgstr "احجز الآن"
+
+#: .\main_app\templates\bookings\create.html:13
+#: .\main_app\templates\rooms\detail.html:24
+#: .\main_app\templates\rooms\index.html:28
+msgid "Price per hour:"
+msgstr "السعر بالساعة:"
+
+#: .\main_app\templates\bookings\create.html:18
+#: .\main_app\templates\offices\detail.html:24
+#: .\main_app\templates\offices\index.html:29
+msgid "Price per month:"
+msgstr "السعر الشهري:"
+
+#: .\main_app\templates\bookings\create.html:83
+msgid "Submit Booking Request"
+msgstr "إرسال طلب الحجز"
+
+#: .\main_app\templates\bookings\success.html:7
+#, fuzzy
+#| msgid "Meeting Request Submitted"
+msgid "Booking Request Submitted"
+msgstr "تم إرسال طلب الاجتماع"
+
+#: .\main_app\templates\bookings\success.html:10
+#, fuzzy
+#| msgid "Thank you for your submission. Our team will contact you shortly."
+msgid ""
+"Thank you. Our team will review your booking request and contact you shortly."
+msgstr "شكرًا لتقديم طلبك. سيتواصل معك فريقنا قريبًا."
+
+#: .\main_app\templates\bookings\success.html:14
+#, fuzzy
+#| msgid "Back Home"
+msgid "Back to Rooms"
+msgstr "العودة للرئيسية"
 
 #: .\main_app\templates\branches\detail.html:14
 msgid "Address:"
@@ -223,8 +270,8 @@ msgid "Opening Hours:"
 msgstr "ساعات العمل:"
 
 #: .\main_app\templates\branches\detail.html:62
-#: .\main_app\templates\rooms\detail.html:20
-#: .\main_app\templates\rooms\index.html:20
+#: .\main_app\templates\rooms\detail.html:21
+#: .\main_app\templates\rooms\index.html:25
 msgid "Capacity:"
 msgstr "السعة:"
 
@@ -459,6 +506,36 @@ msgstr "انضم إلى رواد الأعمال والشركات التي تثق
 msgid "Register Now"
 msgstr "سجل الآن"
 
+#: .\main_app\templates\offices\detail.html:19
+#: .\main_app\templates\offices\index.html:24
+#: .\main_app\templates\rooms\detail.html:20
+#, fuzzy
+#| msgid "Branches"
+msgid "Branch:"
+msgstr "الفروع"
+
+#: .\main_app\templates\offices\detail.html:29
+#: .\main_app\templates\rooms\detail.html:29
+#: .\main_app\templates\services\detail.html:19
+msgid "Available"
+msgstr "متاح"
+
+#: .\main_app\templates\offices\detail.html:35
+#: .\main_app\templates\rooms\detail.html:35
+#: .\main_app\templates\services\detail.html:25
+msgid "Not Available"
+msgstr "غير متاح"
+
+#: .\main_app\templates\offices\index.html:34
+#, fuzzy
+#| msgid "Virtual Office"
+msgid "View Office"
+msgstr "مكتب افتراضي"
+
+#: .\main_app\templates\offices\index.html:39
+msgid "No offices are currently available."
+msgstr "لا توجد مكاتب متاحة حاليًا."
+
 #: .\main_app\templates\referrals\register.html:8
 msgid "Referral Submitted"
 msgstr "تم إرسال الإحالة"
@@ -492,8 +569,7 @@ msgstr "تأكيد كلمة المرور"
 msgid "Already have an account?"
 msgstr "لديك حساب بالفعل؟"
 
-#: .\main_app\templates\rooms\detail.html:26
-#: .\main_app\templates\rooms\index.html:26
+#: .\main_app\templates\rooms\index.html:33
 msgid "View Room"
 msgstr "عرض الغرفة"
 
@@ -517,14 +593,6 @@ msgstr "لم يتم العثور على نتائج. جرّب كلمة بحث أ�
 #: .\main_app\templates\services\detail.html:14
 msgid "Status:"
 msgstr "الحالة:"
-
-#: .\main_app\templates\services\detail.html:19
-msgid "Available"
-msgstr "متاح"
-
-#: .\main_app\templates\services\detail.html:25
-msgid "Not Available"
-msgstr "غير متاح"
 
 #: .\main_app\templates\services\index.html:11
 msgid ""

@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
-from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral)
+from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral, Office, Booking)
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import BusinessRegistrationForm, VisitRequestForm
+from .forms import BusinessRegistrationForm, VisitRequestForm, BookingForm
 from django.db.models import Q
+from django.http import Http404
 
 # Create your views here.
 
@@ -198,6 +199,78 @@ def search(request):
     }
 
     return render(request, "search/results.html", context)
+
+# booking
+class BookingCreateView(LoginRequiredMixin, CreateView):
+    model = Booking
+    form_class = BookingForm
+    template_name = "bookings/create.html"
+    success_url = reverse_lazy("booking_success")
+
+    def get_resource(self):
+        resource_type = self.kwargs["resource_type"]
+        pk = self.kwargs["pk"]
+
+        if resource_type == "room":
+            return get_object_or_404(
+                MeetingRoom,
+                pk=pk,
+                available=True
+            )
+
+        if resource_type == "office":
+            return get_object_or_404(
+                Office,
+                pk=pk,
+                available=True
+            )
+
+        raise Http404("Booking item not found.")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["resource"] = self.get_resource()
+        return kwargs
+
+    def get_initial(self):
+        initial = super().get_initial()
+
+        initial["client_name"] = (
+            self.request.user.get_full_name()
+            or self.request.user.username
+        )
+        initial["email"] = self.request.user.email
+
+        return initial
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["resource"] = self.get_resource()
+        context["resource_type"] = self.kwargs["resource_type"]
+        return context
+
+
+def booking_success(request):
+    return render(request, "bookings/success.html")
+
+# office
+class OfficeListView(ListView):
+    model = Office
+    template_name = "offices/index.html"
+    context_object_name = "offices"
+
+    def get_queryset(self):
+        return Office.objects.select_related("branch")
+
+
+class OfficeDetailView(DetailView):
+    model = Office
+    template_name = "offices/detail.html"
+    context_object_name = "office"
 
 # signup
 def signup(request):

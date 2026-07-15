@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>{% trans "Book Now" %}</h1>
+
+    <p>{{ resource.name }} — {{ resource.branch.name }}</p>
+
+    {% if resource_type == "room" %}
+        <p>
+            {% trans "Price per hour:" %}
+            {{ resource.price_per_hour }} BHD
+        </p>
+    {% else %}
+        <p>
+            {% trans "Price per month:" %}
+            {{ resource.price_per_month }} BHD
+        </p>
+    {% endif %}
+</section>
+
+<section class="form-card">
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <p>
+            {{ form.client_name.label_tag }}
+            {{ form.client_name }}
+            {{ form.client_name.errors }}
+        </p>
+
+        <p>
+            {{ form.phone.label_tag }}
+            {{ form.phone }}
+            {{ form.phone.errors }}
+        </p>
+
+        <p>
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+        </p>
+
+        {% if resource_type == "office" %}
+        <p>
+            {{ form.commercial_registration.label_tag }}
+            {{ form.commercial_registration }}
+            {{ form.commercial_registration.errors }}
+        </p>
+        {% endif %}
+
+        <p>
+            {{ form.start_date.label_tag }}
+            {{ form.start_date }}
+            {{ form.start_date.errors }}
+        </p>
+
+        {% if resource_type == "room" %}
+            <p>
+                {{ form.start_time.label_tag }}
+                {{ form.start_time }}
+                {{ form.start_time.errors }}
+            </p>
+
+            <p>
+                {{ form.end_time.label_tag }}
+                {{ form.end_time }}
+                {{ form.end_time.errors }}
+            </p>
+        {% else %}
+            <p>
+                {{ form.end_date.label_tag }}
+                {{ form.end_date }}
+                {{ form.end_date.errors }}
+            </p>
+        {% endif %}
+
+        <button type="submit">
+            {% trans "Submit Booking Request" %}
+        </button>
+    </form>
+</section>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral)
+from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral, Office, Booking)
 
 # Register your models here.
 admin.site.register(Service)
@@ -13,3 +13,5 @@ admin.site.register(Contact)
 admin.site.register(VisitRequest)
 admin.site.register(BusinessRegistration)
 admin.site.register(Referral)
+admin.site.register(Office)
+admin.site.register(Booking)

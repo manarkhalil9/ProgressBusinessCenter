@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<section class="success-card">
+    <h1>{% trans "Booking Request Submitted" %}</h1>
+
+    <p>
+        {% trans "Thank you. Our team will review your booking request and contact you shortly." %}
+    </p>
+
+    <a class="btn" href="{% url 'rooms' %}">
+        {% trans "Back to Rooms" %}
+    </a>
+</section>
+
+{% endblock %}

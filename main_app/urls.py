@@ -55,6 +55,14 @@ urlpatterns = [
     # search bar
     path("search/", views.search, name="search"),
 
+    # bookings
+    path("book/<str:resource_type>/<int:pk>/", views.BookingCreateView.as_view(), name="book"),
+    path("book/success/", views.booking_success, name="booking_success"),
+
+    # offices
+    path("offices/", views.OfficeListView.as_view(), name="offices"),
+    path("offices/<int:pk>/", views.OfficeDetailView.as_view(), name="office_detail"),
+
     # auth
     path('accounts/signup/', views.signup, name='signup'),
 ]

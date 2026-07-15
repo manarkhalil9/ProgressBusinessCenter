@@ -5,6 +5,7 @@ from .models import (
     Feature,
     Branch,
     MeetingRoom,
+    Office,
     Event,
     GalleryImage,
     FAQ,
@@ -29,7 +30,11 @@ class BranchTranslationOptions(TranslationOptions):
 
 @register(MeetingRoom)
 class MeetingRoomTranslationOptions(TranslationOptions):
-    fields = ("name",)
+    fields = ("name", "description")
+
+@register(Office)
+class OfficeTranslationOptions(TranslationOptions):
+    fields = ("name", "description")
 
 
 @register(Event)

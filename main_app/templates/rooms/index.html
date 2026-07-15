@@ -4,31 +4,37 @@
 {% block content %}
 
 <section class="page-header">
-
-<h1>{% trans "Meeting Rooms" %}</h1>
-
+    <h1>{% trans "Meeting Rooms" %}</h1>
 </section>
 
-<section class="card-grid">
+<section class="card-grid room-grid">
 
-{% for room in rooms %}
+    {% for room in rooms %}
+    <div class="service-card">
 
-<div class="service-card">
+        {% if room.image %}
+            <img class="room-image" src="{{ room.image.url }}" alt="{{ room.name }}">
+        {% endif %}
 
-<h2>{{ room.name }}</h2>
+        <h2>{{ room.name }}</h2>
 
-<p>{% trans "Capacity:" %} {{ room.capacity }}</p>
+        {% if room.description %}
+            <p>{{ room.description|truncatechars:120 }}</p>
+        {% endif %}
 
-<p>$ {{ room.price_per_hour }}</p>
+        <p>{% trans "Capacity:" %} {{ room.capacity }}</p>
 
-<a class="btn"
-href="{% url 'room_detail' room.id %}">
-{% trans "View Room" %}
-</a>
+        <p>
+            {% trans "Price per hour:" %}
+            {{ room.price_per_hour }} BHD
+        </p>
 
-</div>
+        <a class="btn" href="{% url 'room_detail' room.pk %}">
+            {% trans "View Room" %}
+        </a>
 
-{% endfor %}
+    </div>
+    {% endfor %}
 
 </section>
 

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>{% trans "Offices" %}</h1>
+</section>
+
+<section class="card-grid office-grid">
+
+    {% for office in offices %}
+    <div class="service-card">
+
+        {% if office.image %}
+            <img class="office-image" src="{{ office.image.url }}" alt="{{ office.name }}">
+        {% endif %}
+
+        <h2>{{ office.name }}</h2>
+
+        <p>{{ office.description|truncatechars:120 }}</p>
+
+        <p>
+            {% trans "Branch:" %}
+            {{ office.branch.name }}
+        </p>
+
+        <p>
+            {% trans "Price per month:" %}
+            {{ office.price_per_month }} BHD
+        </p>
+
+        <a class="btn" href="{% url 'office_detail' office.pk %}">
+            {% trans "View Office" %}
+        </a>
+
+    </div>
+    {% empty %}
+        <p class="empty">{% trans "No offices are currently available." %}</p>
+    {% endfor %}
+
+</section>
+
+{% endblock %}
