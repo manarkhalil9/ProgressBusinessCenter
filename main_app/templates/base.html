@@ -1,8 +1,9 @@
 {% load static %}
 {% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
 <head>
     <meta name="google" content="translate">
     <meta charset="UTF-8">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body class="site-body">
 
 <nav class="navbar">
 
@@ -151,10 +152,12 @@
 
 </nav>
 
-{% block content %}
-{% endblock %}
+<main class="site-content">
+    {% block content %}
+    {% endblock %}
+</main>
 
-<footer>
+<footer class="site-footer">
     <p>{% trans "© 2026 Progress Business Centre. All rights reserved." %}</p>
 </footer>
 

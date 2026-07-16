@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-14 10:57+0300\n"
+"POT-Creation-Date: 2026-07-15 13:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\main_app\forms.py:70
+msgid "Client Name"
+msgstr "اسم العميل"
+
+#: .\main_app\forms.py:71
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#: .\main_app\forms.py:72
+msgid "Email Address"
+msgstr "عنوان البريد الإلكتروني"
+
+#: .\main_app\forms.py:73
+msgid "Commercial Registration (CR)"
+msgstr "السجل التجاري"
+
+#: .\main_app\forms.py:74
+msgid "Start Date"
+msgstr "تاريخ البدأ"
+
+#: .\main_app\forms.py:75
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#: .\main_app\forms.py:76
+msgid "Start Time"
+msgstr "وقت البدأ"
+
+#: .\main_app\forms.py:77
+msgid "End Time"
+msgstr "وقت الانتهاء"
+
+#: .\main_app\forms.py:102
+msgid "Please choose today or a future date."
+msgstr "يرجى اختيار اليوم أو تاريخ مستقبلي."
+
+#: .\main_app\forms.py:115
+msgid "End time must be after start time."
+msgstr "يجب أن يكون وقت الانتهاء بعد وقت البدء."
+
+#: .\main_app\forms.py:125
+msgid "End date must be after start date."
+msgstr "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء."
 
 #: .\main_app\templates\about.html:8
 msgid "About Progress Business Centre"
@@ -133,10 +177,8 @@ msgstr "الغرف"
 
 #: .\main_app\templates\base.html:53 .\main_app\templates\base.html:124
 #: .\main_app\templates\offices\index.html:7
-#, fuzzy
-#| msgid "Virtual Offices"
 msgid "Offices"
-msgstr "المكاتب الافتراضية"
+msgstr "المكاتب"
 
 #: .\main_app\templates\base.html:54 .\main_app\templates\base.html:122
 msgid "Branches"
@@ -229,21 +271,14 @@ msgid "Submit Booking Request"
 msgstr "إرسال طلب الحجز"
 
 #: .\main_app\templates\bookings\success.html:7
-#, fuzzy
-#| msgid "Meeting Request Submitted"
 msgid "Booking Request Submitted"
 msgstr "تم إرسال طلب الاجتماع"
 
 #: .\main_app\templates\bookings\success.html:10
-#, fuzzy
-#| msgid "Thank you for your submission. Our team will contact you shortly."
-msgid ""
-"Thank you. Our team will review your booking request and contact you shortly."
+msgid "Thank you. Our team will review your booking request and contact you shortly."
 msgstr "شكرًا لتقديم طلبك. سيتواصل معك فريقنا قريبًا."
 
 #: .\main_app\templates\bookings\success.html:14
-#, fuzzy
-#| msgid "Back Home"
 msgid "Back to Rooms"
 msgstr "العودة للرئيسية"
 
@@ -509,10 +544,8 @@ msgstr "سجل الآن"
 #: .\main_app\templates\offices\detail.html:19
 #: .\main_app\templates\offices\index.html:24
 #: .\main_app\templates\rooms\detail.html:20
-#, fuzzy
-#| msgid "Branches"
 msgid "Branch:"
-msgstr "الفروع"
+msgstr "الفرع:"
 
 #: .\main_app\templates\offices\detail.html:29
 #: .\main_app\templates\rooms\detail.html:29
@@ -527,10 +560,8 @@ msgid "Not Available"
 msgstr "غير متاح"
 
 #: .\main_app\templates\offices\index.html:34
-#, fuzzy
-#| msgid "Virtual Office"
 msgid "View Office"
-msgstr "مكتب افتراضي"
+msgstr "عرض المكتب"
 
 #: .\main_app\templates\offices\index.html:39
 msgid "No offices are currently available."

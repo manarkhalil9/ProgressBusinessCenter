@@ -3,6 +3,7 @@ from .models import BusinessRegistration, VisitRequest
 from datetime import date
 from django.core.exceptions import ValidationError
 from .models import Booking, MeetingRoom, Office
+from django.utils.translation import gettext_lazy as _  # Import the translation tool
 
 
 class BusinessRegistrationForm(forms.ModelForm):
@@ -64,37 +65,41 @@ class BookingForm(forms.ModelForm):
             "end_time": forms.TimeInput(attrs={"type": "time"}),
         }
 
+        # ADD THIS: Explicitly define and translate labels
+        labels = {
+            "client_name": _("Client Name"),
+            "phone": _("Phone Number"),
+            "email": _("Email Address"),
+            "commercial_registration": _("Commercial Registration (CR)"),
+            "start_date": _("Start Date"),
+            "end_date": _("End Date"),
+            "start_time": _("Start Time"),
+            "end_time": _("End Time"),
+        }
+
     def __init__(self, *args, resource=None, **kwargs):
         super().__init__(*args, **kwargs)
-
         self.resource = resource
 
         if isinstance(resource, MeetingRoom):
             self.instance.meeting_room = resource
-
             self.fields.pop("commercial_registration")
             self.fields.pop("end_date")
-
             self.fields["start_time"].required = True
             self.fields["end_time"].required = True
 
         elif isinstance(resource, Office):
             self.instance.office = resource
-
             self.fields.pop("start_time")
             self.fields.pop("end_time")
-
             self.fields["commercial_registration"].required = True
             self.fields["end_date"].required = True
 
     def clean_start_date(self):
-        start_date = self.cleaned_data["start_date"]
-
-        if start_date < date.today():
-            raise ValidationError(
-                "Please choose today or a future date."
-            )
-
+        start_date = self.cleaned_data.get("start_date")
+        if start_date and start_date < date.today():
+            # Translate your validation error
+            raise ValidationError(_("Please choose today or a future date."))
         return start_date
 
     def clean(self):
@@ -107,7 +112,7 @@ class BookingForm(forms.ModelForm):
             if start_time and end_time and end_time <= start_time:
                 self.add_error(
                     "end_time",
-                    "End time must be after start time."
+                    _("End time must be after start time.") # Translate error
                 )
 
         if isinstance(self.resource, Office):
@@ -117,7 +122,7 @@ class BookingForm(forms.ModelForm):
             if start_date and end_date and end_date <= start_date:
                 self.add_error(
                     "end_date",
-                    "End date must be after start date."
+                    _("End date must be after start date.") # Translate error
                 )
 
         return cleaned_data
