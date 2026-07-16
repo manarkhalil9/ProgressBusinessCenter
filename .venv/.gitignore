@@ -1,2 +1,14 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
 *
+
+# Other files already being ignored by Django/Git...
+__pycache__/
+*.pyc
+db.sqlite3
+media/
+
+# Ignore the virtual environment folder
+.venv/
+
+# Ignore the environment variables file
+.env

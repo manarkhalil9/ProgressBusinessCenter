@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral, Office, Booking)
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import BusinessRegistrationForm, VisitRequestForm, BookingForm
 from django.db.models import Q
 from django.http import Http404
+from django.views import View
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 
@@ -15,9 +18,11 @@ from django.http import Http404
 def home(request):
     return render(request, 'index.html')
 
+
 #about page
 def about(request):
     return render(request, 'about.html')
+
 
 #services
 #list 
@@ -32,6 +37,7 @@ class ServiceDetail(DetailView):
     template_name = 'services/detail.html'
     context_object_name = 'service'
 
+
 # features
 # list
 class FeatureListView(ListView):
@@ -44,6 +50,7 @@ class FeatureDetailView(DetailView):
     model = Feature
     template_name = 'features/detail.html'
     context_object_name = 'feature'
+
 
 # branches
 # list
@@ -58,6 +65,7 @@ class BranchDetailView(DetailView):
     template_name = 'branches/detail.html'
     context_object_name = 'branch'
 
+
 # meeting rooms
 # list
 class MeetingRoomListView(ListView):
@@ -70,6 +78,23 @@ class MeetingRoomDetailView(DetailView):
     model = MeetingRoom
     template_name = 'rooms/detail.html'
     context_object_name = 'room'
+
+
+# office
+class OfficeListView(ListView):
+    model = Office
+    template_name = "offices/index.html"
+    context_object_name = "offices"
+
+    def get_queryset(self):
+        return Office.objects.select_related("branch")
+
+
+class OfficeDetailView(DetailView):
+    model = Office
+    template_name = "offices/detail.html"
+    context_object_name = "office"
+
 
 # events
 # list
@@ -84,6 +109,7 @@ class EventDetailView(DetailView):
     template_name = 'events/detail.html'
     context_object_name = 'event'
 
+
 # gallery
 # list
 class GalleryListView(ListView):
@@ -96,6 +122,7 @@ class GalleryDetailView(DetailView):
     model = GalleryImage
     template_name = 'gallery/detail.html'
     context_object_name = 'image'
+
 
 # FAQ
 # list
@@ -110,6 +137,7 @@ class FAQDetailView(DetailView):
     template_name = 'faq/detail.html'
     context_object_name = 'faq'
 
+
 # contact detail
 class ContactView(DetailView):
     model = Contact
@@ -118,6 +146,7 @@ class ContactView(DetailView):
 
     def get_object(self):
         return Contact.objects.first()
+
 
 # create visit
 class VisitCreateView(LoginRequiredMixin, CreateView):
@@ -133,6 +162,7 @@ class VisitCreateView(LoginRequiredMixin, CreateView):
 def visit_success(request):
     return render(request, "visits/success.html")
 
+
 # create referral
 class ReferralCreateView(LoginRequiredMixin, CreateView):
     model = Referral
@@ -146,6 +176,7 @@ class ReferralCreateView(LoginRequiredMixin, CreateView):
 
 def referral_success(request):
     return render(request, "referrals/success.html")
+
 
 # business
 # create
@@ -166,6 +197,7 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
     
 def business_success(request):
     return render(request, "business/success.html")
+
 
 # search bar
 def search(request):
@@ -199,6 +231,7 @@ def search(request):
     }
 
     return render(request, "search/results.html", context)
+
 
 # booking
 class BookingCreateView(LoginRequiredMixin, CreateView):
@@ -242,9 +275,21 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         initial["email"] = self.request.user.email
 
         return initial
-
+    
     def form_valid(self, form):
         form.instance.user = self.request.user
+        booking = form.save()
+    
+    # Email to Admin
+        admin_subject = f"New Booking Request: {booking.client_name}"
+        admin_message = f"New booking for {booking.meeting_room or booking.office}. Status: {booking.status}."
+        send_mail(admin_subject, admin_message, settings.DEFAULT_FROM_EMAIL, [settings.ADMIN_EMAIL], fail_silently=False)
+    
+    # Email to User
+        user_subject = "Your Booking Request at Progress Business Centre"
+        user_message = "Thank you for your request. Our team will review it shortly."
+        send_mail(user_subject, user_message, settings.DEFAULT_FROM_EMAIL, [booking.email], fail_silently=False)
+    
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -257,20 +302,44 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 def booking_success(request):
     return render(request, "bookings/success.html")
 
-# office
-class OfficeListView(ListView):
-    model = Office
-    template_name = "offices/index.html"
-    context_object_name = "offices"
+
+# dashboard
+class UserDashboardView(LoginRequiredMixin,ListView):
+    template_name = "dashboard/index.html"
+    context_object_name = "bookings"
 
     def get_queryset(self):
-        return Office.objects.select_related("branch")
+        # Only fetch bookings that belong to the logged-in user
+        return Booking.objects.filter(user=self.request.user).order_by('-created_at')
+    
+ # edit
+class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Booking
+    form_class = BookingForm
+    template_name = "bookings/edit.html"
+    success_url = reverse_lazy("dashboard")
 
+    def test_func(self):
+        booking = self.get_object()
+        # Only allow edit if the user owns it AND it is still 'pending'
+        return booking.user == self.request.user and booking.status == 'pending'
 
-class OfficeDetailView(DetailView):
-    model = Office
-    template_name = "offices/detail.html"
-    context_object_name = "office"
+# cancel
+class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def get(self, request, pk):
+        booking = get_object_or_404(Booking, pk=pk)
+        return render(request, "bookings/confirm_cancel.html", {"booking": booking})
+
+    def post(self, request, pk):
+        booking = get_object_or_404(Booking, pk=pk)
+        booking.status = "cancelled"
+        booking.save()
+        return redirect("dashboard")
+
+    def test_func(self):
+        booking = get_object_or_404(Booking, pk=self.kwargs['pk'])
+        return booking.user == self.request.user
+
 
 # signup
 def signup(request):

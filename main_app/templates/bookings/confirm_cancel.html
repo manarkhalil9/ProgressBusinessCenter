@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<section class="form-card">
+    <h1>{% trans "Cancel Booking" %}</h1>
+    
+    <p>
+        {% trans "Are you sure you want to cancel your booking for" %} 
+        <strong>{{ booking.meeting_room|default:booking.office }}</strong>?
+    </p>
+    <p>{% trans "This action cannot be undone." %}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn delete-btn">
+            {% trans "Yes, Cancel Booking" %}
+        </button>
+        <a href="{% url 'dashboard' %}" class="btn">
+            {% trans "No, Go Back" %}
+        </a>
+    </form>
+</section>
+{% endblock %}

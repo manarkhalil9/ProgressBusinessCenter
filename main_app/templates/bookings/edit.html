@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<section class="form-card">
+    <h1>{% trans "Edit Booking" %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">{% trans "Update Booking" %}</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-light">{% trans "Cancel" %}</a>
+    </form>
+</section>
+{% endblock %}

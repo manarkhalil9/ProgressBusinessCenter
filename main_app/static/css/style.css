@@ -1081,3 +1081,20 @@ html[dir="rtl"] body {
 
 /* If you have any specific margins pushing things left, use logical properties instead */
 /* For example, instead of margin-left: 10px; use margin-inline-start: 10px; */
+
+/* Status Badges */
+.status-badge { padding: 5px 10px; border-radius: 15px; font-size: 0.8em; font-weight: bold; }
+.status-pending { background: #fff3cd; color: #856404; }
+.status-approved { background: #d4edda; color: #155724; }
+.status-rejected { background: #f8d7da; color: #721c24; }
+.status-cancelled { background: #e2e3e5; color: #383d41; }
+
+/* Dashboard Cards */
+.booking-card { 
+    border: 1px solid #ddd; padding: 20px; margin-bottom: 15px; 
+    border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
+.actions { margin-top: 10px; }
+.btn { padding: 10px 15px; text-decoration: none; border-radius: 5px; }
+.edit-btn { background: #007bff; color: white; }
+.delete-btn { background: #dc3545; color: white; }

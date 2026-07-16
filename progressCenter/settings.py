@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
@@ -129,3 +131,29 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 LANGUAGE_COOKIE_NAME = 'django_language'
+
+
+
+# (This prints emails to your terminal instead of sending them, which is great for testing)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# Load the .env file
+load_dotenv()
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# Use these for consistent sender/admin email
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+
+# the email functions know who they are coming from
+DEFAULT_FROM_EMAIL = 'noreply@yourwebsite.com'
+ADMIN_EMAIL = 'manarajkhalil79@gmail.com' 

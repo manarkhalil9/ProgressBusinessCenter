@@ -25,6 +25,10 @@ urlpatterns = [
     path('rooms/', views.MeetingRoomListView.as_view(), name='rooms'),
     path('rooms/<int:pk>/', views.MeetingRoomDetailView.as_view(), name='room_detail'),
 
+    # offices
+    path("offices/", views.OfficeListView.as_view(), name="offices"),
+    path("offices/<int:pk>/", views.OfficeDetailView.as_view(), name="office_detail"),
+
     # events
     path('events/', views.EventListView.as_view(), name='events'),
     path('events/<int:pk>/', views.EventDetailView.as_view(), name='event_detail'),
@@ -59,9 +63,10 @@ urlpatterns = [
     path("book/<str:resource_type>/<int:pk>/", views.BookingCreateView.as_view(), name="book"),
     path("book/success/", views.booking_success, name="booking_success"),
 
-    # offices
-    path("offices/", views.OfficeListView.as_view(), name="offices"),
-    path("offices/<int:pk>/", views.OfficeDetailView.as_view(), name="office_detail"),
+    # dashboard
+    path('dashboard/', views.UserDashboardView.as_view(), name='dashboard'),
+    path('booking/<int:pk>/edit/', views.BookingUpdateView.as_view(), name='booking_edit'),
+    path('booking/<int:pk>/cancel/', views.BookingCancelView.as_view(), name='booking_cancel'),
 
     # auth
     path('accounts/signup/', views.signup, name='signup'),

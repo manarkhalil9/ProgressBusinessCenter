@@ -43,7 +43,7 @@ class MeetingRoom(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='meeting_rooms/', blank=True, null=True)
     capacity = models.PositiveIntegerField()
-    price_per_hour = models.DecimalField(max_digits=8, decimal_places=2)
+    price_per_hour = models.DecimalField(max_digits=8, decimal_places=3)
     available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Office(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='offices/', blank=True, null=True)
-    price_per_month = models.DecimalField(max_digits=10, decimal_places=2)
+    price_per_month = models.DecimalField(max_digits=10, decimal_places=3)
     available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -101,7 +101,7 @@ class Booking(models.Model):
 
     total_price = models.DecimalField(
         max_digits=12,
-        decimal_places=2,
+        decimal_places=3,
         editable=False
     )
 
