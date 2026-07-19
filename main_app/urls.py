@@ -62,10 +62,12 @@ urlpatterns = [
     # bookings
     path("book/<str:resource_type>/<int:pk>/", views.BookingCreateView.as_view(), name="book"),
     path("book/success/", views.booking_success, name="booking_success"),
+    
+    # payment page
+    # path("booking/<int:pk>/payment/", views.booking_payment, name="booking_payment"),
 
     # dashboard
     path('dashboard/', views.UserDashboardView.as_view(), name='dashboard'),
-    path('booking/<int:pk>/edit/', views.BookingUpdateView.as_view(), name='booking_edit'),
     path('booking/<int:pk>/cancel/', views.BookingCancelView.as_view(), name='booking_cancel'),
 
     # auth

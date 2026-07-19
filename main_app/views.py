@@ -11,6 +11,7 @@ from django.http import Http404
 from django.views import View
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -238,25 +239,17 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
     template_name = "bookings/create.html"
-    success_url = reverse_lazy("booking_success")
 
     def get_resource(self):
         resource_type = self.kwargs["resource_type"]
         pk = self.kwargs["pk"]
 
+        # users can request pending dates
         if resource_type == "room":
-            return get_object_or_404(
-                MeetingRoom,
-                pk=pk,
-                available=True
-            )
+            return get_object_or_404(MeetingRoom, pk=pk)
 
         if resource_type == "office":
-            return get_object_or_404(
-                Office,
-                pk=pk,
-                available=True
-            )
+            return get_object_or_404(Office, pk=pk)
 
         raise Http404("Booking item not found.")
 
@@ -267,40 +260,65 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def get_initial(self):
         initial = super().get_initial()
-
         initial["client_name"] = (
-            self.request.user.get_full_name()
-            or self.request.user.username
+            self.request.user.get_full_name() or self.request.user.username
         )
         initial["email"] = self.request.user.email
-
         return initial
     
     def form_valid(self, form):
         form.instance.user = self.request.user
-        booking = form.save()
-    
-    # Email to Admin
+        resource = self.get_resource()
+
+        # Check availability and set status directly
+        if resource.available:
+            form.instance.status = "approved"
+        else:
+            form.instance.status = "pending"
+
+        # Save the booking
+        response = super().form_valid(form)
+        booking = self.object # Retrieve the saved booking
+
+        # Dynamic Emails based on status
         admin_subject = f"New Booking Request: {booking.client_name}"
-        admin_message = f"New booking for {booking.meeting_room or booking.office}. Status: {booking.status}."
+        admin_message = f"New booking for {booking.meeting_room or booking.office}. Status automatically set to: {booking.status}."
         send_mail(admin_subject, admin_message, settings.DEFAULT_FROM_EMAIL, [settings.ADMIN_EMAIL], fail_silently=False)
     
-    # Email to User
-        user_subject = "Your Booking Request at Progress Business Centre"
-        user_message = "Thank you for your request. Our team will review it shortly."
+        if booking.status == "approved":
+            user_subject = "Booking Approved - Confirmation"
+            user_message = f"Great news! Your booking for {booking.meeting_room or booking.office} is approved. Your total is {booking.total_price} BHD. Please complete your payment in person at the front desk upon arrival."
+        else:
+            user_subject = "Your Booking Request at Progress Business Centre"
+            user_message = f"Thank you for your request for {booking.meeting_room or booking.office}. The resource is currently pending availability check. Our team will review it and update you shortly."
+            
         send_mail(user_subject, user_message, settings.DEFAULT_FROM_EMAIL, [booking.email], fail_silently=False)
     
-        return super().form_valid(form)
+        return response
+
+    def get_success_url(self):
+        # Redirect everyone to the success page, bypassing payments for now
+        return reverse_lazy("booking_success")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["resource"] = self.get_resource()
         context["resource_type"] = self.kwargs["resource_type"]
         return context
-
-
+    
 def booking_success(request):
     return render(request, "bookings/success.html")
+
+# payment
+# @login_required
+# def booking_payment(request, pk):
+#     booking = get_object_or_404(Booking, pk=pk, user=request.user)
+    
+#     # Ensure they only pay for approved bookings
+#     if booking.status != "approved":
+#         return redirect("dashboard")
+        
+#     return render(request, "bookings/payment.html", {"booking": booking})
 
 
 # dashboard
@@ -311,18 +329,6 @@ class UserDashboardView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         # Only fetch bookings that belong to the logged-in user
         return Booking.objects.filter(user=self.request.user).order_by('-created_at')
-    
- # edit
-class BookingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Booking
-    form_class = BookingForm
-    template_name = "bookings/edit.html"
-    success_url = reverse_lazy("dashboard")
-
-    def test_func(self):
-        booking = self.get_object()
-        # Only allow edit if the user owns it AND it is still 'pending'
-        return booking.user == self.request.user and booking.status == 'pending'
 
 # cancel
 class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):

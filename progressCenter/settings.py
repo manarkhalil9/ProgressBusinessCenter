@@ -132,28 +132,24 @@ LOGOUT_REDIRECT_URL = '/'
 
 LANGUAGE_COOKIE_NAME = 'django_language'
 
-
-
-# (This prints emails to your terminal instead of sending them, which is great for testing)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
+# --- EMAIL CONFIGURATION ---
 
 # Load the .env file
 load_dotenv()
 
-# Email Configuration
+# OPTION 1: Testing (Uncomment the line below to print emails to the console instead of sending them)
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# OPTION 2: Real Emails (Uses Gmail SMTP and your .env credentials)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-# Use these for consistent sender/admin email
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
-ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
+# Pulling credentials securely from your .env file
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') 
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') 
 
-# the email functions know who they are coming from
-DEFAULT_FROM_EMAIL = 'noreply@yourwebsite.com'
-ADMIN_EMAIL = 'manarajkhalil79@gmail.com' 
+# Default sender and admin emails
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'noreply@yourwebsite.com')
+ADMIN_EMAIL = 'manarajkhalil79@gmail.com'

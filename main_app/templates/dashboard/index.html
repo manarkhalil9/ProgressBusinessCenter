@@ -22,14 +22,16 @@
                 
                 <!-- Only show action buttons if the booking is NOT cancelled -->
                 <div class="actions">
-                    {% if booking.status != 'cancelled' %}
-                        <a href="{% url 'booking_edit' booking.pk %}" class="btn edit-btn">
-                            {% trans "Edit" %}
-                        </a>
-                        <a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">
-                            {% trans "Cancel" %}
-                        </a>
-                    {% else %}
+                    {% if booking.status == 'pending' %}
+                        <a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
+    
+                    {% elif booking.status == 'approved' %}
+                        {# The Pay Now button is frozen for now #}
+                        {# <a href="{% url 'booking_payment' booking.pk %}" class="btn pay-btn">{% trans "Pay Now" %}</a> #}
+                        
+                         <a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
+        
+                    {% elif booking.status == 'cancelled' %}
                         <p class="cancelled-text">{% trans "This booking has been cancelled." %}</p>
                     {% endif %}
                 </div>
