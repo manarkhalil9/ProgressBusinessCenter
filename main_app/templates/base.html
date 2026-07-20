@@ -1,177 +1,345 @@
 {% load static %}
+
 {% load i18n %}
+
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 
+
+
 <!DOCTYPE html>
+
 <html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+
 <head>
+
     <meta name="google" content="translate">
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 
     <title>{% trans "Progress Business Center" %}</title>
 
+
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
+
+
 
 <body class="site-body">
 
+
+
 <nav class="navbar">
 
+
+
     <button class="mobile-menu-btn" type="button" onclick="toggleMenu()" aria-label="{% trans 'Menu' %}">
+
         ☰
+
     </button>
 
+
+
     <div class="logo">
+
         <a href="{% url 'home' %}">
+
             {% trans "Progress Business Centre" %}
+
         </a>
+
     </div>
 
+
+
     <form class="site-search" action="{% url 'search' %}" method="get">
+
         <label class="sr-only" for="site-search-input">
+
             {% trans "Search" %}
+
         </label>
 
+
+
         <input
+
             id="site-search-input"
+
             type="search"
+
             name="q"
+
             value="{{ request.GET.q }}"
+
             placeholder="{% trans 'Search' %}"
+
             aria-label="{% trans 'Search' %}"
+
         >
 
+
+
         <button type="submit">{% trans "Search" %}</button>
+
     </form>
+
+
 
     <div class="nav-links">
 
+
+
         <a href="{% url 'home' %}">{% trans "Home" %}</a>
+
         <a href="{% url 'about' %}">{% trans "About" %}</a>
+
         <a href="{% url 'services' %}">{% trans "Services" %}</a>
+
         <a href="{% url 'rooms' %}">{% trans "Rooms" %}</a>
+
         <a href="{% url 'offices' %}">{% trans "Offices" %}</a>
+
         <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
+
         <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
+
         <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
 
+
+
         {% if user.is_authenticated %}
+
         <details class="nav-more">
+
             <summary>{% trans "More" %}</summary>
 
+
+
             <div class="nav-more-menu">
+
                 <a href="{% url 'features' %}">{% trans "Features" %}</a>
+
                 <a href="{% url 'events' %}">{% trans "Events" %}</a>
+
                 <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
+
                 <a href="{% url 'visit' %}">{% trans "Visit" %}</a>
+
                 <a href="{% url 'referral' %}">{% trans "Referral" %}</a>
+
                 <a href="{% url 'business_register' %}">{% trans "Register" %}</a>
+
             </div>
+
         </details>
+
         {% endif %}
 
+
+
     </div>
+
+
 
         <div class="nav-actions">
 
+
+
         {% if user.is_authenticated %}
+
             <a href="{% url 'dashboard' %}" class="welcome-user" style="text-decoration: none; font-weight: bold; margin-right: 15px;">
+
                 {% blocktrans with username=user.username %}{{ username }}'s Dashboard{% endblocktrans %}
+
             </a>
 
+
+
             <form method="post" action="{% url 'logout' %}" style="display: inline;">
+
                 {% csrf_token %}
+
                 <button class="logout-btn" type="submit">
+
                     {% trans "Logout" %}
+
                 </button>
+
             </form>
+
+
 
         {% else %}
 
+
+
             <a href="{% url 'login' %}" class="nav-login">
+
                 {% trans "Login" %}
+
             </a>
+
+
 
             <a href="{% url 'signup' %}" class="btn-small">
-                {% trans "Sign Up" %}
-            </a>
-        {% endif %}
 
+                {% trans "Sign Up" %}
+
+            </a>
+
+        {% endif %}
+        
+<details class="nav-more">
+    {% get_current_language as CURRENT_LANG %}
+    {% get_available_languages as LANGUAGES %}
+    
+    <summary>
+        {% for lang in LANGUAGES %}
+            {% if lang.0 == CURRENT_LANG %}{{ lang.1 }}{% endif %}
+        {% endfor %}
+    </summary>
+    
+    <div class="nav-more-menu">
         <form action="{% url 'set_language' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-
-            {% get_current_language as LANGUAGE_CODE %}
-            {% get_available_languages as LANGUAGES %}
-
-            <select class="language-btn" name="language" onchange="this.form.submit()">
-                {% for lang in LANGUAGES %}
-                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                        {{ lang.1 }}
-                    </option>
-                {% endfor %}
-            </select>
+            {% for lang in LANGUAGES %}
+                <button type="submit" name="language" value="{{ lang.0 }}" class="lang-link">
+                    {{ lang.1 }}
+                </button>
+            {% endfor %}
         </form>
+    </div>
+</details>
+
+
 
     </div>
+
+
 
     <div class="mobile-menu" id="mobileMenu">
 
+
+
         <a href="{% url 'home' %}">{% trans "Home" %}</a>
+
         <a href="{% url 'about' %}">{% trans "About" %}</a>
+
         <a href="{% url 'services' %}">{% trans "Services" %}</a>
+
         <a href="{% url 'features' %}">{% trans "Features" %}</a>
+
         <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
+
         <a href="{% url 'rooms' %}">{% trans "Rooms" %}</a>
+
         <a href="{% url 'offices' %}">{% trans "Offices" %}</a>
+
         <a href="{% url 'events' %}">{% trans "Events" %}</a>
+
         <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
+
         <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
+
         <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
 
+
+
             {% if user.is_authenticated %}
+
             <a href="{% url 'dashboard' %}" style="font-weight: bold;">{% trans "My Dashboard" %}</a>
-            
+
+           
+
             <a href="{% url 'visit' %}">{% trans "Visit" %}</a>
+
             <a href="{% url 'referral' %}">{% trans "Referral" %}</a>
+
             <a href="{% url 'business_register' %}">{% trans "Register" %}</a>
 
+
+
             <span class="welcome-user mobile-welcome">
+
                 {% blocktrans with username=user.username %}Welcome, {{ username }}{% endblocktrans %}
+
             </span>
 
+
+
             <form method="post" action="{% url 'logout' %}">
+
                 {% csrf_token %}
+
                 <button class="logout-btn" type="submit">
+
                     {% trans "Logout" %}
+
                 </button>
+
             </form>
+
+
 
         {% else %}
 
+
+
             <a href="{% url 'login' %}">{% trans "Login" %}</a>
+
             <a href="{% url 'signup' %}">{% trans "Sign Up" %}</a>
+
         {% endif %}
+
+
 
     </div>
 
+
+
 </nav>
 
+
+
 <main class="site-content">
+
     {% block content %}
+
     {% endblock %}
+
 </main>
 
+
+
 <footer class="site-footer">
+
     <p>{% trans "© 2026 Progress Business Centre. All rights reserved." %}</p>
+
 </footer>
 
+
+
 <script>
+
 function toggleMenu() {
+
     document.getElementById("mobileMenu").classList.toggle("active");
+
 }
+
 </script>
 
+
+
 </body>
-</html>
+
+</html> 
+

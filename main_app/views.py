@@ -185,20 +185,22 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
     model = BusinessRegistration
     form_class = BusinessRegistrationForm
     template_name = "business/register.html"
-    success_url = reverse_lazy("business_success")
-
-    def dispatch(self, request, *args, **kwargs):
-        if hasattr(request.user, "business"):
-            return redirect("business_success")
-        return super().dispatch(request, *args, **kwargs)
-
+    
+    success_url = reverse_lazy("virtual_office_success") 
+ 
     def form_valid(self, form):
+        # Attach the currently logged-in user to the request before saving
         form.instance.user = self.request.user
         return super().form_valid(form)
     
-def business_success(request):
+def virtual_office_success(request):
     return render(request, "business/success.html")
 
+def business_success(request):
+    """
+    Renders the success page after a user submits a business registration.
+    """
+    return render(request, 'business/success.html')
 
 # search bar
 def search(request):
@@ -322,15 +324,20 @@ def booking_success(request):
 
 
 # dashboard
-class UserDashboardView(LoginRequiredMixin,ListView):
+class UserDashboardView(LoginRequiredMixin, ListView):
     template_name = "dashboard/index.html"
     context_object_name = "bookings"
 
     def get_queryset(self):
-        # Only fetch bookings that belong to the logged-in user
+        # Only fetch bookings (Meeting Rooms/Offices)
         return Booking.objects.filter(user=self.request.user).order_by('-created_at')
 
-# cancel
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['registrations'] = BusinessRegistration.objects.filter(user=self.request.user)
+        return context
+
+# cancel booking
 class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, pk):
         booking = get_object_or_404(Booking, pk=pk)
@@ -346,6 +353,19 @@ class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
         booking = get_object_or_404(Booking, pk=self.kwargs['pk'])
         return booking.user == self.request.user
 
+# cancel business registration
+class BusinessRegistrationCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def post(self, request, pk):
+        # We only need a POST method here since we are using a simple delete button
+        registration = get_object_or_404(BusinessRegistration, pk=pk)
+        registration.delete()
+        return redirect("dashboard")
+
+    def test_func(self):
+        # ensures a user can only delete their own registration
+        registration = get_object_or_404(BusinessRegistration, pk=self.kwargs['pk'])
+        return registration.user == self.request.user
+
 
 # signup
 def signup(request):
@@ -357,6 +377,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            
             return redirect("business_register")
 
     return render(

@@ -3,41 +3,16 @@
 
 {% block content %}
 <section class="dashboard-container">
-    <h1>{% trans "My Dashboard" %}</h1>
-
+<h1>{% blocktrans with username=user.username %}{{ username }}'s Dashboard{% endblocktrans %}</h1>
     <div class="booking-list">
         {% for booking in bookings %}
             <div class="booking-card">
                 <h3>{{ booking.client_name }} - {{ booking.meeting_room|default:booking.office }}</h3>
-                
-                <!-- Display the current status dynamically -->
-                <p>
-                    {% trans "Status:" %} 
-                    <span class="status-badge status-{{ booking.status }}">
-                        {{ booking.get_status_display }}
-                    </span>
-                </p>
-                
-                <p>{% trans "Total Price:" %} {{ booking.total_price }} BHD</p>
-                
-                <!-- Only show action buttons if the booking is NOT cancelled -->
-                <div class="actions">
-                    {% if booking.status == 'pending' %}
-                        <a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
-    
-                    {% elif booking.status == 'approved' %}
-                        {# The Pay Now button is frozen for now #}
-                        {# <a href="{% url 'booking_payment' booking.pk %}" class="btn pay-btn">{% trans "Pay Now" %}</a> #}
-                        
-                         <a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
-        
-                    {% elif booking.status == 'cancelled' %}
-                        <p class="cancelled-text">{% trans "This booking has been cancelled." %}</p>
-                    {% endif %}
-                </div>
+                <p>{% trans "Status:" %} {{ booking.get_status_display }}</p>
+                <a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
             </div>
         {% empty %}
-            <p>{% trans "You have no active bookings." %}</p>
+            <p>{% trans "You have no active space bookings." %}</p>
         {% endfor %}
     </div>
 </section>

@@ -54,7 +54,7 @@ urlpatterns = [
 
     # business
     path('register/', views.BusinessRegistrationCreateView.as_view(), name='business_register'),
-    path('register/success/',views.business_success, name='business_success'),
+    path('register/success/', views.business_success, name='business_success'),
 
     # search bar
     path("search/", views.search, name="search"),
@@ -69,6 +69,7 @@ urlpatterns = [
     # dashboard
     path('dashboard/', views.UserDashboardView.as_view(), name='dashboard'),
     path('booking/<int:pk>/cancel/', views.BookingCancelView.as_view(), name='booking_cancel'),
+    path('dashboard/cancel-registration/<int:pk>/', views.BusinessRegistrationCancelView.as_view(), name='cancel_registration'),
 
     # auth
     path('accounts/signup/', views.signup, name='signup'),

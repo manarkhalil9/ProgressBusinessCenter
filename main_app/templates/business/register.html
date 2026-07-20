@@ -2,85 +2,51 @@
 {% load i18n %}
 
 {% block content %}
-
-<section class="form-card">
-
-<h1>
-{% trans "Register Your Business" %}
-</h1>
-
-<p>
-{% trans "Complete the form below to register your business with Progress Business Centre." %}
-</p>
-
-
-<form method="POST">
-
-{% csrf_token %}
-
-
-<div>
-<label>{% trans "Company Name" %}</label><br>
-{{ form.company_name }}
-</div>
-
-
-<br>
-
-
-<div>
-<label>{% trans "Owner Name" %}</label><br>
-{{ form.owner_name }}
-</div>
-
-
-<br>
-
-
-<div>
-<label>{% trans "Commercial Registration" %}</label><br>
-{{ form.commercial_registration }}
-</div>
-
-
-<br>
-
-
-<div>
-<label>{% trans "Business Type" %}</label><br>
-{{ form.business_type }}
-</div>
-
-
-<br>
-
-
-<h3>
-{% trans "Select Office Services" %}
-</h3>
-
-
-{% for checkbox in form.services %}
-
-<div>
-{{ checkbox.tag }}
-<label>{{ checkbox.choice_label }}</label>
-</div>
-
-{% endfor %}
-
-
-<br><br>
-
-
-<button type="submit">
-{% trans "Register Business" %}
-</button>
-
-
-</form>
-
-
+<section class="page-header">
+    <h1>{% trans "Professional Business Registration Services" %}</h1>
+    <p>{% trans "Get your professional business address and office presence without the need for a physical office. Ideal for startups, entrepreneurs, and remote businesses." %}</p>
 </section>
 
+<section class="form-card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Application Details -->
+        <label><b>{% trans "Request Type" %}</b></label>
+        {{ form.request_type }}
+
+        <label><b>{{ form.company_name.label }}</b></label>
+        {{ form.company_name }}
+
+        <label><b>{{ form.owner_name.label }}</b></label>
+        {{ form.owner_name }}
+
+        <label><b>{{ form.business_type.label }}</b></label>
+        {{ form.business_type }}
+
+        <label><b>{{ form.commercial_registration.label }}</b></label>
+        {{ form.commercial_registration }}
+        <small class="help-text-gray">{{ form.commercial_registration.help_text }}</small>
+
+        <label><b>{% trans "CPR Number" %}</b></label>
+        {{ form.cpr_number }}
+
+        <!-- Documentation -->
+        <label><b>{{ form.cpr_document.label }}</b></label>
+        {{ form.cpr_document }}
+
+        <label><b>{{ form.passport_document.label }}</b></label>
+        {{ form.passport_document }}
+        
+        <p style="margin-bottom: 20px;"><small>{% trans "Please upload clear copies of your CPR and Passport." %}</small></p>
+
+        {% if form.errors %}
+            <div class="error-text" style="color: #d62828; margin-bottom: 20px;">
+                {% trans "Please correct the errors above." %}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn">{% trans "Submit Legal Application" %}</button>
+    </form>
+</section>
 {% endblock %}

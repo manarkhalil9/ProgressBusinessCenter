@@ -228,16 +228,31 @@ class VisitRequest(models.Model):
     
 # business registrations
 class BusinessRegistration(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='business')
-    company_name = models.CharField(max_length=150)
-    owner_name = models.CharField(max_length=100)
-    commercial_registration = models.CharField(max_length=100)
+    STATUS_CHOICES = [
+        ("pending", "Pending Government Approval"),
+        ("active", "Active CR"),
+        ("rejected", "Application Rejected"),
+    ]
+    
+    REQUEST_TYPE = [('new', 'New Registration'), ('renewal', 'CR Renewal')]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="service_requests")
+    company_name = models.CharField(max_length=255)
+    owner_name = models.CharField(max_length=255)
+    commercial_registration = models.CharField(max_length=100, blank=True, help_text="Required for renewals.")
+    request_type = models.CharField(max_length=10, choices=REQUEST_TYPE, default='new')
     business_type = models.CharField(max_length=100)
-    services = models.ManyToManyField(Service, blank=True, related_name='business_registrations')
-    created_at = models.DateTimeField(auto_now_add=True)
+    cpr_number = models.CharField(max_length=20, blank=True, null=True)
+    
+    # Required Documents
+    cpr_document = models.FileField(upload_to='business_docs/cpr/', blank=True, null=True, help_text="Upload copy of CPR.")
+    passport_document = models.FileField(upload_to='business_docs/passport/', blank=True, null=True, help_text="Upload copy of Passport.")
+    
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
+    submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.company_name
+        return f"{self.company_name} ({self.get_request_type_display()})"
 
 # referrals
 class Referral(models.Model):

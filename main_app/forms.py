@@ -7,21 +7,23 @@ from django.utils.translation import gettext_lazy as _  # Import the translation
 
 
 class BusinessRegistrationForm(forms.ModelForm):
-
     class Meta:
         model = BusinessRegistration
-
         fields = [
+            "request_type", 
             "company_name",
             "owner_name",
             "commercial_registration",
             "business_type",
-            "services",
+            "cpr_number",
+            "cpr_document",
+            "passport_document",
         ]
-
-        widgets = {
-            "services": forms.CheckboxSelectMultiple(),
+        labels = {
+            "cpr_document": _("Upload CPR"),
+            "passport_document": _("Upload Passport"),
         }
+
 
 class VisitRequestForm(forms.ModelForm):
     class Meta:
@@ -43,6 +45,7 @@ class VisitRequestForm(forms.ModelForm):
                 attrs={'type': 'time'}
             ),
         }
+
 
 class BookingForm(forms.ModelForm):
     class Meta:

@@ -1,20 +1,25 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load i18n %}
 
 {% block content %}
+<section class="success-card" style="text-align: center; padding: 50px;">
+    <div class="success-icon" style="font-size: 50px; color: #1f9d55; margin-bottom: 20px;">
+        ✓
+    </div>
+    
+    <!-- Updated the H1 to be more specific to the service -->
+    <h1>{% trans "Virtual Office Application Received!" %}</h1>
+    
+    <p>{% trans "Your application for professional business services has been submitted for review. Our team will contact you shortly." %}</p>
 
-<section class="success-card">
+    <br>
+    
+    <div class="hero-buttons">
+        <!-- Changed link text to match the new service name -->
+        <a href="{% url 'dashboard' %}" class="btn btn-light">{% trans "Track My Application" %}</a>
 
-<h1>✅ {% trans "Registration Submitted" %}</h1>
-
-<p>
-{% trans "Thank you for your submission. Our team will contact you shortly." %}
-</p>
-
-<a href="{% url 'home' %}" class="btn">
-{% trans "Back Home" %}
-</a>
-
+        <a href="{% url 'offices' %}" class="btn">{% trans "Browse Offices" %}</a>
+        <a href="{% url 'rooms' %}" class="btn">{% trans "Browse Meeting Rooms" %}</a>
+    </div>
 </section>
-
 {% endblock %}
