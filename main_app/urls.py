@@ -49,7 +49,7 @@ urlpatterns = [
     path('visit/success/', views.visit_success, name='visit_success'),
 
     # referral
-    path('referral/', views.ReferralCreateView.as_view(), name='referral'),
+    path('referral/', views.ReferralCreateView.as_view(), name='referral_create'),
     path('referral/success/', views.referral_success, name='referral_success'),
 
     # business

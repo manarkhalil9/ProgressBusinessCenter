@@ -1,8 +1,7 @@
 from django import forms
-from .models import BusinessRegistration, VisitRequest
+from .models import BusinessRegistration, VisitRequest, Booking, MeetingRoom, Office, Referral
 from datetime import date
 from django.core.exceptions import ValidationError
-from .models import Booking, MeetingRoom, Office
 from django.utils.translation import gettext_lazy as _  # Import the translation tool
 
 
@@ -20,10 +19,15 @@ class BusinessRegistrationForm(forms.ModelForm):
             "passport_document",
         ]
         labels = {
+            "request_type": _("Request Type"),
+            "company_name": _("Company Name"),
+            "owner_name": _("Owner Name"),
+            "commercial_registration": _("Commercial Registration"),
+            "business_type": _("Business Type"),
+            "cpr_number": _("CPR Number"),
             "cpr_document": _("Upload CPR"),
             "passport_document": _("Upload Passport"),
         }
-
 
 class VisitRequestForm(forms.ModelForm):
     class Meta:
@@ -36,6 +40,15 @@ class VisitRequestForm(forms.ModelForm):
             'preferred_time',
             'notes',
         ]
+
+        labels = {
+            "full_name": _("Full Name"),
+            "email": _("Email Address"),
+            "phone": _("Phone Number"),
+            "preferred_date": _("Preferred Date"),
+            "preferred_time": _("Preferred Time"),
+            "notes": _("Notes"),
+        }
 
         widgets = {
             'preferred_date': forms.DateInput(
@@ -68,7 +81,6 @@ class BookingForm(forms.ModelForm):
             "end_time": forms.TimeInput(attrs={"type": "time"}),
         }
 
-        # ADD THIS: Explicitly define and translate labels
         labels = {
             "client_name": _("Client Name"),
             "phone": _("Phone Number"),
@@ -129,3 +141,20 @@ class BookingForm(forms.ModelForm):
                 )
 
         return cleaned_data
+    
+class ReferralForm(forms.ModelForm):
+    class Meta:
+        model = Referral
+        fields = ['full_name', 'email', 'phone', 'referred_company']
+        labels = {
+            'full_name': _('Full Name'),
+            'email': _('Email Address'),
+            'phone': _('Phone Number'),
+            'referred_company': _('Referred Company Name'),
+        }
+        widgets = {
+            'full_name': forms.TextInput(attrs={'placeholder': _('Enter full name')}),
+            'email': forms.EmailInput(attrs={'placeholder': _('name@example.com')}),
+            'phone': forms.TextInput(attrs={'placeholder': _('+973 ...')}),
+            'referred_company': forms.TextInput(attrs={'placeholder': _('Enter company name')}),
+        }

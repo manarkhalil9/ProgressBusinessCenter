@@ -1339,3 +1339,32 @@ html[dir="rtl"] body {
     vertical-align: middle;
 }
 
+/* Container styling - keeping it clean and removing the box border */
+.custom-file-wrapper input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    color: #003366;
+    font-family: inherit;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+/* Style ONLY the "Choose File" button itself */
+.custom-file-wrapper input[type="file"]::file-selector-button {
+    background-color: #ff9800; /* Orange theme */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-inline-end: 15px; /* Uses inline-end to work perfectly for both English and Arabic */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for the button */
+.custom-file-wrapper input[type="file"]::file-selector-button:hover {
+    background-color: #e68900;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+}

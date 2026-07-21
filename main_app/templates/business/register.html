@@ -33,10 +33,14 @@
 
         <!-- Documentation -->
         <label><b>{{ form.cpr_document.label }}</b></label>
-        {{ form.cpr_document }}
+        <div class="custom-file-wrapper">
+            {{ form.cpr_document }}
+        </div>
 
         <label><b>{{ form.passport_document.label }}</b></label>
-        {{ form.passport_document }}
+        <div class="custom-file-wrapper">
+            {{ form.passport_document }}
+        </div>
         
         <p style="margin-bottom: 20px;"><small>{% trans "Please upload clear copies of your CPR and Passport." %}</small></p>
 

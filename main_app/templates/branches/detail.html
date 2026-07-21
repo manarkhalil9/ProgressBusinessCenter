@@ -40,48 +40,6 @@
 {{ branch.opening_hours }}
 </p>
 
-
-
-<h2>{% trans "Meeting Rooms" %}</h2>
-
-
-<div class="card-grid">
-
-
-{% for room in branch.meeting_rooms.all %}
-
-
-<div class="service-card">
-
-<h3>
-{{ room.name }}
-</h3>
-
-
-<p>
-{% trans "Capacity:" %} {{ room.capacity }} {% trans "people" %}
-</p>
-
-
-<p>
-{% trans "Price:" %}
-{{ room.price_per_hour }}
-</p>
-
-
-</div>
-
-
-{% empty %}
-
-<p>{% trans "No meeting rooms available." %}</p>
-
-{% endfor %}
-
-
-</div>
-
-
 </section>
 
 

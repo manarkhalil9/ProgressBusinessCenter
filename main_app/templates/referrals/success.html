@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
+<div class="success-card">
+    <div style="color: #1f9d55; font-size: 64px; margin-bottom: 20px;">✓</div>
+    
+    <h2 style="color: #003366; margin-bottom: 15px;">{% trans "Referral Submitted!" %}</h2>
+    
+    <p style="color: #666; margin-bottom: 35px; font-size: 18px;">
+        {% trans "Thank you for sharing. Our team will review your referral and contact them shortly." %}
+    </p>
 
-<section class="success-card">
-
-<h1>✅ Referral Submitted</h1>
-
-<p>
-Thank you for your submission.
-Our team will contact you shortly.
-</p>
-
-<a href="{% url 'home' %}" class="btn">
-Back Home
-</a>
-
-</section>
-
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <a href="{% url 'referral_create' %}" class="btn">
+            {% trans "Submit Another Referral" %}
+        </a>
+        
+        <a href="{% url 'home' %}" class="btn btn-light" style="border: 2px solid #003366;">
+            {% trans "Back Home" %}
+        </a>
+    </div>
+</div>
 {% endblock %}

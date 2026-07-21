@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>{% trans "Refer a Business" %}</h1>
+    <p>{% trans "Know someone looking for a professional workspace? Refer them to us!" %}</p>
+</div>
+
+<div class="form-card">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}" style="font-weight: 600; color: #003366;">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                
+                {% if field.errors %}
+                    <span class="error">{{ field.errors.0 }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">{% trans "Submit Referral" %}</button>
+    </form>
+</div>
+{% endblock %}

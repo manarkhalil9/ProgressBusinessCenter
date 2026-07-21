@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral, Office, Booking)
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import BusinessRegistrationForm, VisitRequestForm, BookingForm
+from .forms import BusinessRegistrationForm, VisitRequestForm, BookingForm, ReferralForm
 from django.db.models import Q
 from django.http import Http404
 from django.views import View
@@ -167,8 +167,8 @@ def visit_success(request):
 # create referral
 class ReferralCreateView(LoginRequiredMixin, CreateView):
     model = Referral
-    fields = ['full_name', 'email', 'phone', 'referred_company']
-    template_name = "referrals/register.html"
+    form_class = ReferralForm
+    template_name = "referrals/index.html"
     success_url = reverse_lazy("referral_success")
 
     def form_valid(self, form):
@@ -186,7 +186,7 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
     form_class = BusinessRegistrationForm
     template_name = "business/register.html"
     
-    success_url = reverse_lazy("virtual_office_success") 
+    success_url = reverse_lazy("business_success") 
  
     def form_valid(self, form):
         # Attach the currently logged-in user to the request before saving
