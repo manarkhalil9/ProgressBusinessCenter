@@ -1,81 +1,62 @@
 {% extends 'base.html' %}
-
 {% load i18n %}
-
-
 
 {% block content %}
 
-<section class="dashboard-container">
 
-<h1>{% blocktrans with username=user.username %}{{ username }}'s Dashboard{% endblocktrans %}</h1>
+<div class="bookings-container">
 
+  <section class="page-header">
+    <h1>{% trans "My Bookings" %}</h1>
+  </section>
 
+  <div class="booking-grid">
+    {% for booking in bookings %}
+      <div class="booking-card">
+        
+        <div class="booking-header">
+          <h3 class="booking-title">
+            {{ booking.meeting_room|default:booking.office|default:booking.client_name }}
+          </h3>
+          <span class="status-badge status-{{ booking.status }}">
+            {{ booking.get_status_display }}
+          </span>
+        </div>
 
-<div class="booking-list">
+        <div class="booking-details">
+          <div class="detail-row">
+            <span class="detail-label">{% trans "Total Price" %}</span>
+            <span class="detail-value">{{ booking.total_price }} {% trans "BHD" %}</span>
+          </div>
+        </div>
 
-{% for booking in bookings %}
+        <div class="booking-actions">
+          {% if booking.status == 'pending' or booking.status == 'approved' %}
+            <a href="{% url 'booking_cancel' booking.pk %}" class="btn-cancel">
+              {% trans "Cancel Booking" %}
+            </a>
+          {% elif booking.status == 'cancelled' %}
+            <p class="cancelled-msg">{% trans "This booking is cancelled." %}</p>
+          {% endif %}
+        </div>
 
-<div class="booking-card">
-
-<h3>{{ booking.client_name }} - {{ booking.meeting_room|default:booking.office }}</h3>
-
-
-<!-- Display the current status dynamically -->
-
-<p>
-
-{% trans "Status:" %}
-
-<span class="status-badge status-{{ booking.status }}">
-
-{{ booking.get_status_display }}
-
-</span>
-
-</p>
-
-
-<p>{% trans "Total Price:" %} {{ booking.total_price }} BHD</p>
-
-
-<!-- Only show action buttons if the booking is NOT cancelled -->
-
-<div class="actions">
-
-{% if booking.status == 'pending' %}
-
-<a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
-
-
-{% elif booking.status == 'approved' %}
-
-{# The Pay Now button is frozen for now #}
-
-{# <a href="{% url 'booking_payment' booking.pk %}" class="btn pay-btn">{% trans "Pay Now" %}</a> #}
-
-
-<a href="{% url 'booking_cancel' booking.pk %}" class="btn delete-btn">{% trans "Cancel" %}</a>
-
-
-{% elif booking.status == 'cancelled' %}
-
-<p class="cancelled-text">{% trans "This booking has been cancelled." %}</p>
-
-{% endif %}
+      </div>
+    {% empty %}
+      <div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <p>{% trans "You have no active bookings." %}</p>
+        <a href="{% url 'services' %}" class="btn" style="background: #003366; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none;">
+          {% trans "Explore Services" %}
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 
 </div>
-
-</div>
-
-{% empty %}
-
-<p>{% trans "You have no active bookings." %}</p>
-
-{% endfor %}
-
-</div>
-
-</section>
 
 {% endblock %}

@@ -5,86 +5,88 @@
 
 <section class="about-page">
 
-<h1>{% trans "About Progress Business Centre" %}</h1>
+    <h1>{% trans "About Progress Business Centre" %}</h1>
 
-<p class="intro">
+    <p class="intro">
+        {% trans "Progress Business Centre is the premier destination for established enterprises and scaling startups in Bahrain. We provide strategic infrastructure, premium facilities, and the operational support required to drive your business forward." %}
+    </p>
 
-{% trans "Progress Business Centre is dedicated to helping entrepreneurs, freelancers and companies succeed by providing flexible workspace solutions in a professional environment." %}
+    <div class="about-grid">
 
-</p>
+        <div class="about-card">
+            <!-- Professional Target/Mission Icon -->
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                {% trans "Our Mission" %}
+            </h2>
+            <p>
+                {% trans "To deliver agile, premium workspace solutions that empower businesses to scale efficiently and operate with absolute professionalism." %}
+            </p>
+        </div>
 
+        <div class="about-card">
+            <!-- Professional Compass/Vision Icon -->
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+                {% trans "Our Vision" %}
+            </h2>
+            <p>
+                {% trans "To be the cornerstone of corporate growth in Bahrain, recognized as the ultimate hub for business excellence and innovation." %}
+            </p>
+        </div>
 
-<div class="about-grid">
+        <div class="about-card">
+            <!-- Professional Building Icon -->
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                    <path d="M9 22v-4h6v4"></path>
+                    <path d="M8 6h.01"></path>
+                    <path d="M16 6h.01"></path>
+                    <path d="M12 6h.01"></path>
+                    <path d="M12 10h.01"></path>
+                    <path d="M12 14h.01"></path>
+                    <path d="M16 10h.01"></path>
+                    <path d="M16 14h.01"></path>
+                    <path d="M8 10h.01"></path>
+                    <path d="M8 14h.01"></path>
+                </svg>
+                {% trans "Core Capabilities" %}
+            </h2>
+            <ul style="text-align: left; margin: 15px auto; max-width: 200px; padding-left: 20px; color: #555;">
+                <li style="margin-bottom: 8px;">{% trans "Virtual Corporate Addresses" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Dynamic Coworking Spaces" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Executive Private Offices" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "High-Tech Boardrooms" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Commercial Registration (CR)" %}</li>
+            </ul>
+        </div>
 
+        <div class="about-card">
+            <!-- Professional Shield/Quality Icon -->
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                {% trans "The Progress Edge" %}
+            </h2>
+            <ul style="text-align: left; margin: 15px auto; max-width: 200px; padding-left: 20px; color: #555;">
+                <li style="margin-bottom: 8px;">{% trans "Prestigious Seef Location" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Dedicated Administrative Support" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Scalable Lease Terms" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Exclusive Corporate Network" %}</li>
+            </ul>
+        </div>
 
-<div class="about-card">
-
-<h2>🎯 {% trans "Our Mission" %}</h2>
-
-<p>
-{% trans "To provide innovative office solutions that support business growth." %}
-</p>
-
-</div>
-
-
-
-<div class="about-card">
-
-<h2>👁 {% trans "Our Vision" %}</h2>
-
-<p>
-{% trans "To become Bahrain's preferred destination for flexible workspaces." %}
-</p>
-
-</div>
-
-
-
-<div class="about-card">
-
-<h2>🏢 {% trans "Our Services" %}</h2>
-
-<ul>
-
-<li>{% trans "Virtual Offices" %}</li>
-
-<li>{% trans "Coworking Spaces" %}</li>
-
-<li>{% trans "Private Offices" %}</li>
-
-<li>{% trans "Meeting Rooms" %}</li>
-
-<li>{% trans "Business Registration" %}</li>
-
-</ul>
-
-</div>
-
-
-
-<div class="about-card">
-
-<h2>⭐ {% trans "Why Us?" %}</h2>
-
-<ul>
-
-<li>{% trans "Professional Staff" %}</li>
-
-<li>{% trans "Prime Business Address" %}</li>
-
-<li>{% trans "Affordable Pricing" %}</li>
-
-<li>{% trans "Networking Opportunities" %}</li>
-
-</ul>
-
-</div>
-
-
-</div>
+    </div>
 
 </section>
-
 
 {% endblock %}

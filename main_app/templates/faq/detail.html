@@ -3,8 +3,43 @@
 
 {% block content %}
 
-<h2>{{ faq.question }}</h2>
+<div class="faq-detail-container">
 
-<p>{{ faq.answer }}</p>
+  <!-- Navigation Link -->
+  <a href="{% url 'faqs' %}" class="back-link">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    {% trans "Back to All FAQs" %}
+  </a>
+
+  <article class="faq-card">
+    
+    <div class="badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+      {% trans "Frequently Asked Question" %}
+    </div>
+
+    <h1 class="faq-question">{{ faq.question }}</h1>
+
+    <hr class="divider">
+
+    <div class="faq-answer">
+      {{ faq.answer|linebreaks }}
+    </div>
+
+    <div class="help-callout">
+      <p class="help-text">{% trans "Was this answer helpful?" %}</p>
+      <a href="{% url 'contact' %}" class="btn-secondary">{% trans "Need More Help?" %}</a>
+    </div>
+
+  </article>
+
+</div>
 
 {% endblock %}

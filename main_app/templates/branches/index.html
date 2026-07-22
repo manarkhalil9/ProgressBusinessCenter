@@ -3,43 +3,49 @@
 
 {% block content %}
 
+<div class="locations-container">
+  
+  <section class="page-header">
+    <h1>{% trans "Our Locations" %}</h1>
+    <p>{% trans "Explore our business centers and find a branch near you." %}</p>
+  </section>
 
-<section class="page-header">
+  <section class="features-section">
+    <div class="card-grid">
+      {% for branch in branches %}
+        <div class="feature-card">
+          <div>
+            <div class="card-header">
+              <div class="icon-wrapper">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <h3>{{ branch.name }}</h3>
+            </div>
 
-<h1>{% trans "Our Locations" %}</h1>
+            <p class="branch-address">
+              {{ branch.address }}
+            </p>
+          </div>
 
-<p>
-{% trans "Explore our business centers and available branches." %}
-</p>
-
-</section>
-
-
-<section class="features-section">
-
-<div class="card-grid">
-
-{% for branch in branches %}
-
-<div class="feature-card">
-
-<h3>📍 {{ branch.name }}</h3>
-
-<p>
-{{ branch.address }}
-</p>
-
-<a class="btn" href="{% url 'branch_detail' branch.id %}">
-{% trans "View Branch" %}
-</a>
+          <a class="btn-branch" href="{% url 'branch_detail' branch.id %}">
+            {% trans "View Branch" %}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      {% empty %}
+        <div class="empty-state">
+          <p>{% trans "No branches available at the moment." %}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
 
 </div>
-
-{% endfor %}
-
-</div>
-
-</section>
-
 
 {% endblock %}

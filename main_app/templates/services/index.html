@@ -4,32 +4,29 @@
 {% block content %}
 
 <section class="page-header">
-
-<h1>{% trans "Our Services" %}</h1>
-
-<p>
-{% trans "Explore our professional office solutions designed for startups, entrepreneurs and growing businesses." %}
-</p>
-
+    <h1>{% trans "Corporate Services Portfolio" %}</h1>
+    <p>
+        {% trans "Discover our comprehensive suite of premium workspace solutions, designed to support operations and accelerate growth for enterprises of all sizes." %}
+    </p>
 </section>
 
 <section class="card-grid">
 
-{% for service in services %}
+    {% for service in services %}
+    <div class="service-card">
+        <h3>{{ service.title }}</h3>
+        
+        <p>{{ service.description|truncatewords:15 }}</p>
 
-<div class="service-card">
-
-<h3>{{ service.title }}</h3>
-
-<p>{{ service.description }}</p>
-
-<a class="btn" href="{% url 'service_detail' service.id %}">
-{% trans "Learn More" %}
-</a>
-
-</div>
-
-{% endfor %}
+        <a class="btn" href="{% url 'service_detail' service.id %}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+            {% trans "View Details" %}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M12 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+    {% endfor %}
 
 </section>
 

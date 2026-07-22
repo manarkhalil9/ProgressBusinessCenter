@@ -3,31 +3,68 @@
 
 {% block content %}
 
-<section class="detail-card">
+<section class="detail-card" style="position: relative; padding-top: 50px;">
+    
+    <a href="{% url 'services' %}" style="position: absolute; top: 20px; inline-size: max-content; text-decoration: none; color: #003366; font-size: 0.9em; display: flex; align-items: center; gap: 5px; font-weight: 600;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5"></path>
+            <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+        {% trans "Back to Portfolio" %}
+    </a>
 
-<h1>{{ service.title }}</h1>
+    <h1 style="color: #003366; margin-bottom: 10px;">{{ service.title }}</h1>
+    
+    <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 20px 0;">
+    
+    <p style="font-size: 1.1em; line-height: 1.8; color: #444;">
+        {{ service.description }}
+    </p>
 
-<p>{{ service.description }}</p>
+    <div style="margin-top: 40px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        
+        <p style="margin: 0; font-size: 1.1em;">
+            <strong>{% trans "Current Availability:" %}</strong>
+            
+            {% if service.available %}
+                <span class="available" style="margin-inline-start: 10px; font-weight: 600; color: green;">
+                    ✓ {% trans "Available" %}
+                </span>
+            {% else %}
+                <span class="not-available" style="margin-inline-start: 10px; font-weight: 600; color: red;">
+                    ✕ {% trans "Currently Occupied" %}
+                </span>
+            {% endif %}
+        </p>
 
-<p>
+        {% if service.available %}
+            <div style="display: flex; gap: 10px;">
+                
+                {% if "Virtual" in service.title or "CR" in service.title or "Registration" in service.title or "افتراضي" in service.title or "سجل" in service.title %}
+                    <a href="{% url 'business_register' %}" class="btn">
+                        {% trans "Start CR Registration" %}
+                    </a>
+                    
+                {% elif "Meeting" in service.title or "Room" in service.title or "غرفة" in service.title %}
+                    <a href="{% url 'rooms' %}" class="btn">
+                        {% trans "Book Meeting Room" %}
+                    </a>
+                    
+                {% elif "Office" in service.title or "Coworking" in service.title or "مكتب" in service.title %}
+                    <a href="{% url 'offices' %}" class="btn">
+                        {% trans "Book Workspace" %}
+                    </a>
+                    
+                {% else %}
+                    <a href="{% url 'visit' %}" class="btn">
+                        {% trans "Arrange a Visit" %}
+                    </a>
+                {% endif %}
 
-<strong>{% trans "Status:" %}</strong>
-
-{% if service.available %}
-
-<span class="available">
-{% trans "Available" %}
-</span>
-
-{% else %}
-
-<span class="not-available">
-{% trans "Not Available" %}
-</span>
-
-{% endif %}
-
-</p>
+            </div>
+        {% endif %}
+        
+    </div>
 
 </section>
 

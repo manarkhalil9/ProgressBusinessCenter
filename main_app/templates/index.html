@@ -3,227 +3,161 @@
 
 {% block content %}
 
+<!-- HERO SECTION -->
 <section class="hero">
-
     <div class="hero-content">
-
         <h1>{% trans "Progress Business Centre" %}</h1>
-
         <p>
-            {% trans "Premium office solutions for startups, entrepreneurs and growing businesses in Bahrain." %}
+            {% trans "Premium workspace solutions and corporate services for established enterprises and ambitious startups in Bahrain." %}
         </p>
-
         <div class="hero-buttons">
-
             <a href="{% url 'services' %}" class="btn">
-                {% trans "Our Services" %}
+                {% trans "Explore Services" %}
             </a>
-
             <a href="{% url 'visit' %}" class="btn btn-light">
-                {% trans "Arrange a Visit" %}
+                {% trans "Schedule a Tour" %}
             </a>
+        </div>
+    </div>
+</section>
 
+<!-- FEATURES SECTION -->
+<section class="features-section">
+    <h2>{% trans "The Progress Advantage" %}</h2>
+    <div class="card-grid">
+
+        <div class="feature-card">
+            <h3>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+            </h3>
+            <h4>{% trans "Strategic Location" %}</h4>
+            <p>
+                {% trans "Situated in the heart of Seef, offering a prestigious corporate address for your brand." %}
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+            </h3>
+            <h4>{% trans "Agile Workspaces" %}</h4>
+            <p>
+                {% trans "Scalable solutions from virtual addresses to fully serviced executive suites." %}
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </h3>
+            <h4>{% trans "Enterprise Support" %}</h4>
+            <p>
+                {% trans "Comprehensive administrative, legal, and operational support for growing teams." %}
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <h3>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+            </h3>
+            <h4>{% trans "Premium Facilities" %}</h4>
+            <p>
+                {% trans "Access state-of-the-art boardrooms and conference facilities on demand." %}
+            </p>
         </div>
 
     </div>
-
 </section>
 
-
-<section class="features-section">
-
-<h2>{% trans "Why Choose Us" %}</h2>
-
-<div class="card-grid">
-
-<div class="feature-card">
-
-<h3>🏢</h3>
-
-<h4>{% trans "Prime Location" %}</h4>
-
-<p>
-{% trans "Located in Seef, Bahrain with easy access." %}
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>💼</h3>
-
-<h4>{% trans "Flexible Offices" %}</h4>
-
-<p>
-{% trans "Choose between virtual, coworking and serviced offices." %}
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>🤝</h3>
-
-<h4>{% trans "Business Support" %}</h4>
-
-<p>
-{% trans "Professional services for startups and companies." %}
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<h3>📅</h3>
-
-<h4>{% trans "Meeting Rooms" %}</h4>
-
-<p>
-{% trans "Book fully equipped meeting rooms whenever needed." %}
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-
+<!-- SERVICES PREVIEW -->
 <section class="services-preview">
+    <h2>{% trans "Tailored Corporate Solutions" %}</h2>
+    <div class="card-grid">
 
-<h2>{% trans "Our Office Solutions" %}</h2>
+        <div class="service-card">
+            <h3>{% trans "Virtual Office" %}</h3>
+            <p>
+                {% trans "Establish a prestigious commercial presence with our professional mail and call handling services." %}
+            </p>
+        </div>
 
-<div class="card-grid">
+        <div class="service-card">
+            <h3>{% trans "Coworking Spaces" %}</h3>
+            <p>
+                {% trans "Dynamic, collaborative environments designed to maximize focus and networking opportunities." %}
+            </p>
+        </div>
 
+        <div class="service-card">
+            <h3>{% trans "Executive Offices" %}</h3>
+            <p>
+                {% trans "Fully furnished, private operational spaces equipped with high-speed IT infrastructure." %}
+            </p>
+        </div>
 
-<div class="service-card">
+        <div class="service-card">
+            <h3>{% trans "Conference Rooms" %}</h3>
+            <p>
+                {% trans "High-tech meeting environments optimized for client pitches and team strategizing." %}
+            </p>
+        </div>
 
-<h3>{% trans "Virtual Office" %}</h3>
-
-<p>
-{% trans "Professional business address without renting physical space." %}
-</p>
-
-</div>
-
-
-<div class="service-card">
-
-<h3>{% trans "Coworking Space" %}</h3>
-
-<p>
-{% trans "Collaborative workspaces designed for productivity." %}
-</p>
-
-</div>
-
-
-<div class="service-card">
-
-<h3>{% trans "Private Office" %}</h3>
-
-<p>
-{% trans "Fully serviced offices for companies of all sizes." %}
-</p>
-
-</div>
-
-
-<div class="service-card">
-
-<h3>{% trans "Meeting Rooms" %}</h3>
-
-<p>
-{% trans "Modern conference rooms equipped with everything you need." %}
-</p>
-
-</div>
-
-
-</div>
-
+    </div>
 </section>
 
-
-
+<!-- ABOUT / MISSION SECTION -->
 <section class="about-home">
-
-<div>
-
-<h2>{% trans "Our Mission" %}</h2>
-
-<p>
-{% trans "To empower entrepreneurs and businesses with flexible office solutions that promote growth, innovation and collaboration." %}
-</p>
-
-</div>
-
+    <div>
+        <h2>{% trans "Our Corporate Mission" %}</h2>
+        <p>
+            {% trans "To provide businesses with superior infrastructure, seamless operational support, and the professional environment required to scale successfully in today's competitive market." %}
+        </p>
+    </div>
 </section>
 
-
-
+<!-- STATS SECTION -->
 <section class="stats">
-
-<div>
-
-<h2>500+</h2>
-
-<p>{% trans "Businesses Supported" %}</p>
-
-</div>
-
-
-<div>
-
-<h2>4</h2>
-
-<p>{% trans "Office Solutions" %}</p>
-
-</div>
-
-
-<div>
-
-<h2>24/7</h2>
-
-<p>{% trans "Business Support" %}</p>
-
-</div>
-
-
-<div>
-
-<h2>100%</h2>
-
-<p>{% trans "Professional Environment" %}</p>
-
-</div>
-
+    <div>
+        <h2>500+</h2>
+        <p>{% trans "Active Enterprises" %}</p>
+    </div>
+    <div>
+        <h2>4</h2>
+        <p>{% trans "Premium Solutions" %}</p>
+    </div>
+    <div>
+        <h2>24/7</h2>
+        <p>{% trans "Facility Access" %}</p>
+    </div>
+    <div>
+        <h2>100%</h2>
+        <p>{% trans "Operational Support" %}</p>
+    </div>
 </section>
 
-
-
+<!-- CR REGISTRATION CTA -->
 <section class="cta">
-
-<h2>{% trans "Ready to Grow Your Business?" %}</h2>
-
-<p>
-{% trans "Join entrepreneurs and companies that trust Progress Business Centre." %}
-</p>
-
-
-<a href="{% url 'business_register' %}" class="btn">
-
-{% trans "Register Now" %}
-
-</a>
-
-
+    <h2>{% trans "Establish Your Commercial Presence" %}</h2>
+    <p>
+        {% trans "Streamline your company setup. Apply for your Commercial Registration (CR) and secure your business address today." %}
+    </p>
+    
+    <a href="{% url 'business_register' %}" class="btn">
+        {% trans "Start CR Registration" %}
+    </a>
 </section>
-
 
 {% endblock %}

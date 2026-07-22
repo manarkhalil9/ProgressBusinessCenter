@@ -2,22 +2,42 @@
 {% load i18n %}
 
 {% block content %}
+<div class="detail-container">
 
+  <!-- Make sure to change 'features' to your actual list view URL name -->
+  <a href="{% url 'features' %}" class="back-link">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    {% trans "Back to All Features" %}
+  </a>
 
-<section class="detail-card">
+  <section class="detail-card">
+    <h1 class="branch-title">{{ feature.title }}</h1>
 
+    <div class="info-grid">
+      
+      <!-- Feature Description Formatted as an Info Item -->
+      <div class="info-item" style="grid-column: 1 / -1;">
+        <div class="info-icon">
+          <!-- Document/Text SVG Icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="21" y1="10" x2="3" y2="10"></line>
+            <line x1="21" y1="6" x2="3" y2="6"></line>
+            <line x1="21" y1="14" x2="3" y2="14"></line>
+            <line x1="21" y1="18" x2="3" y2="18"></line>
+          </svg>
+        </div>
+        <div class="info-content">
+          <span class="info-label">{% trans "Feature Description" %}</span>
+          <span class="info-value">{{ feature.description }}</span>
+        </div>
+      </div>
 
-<h1>
-{{ feature.title }}
-</h1>
+    </div>
 
+  </section>
 
-<p>
-{{ feature.description }}
-</p>
-
-
-</section>
-
-
+</div>
 {% endblock %}
