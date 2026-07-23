@@ -6,158 +6,268 @@
 <!-- HERO SECTION -->
 <section class="hero">
     <div class="hero-content">
-        <h1>{% trans "Progress Business Centre" %}</h1>
+
+        <h1>
+            {% trans "Your Gateway to Doing Business in Bahrain" %}
+        </h1>
+
         <p>
-            {% trans "Premium workspace solutions and corporate services for established enterprises and ambitious startups in Bahrain." %}
+            {% trans "Progress Business Centre helps entrepreneurs, startups and international companies establish a professional business presence in Bahrain through premium virtual offices, serviced offices and complete business support solutions." %}
         </p>
+
         <div class="hero-buttons">
+
             <a href="{% url 'services' %}" class="btn">
-                {% trans "Explore Services" %}
+                {% trans "Explore Our Solutions" %}
             </a>
-            <a href="{% url 'visit' %}" class="btn btn-light">
-                {% trans "Schedule a Tour" %}
+
+            <a href="{% url 'business_register' %}" class="btn btn-light">
+                {% trans "Start Your Business" %}
             </a>
-        </div>
-    </div>
-</section>
 
-<!-- FEATURES SECTION -->
-<section class="features-section">
-    <h2>{% trans "The Progress Advantage" %}</h2>
-    <div class="card-grid">
-
-        <div class="feature-card">
-            <h3>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-            </h3>
-            <h4>{% trans "Strategic Location" %}</h4>
-            <p>
-                {% trans "Situated in the heart of Seef, offering a prestigious corporate address for your brand." %}
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <h3>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                </svg>
-            </h3>
-            <h4>{% trans "Agile Workspaces" %}</h4>
-            <p>
-                {% trans "Scalable solutions from virtual addresses to fully serviced executive suites." %}
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <h3>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-            </h3>
-            <h4>{% trans "Enterprise Support" %}</h4>
-            <p>
-                {% trans "Comprehensive administrative, legal, and operational support for growing teams." %}
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <h3>
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-            </h3>
-            <h4>{% trans "Premium Facilities" %}</h4>
-            <p>
-                {% trans "Access state-of-the-art boardrooms and conference facilities on demand." %}
-            </p>
         </div>
 
     </div>
 </section>
 
-<!-- SERVICES PREVIEW -->
+<!-- SERVICES -->
+
 <section class="services-preview">
-    <h2>{% trans "Tailored Corporate Solutions" %}</h2>
+
+    <h2>{% trans "Business Solutions" %}</h2>
+
     <div class="card-grid">
 
         <div class="service-card">
-            <h3>{% trans "Virtual Office" %}</h3>
+
+            <h3>{% trans "Virtual Offices" %}</h3>
+
             <p>
-                {% trans "Establish a prestigious commercial presence with our professional mail and call handling services." %}
+                {% trans "Establish a professional business presence in Bahrain with a prestigious address, call handling, mail services, meeting room access and administrative support without renting a physical office." %}
             </p>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <h3>{% trans "Serviced Offices" %}</h3>
+
+            <p>
+                {% trans "Fully furnished private offices with reception services, utilities, cleaning, internet access and professional facilities designed for growing businesses." %}
+            </p>
+
         </div>
 
         <div class="service-card">
+
+            <h3>{% trans "Meeting Rooms" %}</h3>
+
+            <p>
+                {% trans "Professional meeting spaces available for client meetings, business discussions and presentations whenever your company needs them." %}
+            </p>
+
+        </div>
+
+        <div class="service-card">
+
             <h3>{% trans "Coworking Spaces" %}</h3>
-            <p>
-                {% trans "Dynamic, collaborative environments designed to maximize focus and networking opportunities." %}
-            </p>
-        </div>
 
-        <div class="service-card">
-            <h3>{% trans "Executive Offices" %}</h3>
             <p>
-                {% trans "Fully furnished, private operational spaces equipped with high-speed IT infrastructure." %}
+                {% trans "Flexible workspace solutions for entrepreneurs, freelancers and startups looking for a professional environment to work and grow." %}
             </p>
-        </div>
 
-        <div class="service-card">
-            <h3>{% trans "Conference Rooms" %}</h3>
-            <p>
-                {% trans "High-tech meeting environments optimized for client pitches and team strategizing." %}
-            </p>
         </div>
 
     </div>
+
 </section>
 
-<!-- ABOUT / MISSION SECTION -->
+<!-- WHY BAHRAIN SECTION -->
+
 <section class="about-home">
+
     <div>
-        <h2>{% trans "Our Corporate Mission" %}</h2>
+
+        <h2>{% trans "Why Bahrain?" %}</h2>
+
         <p>
-            {% trans "To provide businesses with superior infrastructure, seamless operational support, and the professional environment required to scale successfully in today's competitive market." %}
+
+            {% trans "Bahrain is one of the GCC's most attractive business destinations, offering international investors a stable economy, competitive operating costs and a strategic location that connects businesses to regional markets." %}
+
         </p>
+
     </div>
+
 </section>
 
-<!-- STATS SECTION -->
+
+
+<section class="features-section">
+
+    <div class="card-grid">
+
+        <div class="feature-card">
+
+            <h4>{% trans "100% Foreign Ownership" %}</h4>
+
+            <p>
+
+                {% trans "Many business activities allow full foreign ownership, making Bahrain an ideal destination for international investors." %}
+
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <h4>{% trans "Gateway to the GCC" %}</h4>
+
+            <p>
+
+                {% trans "Reach Saudi Arabia and the wider GCC market from one strategic business location." %}
+
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <h4>{% trans "Fast & Simple Company Formation" %}</h4>
+
+            <p>
+
+                {% trans "Simple company formation procedures, supportive regulations and a modern financial ecosystem help businesses launch faster." %}
+
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <h4>{% trans "Professional Local Support" %}</h4>
+
+            <p>
+
+                {% trans "Progress Business Centre assists international businesses with office solutions, business registration and administrative services throughout their journey." %}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- WHY PROGRESS -->
+
+<section class="services-preview">
+
+    <h2>{% trans "Why Progress Business Centre?" %}</h2>
+
+    <div class="card-grid">
+
+        <div class="service-card">
+            <h3>{% trans "Prestigious Seef Business Address" %}</h3>
+            <p>
+                {% trans "Operate from one of Bahrain's leading commercial districts to strengthen your company's professional image." %}
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>{% trans "Dedicated Reception & Call Answering" %}</h3>
+            <p>
+                {% trans "Professional receptionists answer calls in your company name and manage your correspondence." %}
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>{% trans "Business Support Services" %}</h3>
+            <p>
+                {% trans "Mail handling, administration, company documentation and meeting facilities from one trusted provider." %}
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>{% trans "Grow With Your Business" %}</h3>
+            <p>
+                {% trans "Start with a virtual office and easily upgrade to a serviced office as your company expands." %}
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
 <section class="stats">
+
     <div>
         <h2>500+</h2>
-        <p>{% trans "Active Enterprises" %}</p>
+        <p>{% trans "Businesses Supported" %}</p>
     </div>
+
     <div>
-        <h2>4</h2>
-        <p>{% trans "Premium Solutions" %}</p>
+        <h2>Premium</h2>
+        <p>{% trans "Office Solutions" %}</p>
     </div>
+
+    <div>
+        <h2>Professional</h2>
+        <p>{% trans "Business Address" %}</p>
+    </div>
+
     <div>
         <h2>24/7</h2>
-        <p>{% trans "Facility Access" %}</p>
+        <p>{% trans "Business Support" %}</p>
     </div>
-    <div>
-        <h2>100%</h2>
-        <p>{% trans "Operational Support" %}</p>
-    </div>
+
 </section>
 
-<!-- CR REGISTRATION CTA -->
+<!-- WHO WE SERVE -->
+<section class="about-home">
+
+<div>
+
+<h2>{% trans "Who We Serve" %}</h2>
+
+<p>
+
+{% trans "Whether you are launching a startup, expanding your international business, working as a freelancer or opening a regional office, Progress Business Centre provides flexible solutions tailored to your business needs." %}
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
 <section class="cta">
-    <h2>{% trans "Establish Your Commercial Presence" %}</h2>
+
+    <h2>{% trans "Expand Your Business into Bahrain" %}</h2>
+
     <p>
-        {% trans "Streamline your company setup. Apply for your Commercial Registration (CR) and secure your business address today." %}
+
+        {% trans "From virtual offices and commercial registration to fully serviced workspaces, Progress Business Centre provides everything your company needs to establish a successful presence in Bahrain." %}
+
     </p>
-    
+
     <a href="{% url 'business_register' %}" class="btn">
-        {% trans "Start CR Registration" %}
+
+        {% trans "Get Started" %}
+
     </a>
+
 </section>
 
 {% endblock %}
