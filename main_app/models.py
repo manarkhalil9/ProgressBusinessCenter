@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from decimal import Decimal
-from datetime import datetime
+from datetime import datetime, timedelta, date
 
 # Create your models here.
 
@@ -44,10 +44,37 @@ class MeetingRoom(models.Model):
     image = models.ImageField(upload_to='meeting_rooms/', blank=True, null=True)
     capacity = models.PositiveIntegerField()
     price_per_hour = models.DecimalField(max_digits=8, decimal_places=3)
-    available = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f"{self.name} - {self.branch.name}"
+    def is_available(self, start_datetime, end_datetime):
+        """Check if this room is free for the given datetime range."""
+        overlapping = self.bookings.filter(
+            start_date=start_datetime.date(),
+            start_time__lt=end_datetime.time(),
+            end_time__gt=start_datetime.time(),
+            status__in=['pending', 'approved']
+        ).exists()
+        return not overlapping
+
+    def get_available_time_slots(self, date, interval_minutes=30):
+        """
+        Return a list of available time slots for a given date.
+        Slots are returned as (start_time, end_time) tuples.
+        """
+        # Define business hours
+        start_hour, end_hour = 9, 18
+        slots = []
+        time = datetime.combine(date, datetime.min.time().replace(hour=start_hour))
+        end_time = datetime.combine(date, datetime.min.time().replace(hour=end_hour))
+        while time < end_time:
+            slot_start = time.time()
+            slot_end = (time + timedelta(minutes=interval_minutes)).time()
+            if self.is_available(
+                datetime.combine(date, slot_start),
+                datetime.combine(date, slot_end)
+            ):
+                slots.append((slot_start, slot_end))
+            time += timedelta(minutes=interval_minutes)
+        return slots
     
 # office
 class Office(models.Model):
@@ -56,10 +83,68 @@ class Office(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='offices/', blank=True, null=True)
     price_per_month = models.DecimalField(max_digits=10, decimal_places=3)
-    available = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f"{self.name} - {self.branch.name}"
+    def is_available(self, start_date, end_date):
+        """Check if this office is free for the entire date range."""
+        overlapping = self.bookings.filter(
+            start_date__lt=end_date,
+            end_date__gt=start_date,
+            status__in=['pending', 'approved']
+        ).exists()
+        return not overlapping
+
+    def get_available_months(self, start_date, end_date):
+        """
+        Return a list of dates (day by day) that are fully available
+        for the given range. For simplicity, we just check if the whole
+        range is available.
+        """
+        # For a full-featured solution, we would check each day individually.
+        return self.is_available(start_date, end_date)
+
+def get_unavailable_dates(self, year, month):
+    """Return a set of date objects for this month where the office is not available."""
+    start = date(year, month, 1)
+    # compute last day of month
+    if month == 12:
+        end = date(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        end = date(year, month + 1, 1) - timedelta(days=1)
+    
+    # Find all bookings that overlap this month
+    bookings = self.bookings.filter(
+        start_date__lte=end,
+        end_date__gte=start,
+        status__in=['pending', 'approved']
+    )
+    unavailable = set()
+    for b in bookings:
+        # iterate through each day from max(start, b.start) to min(end, b.end)
+        current = max(b.start_date, start)
+        while current <= min(b.end_date, end):
+            unavailable.add(current)
+            current += timedelta(days=1)
+    return unavailable
+
+def is_available_on_date(self, check_date):
+    """Check if the office is free on a given date."""
+    return not self.bookings.filter(
+        start_date__lte=check_date,
+        end_date__gte=check_date,
+        status__in=['pending', 'approved']
+    ).exists()
+
+# models.py
+
+def get_next_available_date(self, from_date):
+    """Return the first date >= from_date where the office is available, or None."""
+    # Check up to 90 days ahead
+    max_lookahead = 90
+    for i in range(max_lookahead + 1):
+        check_date = from_date + timedelta(days=i)
+        if self.is_available_on_date(check_date):
+            return check_date
+    return None
     
 # booking
 class Booking(models.Model):

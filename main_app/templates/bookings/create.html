@@ -5,84 +5,188 @@
 
 <section class="page-header">
     <h1>{% trans "Book Now" %}</h1>
-
-    <p>{{ resource.name }} — {{ resource.branch.name }}</p>
-
-    {% if resource_type == "room" %}
-        <p>
-            {% trans "Price per hour:" %}
-            {{ resource.price_per_hour }} BHD
-        </p>
-    {% else %}
-        <p>
-            {% trans "Price per month:" %}
-            {{ resource.price_per_month }} BHD
-        </p>
-    {% endif %}
+    <p class="resource-name">{{ resource.name }} — {{ resource.branch.name }}</p>
+    <p class="price-info">
+        {% trans "Starting from" %}
+        {% if resource_type == "room" %}
+            {{ resource.price_per_hour }} BHD / {% trans "hour" %}
+        {% else %}
+            {{ resource.price_per_month }} BHD / {% trans "month" %}
+        {% endif %}
+    </p>
 </section>
 
 <section class="form-card">
-    <form method="post">
+    <form method="post" novalidate>
         {% csrf_token %}
 
         {{ form.non_field_errors }}
 
-        <p>
-            {{ form.client_name.label_tag }}
-            {{ form.client_name }}
-            {{ form.client_name.errors }}
-        </p>
+        <!-- ========== CLIENT INFORMATION ========== -->
+        <div class="form-section">
+            <h3>{% trans "Your Details" %}</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.client_name.label_tag }}
+                    {{ form.client_name }}
+                    {{ form.client_name.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.phone.label_tag }}
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+            {% if resource_type == "office" %}
+                <div class="form-group">
+                    {{ form.commercial_registration.label_tag }}
+                    {{ form.commercial_registration }}
+                    {{ form.commercial_registration.errors }}
+                    <small class="help-text">{% trans "Required for office bookings." %}</small>
+                </div>
+            {% endif %}
+        </div>
 
-        <p>
-            {{ form.phone.label_tag }}
-            {{ form.phone }}
-            {{ form.phone.errors }}
-        </p>
+        <!-- ========== CALENDAR ========== -->
+        <div class="form-section">
+            <h3>{% trans "Select a Date" %}</h3>
+            <div class="booking-calendar">
+                <div class="month-nav">
+                    <a href="?date={{ previous_month }}" aria-label="{% trans 'Previous month' %}">&larr;</a>
+                    <span>{{ month_name }} {{ year }}</span>
+                    <a href="?date={{ next_month }}" aria-label="{% trans 'Next month' %}">&rarr;</a>
+                </div>
+                <table class="calendar-grid">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Sun" %}</th>
+                            <th>{% trans "Mon" %}</th>
+                            <th>{% trans "Tue" %}</th>
+                            <th>{% trans "Wed" %}</th>
+                            <th>{% trans "Thu" %}</th>
+                            <th>{% trans "Fri" %}</th>
+                            <th>{% trans "Sat" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for week in month_days %}
+                            <tr>
+                                {% for day in week %}
+                                    <td class="
+                                        {% if day.month != month %}other-month{% endif %}
+                                        {% if day == selected_date %}selected{% endif %}
+                                        {% if day in unavailable_dates %}unavailable{% endif %}
+                                        {% if day < today %}past{% endif %}
+                                    ">
+                                        {% if day.month == month and day >= today %}
+                                            <a href="?date={{ day|date:'Y-m-d' }}">{{ day.day }}</a>
+                                        {% else %}
+                                            <span>{{ day.day }}</span>
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="selected-date">
+                    <strong>{% trans "Selected:" %}</strong> {{ selected_date|date:"Y-m-d" }}
+                    <input type="hidden" name="start_date" value="{{ selected_date|date:'Y-m-d' }}">
+                </div>
+            </div>
+        </div>
 
-        <p>
-            {{ form.email.label_tag }}
-            {{ form.email }}
-            {{ form.email.errors }}
-        </p>
-
-        {% if resource_type == "office" %}
-        <p>
-            {{ form.commercial_registration.label_tag }}
-            {{ form.commercial_registration }}
-            {{ form.commercial_registration.errors }}
-        </p>
-        {% endif %}
-
-        <p>
-            {{ form.start_date.label_tag }}
-            {{ form.start_date }}
-            {{ form.start_date.errors }}
-        </p>
-
+        <!-- ========== TIME SLOTS (Meeting Rooms only) ========== -->
         {% if resource_type == "room" %}
-            <p>
-                {{ form.start_time.label_tag }}
-                {{ form.start_time }}
-                {{ form.start_time.errors }}
-            </p>
+            <div class="form-section">
+                <h3>{% trans "Available Time Slots" %}</h3>
+                <div class="time-slots">
+                    {% if available_slots %}
+                        <ul class="slot-list">
+                            {% for start, end in available_slots %}
+                                <li data-start="{{ start|time:'H:i' }}" data-end="{{ end|time:'H:i' }}">
+                                    {{ start|time:"H:i" }} – {{ end|time:"H:i" }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <p class="hint">{% trans "Click a slot to fill the start and end times below." %}</p>
+                    {% else %}
+                        <p class="no-slots">{% trans "No slots available on this date." %}</p>
+                    {% endif %}
+                </div>
 
-            <p>
-                {{ form.end_time.label_tag }}
-                {{ form.end_time }}
-                {{ form.end_time.errors }}
-            </p>
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form.start_time.label_tag }}
+                        {{ form.start_time }}
+                        {{ form.start_time.errors }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.end_time.label_tag }}
+                        {{ form.end_time }}
+                        {{ form.end_time.errors }}
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <p>
-                {{ form.end_date.label_tag }}
-                {{ form.end_date }}
-                {{ form.end_date.errors }}
-            </p>
+            <!-- ========== OFFICE: End Date ========== -->
+            <div class="form-section">
+                <h3>{% trans "Booking Period" %}</h3>
+                <div class="form-group">
+                    {{ form.end_date.label_tag }}
+                    {{ form.end_date }}
+                    {{ form.end_date.errors }}
+                    <p class="info-box">
+                        {% trans "The office must be available for the entire selected period." %}
+                    </p>
+                </div>
+            </div>
         {% endif %}
 
-        <button type="submit">
-            {% trans "Submit Booking Request" %}
-        </button>
+        <!-- ========== SUBMIT ========== -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-full">
+                {% trans "Submit Booking Request" %}
+            </button>
+        </div>
     </form>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Slot click: fill time fields and highlight selected
+        const slots = document.querySelectorAll('.slot-list li');
+        const startInput = document.getElementById('id_start_time');
+        const endInput = document.getElementById('id_end_time');
+
+        slots.forEach(slot => {
+            slot.addEventListener('click', function() {
+                if (startInput && endInput) {
+                    startInput.value = this.dataset.start;
+                    endInput.value = this.dataset.end;
+                    // Remove active class from all slots
+                    slots.forEach(s => s.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // If start/end time are already filled, highlight matching slot
+        if (startInput && endInput && startInput.value && endInput.value) {
+            const startVal = startInput.value;
+            const endVal = endInput.value;
+            slots.forEach(slot => {
+                if (slot.dataset.start === startVal && slot.dataset.end === endVal) {
+                    slot.classList.add('active');
+                }
+            });
+        }
+    });
+</script>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
 from .models import BusinessRegistration, VisitRequest, Booking, MeetingRoom, Office, Referral
-from datetime import date
+from datetime import date, datetime, timedelta
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _  # Import the translation tool
 
@@ -96,51 +96,38 @@ class BookingForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.resource = resource
 
-        if isinstance(resource, MeetingRoom):
-            self.instance.meeting_room = resource
-            self.fields.pop("commercial_registration")
-            self.fields.pop("end_date")
-            self.fields["start_time"].required = True
-            self.fields["end_time"].required = True
-
-        elif isinstance(resource, Office):
-            self.instance.office = resource
-            self.fields.pop("start_time")
-            self.fields.pop("end_time")
-            self.fields["commercial_registration"].required = True
-            self.fields["end_date"].required = True
-
-    def clean_start_date(self):
-        start_date = self.cleaned_data.get("start_date")
-        if start_date and start_date < date.today():
-            # Translate your validation error
-            raise ValidationError(_("Please choose today or a future date."))
-        return start_date
-
     def clean(self):
         cleaned_data = super().clean()
+        resource = self.resource
 
-        if isinstance(self.resource, MeetingRoom):
-            start_time = cleaned_data.get("start_time")
-            end_time = cleaned_data.get("end_time")
+        if not resource:
+            raise ValidationError("No resource selected.")
 
-            if start_time and end_time and end_time <= start_time:
-                self.add_error(
-                    "end_time",
-                    _("End time must be after start time.") # Translate error
-                )
+        if isinstance(resource, MeetingRoom):
+            start_date = cleaned_data.get('start_date')
+            start_time = cleaned_data.get('start_time')
+            end_time = cleaned_data.get('end_time')
+            if start_date and start_time and end_time:
+                start_dt = datetime.combine(start_date, start_time)
+                end_dt = datetime.combine(start_date, end_time)
+                if not resource.is_available(start_dt, end_dt):
+                    self.add_error('start_time', _('This time slot is already booked.'))
+                    self.add_error('end_time', _('Please choose an available slot.'))
 
-        if isinstance(self.resource, Office):
-            start_date = cleaned_data.get("start_date")
-            end_date = cleaned_data.get("end_date")
-
-            if start_date and end_date and end_date <= start_date:
-                self.add_error(
-                    "end_date",
-                    _("End date must be after start date.") # Translate error
-                )
+        elif isinstance(resource, Office):
+            start_date = cleaned_data.get('start_date')
+            end_date = cleaned_data.get('end_date')
+            if start_date and end_date:
+                if not resource.is_available(start_date, end_date):
+                    self.add_error('end_date', _('This date range is not fully available.'))
 
         return cleaned_data
+
+    def get_available_slots(self, date):
+        """Return available time slots for a meeting room on a given date."""
+        if isinstance(self.resource, MeetingRoom):
+            return self.resource.get_available_time_slots(date)
+        return []
     
 class ReferralForm(forms.ModelForm):
     class Meta:

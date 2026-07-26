@@ -1,87 +1,96 @@
+# main_app/views.py
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
-from .models import (Service, Feature, Branch, MeetingRoom, Event, GalleryImage, FAQ, Contact, VisitRequest, BusinessRegistration, Referral, Office, Booking)
+from .models import (
+    Service, Feature, Branch, MeetingRoom, Event, GalleryImage,
+    FAQ, Contact, VisitRequest, BusinessRegistration, Referral,
+    Office, Booking
+)
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import BusinessRegistrationForm, VisitRequestForm, BookingForm, ReferralForm
+from .forms import (
+    BusinessRegistrationForm, VisitRequestForm, BookingForm, ReferralForm
+)
 from django.db.models import Q
 from django.http import Http404
 from django.views import View
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
+from datetime import date, datetime, timedelta
+import calendar
 
-# Create your views here.
 
-# home page
+# ---------- HOME ----------
 def home(request):
     return render(request, 'index.html')
 
 
-#about page
+# ---------- ABOUT ----------
 def about(request):
     return render(request, 'about.html')
 
 
-#services
-#list 
+# ---------- SERVICES ----------
 class ServiceList(ListView):
     model = Service
     template_name = 'services/index.html'
     context_object_name = 'services'
 
-# detail
+
 class ServiceDetail(DetailView):
     model = Service
     template_name = 'services/detail.html'
     context_object_name = 'service'
 
 
-# features
-# list
+# ---------- FEATURES ----------
 class FeatureListView(ListView):
     model = Feature
     template_name = 'features/index.html'
     context_object_name = 'features'
 
-# detail
+
 class FeatureDetailView(DetailView):
     model = Feature
     template_name = 'features/detail.html'
     context_object_name = 'feature'
 
 
-# branches
-# list
+# ---------- BRANCHES ----------
 class BranchListView(ListView):
     model = Branch
     template_name = 'branches/index.html'
     context_object_name = 'branches'
 
-# detail
+
 class BranchDetailView(DetailView):
     model = Branch
     template_name = 'branches/detail.html'
     context_object_name = 'branch'
 
 
-# meeting rooms
-# list
+# ---------- MEETING ROOMS ----------
 class MeetingRoomListView(ListView):
     model = MeetingRoom
     template_name = 'rooms/index.html'
     context_object_name = 'rooms'
 
-# detail
+
 class MeetingRoomDetailView(DetailView):
     model = MeetingRoom
     template_name = 'rooms/detail.html'
     context_object_name = 'room'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['today'] = date.today()
+        return context
 
-# office
+
+# ---------- OFFICES ----------
 class OfficeListView(ListView):
     model = Office
     template_name = "offices/index.html"
@@ -96,50 +105,52 @@ class OfficeDetailView(DetailView):
     template_name = "offices/detail.html"
     context_object_name = "office"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['today'] = date.today()
+        return context
 
-# events
-# list
+
+# ---------- EVENTS ----------
 class EventListView(ListView):
     model = Event
     template_name = 'events/index.html'
     context_object_name = 'events'
 
-# detail
+
 class EventDetailView(DetailView):
     model = Event
     template_name = 'events/detail.html'
     context_object_name = 'event'
 
 
-# gallery
-# list
+# ---------- GALLERY ----------
 class GalleryListView(ListView):
     model = GalleryImage
     template_name = 'gallery/index.html'
     context_object_name = 'gallery'
 
-# detail
+
 class GalleryDetailView(DetailView):
     model = GalleryImage
     template_name = 'gallery/detail.html'
     context_object_name = 'image'
 
 
-# FAQ
-# list
+# ---------- FAQ ----------
 class FAQListView(ListView):
     model = FAQ
     template_name = 'faq/index.html'
     context_object_name = 'faqs'
 
-# detail
+
 class FAQDetailView(DetailView):
     model = FAQ
     template_name = 'faq/detail.html'
     context_object_name = 'faq'
 
 
-# contact detail
+# ---------- CONTACT ----------
 class ContactView(DetailView):
     model = Contact
     template_name = 'contact/detail.html'
@@ -149,7 +160,7 @@ class ContactView(DetailView):
         return Contact.objects.first()
 
 
-# create visit
+# ---------- VISIT REQUESTS ----------
 class VisitCreateView(LoginRequiredMixin, CreateView):
     model = VisitRequest
     form_class = VisitRequestForm
@@ -159,12 +170,13 @@ class VisitCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-    
+
+
 def visit_success(request):
     return render(request, "visits/success.html")
 
 
-# create referral
+# ---------- REFERRALS ----------
 class ReferralCreateView(LoginRequiredMixin, CreateView):
     model = Referral
     form_class = ReferralForm
@@ -175,37 +187,30 @@ class ReferralCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+
 def referral_success(request):
     return render(request, "referrals/success.html")
 
 
-# business
-# create
+# ---------- BUSINESS REGISTRATION ----------
 class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
     model = BusinessRegistration
     form_class = BusinessRegistrationForm
     template_name = "business/register.html"
-    
-    success_url = reverse_lazy("business_success") 
- 
+    success_url = reverse_lazy("business_success")
+
     def form_valid(self, form):
-        # Attach the currently logged-in user to the request before saving
         form.instance.user = self.request.user
         return super().form_valid(form)
-    
-def virtual_office_success(request):
-    return render(request, "business/success.html")
+
 
 def business_success(request):
-    """
-    Renders the success page after a user submits a business registration.
-    """
     return render(request, 'business/success.html')
 
-# search bar
+
+# ---------- SEARCH ----------
 def search(request):
     query = request.GET.get("q", "").strip()
-
     services = Service.objects.none()
     rooms = MeetingRoom.objects.none()
     faqs = FAQ.objects.none()
@@ -215,12 +220,10 @@ def search(request):
             Q(title__icontains=query) |
             Q(description__icontains=query)
         )
-
         rooms = MeetingRoom.objects.filter(
             Q(name__icontains=query) |
             Q(branch__name__icontains=query)
         )
-
         faqs = FAQ.objects.filter(
             Q(question__icontains=query) |
             Q(answer__icontains=query)
@@ -232,11 +235,10 @@ def search(request):
         "rooms": rooms,
         "faqs": faqs,
     }
-
     return render(request, "search/results.html", context)
 
 
-# booking
+# ---------- BOOKING ----------
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
@@ -245,14 +247,10 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     def get_resource(self):
         resource_type = self.kwargs["resource_type"]
         pk = self.kwargs["pk"]
-
-        # users can request pending dates
         if resource_type == "room":
             return get_object_or_404(MeetingRoom, pk=pk)
-
         if resource_type == "office":
             return get_object_or_404(Office, pk=pk)
-
         raise Http404("Booking item not found.")
 
     def get_form_kwargs(self):
@@ -266,70 +264,146 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
             self.request.user.get_full_name() or self.request.user.username
         )
         initial["email"] = self.request.user.email
+        initial["start_date"] = date.today()
         return initial
-    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        resource = self.get_resource()
+        context["resource"] = resource
+        context["resource_type"] = self.kwargs["resource_type"]
+
+        # Determine selected date (from GET, POST, or default)
+        selected_date = date.today()
+        if self.request.method == "POST":
+            date_str = self.request.POST.get("start_date")
+            if date_str:
+                try:
+                    selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                except ValueError:
+                    pass
+        else:
+            date_str = self.request.GET.get("date")
+            if date_str:
+                try:
+                    selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                except ValueError:
+                    pass
+        context["selected_date"] = selected_date
+        context["today"] = date.today()
+
+        # Build calendar for the month of the selected date
+        year, month = selected_date.year, selected_date.month
+        cal = calendar.Calendar(firstweekday=6)  # Sunday first day
+        month_days = cal.monthdatescalendar(year, month)
+
+        # For offices: compute unavailable dates
+        unavailable_dates = set()
+        if isinstance(resource, Office):
+            unavailable_dates = resource.get_unavailable_dates(year, month)
+
+        # Month navigation URLs
+        if month == 1:
+            prev_month = date(year - 1, 12, 1)
+        else:
+            prev_month = date(year, month - 1, 1)
+        if month == 12:
+            next_month = date(year + 1, 1, 1)
+        else:
+            next_month = date(year, month + 1, 1)
+
+        context.update({
+            "month_days": month_days,
+            "month_name": calendar.month_name[month],
+            "year": year,
+            "unavailable_dates": unavailable_dates,
+            "previous_month": prev_month.strftime("%Y-%m-%d"),
+            "next_month": next_month.strftime("%Y-%m-%d"),
+        })
+
+        # For meeting rooms: compute available time slots for the selected date
+        if isinstance(resource, MeetingRoom):
+            context["available_slots"] = resource.get_available_time_slots(selected_date)
+        else:
+            context["available_slots"] = None
+
+        return context
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         resource = self.get_resource()
 
-        # Check availability and set status directly
-        if resource.available:
-            form.instance.status = "approved"
-        else:
-            form.instance.status = "pending"
+        # Real-time availability check
+        is_free = False
+        if isinstance(resource, MeetingRoom):
+            start_date = form.cleaned_data.get("start_date")
+            start_time = form.cleaned_data.get("start_time")
+            end_time = form.cleaned_data.get("end_time")
+            if start_date and start_time and end_time:
+                start_dt = datetime.combine(start_date, start_time)
+                end_dt = datetime.combine(start_date, end_time)
+                is_free = resource.is_available(start_dt, end_dt)
+        elif isinstance(resource, Office):
+            start_date = form.cleaned_data.get("start_date")
+            end_date = form.cleaned_data.get("end_date")
+            if start_date and end_date:
+                is_free = resource.is_available(start_date, end_date)
 
-        # Save the booking
+        form.instance.status = "approved" if is_free else "pending"
+
         response = super().form_valid(form)
-        booking = self.object # Retrieve the saved booking
+        booking = self.object
 
-        # Dynamic Emails based on status
+        # Email notifications
         admin_subject = f"New Booking Request: {booking.client_name}"
-        admin_message = f"New booking for {booking.meeting_room or booking.office}. Status automatically set to: {booking.status}."
-        send_mail(admin_subject, admin_message, settings.DEFAULT_FROM_EMAIL, [settings.ADMIN_EMAIL], fail_silently=False)
-    
+        admin_message = (
+            f"New booking for {booking.meeting_room or booking.office}. "
+            f"Status automatically set to: {booking.status}."
+        )
+        send_mail(
+            admin_subject,
+            admin_message,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.ADMIN_EMAIL],
+            fail_silently=False,
+        )
+
         if booking.status == "approved":
             user_subject = "Booking Approved - Confirmation"
-            user_message = f"Great news! Your booking for {booking.meeting_room or booking.office} is approved. Your total is {booking.total_price} BHD. Please complete your payment in person at the front desk upon arrival."
+            user_message = (
+                f"Great news! Your booking for {booking.meeting_room or booking.office} is approved. "
+                f"Your total is {booking.total_price} BHD. Please complete your payment in person at the front desk upon arrival."
+            )
         else:
             user_subject = "Your Booking Request at Progress Business Centre"
-            user_message = f"Thank you for your request for {booking.meeting_room or booking.office}. The resource is currently pending availability check. Our team will review it and update you shortly."
-            
-        send_mail(user_subject, user_message, settings.DEFAULT_FROM_EMAIL, [booking.email], fail_silently=False)
-    
+            user_message = (
+                f"Thank you for your request for {booking.meeting_room or booking.office}. "
+                "The resource is currently pending availability check. Our team will review it and update you shortly."
+            )
+        send_mail(
+            user_subject,
+            user_message,
+            settings.DEFAULT_FROM_EMAIL,
+            [booking.email],
+            fail_silently=False,
+        )
+
         return response
 
     def get_success_url(self):
-        # Redirect everyone to the success page, bypassing payments for now
         return reverse_lazy("booking_success")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["resource"] = self.get_resource()
-        context["resource_type"] = self.kwargs["resource_type"]
-        return context
-    
+
 def booking_success(request):
     return render(request, "bookings/success.html")
 
-# payment
-# @login_required
-# def booking_payment(request, pk):
-#     booking = get_object_or_404(Booking, pk=pk, user=request.user)
-    
-#     # Ensure they only pay for approved bookings
-#     if booking.status != "approved":
-#         return redirect("dashboard")
-        
-#     return render(request, "bookings/payment.html", {"booking": booking})
 
-
-# dashboard
+# ---------- DASHBOARD ----------
 class UserDashboardView(LoginRequiredMixin, ListView):
     template_name = "dashboard/index.html"
     context_object_name = "bookings"
 
     def get_queryset(self):
-        # Only fetch bookings (Meeting Rooms/Offices)
         return Booking.objects.filter(user=self.request.user).order_by('-created_at')
 
     def get_context_data(self, **kwargs):
@@ -337,7 +411,8 @@ class UserDashboardView(LoginRequiredMixin, ListView):
         context['registrations'] = BusinessRegistration.objects.filter(user=self.request.user)
         return context
 
-# cancel booking
+
+# ---------- CANCEL BOOKING ----------
 class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, pk):
         booking = get_object_or_404(Booking, pk=pk)
@@ -353,35 +428,26 @@ class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
         booking = get_object_or_404(Booking, pk=self.kwargs['pk'])
         return booking.user == self.request.user
 
-# cancel business registration
+
+# ---------- CANCEL BUSINESS REGISTRATION ----------
 class BusinessRegistrationCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self, request, pk):
-        # We only need a POST method here since we are using a simple delete button
         registration = get_object_or_404(BusinessRegistration, pk=pk)
         registration.delete()
         return redirect("dashboard")
 
     def test_func(self):
-        # ensures a user can only delete their own registration
         registration = get_object_or_404(BusinessRegistration, pk=self.kwargs['pk'])
         return registration.user == self.request.user
 
 
-# signup
+# ---------- SIGNUP ----------
 def signup(request):
     form = UserCreationForm()
-
     if request.method == "POST":
         form = UserCreationForm(request.POST)
-
         if form.is_valid():
             user = form.save()
             login(request, user)
-            
             return redirect("business_register")
-
-    return render(
-        request,
-        "registration/signup.html",
-        {"form": form},
-    )
+    return render(request, "registration/signup.html", {"form": form})

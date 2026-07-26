@@ -3,68 +3,216 @@
 
 {% block content %}
 
-<section class="detail-card" style="position: relative; padding-top: 50px;">
-    
-    <a href="{% url 'services' %}" style="position: absolute; top: 20px; inline-size: max-content; text-decoration: none; color: #003366; font-size: 0.9em; display: flex; align-items: center; gap: 5px; font-weight: 600;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 12H5"></path>
-            <path d="M12 19l-7-7 7-7"></path>
-        </svg>
-        {% trans "Back to Portfolio" %}
-    </a>
+<section class="detail-card">
 
-    <h1 style="color: #003366; margin-bottom: 10px;">{{ service.title }}</h1>
-    
-    <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 20px 0;">
-    
-    <p style="font-size: 1.1em; line-height: 1.8; color: #444;">
-        {{ service.description }}
-    </p>
+<a href="{% url 'services' %}" class="back-link">
 
-    <div style="margin-top: 40px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-        
-        <p style="margin: 0; font-size: 1.1em;">
-            <strong>{% trans "Current Availability:" %}</strong>
-            
-            {% if service.available %}
-                <span class="available" style="margin-inline-start: 10px; font-weight: 600; color: green;">
-                    ✓ {% trans "Available" %}
-                </span>
-            {% else %}
-                <span class="not-available" style="margin-inline-start: 10px; font-weight: 600; color: red;">
-                    ✕ {% trans "Currently Occupied" %}
-                </span>
-            {% endif %}
+    <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2">
+
+        <path d="M19 12H5"></path>
+        <path d="M12 19l-7-7 7-7"></path>
+
+    </svg>
+
+    {% trans "Back to Services" %}
+
+</a>
+
+
+<h1>{{ service.title }}</h1>
+
+
+<p class="detail-description">
+
+    {{ service.description }}
+
+</p>
+
+
+<div class="card-grid">
+
+    <div class="feature-card">
+
+        <h3>
+            {% trans "Business Benefits" %}
+        </h3>
+
+        <p>
+
+            {% trans "Designed to help businesses establish a professional presence, improve operational efficiency and support long-term growth in Bahrain." %}
+
         </p>
 
-        {% if service.available %}
-            <div style="display: flex; gap: 10px;">
-                
-                {% if "Virtual" in service.title or "CR" in service.title or "Registration" in service.title or "افتراضي" in service.title or "سجل" in service.title %}
-                    <a href="{% url 'business_register' %}" class="btn">
-                        {% trans "Start CR Registration" %}
-                    </a>
-                    
-                {% elif "Meeting" in service.title or "Room" in service.title or "غرفة" in service.title %}
-                    <a href="{% url 'rooms' %}" class="btn">
-                        {% trans "Book Meeting Room" %}
-                    </a>
-                    
-                {% elif "Office" in service.title or "Coworking" in service.title or "مكتب" in service.title %}
-                    <a href="{% url 'offices' %}" class="btn">
-                        {% trans "Book Workspace" %}
-                    </a>
-                    
-                {% else %}
-                    <a href="{% url 'visit' %}" class="btn">
-                        {% trans "Arrange a Visit" %}
-                    </a>
-                {% endif %}
-
-            </div>
-        {% endif %}
-        
     </div>
+
+
+    <div class="feature-card">
+
+        <h3>
+            {% trans "Ideal For" %}
+        </h3>
+
+        <p>
+
+        {% if "Virtual" in service.title %}
+
+            {% trans "International companies, startups, freelancers and businesses entering the Bahrain market." %}
+
+        {% elif "Office" in service.title %}
+
+            {% trans "Companies requiring a fully serviced professional office with ready-to-use facilities." %}
+
+        {% elif "Meeting" in service.title %}
+
+            {% trans "Businesses hosting client meetings, presentations and professional discussions." %}
+
+        {% else %}
+
+            {% trans "Businesses seeking flexible workspace and business support solutions." %}
+
+        {% endif %}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<section class="card-grid">
+
+    <div class="feature-card">
+
+        <h3>
+            {% trans "Key Benefits" %}
+        </h3>
+
+        <p>
+
+        {% if "Virtual" in service.title %}
+
+            • {% trans "Prestigious Bahrain business address" %}<br>
+            • {% trans "Professional mail and call handling" %}<br>
+            • {% trans "Lower operating costs" %}<br>
+            • {% trans "Access to meeting facilities" %}
+
+        {% elif "Office" in service.title %}
+
+            • {% trans "Fully furnished workspace" %}<br>
+            • {% trans "Reception and administrative support" %}<br>
+            • {% trans "High-speed internet and utilities" %}<br>
+            • {% trans "Flexible business environment" %}
+
+        {% elif "Meeting" in service.title %}
+
+            • {% trans "Professional meeting environment" %}<br>
+            • {% trans "Ideal for presentations" %}<br>
+            • {% trans "Comfortable client experience" %}<br>
+            • {% trans "Flexible booking options" %}
+
+        {% else %}
+
+            • {% trans "Professional business support" %}<br>
+            • {% trans "Flexible solutions" %}<br>
+            • {% trans "Experienced team" %}<br>
+            • {% trans "Designed for business growth" %}
+
+        {% endif %}
+
+        </p>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <h3>
+            {% trans "Why Choose This Solution?" %}
+        </h3>
+
+        <p>
+
+        {% if "Virtual" in service.title %}
+
+            {% trans "Build your Bahrain presence with a prestigious business address, professional call handling, mail services and access to business facilities without the cost of maintaining a traditional office." %}
+
+        {% elif "Office" in service.title %}
+
+            {% trans "Operate from a fully equipped workspace supported by reception services, modern facilities and a professional business environment." %}
+
+        {% elif "Meeting" in service.title %}
+
+            {% trans "Host meetings, presentations and client discussions in a professional environment that reflects your company's image." %}
+
+        {% else %}
+
+            {% trans "Receive reliable business support through flexible workspace solutions designed around your company's needs." %}
+
+        {% endif %}
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="cta">
+
+    <h2>
+
+        {% trans "Ready to Get Started?" %}
+
+    </h2>
+
+    <p>
+
+        {% trans "Our team is ready to help you choose the right solution for your business in Bahrain." %}
+
+    </p>
+
+
+    {% if "Virtual" in service.title or "CR" in service.title %}
+
+        <a href="{% url 'business_register' %}" class="btn">
+
+            {% trans "Start Your Application" %}
+
+        </a>
+
+    {% elif "Meeting" in service.title %}
+
+        <a href="{% url 'rooms' %}" class="btn">
+
+            {% trans "Book a Meeting Room" %}
+
+        </a>
+
+    {% elif "Office" in service.title %}
+
+        <a href="{% url 'offices' %}" class="btn">
+
+            {% trans "Browse Offices" %}
+
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'contact' %}" class="btn">
+
+            {% trans "Contact Our Team" %}
+
+        </a>
+
+    {% endif %}
+
+</div>
 
 </section>
 

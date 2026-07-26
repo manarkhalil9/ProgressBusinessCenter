@@ -3,90 +3,106 @@
 
 {% block content %}
 
-<section class="about-page">
-
-    <h1>{% trans "About Progress Business Centre" %}</h1>
-
-    <p class="intro">
-        {% trans "Progress Business Centre is the premier destination for established enterprises and scaling startups in Bahrain. We provide strategic infrastructure, premium facilities, and the operational support required to drive your business forward." %}
+<!-- Kept the page-header style to match your new services page -->
+<section class="page-header">
+    <h1>{% trans "Your Gateway to the GCC Market" %}</h1>
+    <p>
+        {% trans "Progress Business Centre is more than a workspace. We are a strategic partner for startups, established enterprises, and international companies looking to establish a powerful presence in the Kingdom of Bahrain." %}
     </p>
+</section>
+
+<section class="about-page" style="padding-top: 20px;">
 
     <div class="about-grid">
 
+        <!-- Card 1: Mission -->
         <div class="about-card">
-            <!-- Professional Target/Mission Icon -->
-            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center; color: #003366;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <circle cx="12" cy="12" r="6"></circle>
                     <circle cx="12" cy="12" r="2"></circle>
                 </svg>
                 {% trans "Our Mission" %}
             </h2>
-            <p>
-                {% trans "To deliver agile, premium workspace solutions that empower businesses to scale efficiently and operate with absolute professionalism." %}
+            <p style="color: #555; line-height: 1.6;">
+                {% trans "To deliver agile, premium workspace solutions and seamless administrative support, empowering businesses to scale efficiently and operate with absolute professionalism." %}
             </p>
         </div>
 
+        <!-- Card 2: Vision -->
         <div class="about-card">
-            <!-- Professional Compass/Vision Icon -->
-            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center; color: #003366;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                 </svg>
                 {% trans "Our Vision" %}
             </h2>
-            <p>
-                {% trans "To be the cornerstone of corporate growth in Bahrain, recognized as the ultimate hub for business excellence and innovation." %}
+            <p style="color: #555; line-height: 1.6;">
+                {% trans "To be the cornerstone of corporate growth in Bahrain, recognized globally as the ultimate hub for business excellence, innovation, and seamless market entry." %}
             </p>
         </div>
 
+        <!-- Card 3: Why Bahrain (Replaced Core Capabilities) -->
         <div class="about-card">
-            <!-- Professional Building Icon -->
-            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-                    <path d="M9 22v-4h6v4"></path>
-                    <path d="M8 6h.01"></path>
-                    <path d="M16 6h.01"></path>
-                    <path d="M12 6h.01"></path>
-                    <path d="M12 10h.01"></path>
-                    <path d="M12 14h.01"></path>
-                    <path d="M16 10h.01"></path>
-                    <path d="M16 14h.01"></path>
-                    <path d="M8 10h.01"></path>
-                    <path d="M8 14h.01"></path>
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center; color: #003366;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                 </svg>
-                {% trans "Core Capabilities" %}
+                {% trans "Why Bahrain?" %}
             </h2>
-            <ul style="text-align: left; margin: 15px auto; max-width: 200px; padding-left: 20px; color: #555;">
-                <li style="margin-bottom: 8px;">{% trans "Virtual Corporate Addresses" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "Dynamic Coworking Spaces" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "Executive Private Offices" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "High-Tech Boardrooms" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "Commercial Registration (CR)" %}</li>
+            <p style="color: #555; margin-bottom: 10px; font-size: 0.9em;">
+                {% trans "A strategic launchpad for the GCC market offering unparalleled advantages:" %}
+            </p>
+            <ul style="text-align: left; margin: 0 auto; max-width: 220px; padding-left: 20px; color: #444; font-weight: 500;">
+                <li style="margin-bottom: 8px;">{% trans "100% Foreign Ownership" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Business-Friendly Tax Environment" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Gateway to GCC Markets" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Business-friendly regulations" %}</li>
             </ul>
         </div>
 
+        <!-- Card 4: The Progress Edge -->
         <div class="about-card">
-            <!-- Professional Shield/Quality Icon -->
-            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <h2 style="display: flex; align-items: center; gap: 10px; justify-content: center; color: #003366;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
-                {% trans "The Progress Edge" %}
+                {% trans "The PBC Advantage" %}
             </h2>
-            <ul style="text-align: left; margin: 15px auto; max-width: 200px; padding-left: 20px; color: #555;">
-                <li style="margin-bottom: 8px;">{% trans "Prestigious Seef Location" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "Dedicated Administrative Support" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "Scalable Lease Terms" %}</li>
-                <li style="margin-bottom: 8px;">{% trans "Exclusive Corporate Network" %}</li>
+            <p style="color: #555; margin-bottom: 10px; font-size: 0.9em;">
+                {% trans "Everything you need to operate from day one:" %}
+            </p>
+            <ul style="text-align: left; margin: 0 auto; max-width: 220px; padding-left: 20px; color: #444; font-weight: 500;">
+                <li style="margin-bottom: 8px;">{% trans "Prestigious Seef District location" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Fully equipped, ready-to-use offices" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Professional Reception & Administrative Support" %}</li>
+                <li style="margin-bottom: 8px;">{% trans "Flexible, scalable lease terms" %}</li>
             </ul>
         </div>
 
     </div>
 
+</section>
+
+<!-- Added a CTA section to drive conversions -->
+<section class="about-home" style="margin-top: 50px; text-align: center;">
+    <div>
+        <h2 style="color: #003366;">{% trans "Ready to Establish Your Presence?" %}</h2>
+        <p style="max-width: 600px; margin: 15px auto 25px; color: #555;">
+            {% trans "Join the growing network of successful businesses operating from Progress Business Centre. Explore our flexible workspace solutions today." %}
+        </p>
+        <a href="{% url 'services' %}" class="btn" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 600;">
+            {% trans "Explore Our Solutions" %}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="M12 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
 </section>
 
 {% endblock %}

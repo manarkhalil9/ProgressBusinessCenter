@@ -137,10 +137,10 @@ LANGUAGE_COOKIE_NAME = 'django_language'
 # Load the .env file
 load_dotenv()
 
-# OPTION 1: Testing (Uncomment the line below to print emails to the console instead of sending them)
+# Testing (Uncomment the line below to print emails to the console instead of sending them)
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# OPTION 2: Real Emails (Uses Gmail SMTP and your .env credentials)
+# Real Emails (Uses Gmail SMTP and your .env credentials)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

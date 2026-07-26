@@ -5,6 +5,7 @@
 
 <section class="page-header">
     <h1>{{ room.name }}</h1>
+    <p>{% trans "Professional meeting facilities designed for productive business discussions." %}</p>
 </section>
 
 <section class="detail-card">
@@ -14,26 +15,36 @@
     {% endif %}
 
     {% if room.description %}
-        <p>{{ room.description }}</p>
+        <p class="detail-description">{{ room.description }}</p>
     {% endif %}
 
-    <p>{% trans "Branch:" %} {{ room.branch.name }}</p>
-    <p>{% trans "Capacity:" %} {{ room.capacity }}</p>
+    <div class="card-grid">
+        <div class="feature-card">
+            <h3>{% trans "Location" %}</h3>
+            <p>{{ room.branch.name }}</p>
+        </div>
+        <div class="feature-card">
+            <h3>{% trans "Capacity" %}</h3>
+            <p>{{ room.capacity }} {% trans "People" %}</p>
+        </div>
+        <div class="feature-card">
+            <h3>{% trans "Hourly Rate" %}</h3>
+            <p>{{ room.price_per_hour }} BHD</p>
+        </div>
+    </div>
 
-    <p>
-        {% trans "Price per hour:" %}
-        {{ room.price_per_hour }} BHD
-    </p>
-
-    {% if room.available %}
-        <p class="available">{% trans "Available" %}</p>
-
-        <a class="btn" href="{% url 'book' 'room' room.pk %}">
-            {% trans "Book Now" %}
-        </a>
-    {% else %}
-        <p class="not-available">{% trans "Not Available" %}</p>
-    {% endif %}
+    <!-- ========== AVAILABILITY ========== -->
+    <section class="availability-section">
+        <h2>{% trans "Availability" %}</h2>
+        <p class="info-text">
+            {% trans "View real‑time availability and book your preferred time slot using the calendar." %}
+        </p>
+        <div class="cta-buttons" style="margin-top: 20px;">
+            <a href="{% url 'book' 'room' room.pk %}" class="btn btn-primary">
+                {% trans "Check Availability & Book" %}
+            </a>
+        </div>
+    </section>
 
 </section>
 

@@ -4,30 +4,91 @@
 {% block content %}
 
 <section class="page-header">
-    <h1>{% trans "Corporate Services Portfolio" %}</h1>
+
+    <h1>
+        {% trans "Business Solutions for Companies Expanding in Bahrain" %}
+    </h1>
+
     <p>
-        {% trans "Discover our comprehensive suite of premium workspace solutions, designed to support operations and accelerate growth for enterprises of all sizes." %}
+        {% trans "Explore flexible office solutions designed for international companies, startups and entrepreneurs looking to establish a professional presence in Bahrain." %}
     </p>
+
 </section>
+
 
 <section class="card-grid">
 
-    {% for service in services %}
-    <div class="service-card">
-        <h3>{{ service.title }}</h3>
-        
-        <p>{{ service.description|truncatewords:15 }}</p>
 
-        <a class="btn" href="{% url 'service_detail' service.id %}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
-            {% trans "View Details" %}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    {% for service in services %}
+
+    <div class="service-card">
+
+
+        <h3>
+            {{ service.title }}
+        </h3>
+
+
+        <p>
+            {{ service.description|truncatewords:25 }}
+        </p>
+
+
+        <a class="btn" href="{% url 'service_detail' service.id %}">
+
+            {% trans "Explore Solution" %}
+
+            <svg 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
+
             </svg>
+
         </a>
+
+
     </div>
+
+
+    {% empty %}
+
+        <p>
+            {% trans "No services are available at the moment." %}
+        </p>
+
     {% endfor %}
 
+
 </section>
+
+
+
+<section class="about-home">
+
+    <div>
+
+        <h2>
+            {% trans "Solutions That Grow With Your Business" %}
+        </h2>
+
+
+        <p>
+            {% trans "Whether you need a virtual business address, a fully equipped office or professional meeting facilities, Progress Business Centre provides flexible solutions that adapt to your company's growth." %}
+        </p>
+
+
+    </div>
+
+</section>
+
 
 {% endblock %}
