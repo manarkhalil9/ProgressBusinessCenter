@@ -4,25 +4,24 @@
 {% block content %}
 
 <section class="page-header">
-
-<h1>{% trans "Gallery" %}</h1>
-
+    <h1>{% trans "Gallery" %}</h1>
+    <p>{% trans "Explore our workspace, facilities, and events through our image collection." %}</p>
 </section>
 
 <section class="gallery-grid">
-
-{% for image in gallery %}
-
-<a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
-
-<img src="{{ image.image.url }}">
-
-<h3>{{ image.title }}</h3>
-
-</a>
-
-{% endfor %}
-
+    {% for image in gallery %}
+        <a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
+            <div class="gallery-image-wrapper">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                <div class="gallery-overlay">
+                    <span class="gallery-view-icon">🔍</span>
+                </div>
+            </div>
+            <h3>{{ image.title }}</h3>
+        </a>
+    {% empty %}
+        <p class="empty">{% trans "No images available yet." %}</p>
+    {% endfor %}
 </section>
 
 {% endblock %}

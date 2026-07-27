@@ -7,18 +7,30 @@
     <h1>{% trans "Book Now" %}</h1>
     <p class="resource-name">{{ resource.name }} — {{ resource.branch.name }}</p>
     <p class="price-info">
-        {% trans "Starting from" %}
+        {% trans "Starting from" %} 
+        <strong>
         {% if resource_type == "room" %}
             {{ resource.price_per_hour }} BHD / {% trans "hour" %}
         {% else %}
             {{ resource.price_per_month }} BHD / {% trans "month" %}
         {% endif %}
+        </strong>
     </p>
 </section>
 
 <section class="form-card">
     <form method="post" novalidate>
         {% csrf_token %}
+
+        <!-- ====== ERROR DISPLAY (NEW) ====== -->
+        {% if form.errors %}
+        <div style="background:#fef2f2; border:1px solid #ef4444; padding:15px; margin-bottom:20px; border-radius:8px;">
+            <ul style="color:#b91c1c; margin:0; padding-left:20px;">
+                {{ form.errors }}
+                {{ form.non_field_errors }}
+            </ul>
+        </div>
+        {% endif %}
 
         {{ form.non_field_errors }}
 
@@ -47,19 +59,19 @@
                     {{ form.commercial_registration.label_tag }}
                     {{ form.commercial_registration }}
                     {{ form.commercial_registration.errors }}
-                    <small class="help-text">{% trans "Required for office bookings." %}</small>
+                    <small class="help-text" style="color:#64748b;">{% trans "Optional for office bookings." %}</small>
                 </div>
             {% endif %}
         </div>
 
-        <!-- ========== CALENDAR ========== -->
+        <!-- ========== START DATE CALENDAR ========== -->
         <div class="form-section">
             <h3>{% trans "Select a Date" %}</h3>
-            <div class="booking-calendar">
+            <div class="booking-calendar start-calendar">
                 <div class="month-nav">
-                    <a href="?date={{ previous_month }}" aria-label="{% trans 'Previous month' %}">&larr;</a>
-                    <span>{{ month_name }} {{ year }}</span>
-                    <a href="?date={{ next_month }}" aria-label="{% trans 'Next month' %}">&rarr;</a>
+                    <a href="?date={{ previous_month }}" class="btn-nav" aria-label="{% trans 'Previous month' %}">&larr;</a>
+                    <span style="font-weight: 600;">{{ month_name }} {{ year }}</span>
+                    <a href="?date={{ next_month }}" class="btn-nav" aria-label="{% trans 'Next month' %}">&rarr;</a>
                 </div>
                 <table class="calendar-grid">
                     <thead>
@@ -79,24 +91,19 @@
                                 {% for day in week %}
                                     <td class="
                                         {% if day.month != month %}other-month{% endif %}
-                                        {% if day == selected_date %}selected{% endif %}
-                                        {% if day in unavailable_dates %}unavailable{% endif %}
+                                        {% if day in unavailable_dates or day|date:'w' == '5' %}unavailable{% endif %}
                                         {% if day < today %}past{% endif %}
                                     ">
-                                        {% if day.month == month and day >= today %}
-                                            <a href="?date={{ day|date:'Y-m-d' }}">{{ day.day }}</a>
-                                        {% else %}
-                                            <span>{{ day.day }}</span>
-                                        {% endif %}
+                                        <div class="selectable-date" data-date="{{ day|date:'Y-m-d' }}">{{ day.day }}</div>
                                     </td>
                                 {% endfor %}
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <div class="selected-date">
-                    <strong>{% trans "Selected:" %}</strong> {{ selected_date|date:"Y-m-d" }}
-                    <input type="hidden" name="start_date" value="{{ selected_date|date:'Y-m-d' }}">
+                <div class="selected-date-display">
+                    <strong>{% trans "Selected Date:" %}</strong> <span id="display_start_date">{{ selected_date|date:"Y-m-d" }}</span>
+                    <input type="hidden" name="start_date" id="id_start_date" value="{{ selected_date|date:'Y-m-d' }}">
                 </div>
             </div>
         </div>
@@ -105,52 +112,91 @@
         {% if resource_type == "room" %}
             <div class="form-section">
                 <h3>{% trans "Available Time Slots" %}</h3>
-                <div class="time-slots">
-                    {% if available_slots %}
-                        <ul class="slot-list">
-                            {% for start, end in available_slots %}
-                                <li data-start="{{ start|time:'H:i' }}" data-end="{{ end|time:'H:i' }}">
-                                    {{ start|time:"H:i" }} – {{ end|time:"H:i" }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <p class="hint">{% trans "Click a slot to fill the start and end times below." %}</p>
-                    {% else %}
-                        <p class="no-slots">{% trans "No slots available on this date." %}</p>
-                    {% endif %}
-                </div>
+                
+                {% if available_slots %}
+                    <ul class="slot-list">
+                        {% for start, end in available_slots %}
+                            <li data-start="{{ start|time:'H:i' }}" data-end="{{ end|time:'H:i' }}">
+                                {{ start|time:"H:i" }} – {{ end|time:"H:i" }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <p class="hint" style="color:#64748b; font-size:14px; margin-bottom:10px;">
+                        {% trans "Click a slot to fill start & end time, or enter custom times below." %}
+                    </p>
+                {% else %}
+                    <p class="no-slots" style="color:#ef4444; margin-bottom:10px;">{% trans "No preset slots available for this date. Enter times manually below." %}</p>
+                {% endif %}
 
-                <div class="form-row">
-                    <div class="form-group">
-                        {{ form.start_time.label_tag }}
-                        {{ form.start_time }}
-                        {{ form.start_time.errors }}
-                    </div>
-                    <div class="form-group">
-                        {{ form.end_time.label_tag }}
-                        {{ form.end_time }}
-                        {{ form.end_time.errors }}
+                <div class="manual-time-entry">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="id_start_time" style="font-weight:600;">{% trans "Start Time" %}</label>
+                            <input type="time" name="start_time" id="id_start_time" class="form-control-time" value="{{ form.start_time.value|default:'' }}" required>
+                            {{ form.start_time.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_end_time" style="font-weight:600;">{% trans "End Time" %}</label>
+                            <input type="time" name="end_time" id="id_end_time" class="form-control-time" value="{{ form.end_time.value|default:'' }}" required>
+                            {{ form.end_time.errors }}
+                        </div>
                     </div>
                 </div>
             </div>
         {% else %}
-            <!-- ========== OFFICE: End Date ========== -->
+            <!-- ========== OFFICE: End Date Calendar ========== -->
             <div class="form-section">
-                <h3>{% trans "Booking Period" %}</h3>
-                <div class="form-group">
-                    {{ form.end_date.label_tag }}
-                    {{ form.end_date }}
-                    {{ form.end_date.errors }}
-                    <p class="info-box">
-                        {% trans "The office must be available for the entire selected period." %}
-                    </p>
+                <h3>{% trans "Booking Period (End Date)" %}</h3>
+                <div class="booking-calendar end-calendar">
+                    <div class="month-nav">
+                        <a href="?date={{ previous_month }}" class="btn-nav" aria-label="{% trans 'Previous month' %}">&larr;</a>
+                        <span style="font-weight: 600;">{{ month_name }} {{ year }}</span>
+                        <a href="?date={{ next_month }}" class="btn-nav" aria-label="{% trans 'Next month' %}">&rarr;</a>
+                    </div>
+                    <table class="calendar-grid">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Sun" %}</th>
+                                <th>{% trans "Mon" %}</th>
+                                <th>{% trans "Tue" %}</th>
+                                <th>{% trans "Wed" %}</th>
+                                <th>{% trans "Thu" %}</th>
+                                <th>{% trans "Fri" %}</th>
+                                <th>{% trans "Sat" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for week in month_days %}
+                                <tr>
+                                    {% for day in week %}
+                                        <td class="
+                                            {% if day.month != month %}other-month{% endif %}
+                                            {% if day in unavailable_dates or day|date:'w' == '5' %}unavailable{% endif %}
+                                            {% if day <= today %}past{% endif %}
+                                        ">
+                                            <div class="selectable-date" data-date="{{ day|date:'Y-m-d' }}">{{ day.day }}</div>
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                    <div class="manual-time-entry">
+                        <label for="id_end_date" style="font-weight:600;">{% trans "Confirm End Date" %}</label>
+                        <input type="date" name="end_date" id="id_end_date" class="form-control-time" style="margin-top:5px;" value="{{ form.end_date.value|default:'' }}" required>
+                        {{ form.end_date.errors }}
+                        <p class="info-box" style="margin-top: 10px; font-size:14px; color:#64748b;">
+                            {% trans "The office must be available for the entire selected period." %}
+                        </p>
+                    </div>
                 </div>
             </div>
         {% endif %}
 
         <!-- ========== SUBMIT ========== -->
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary btn-full">
+        <div class="form-actions" style="margin-top:30px;">
+            <button type="submit" class="btn btn-primary btn-full" style="padding:15px; font-size:16px; font-weight:bold;">
                 {% trans "Submit Booking Request" %}
             </button>
         </div>
@@ -159,29 +205,81 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Slot click: fill time fields and highlight selected
+        
+        // --- 1. START CALENDAR LOGIC ---
+        const startCalendarCells = document.querySelectorAll('.start-calendar .selectable-date');
+        const startInput = document.getElementById('id_start_date');
+        const startDisplay = document.getElementById('display_start_date');
+
+        // Apply active class to default/selected date on load
+        if (startInput && startInput.value) {
+            const activeCell = document.querySelector(`.start-calendar .selectable-date[data-date="${startInput.value}"]`);
+            if (activeCell && !activeCell.parentElement.classList.contains('unavailable')) {
+                activeCell.parentElement.classList.add('selected');
+            }
+        }
+
+        startCalendarCells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                // Ignore clicks on unavailable/past dates
+                if (this.parentElement.classList.contains('unavailable') || this.parentElement.classList.contains('past')) {
+                    return;
+                }
+
+                document.querySelectorAll('.start-calendar td.selected').forEach(td => {
+                    td.classList.remove('selected');
+                });
+
+                this.parentElement.classList.add('selected');
+
+                const selectedDate = this.getAttribute('data-date');
+                if (startInput) startInput.value = selectedDate;
+                if (startDisplay) startDisplay.innerText = selectedDate;
+            });
+        });
+
+        // --- 2. END CALENDAR LOGIC (Offices) ---
+        const endCalendarCells = document.querySelectorAll('.end-calendar .selectable-date');
+        const endInputDateBox = document.getElementById('id_end_date');
+
+        endCalendarCells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                if (this.parentElement.classList.contains('unavailable') || this.parentElement.classList.contains('past')) {
+                    return;
+                }
+
+                document.querySelectorAll('.end-calendar td.selected').forEach(td => {
+                    td.classList.remove('selected');
+                });
+
+                this.parentElement.classList.add('selected');
+
+                if (endInputDateBox) {
+                    endInputDateBox.value = this.getAttribute('data-date');
+                }
+            });
+        });
+
+        // --- 3. TIME SLOT LOGIC (Meeting Rooms) ---
         const slots = document.querySelectorAll('.slot-list li');
-        const startInput = document.getElementById('id_start_time');
-        const endInput = document.getElementById('id_end_time');
+        const startTimeBox = document.getElementById('id_start_time');
+        const endTimeBox = document.getElementById('id_end_time');
 
         slots.forEach(slot => {
             slot.addEventListener('click', function() {
-                if (startInput && endInput) {
-                    startInput.value = this.dataset.start;
-                    endInput.value = this.dataset.end;
-                    // Remove active class from all slots
+                if (startTimeBox && endTimeBox) {
+                    startTimeBox.value = this.dataset.start;
+                    endTimeBox.value = this.dataset.end;
+                    
                     slots.forEach(s => s.classList.remove('active'));
                     this.classList.add('active');
                 }
             });
         });
 
-        // If start/end time are already filled, highlight matching slot
-        if (startInput && endInput && startInput.value && endInput.value) {
-            const startVal = startInput.value;
-            const endVal = endInput.value;
+        if (startTimeBox && endTimeBox && startTimeBox.value && endTimeBox.value) {
             slots.forEach(slot => {
-                if (slot.dataset.start === startVal && slot.dataset.end === endVal) {
+                if (slot.dataset.start === startTimeBox.value && slot.dataset.end === endTimeBox.value) {
                     slot.classList.add('active');
                 }
             });

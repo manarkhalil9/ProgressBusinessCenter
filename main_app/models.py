@@ -78,7 +78,7 @@ class MeetingRoom(models.Model):
     
 # office
 class Office(models.Model):
-    branch = models.ForeignKey( Branch, on_delete=models.CASCADE, related_name='offices')
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, related_name='offices')
     name = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='offices/', blank=True, null=True)
@@ -93,58 +93,43 @@ class Office(models.Model):
         ).exists()
         return not overlapping
 
-    def get_available_months(self, start_date, end_date):
-        """
-        Return a list of dates (day by day) that are fully available
-        for the given range. For simplicity, we just check if the whole
-        range is available.
-        """
-        # For a full-featured solution, we would check each day individually.
-        return self.is_available(start_date, end_date)
+    def get_unavailable_dates(self, year, month):
+        """Return a set of date objects for this month where the office is not available."""
+        start = date(year, month, 1)
+        if month == 12:
+            end = date(year + 1, 1, 1) - timedelta(days=1)
+        else:
+            end = date(year, month + 1, 1) - timedelta(days=1)
+        
+        bookings = self.bookings.filter(
+            start_date__lte=end,
+            end_date__gte=start,
+            status__in=['pending', 'approved']
+        )
+        unavailable = set()
+        for b in bookings:
+            current = max(b.start_date, start)
+            while current <= min(b.end_date, end):
+                unavailable.add(current)
+                current += timedelta(days=1)
+        return unavailable
 
-def get_unavailable_dates(self, year, month):
-    """Return a set of date objects for this month where the office is not available."""
-    start = date(year, month, 1)
-    # compute last day of month
-    if month == 12:
-        end = date(year + 1, 1, 1) - timedelta(days=1)
-    else:
-        end = date(year, month + 1, 1) - timedelta(days=1)
-    
-    # Find all bookings that overlap this month
-    bookings = self.bookings.filter(
-        start_date__lte=end,
-        end_date__gte=start,
-        status__in=['pending', 'approved']
-    )
-    unavailable = set()
-    for b in bookings:
-        # iterate through each day from max(start, b.start) to min(end, b.end)
-        current = max(b.start_date, start)
-        while current <= min(b.end_date, end):
-            unavailable.add(current)
-            current += timedelta(days=1)
-    return unavailable
+    def is_available_on_date(self, check_date):
+        """Check if the office is free on a given date."""
+        return not self.bookings.filter(
+            start_date__lte=check_date,
+            end_date__gte=check_date,
+            status__in=['pending', 'approved']
+        ).exists()
 
-def is_available_on_date(self, check_date):
-    """Check if the office is free on a given date."""
-    return not self.bookings.filter(
-        start_date__lte=check_date,
-        end_date__gte=check_date,
-        status__in=['pending', 'approved']
-    ).exists()
-
-# models.py
-
-def get_next_available_date(self, from_date):
-    """Return the first date >= from_date where the office is available, or None."""
-    # Check up to 90 days ahead
-    max_lookahead = 90
-    for i in range(max_lookahead + 1):
-        check_date = from_date + timedelta(days=i)
-        if self.is_available_on_date(check_date):
-            return check_date
-    return None
+    def get_next_available_date(self, from_date):
+        """Return the first date >= from_date where the office is available, or None."""
+        max_lookahead = 90
+        for i in range(max_lookahead + 1):
+            check_date = from_date + timedelta(days=i)
+            if self.is_available_on_date(check_date):
+                return check_date
+        return None
     
 # booking
 class Booking(models.Model):
@@ -224,11 +209,6 @@ class Booking(models.Model):
             if self.end_date <= self.start_date:
                 raise ValidationError(
                     "End date must be after start date."
-                )
-
-            if not self.commercial_registration:
-                raise ValidationError(
-                    "CR number is required for office bookings."
                 )
 
     def save(self, *args, **kwargs):

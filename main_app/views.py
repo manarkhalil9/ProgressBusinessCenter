@@ -239,6 +239,7 @@ def search(request):
 
 
 # ---------- BOOKING ----------
+# ---------- BOOKING ----------
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
@@ -247,11 +248,27 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     def get_resource(self):
         resource_type = self.kwargs["resource_type"]
         pk = self.kwargs["pk"]
+
         if resource_type == "room":
             return get_object_or_404(MeetingRoom, pk=pk)
+
         if resource_type == "office":
             return get_object_or_404(Office, pk=pk)
+
         raise Http404("Booking item not found.")
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # Attach user and resource BEFORE form.is_valid() runs model clean()
+        form.instance.user = self.request.user
+        resource = self.get_resource()
+        
+        if isinstance(resource, MeetingRoom):
+            form.instance.meeting_room = resource
+        elif isinstance(resource, Office):
+            form.instance.office = resource
+            
+        return form
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -261,7 +278,8 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial["client_name"] = (
-            self.request.user.get_full_name() or self.request.user.username
+            self.request.user.get_full_name()
+            or self.request.user.username
         )
         initial["email"] = self.request.user.email
         initial["start_date"] = date.today()
@@ -269,59 +287,64 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         resource = self.get_resource()
+
         context["resource"] = resource
         context["resource_type"] = self.kwargs["resource_type"]
 
-        # Determine selected date (from GET, POST, or default)
         selected_date = date.today()
+
         if self.request.method == "POST":
             date_str = self.request.POST.get("start_date")
             if date_str:
                 try:
-                    selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                    selected_date = datetime.strptime(
+                        date_str,
+                        "%Y-%m-%d"
+                    ).date()
                 except ValueError:
                     pass
         else:
             date_str = self.request.GET.get("date")
             if date_str:
                 try:
-                    selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                    selected_date = datetime.strptime(
+                        date_str,
+                        "%Y-%m-%d"
+                    ).date()
                 except ValueError:
                     pass
+
         context["selected_date"] = selected_date
         context["today"] = date.today()
 
-        # Build calendar for the month of the selected date
-        year, month = selected_date.year, selected_date.month
-        cal = calendar.Calendar(firstweekday=6)  # Sunday first day
-        month_days = cal.monthdatescalendar(year, month)
+        year = selected_date.year
+        month = selected_date.month
 
-        # For offices: compute unavailable dates
-        unavailable_dates = set()
+        cal = calendar.Calendar(firstweekday=6)
+        context["month_days"] = cal.monthdatescalendar(year, month)
+        context["month_name"] = calendar.month_name[month]
+        context["year"] = year
+
         if isinstance(resource, Office):
-            unavailable_dates = resource.get_unavailable_dates(year, month)
+            context["unavailable_dates"] = resource.get_unavailable_dates(year, month)
+        else:
+            context["unavailable_dates"] = set()
 
-        # Month navigation URLs
         if month == 1:
             prev_month = date(year - 1, 12, 1)
         else:
             prev_month = date(year, month - 1, 1)
+
         if month == 12:
             next_month = date(year + 1, 1, 1)
         else:
             next_month = date(year, month + 1, 1)
 
-        context.update({
-            "month_days": month_days,
-            "month_name": calendar.month_name[month],
-            "year": year,
-            "unavailable_dates": unavailable_dates,
-            "previous_month": prev_month.strftime("%Y-%m-%d"),
-            "next_month": next_month.strftime("%Y-%m-%d"),
-        })
+        context["previous_month"] = prev_month.strftime("%Y-%m-%d")
+        context["next_month"] = next_month.strftime("%Y-%m-%d")
 
-        # For meeting rooms: compute available time slots for the selected date
         if isinstance(resource, MeetingRoom):
             context["available_slots"] = resource.get_available_time_slots(selected_date)
         else:
@@ -330,65 +353,76 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
         resource = self.get_resource()
 
-        # Real-time availability check
-        is_free = False
         if isinstance(resource, MeetingRoom):
-            start_date = form.cleaned_data.get("start_date")
-            start_time = form.cleaned_data.get("start_time")
-            end_time = form.cleaned_data.get("end_time")
-            if start_date and start_time and end_time:
-                start_dt = datetime.combine(start_date, start_time)
-                end_dt = datetime.combine(start_date, end_time)
-                is_free = resource.is_available(start_dt, end_dt)
-        elif isinstance(resource, Office):
-            start_date = form.cleaned_data.get("start_date")
-            end_date = form.cleaned_data.get("end_date")
-            if start_date and end_date:
-                is_free = resource.is_available(start_date, end_date)
+            start_dt = datetime.combine(
+                form.cleaned_data["start_date"],
+                form.cleaned_data["start_time"],
+            )
+
+            end_dt = datetime.combine(
+                form.cleaned_data["start_date"],
+                form.cleaned_data["end_time"],
+            )
+
+            is_free = resource.is_available(start_dt, end_dt)
+
+        else:
+            is_free = resource.is_available(
+                form.cleaned_data["start_date"],
+                form.cleaned_data["end_date"],
+            )
 
         form.instance.status = "approved" if is_free else "pending"
 
         response = super().form_valid(form)
+
         booking = self.object
 
-        # Email notifications
-        admin_subject = f"New Booking Request: {booking.client_name}"
-        admin_message = (
-            f"New booking for {booking.meeting_room or booking.office}. "
-            f"Status automatically set to: {booking.status}."
-        )
         send_mail(
-            admin_subject,
-            admin_message,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.ADMIN_EMAIL],
-            fail_silently=False,
+            subject=f"New Booking Request: {booking.client_name}",
+            message=(
+                f"Booking for "
+                f"{booking.meeting_room or booking.office}\n"
+                f"Status: {booking.status}"
+            ),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.ADMIN_EMAIL],
+            fail_silently=True,
         )
 
         if booking.status == "approved":
-            user_subject = "Booking Approved - Confirmation"
-            user_message = (
-                f"Great news! Your booking for {booking.meeting_room or booking.office} is approved. "
-                f"Your total is {booking.total_price} BHD. Please complete your payment in person at the front desk upon arrival."
+            subject = "Booking Approved"
+            message = (
+                f"Your booking for "
+                f"{booking.meeting_room or booking.office} "
+                f"has been approved.\n\n"
+                f"Total Price: {booking.total_price} BHD"
             )
         else:
-            user_subject = "Your Booking Request at Progress Business Centre"
-            user_message = (
-                f"Thank you for your request for {booking.meeting_room or booking.office}. "
-                "The resource is currently pending availability check. Our team will review it and update you shortly."
+            subject = "Booking Received"
+            message = (
+                f"Your booking request for "
+                f"{booking.meeting_room or booking.office} "
+                f"is currently pending review."
             )
+
         send_mail(
-            user_subject,
-            user_message,
-            settings.DEFAULT_FROM_EMAIL,
-            [booking.email],
-            fail_silently=False,
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[booking.email],
+            fail_silently=True,
         )
 
         return response
+
+    def form_invalid(self, form):
+        print("========== BOOKING FORM ERRORS ==========")
+        print(form.errors)
+        print(form.non_field_errors())
+        return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy("booking_success")
@@ -396,21 +430,6 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
 def booking_success(request):
     return render(request, "bookings/success.html")
-
-
-# ---------- DASHBOARD ----------
-class UserDashboardView(LoginRequiredMixin, ListView):
-    template_name = "dashboard/index.html"
-    context_object_name = "bookings"
-
-    def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user).order_by('-created_at')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['registrations'] = BusinessRegistration.objects.filter(user=self.request.user)
-        return context
-
 
 # ---------- CANCEL BOOKING ----------
 class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -440,6 +459,29 @@ class BusinessRegistrationCancelView(LoginRequiredMixin, UserPassesTestMixin, Vi
         registration = get_object_or_404(BusinessRegistration, pk=self.kwargs['pk'])
         return registration.user == self.request.user
 
+
+# ---------- USER DASHBOARD ----------
+class UserDashboardView(LoginRequiredMixin, ListView):
+    model = Booking
+    template_name = "dashboard/index.html"
+    context_object_name = "bookings"
+
+    def get_queryset(self):
+        return (
+            Booking.objects.filter(user=self.request.user)
+            .select_related("meeting_room", "office")
+            .order_by("-created_at")
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["corporate_registrations"] = (
+            BusinessRegistration.objects.filter(user=self.request.user)
+            .order_by("-submitted_at")
+        )
+
+        return context
 
 # ---------- SIGNUP ----------
 def signup(request):

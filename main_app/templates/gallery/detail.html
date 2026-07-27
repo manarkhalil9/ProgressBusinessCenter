@@ -3,8 +3,18 @@
 
 {% block content %}
 
-<h1>{{ image.title }}</h1>
+<section class="gallery-detail-container">
+    <div class="gallery-detail-card">
+        <a href="{% url 'gallery' %}" class="back-link">
+            ← {% trans "Back to Gallery" %}
+        </a>
 
-<img src="{{ image.image.url }}" width="700">
+        <div class="gallery-detail-image-wrapper">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}" class="gallery-detail-image">
+        </div>
+
+        <h2 class="gallery-detail-title">{{ image.title }}</h2>
+    </div>
+</section>
 
 {% endblock %}
