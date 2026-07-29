@@ -354,11 +354,12 @@ img {
 }
 
 .hero {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
+    background: linear-gradient(135deg, #1a2a4a, #2a3a5a);
     color: #fff;
     text-align: center;
     padding: 100px 20px;
 }
+
 .hero h1 {
     font-size: 52px;
     margin-bottom: 20px;
@@ -525,11 +526,12 @@ img {
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    background: #0f172a;
+    background: #1a2a4a;
     color: #fff;
     text-align: center;
     padding: 70px 20px;
 }
+
 .stats h2 {
     font-size: 32px;
     margin-bottom: 10px;
@@ -2463,3 +2465,307 @@ html[dir="rtl"] body {
     }
 }
 
+/* ==========================================
+   UNIFIED AUTH BUTTONS (Login, Sign Up, Logout)
+========================================== */
+.nav-actions .nav-login,
+.nav-actions .btn-small,
+.nav-actions .logout-btn {
+    background: #6366f1;           /* purple background */
+    color: #fff !important;        /* white text */
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    text-decoration: none;         /* for <a> links */
+    display: inline-block;         /* for <a> and <button> */
+    line-height: normal;
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.25);
+}
+
+.nav-actions .nav-login:hover,
+.nav-actions .btn-small:hover,
+.nav-actions .logout-btn:hover {
+    background: #4f46e5;           /* darker purple on hover */
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(99, 102, 241, 0.35);
+}
+
+.nav-actions .nav-login:active,
+.nav-actions .btn-small:active,
+.nav-actions .logout-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+}
+
+/* ---------- INFO TEXT (used in social signup) ---------- */
+.info-text {
+    color: #475569;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    background: #f8fafc;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #6366f1;
+}
+
+/* ---------- FORM ERROR LISTS ---------- */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    background: #fee2e2;
+    border-radius: 6px;
+    padding: 10px 15px;
+}
+.errorlist .error {
+    color: #b91c1c;
+    font-size: 14px;
+    display: block;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin: 20px 0 10px 0;
+}
+
+.button-row .btn,
+.button-row .btn-google {
+    flex: 1 1 auto;
+    min-width: 160px;
+    text-align: center;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.btn-google {
+    background-color: #6366f1 !important;
+    color: #ffffff !important;
+}
+
+.btn-google:hover {
+    background-color: #4f46e5 !important;
+    color: #ffffff !important;
+    transform: translateY(-3px);
+}
+
+.btn-google.cancel {
+    background: #64748b !important;
+}
+.btn-google.cancel:hover {
+    background: #475569 !important;
+}
+
+.info-text {
+    color: #475569;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    background: #f8fafc;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 4px solid #6366f1;
+}
+
+.detail-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Side-by-Side Grid Layout */
+.branch-location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Left: Image Card */
+.branch-image-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.branch-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+}
+
+/* Right: Location Details Card */
+.branch-visit-card {
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.branch-visit-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.visit-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+.branch-info-details {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.branch-info-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: #1e293b;
+}
+
+.branch-info-details p {
+  color: #475569;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+/* Button Styling */
+.btn-open-maps {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #ffffff;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.btn-open-maps:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+  .branch-location-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card Setup */
+.feature-card.with-image {
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Remove default padding so the image touches the edges */
+  overflow: hidden; /* Ensures the image respects the card's border-radius */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card.with-image:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Wrapper */
+.card-image-wrapper {
+  width: 100%;
+  height: 220px; /* Fixed height so all cards align perfectly in the grid */
+  overflow: hidden;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents image stretching */
+  transition: transform 0.4s ease; /* Smooth hover transition */
+}
+
+/* Hover Zoom Effect */
+.feature-card.with-image:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* Placeholder for branches without an image */
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+}
+
+/* Content Area inside the card */
+.card-content {
+  padding: 20px 24px;
+  flex-grow: 1; /* Pushes the button wrapper to the bottom */
+}
+
+.card-footer {
+  padding: 0 24px 24px 24px;
+}
+
+.btn-branch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* Assuming you have existing button colors, if not add background/color here */
+}

@@ -32,6 +32,7 @@ class Branch(models.Model):
     phone = models.CharField(max_length=20)
     email = models.EmailField()
     opening_hours = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='branches/', blank=True, null=True)
 
     def __str__(self):
         return self.name

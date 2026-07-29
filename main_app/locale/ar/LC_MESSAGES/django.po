@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-27 14:12+0300\n"
+"POT-Creation-Date: 2026-07-29 10:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,8 +182,8 @@ msgstr ""
 
 #: .\main_app\templates\about.html:61 .\main_app\templates\index.html:179
 #, python-format
-msgid "100%% Foreign Ownership"
-msgstr "ملكية أجنبية بنسبة 100%"
+msgid "100% Foreign Ownership"
+msgstr "%ملكية أجنبية بنسبة 100%"
 
 #: .\main_app\templates\about.html:62
 msgid "Business-Friendly Tax Environment"
@@ -259,103 +259,110 @@ msgstr "القائمة"
 msgid "Progress Business Centre"
 msgstr "مركز بروجريس للأعمال"
 
-#: .\main_app\templates\base.html:44 .\main_app\templates\base.html:51
-#: .\main_app\templates\base.html:52 .\main_app\templates\base.html:54
+#: .\main_app\templates\base.html:43 .\main_app\templates\base.html:49
+#: .\main_app\templates\base.html:50 .\main_app\templates\base.html:52
 #: .\main_app\templates\search\results.html:8
 msgid "Search"
 msgstr "بحث"
 
-#: .\main_app\templates\base.html:65 .\main_app\templates\base.html:127
+#: .\main_app\templates\base.html:64 .\main_app\templates\base.html:135
 msgid "Home"
 msgstr "الرئيسية"
 
-#: .\main_app\templates\base.html:66 .\main_app\templates\base.html:128
+#: .\main_app\templates\base.html:65 .\main_app\templates\base.html:136
 msgid "About"
 msgstr "من نحن"
 
-#: .\main_app\templates\base.html:67 .\main_app\templates\base.html:129
+#: .\main_app\templates\base.html:66 .\main_app\templates\base.html:137
 #: .\main_app\templates\search\results.html:24
 msgid "Services"
 msgstr "الخدمات"
 
-#: .\main_app\templates\base.html:68 .\main_app\templates\base.html:132
+#: .\main_app\templates\base.html:67 .\main_app\templates\base.html:138
 #: .\main_app\templates\index.html:130
 #: .\main_app\templates\search\results.html:37
 msgid "Meeting Rooms"
 msgstr "غرف الاجتماعات"
 
-#: .\main_app\templates\base.html:69 .\main_app\templates\base.html:133
+#: .\main_app\templates\base.html:68 .\main_app\templates\base.html:139
 #: .\main_app\templates\index.html:119
 msgid "Serviced Offices"
 msgstr "المكاتب المخدومة"
 
-#: .\main_app\templates\base.html:70 .\main_app\templates\base.html:131
+#: .\main_app\templates\base.html:69 .\main_app\templates\base.html:140
 msgid "Branches"
 msgstr "الفروع"
 
-#: .\main_app\templates\base.html:71 .\main_app\templates\base.html:136
-#: .\main_app\templates\search\results.html:53
-msgid "FAQ"
-msgstr "الأسئلة الشائعة"
+#: .\main_app\templates\base.html:73
+msgid "Explore"
+msgstr "تصفح"
 
-#: .\main_app\templates\base.html:72 .\main_app\templates\base.html:137
-msgid "Contact"
-msgstr "اتصل بنا"
-
-#: .\main_app\templates\base.html:76
-msgid "More"
-msgstr "المزيد"
-
-#: .\main_app\templates\base.html:78 .\main_app\templates\base.html:130
+#: .\main_app\templates\base.html:75 .\main_app\templates\base.html:143
 msgid "Features"
 msgstr "المميزات"
 
-#: .\main_app\templates\base.html:79 .\main_app\templates\base.html:134
+#: .\main_app\templates\base.html:76 .\main_app\templates\base.html:144
 msgid "Events"
 msgstr "الفعاليات"
 
-#: .\main_app\templates\base.html:80 .\main_app\templates\base.html:135
+#: .\main_app\templates\base.html:77 .\main_app\templates\base.html:145
 #: .\main_app\templates\gallery\index.html:7
 msgid "Gallery"
 msgstr "معرض الصور"
 
-#: .\main_app\templates\base.html:81 .\main_app\templates\base.html:141
+#: .\main_app\templates\base.html:78 .\main_app\templates\base.html:146
+#: .\main_app\templates\search\results.html:53
+msgid "FAQ"
+msgstr "الأسئلة الشائعة"
+
+#: .\main_app\templates\base.html:79 .\main_app\templates\base.html:147
+msgid "Contact"
+msgstr "اتصل بنا"
+
+#: .\main_app\templates\base.html:86
+msgid "Engage"
+msgstr "تفاعل"
+
+#: .\main_app\templates\base.html:88 .\main_app\templates\base.html:152
 msgid "Visit"
 msgstr "زيارة"
 
-#: .\main_app\templates\base.html:82 .\main_app\templates\base.html:142
+#: .\main_app\templates\base.html:89 .\main_app\templates\base.html:153
 msgid "Referral"
 msgstr "الإحالة"
 
-#: .\main_app\templates\base.html:83 .\main_app\templates\base.html:143
+#: .\main_app\templates\base.html:90 .\main_app\templates\base.html:154
 msgid "CR Registration"
 msgstr "تسجيل السجل التجاري"
 
-#: .\main_app\templates\base.html:93 .\main_app\templates\base.html:140
+#: .\main_app\templates\base.html:100 .\main_app\templates\base.html:151
 #: .\main_app\templates\dashboard\index.html:9
 msgid "My Bookings"
 msgstr "حجوزاتي"
 
-#: .\main_app\templates\base.html:97 .\main_app\templates\base.html:149
+#: .\main_app\templates\base.html:104 .\main_app\templates\base.html:160
 msgid "Logout"
 msgstr "تسجيل الخروج"
 
-#: .\main_app\templates\base.html:100 .\main_app\templates\base.html:152
+#: .\main_app\templates\base.html:107 .\main_app\templates\base.html:163
 #: .\main_app\templates\registration\login.html:10
 #: .\main_app\templates\registration\login.html:22
-#: .\main_app\templates\registration\signup.html:97
+#: .\main_app\templates\registration\signup.html:60
+#: .\main_app\templates\socialaccount\signup.html:60
 msgid "Login"
 msgstr "تسجيل الدخول"
 
-#: .\main_app\templates\base.html:101 .\main_app\templates\base.html:153
+#: .\main_app\templates\base.html:108 .\main_app\templates\base.html:164
+#: .\main_app\templates\registration\signup.html:52
+#: .\main_app\templates\socialaccount\signup.html:52
 msgid "Sign Up"
 msgstr "إنشاء حساب"
 
-#: .\main_app\templates\base.html:145
+#: .\main_app\templates\base.html:156
 msgid "Welcome, {{ username }}"
 msgstr "مرحباً, {{ username }}"
 
-#: .\main_app\templates\base.html:164
+#: .\main_app\templates\base.html:175
 msgid ""
 "© 2026 Progress Business Centre. Helping businesses establish and grow in "
 "Bahrain."
@@ -519,6 +526,8 @@ msgid "Phone"
 msgstr "الهاتف"
 
 #: .\main_app\templates\branches\detail.html:61
+#: .\main_app\templates\registration\signup.html:32
+#: .\main_app\templates\socialaccount\signup.html:32
 msgid "Email"
 msgstr "البريد الإلكتروني"
 
@@ -1062,7 +1071,8 @@ msgid "Grow With Your Business"
 msgstr "انمُ مع عملك"
 
 #: .\main_app\templates\index.html:286
-msgid "Start with a virtual office and upgrade to a serviced office whenever your "
+msgid ""
+"Start with a virtual office and upgrade to a serviced office whenever your "
 "business expands."
 msgstr "ابدأ بمكتب افتراضي وانتقل إلى مكتب مخدوم كلما توسع عملك."
 
@@ -1191,23 +1201,35 @@ msgid "Sign up"
 msgstr "إنشاء حساب"
 
 #: .\main_app\templates\registration\signup.html:9
-#: .\main_app\templates\registration\signup.html:84
-msgid "Create Account"
-msgstr "إنشاء حساب"
+#: .\main_app\templates\socialaccount\signup.html:9
+msgid "Sign Up via Google"
+msgstr "التسجيل عبر Google"
 
-#: .\main_app\templates\registration\signup.html:20
+#: .\main_app\templates\registration\signup.html:12
+#: .\main_app\templates\socialaccount\signup.html:12
+#, python-format
+msgid ""
+"\n"
+"        You are about to use your %(provider_name)s account to sign up for\n"
+"        %(site_name)s. Please confirm your details below.\n"
+"        "
+msgstr ""
+"\n"
+"        أنت على وشك استخدام حسابك على %(provider_name)s للتسجيل في %(site_name)s. يرجى تأكيد بياناتك أدناه.\n"
+"        "
+
+#: .\main_app\templates\registration\signup.html:42
+#: .\main_app\templates\socialaccount\signup.html:42
 msgid "Username"
 msgstr "اسم المستخدم"
 
-#: .\main_app\templates\registration\signup.html:40
-msgid "Password"
-msgstr "كلمة المرور"
+#: .\main_app\templates\registration\signup.html:53
+#: .\main_app\templates\socialaccount\signup.html:53
+msgid "Cancel"
+msgstr "إلغاء"
 
-#: .\main_app\templates\registration\signup.html:62
-msgid "Confirm Password"
-msgstr "تأكيد كلمة المرور"
-
-#: .\main_app\templates\registration\signup.html:94
+#: .\main_app\templates\registration\signup.html:59
+#: .\main_app\templates\socialaccount\signup.html:59
 msgid "Already have an account?"
 msgstr "هل لديك حساب بالفعل؟"
 
@@ -1490,3 +1512,15 @@ msgstr "تم إرسال طلب الاجتماع"
 #: .\main_app\templates\visits\success.html:11
 msgid "Thank you for your submission. Our team will contact you shortly."
 msgstr "شكراً لتقديمك. سيتواصل معك فريقنا قريباً."
+
+#~ msgid "More"
+#~ msgstr "المزيد"
+
+#~ msgid "Create Account"
+#~ msgstr "إنشاء حساب"
+
+#~ msgid "Password"
+#~ msgstr "كلمة المرور"
+
+#~ msgid "Confirm Password"
+#~ msgstr "تأكيد كلمة المرور"

@@ -14,7 +14,7 @@
 
     <title>{% trans "Progress Business Center" %}</title>
 
-    <!-- Google Fonts: Inter (English) & Cairo (Arabic) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
 
 <nav class="navbar">
 
-    <!-- Mobile menu toggle button -->
+    <!-- Mobile menu toggle -->
     <button class="mobile-menu-btn" type="button" onclick="toggleMenu()" aria-label="{% trans 'Menu' %}">
         ☰
     </button>
@@ -38,11 +38,9 @@
         </a>
     </div>
 
-    <!-- Search Bar with Magnifying Glass Icon -->
+    <!-- Search Bar -->
     <form class="site-search" action="{% url 'search' %}" method="get" role="search">
-        <label class="sr-only" for="site-search-input">
-            {% trans "Search" %}
-        </label>
+        <label class="sr-only" for="site-search-input">{% trans "Search" %}</label>
         <input
             id="site-search-input"
             type="search"
@@ -52,7 +50,6 @@
             aria-label="{% trans 'Search' %}"
         >
         <button type="submit" aria-label="{% trans 'Search' %}">
-            <!-- Magnifying glass SVG icon -->
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -62,22 +59,32 @@
 
     <!-- Desktop Navigation Links -->
     <div class="nav-links">
+
+        <!-- Core Site Links (Visible to Everyone) -->
         <a href="{% url 'home' %}">{% trans "Home" %}</a>
         <a href="{% url 'about' %}">{% trans "About" %}</a>
         <a href="{% url 'services' %}">{% trans "Services" %}</a>
         <a href="{% url 'rooms' %}">{% trans "Meeting Rooms" %}</a>
         <a href="{% url 'offices' %}">{% trans "Serviced Offices" %}</a>
         <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
-        <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
-        <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
 
-        {% if user.is_authenticated %}
+        <!-- Public Dropdown: "Explore" (Always Visible) -->
         <details class="nav-more">
-            <summary>{% trans "More" %}</summary>
+            <summary>{% trans "Explore" %}</summary>
             <div class="nav-more-menu">
                 <a href="{% url 'features' %}">{% trans "Features" %}</a>
                 <a href="{% url 'events' %}">{% trans "Events" %}</a>
                 <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
+                <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
+                <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
+            </div>
+        </details>
+
+        <!-- Authenticated Dropdown: "Engage" (Visible Only When Logged In) -->
+        {% if user.is_authenticated %}
+        <details class="nav-more">
+            <summary>{% trans "Engage" %}</summary>
+            <div class="nav-more-menu">
                 <a href="{% url 'visit' %}">{% trans "Visit" %}</a>
                 <a href="{% url 'referral_create' %}">{% trans "Referral" %}</a>
                 <a href="{% url 'business_register' %}">{% trans "CR Registration" %}</a>
@@ -122,20 +129,24 @@
         </details>
     </div>
 
-    <!-- Mobile Menu (hidden by default) -->
+    <!-- Mobile Menu (Hidden by default) -->
     <div class="mobile-menu" id="mobileMenu">
+        <!-- Core Links -->
         <a href="{% url 'home' %}">{% trans "Home" %}</a>
         <a href="{% url 'about' %}">{% trans "About" %}</a>
         <a href="{% url 'services' %}">{% trans "Services" %}</a>
-        <a href="{% url 'features' %}">{% trans "Features" %}</a>
-        <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
         <a href="{% url 'rooms' %}">{% trans "Meeting Rooms" %}</a>
         <a href="{% url 'offices' %}">{% trans "Serviced Offices" %}</a>
+        <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
+        
+        <!-- Public Explore Links -->
+        <a href="{% url 'features' %}">{% trans "Features" %}</a>
         <a href="{% url 'events' %}">{% trans "Events" %}</a>
         <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
         <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
         <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
 
+        <!-- Authenticated Mobile Links -->
         {% if user.is_authenticated %}
             <a href="{% url 'dashboard' %}" style="font-weight: bold;">{% trans "My Bookings" %}</a>
             <a href="{% url 'visit' %}">{% trans "Visit" %}</a>

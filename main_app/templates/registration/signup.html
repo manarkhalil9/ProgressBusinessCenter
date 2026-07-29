@@ -1,110 +1,67 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load socialaccount %}
 
 {% block content %}
 
 <section class="form-card">
 
-<h1>
-{% trans "Create Account" %}
-</h1>
+    <h1>{% trans "Create Account" %}</h1>
 
+    <!-- 1. Add an ID to your main signup form -->
+    <form method="post" action="{% url 'signup' %}" id="signup_form">
+        {% csrf_token %}
 
-<form method="post">
+        <p>
+            <label for="{{ form.username.id_for_label }}">{% trans "Username" %}</label>
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </p>
 
-{% csrf_token %}
+        <p>
+            <label for="{{ form.password1.id_for_label }}">{% trans "Password" %}</label>
+            {{ form.password1 }}
+            {% for error in form.password1.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </p>
 
+        <p>
+            <label for="{{ form.password2.id_for_label }}">{% trans "Confirm Password" %}</label>
+            {{ form.password2 }}
+            {% for error in form.password2.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        </p>
+    </form>
+    <!-- End of main form -->
 
-<p>
-<label>
-{% trans "Username" %}
-</label>
+    <!-- Button Row: Create Account + Google side by side -->
+    <div class="button-row" style="display: flex; gap: 10px; margin-top: 15px;">
+        
+        <!-- 2. Attach this button to the form above using form="signup_form" -->
+        <button class="btn" type="submit" form="signup_form">
+            {% trans "Create Account" %}
+        </button>
 
-{{ form.username }}
+        <!-- 3. Create a separate POST form specifically for Google -->
+        <form method="post" action="{% provider_login_url 'google' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-google">
+                {% trans "Sign in with Google" %}
+            </button>
+        </form>
 
-{% for error in form.username.errors %}
+    </div>
 
-<span class="error">
-{{ error }}
-</span>
-
-{% endfor %}
-
-</p>
-
-
-
-<p>
-
-<label>
-{% trans "Password" %}
-</label>
-
-{{ form.password1 }}
-
-
-{% for error in form.password1.errors %}
-
-<span class="error">
-{{ error }}
-</span>
-
-{% endfor %}
-
-
-</p>
-
-
-
-<p>
-
-<label>
-{% trans "Confirm Password" %}
-</label>
-
-
-{{ form.password2 }}
-
-
-{% for error in form.password2.errors %}
-
-<span class="error">
-{{ error }}
-</span>
-
-
-{% endfor %}
-
-
-</p>
-
-
-
-<button class="btn" type="submit">
-{% trans "Create Account" %}
-</button>
-
-
-</form>
-
-{% load socialaccount %}
-<a href="{% provider_login_url 'google' %}" class="btn-google">
-
-Sign in with Google</a>
-
-<p>
-
-{% trans "Already have an account?" %}
-
-<a href="{% url 'login' %}">
-{% trans "Login" %}
-</a>
-
-
-</p>
-
+    <!-- "Already have an account?" link -->
+    <p style="margin-top: 20px;">
+        {% trans "Already have an account?" %}
+        <a href="{% url 'login' %}">{% trans "Login" %}</a>
+    </p>
 
 </section>
-
 
 {% endblock %}
