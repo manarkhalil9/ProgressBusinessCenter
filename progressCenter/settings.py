@@ -38,7 +38,7 @@ SECRET_KEY = 'django-insecure-qbk@%#&9($g1c@*dmsgm+he9bf7&t*49ggv4=r_r3o8-2(**#$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -52,7 +52,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'modeltranslation',
     'main_app.apps.MainAppConfig',
+
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -63,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'progressCenter.urls'
@@ -137,9 +147,6 @@ LANGUAGE_COOKIE_NAME = 'django_language'
 # Load the .env file
 load_dotenv()
 
-# Testing (Uncomment the line below to print emails to the console instead of sending them)
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 # Real Emails (Uses Gmail SMTP and your .env credentials)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -153,3 +160,31 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 # Default sender and admin emails
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'noreply@yourwebsite.com')
 ADMIN_EMAIL = 'manarajkhalil79@gmail.com'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': os.getenv('GOOGLE_CLIENT_ID'),
+            'secret': os.getenv('GOOGLE_CLIENT_SECRET'),
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+# Redirect users after succe  ssful login/logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_LOGIN_ON_GET = True
