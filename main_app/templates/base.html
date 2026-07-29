@@ -34,7 +34,9 @@
     <!-- Logo -->
     <div class="logo">
         <a href="{% url 'home' %}">
-            {% trans "Progress Business Centre" %}
+            <img src="{% static 'images/logo.png' %}" 
+                 alt="{% trans 'Progress Business Centre' %}" 
+                 class="logo-img">
         </a>
     </div>
 

@@ -22,7 +22,6 @@ LANGUAGES = (
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 LOCALE_PATHS = [
@@ -80,7 +79,7 @@ ROOT_URLCONF = 'progressCenter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,10 +123,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
@@ -142,12 +146,12 @@ LOGOUT_REDIRECT_URL = '/'
 
 LANGUAGE_COOKIE_NAME = 'django_language'
 
-# --- EMAIL CONFIGURATION ---
+# EMAIL CONFIGURATION
 
 # Load the .env file
 load_dotenv()
 
-# Real Emails (Uses Gmail SMTP and your .env credentials)
+# Real Emails
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -184,7 +188,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# Redirect users after succe  ssful login/logout
+# Redirect users after successful login/logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
