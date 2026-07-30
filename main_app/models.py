@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from datetime import datetime, timedelta, date
 
 # Create your models here.
@@ -15,6 +15,7 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
+
     
 # features
 class Feature(models.Model):
@@ -23,6 +24,7 @@ class Feature(models.Model):
 
     def __str__(self):
         return self.title
+
     
 # branches
 class Branch(models.Model):
@@ -36,6 +38,7 @@ class Branch(models.Model):
 
     def __str__(self):
         return self.name
+
     
 # meeting rooms
 class MeetingRoom(models.Model):
@@ -46,8 +49,12 @@ class MeetingRoom(models.Model):
     capacity = models.PositiveIntegerField()
     price_per_hour = models.DecimalField(max_digits=8, decimal_places=3)
 
+    def __str__(self):
+        return self.name
+
     def is_available(self, start_datetime, end_datetime):
         """Check if this room is free for the given datetime range."""
+        # Note: status__in=['pending', 'approved'] automatically excludes cancelled bookings
         overlapping = self.bookings.filter(
             start_date=start_datetime.date(),
             start_time__lt=end_datetime.time(),
@@ -61,7 +68,6 @@ class MeetingRoom(models.Model):
         Return a list of available time slots for a given date.
         Slots are returned as (start_time, end_time) tuples.
         """
-        # Define business hours
         start_hour, end_hour = 9, 18
         slots = []
         time = datetime.combine(date, datetime.min.time().replace(hour=start_hour))
@@ -76,6 +82,7 @@ class MeetingRoom(models.Model):
                 slots.append((slot_start, slot_end))
             time += timedelta(minutes=interval_minutes)
         return slots
+
     
 # office
 class Office(models.Model):
@@ -85,11 +92,15 @@ class Office(models.Model):
     image = models.ImageField(upload_to='offices/', blank=True, null=True)
     price_per_month = models.DecimalField(max_digits=10, decimal_places=3)
 
+    def __str__(self):
+        return self.name
+
     def is_available(self, start_date, end_date):
-        """Check if this office is free for the entire date range."""
+        """Check if this office is free for the given date range (inclusive)."""
+        # Updated to __lte and __gte so single-day & short-term overlaps are accurately caught
         overlapping = self.bookings.filter(
-            start_date__lt=end_date,
-            end_date__gt=start_date,
+            start_date__lte=end_date,
+            end_date__gte=start_date,
             status__in=['pending', 'approved']
         ).exists()
         return not overlapping
@@ -131,6 +142,7 @@ class Office(models.Model):
             if self.is_available_on_date(check_date):
                 return check_date
         return None
+
     
 # booking
 class Booking(models.Model):
@@ -202,17 +214,20 @@ class Booking(models.Model):
                 )
 
         if self.office:
+            # Auto-set end_date to start_date for single-day office bookings if omitted
             if not self.end_date:
-                raise ValidationError(
-                    "End date is required for office bookings."
-                )
+                self.end_date = self.start_date
 
-            if self.end_date <= self.start_date:
+            # Updated validation: allow end_date == start_date (single day booking)
+            if self.end_date < self.start_date:
                 raise ValidationError(
-                    "End date must be after start date."
+                    "End date cannot be earlier than start date."
                 )
 
     def save(self, *args, **kwargs):
+        # Run model cleaning prior to save
+        self.clean()
+
         if self.meeting_room and self.start_time and self.end_time:
             start = datetime.combine(self.start_date, self.start_time)
             end = datetime.combine(self.start_date, self.end_time)
@@ -224,23 +239,36 @@ class Booking(models.Model):
             self.total_price = self.meeting_room.price_per_hour * hours
 
         elif self.office and self.end_date:
-            months = (
-                (self.end_date.year - self.start_date.year) * 12
-                + self.end_date.month - self.start_date.month
-            )
+            # Calculate duration in days (inclusive)
+            total_days = (self.end_date - self.start_date).days + 1
 
-            if self.end_date.day > self.start_date.day:
-                months += 1
+            if total_days < 30:
+                # Prorated daily pricing for short-term/single-day bookings
+                daily_rate = self.office.price_per_month / Decimal('30')
+                self.total_price = (daily_rate * Decimal(total_days)).quantize(
+                    Decimal('0.001'), rounding=ROUND_HALF_UP
+                )
+            else:
+                # Full monthly rate calculation
+                months = (
+                    (self.end_date.year - self.start_date.year) * 12
+                    + self.end_date.month - self.start_date.month
+                )
+                if self.end_date.day > self.start_date.day:
+                    months += 1
 
-            months = max(1, months)
-
-            self.total_price = self.office.price_per_month * months
+                months = max(1, months)
+                self.total_price = self.office.price_per_month * Decimal(months)
 
         super().save(*args, **kwargs)
 
     def __str__(self):
-        item = self.meeting_room or self.office
-        return f"{self.client_name} - {item}"
+        if self.meeting_room:
+            return f"{self.client_name} - {self.meeting_room.name}"
+        elif self.office:
+            return f"{self.client_name} - {self.office.name}"
+        return f"{self.client_name} - Booking #{self.id}"
+
     
 # events
 class Event(models.Model):
@@ -251,6 +279,7 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
     
 # gallery
 class GalleryImage(models.Model):
@@ -260,6 +289,7 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return self.title
+
     
 # FAQ
 class FAQ(models.Model):
@@ -268,6 +298,7 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
     
 # contact
 class Contact(models.Model):
@@ -277,6 +308,7 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.phone
+
     
 # visit requests
 class VisitRequest(models.Model):
@@ -291,6 +323,7 @@ class VisitRequest(models.Model):
 
     def __str__(self):
         return self.full_name
+
     
 # business registrations
 class BusinessRegistration(models.Model):
@@ -310,7 +343,6 @@ class BusinessRegistration(models.Model):
     business_type = models.CharField(max_length=100)
     cpr_number = models.CharField(max_length=20, blank=True, null=True)
     
-    # Required Documents
     cpr_document = models.FileField(upload_to='business_docs/cpr/', blank=True, null=True, help_text="Upload copy of CPR.")
     passport_document = models.FileField(upload_to='business_docs/passport/', blank=True, null=True, help_text="Upload copy of Passport.")
     
@@ -319,6 +351,7 @@ class BusinessRegistration(models.Model):
 
     def __str__(self):
         return f"{self.company_name} ({self.get_request_type_display()})"
+
 
 # referrals
 class Referral(models.Model):

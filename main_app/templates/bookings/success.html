@@ -10,9 +10,16 @@
         {% trans "Thank you. Our team will review your booking request and contact you shortly." %}
     </p>
 
-    <a class="btn" href="{% url 'rooms' %}">
-        {% trans "Back to Rooms" %}
-    </a>
+    {% if booking_type == 'office' %}
+        <a class="btn" href="{% url 'offices' %}">
+            {% trans "Back to Offices" %}
+        </a>
+        
+    {% else %}
+        <a class="btn" href="{% url 'rooms' %}">
+            {% trans "Back to Meeting Rooms" %}
+        </a>
+    {% endif %}
 </section>
 
 {% endblock %}

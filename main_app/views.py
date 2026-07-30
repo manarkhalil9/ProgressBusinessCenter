@@ -1,5 +1,3 @@
-# main_app/views.py
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from .models import (
@@ -243,7 +241,6 @@ def search(request):
 
 
 # ---------- BOOKING ----------
-# ---------- BOOKING ----------
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
     form_class = BookingForm
@@ -373,10 +370,14 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
             is_free = resource.is_available(start_dt, end_dt)
 
         else:
-            is_free = resource.is_available(
-                form.cleaned_data["start_date"],
-                form.cleaned_data["end_date"],
-            )
+            # Handle Office bookings: Fallback to start_date if end_date is missing for short-term/single-day
+            start_date = form.cleaned_data.get("start_date")
+            end_date = form.cleaned_data.get("end_date") or start_date
+            
+            # Ensure the form instance correctly reflects this default before saving
+            form.instance.end_date = end_date
+
+            is_free = resource.is_available(start_date, end_date)
 
         form.instance.status = "approved" if is_free else "pending"
 
@@ -430,7 +431,6 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy("booking_success")
-
 
 def booking_success(request):
     return render(request, "bookings/success.html")

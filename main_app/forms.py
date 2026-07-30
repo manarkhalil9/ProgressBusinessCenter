@@ -117,9 +117,17 @@ class BookingForm(forms.ModelForm):
         elif isinstance(resource, Office):
             start_date = cleaned_data.get('start_date')
             end_date = cleaned_data.get('end_date')
+
+            if start_date and not end_date:
+                end_date = start_date
+                cleaned_data['end_date'] = end_date
+                self.instance.end_date = end_date
+
             if start_date and end_date:
-                if not resource.is_available(start_date, end_date):
-                    self.add_error('end_date', _('This date range is not fully available.'))
+                if end_date < start_date:
+                    self.add_error('end_date', _('End date cannot be earlier than start date.'))
+                elif not resource.is_available(start_date, end_date):
+                    self.add_error('end_date', _('This date or date range is not fully available.'))
 
         return cleaned_data
 
