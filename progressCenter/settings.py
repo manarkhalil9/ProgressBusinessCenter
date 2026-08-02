@@ -163,7 +163,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # Default sender and admin emails
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER', 'noreply@yourwebsite.com')
-ADMIN_EMAIL = 'manarajkhalil79@gmail.com'
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', EMAIL_HOST_USER)
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
