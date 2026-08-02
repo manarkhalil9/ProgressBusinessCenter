@@ -369,6 +369,9 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
             is_free = resource.is_available(start_dt, end_dt)
 
+            # Determine duration string for meeting rooms
+            duration_info = f"Time: {form.cleaned_data['start_time'].strftime('%I:%M %p')} to {form.cleaned_data['end_time'].strftime('%I:%M %p')}"
+
         else:
             # Handle Office bookings: Fallback to start_date if end_date is missing for short-term/single-day
             start_date = form.cleaned_data.get("start_date")
@@ -379,43 +382,73 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
             is_free = resource.is_available(start_date, end_date)
 
+            # Determine duration string for offices
+            duration_info = f"Duration: {start_date} to {end_date}"
+
         form.instance.status = "approved" if is_free else "pending"
 
         response = super().form_valid(form)
-
         booking = self.object
 
+        # ---------------------------------------------------------
+        # 1. EMAIL TO ADMIN
+        # ---------------------------------------------------------
+        # Note: Replace 'phone' below if your model uses a different 
+        # field name for the contact number (e.g., 'contact_number')
+        contact_number = getattr(booking, 'phone', 'Not provided')
+
+        admin_subject = f"New Booking Request: {booking.client_name}"
+        admin_message = (
+            f"A new booking request has been submitted.\n\n"
+            f"--- Client Information ---\n"
+            f"Name: {booking.client_name}\n"
+            f"Email: {booking.email}\n"
+            f"Contact Number: {contact_number}\n\n"
+            f"--- Booking Details ---\n"
+            f"Resource: {booking.meeting_room or booking.office}\n"
+            f"Start Date: {booking.start_date}\n"
+            f"{duration_info}\n"
+            f"System Status: {booking.status.title()}\n"
+        )
+
         send_mail(
-            subject=f"New Booking Request: {booking.client_name}",
-            message=(
-                f"Booking for "
-                f"{booking.meeting_room or booking.office}\n"
-                f"Status: {booking.status}"
-            ),
+            subject=admin_subject,
+            message=admin_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[settings.ADMIN_EMAIL],
             fail_silently=True,
         )
 
+        # ---------------------------------------------------------
+        # 2. EMAIL TO CLIENT
+        # ---------------------------------------------------------
         if booking.status == "approved":
-            subject = "Booking Approved"
-            message = (
-                f"Your booking for "
-                f"{booking.meeting_room or booking.office} "
-                f"has been approved.\n\n"
-                f"Total Price: {booking.total_price} BHD"
+            client_subject = "Booking Confirmation - Progress Center"
+            client_message = (
+                f"Dear {booking.client_name},\n\n"
+                f"Thank you for choosing Progress Center. Your booking for "
+                f"{booking.meeting_room or booking.office} has been successfully reserved.\n\n"
+                f"Our management team will contact you shortly to discuss the final details, "
+                f"customized pricing, and any specific requirements you may have.\n\n"
+                f"We look forward to hosting you.\n\n"
+                f"Best regards,\n"
+                f"The Progress Center Team"
             )
         else:
-            subject = "Booking Received"
-            message = (
-                f"Your booking request for "
-                f"{booking.meeting_room or booking.office} "
-                f"is currently pending review."
+            client_subject = "Booking Request Received - Progress Center"
+            client_message = (
+                f"Dear {booking.client_name},\n\n"
+                f"Thank you for your interest in Progress Center. We have received your booking request for "
+                f"{booking.meeting_room or booking.office}.\n\n"
+                f"Your request is currently under review. Our team will contact you shortly to confirm "
+                f"availability and discuss the final details, including customized pricing.\n\n"
+                f"Best regards,\n"
+                f"The Progress Center Team"
             )
 
         send_mail(
-            subject=subject,
-            message=message,
+            subject=client_subject,
+            message=client_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[booking.email],
             fail_silently=True,
