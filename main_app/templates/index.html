@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
 
 {% block content %}
 
 <!-- HERO SECTION -->
-<section class="hero">
+<section class="hero" style="background-image: url('{% static 'images/hero-bg.png' %}');">
     <div class="hero-content">
         <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
         <p>{% trans "Progress Business Centre helps entrepreneurs, startups, and international companies establish a professional business presence in Bahrain through premium virtual offices, serviced offices, and complete business support solutions." %}</p>
