@@ -41,49 +41,68 @@
         </a>
     </div>
 
-    <!-- Search Bar -->
-    <form class="site-search" action="{% url 'search' %}" method="get" role="search">
+    <!-- EXPANDABLE SEARCH BAR -->
+    <form class="site-search" id="siteSearchForm" action="{% url 'search' %}" method="get" role="search">
         <label class="sr-only" for="site-search-input">{% trans "Search" %}</label>
         <input
             id="site-search-input"
             type="search"
             name="q"
-            value="{{ request.GET.q }}"
-            placeholder="{% trans 'Search' %}"
+            value="{{ request.GET.q|default:'' }}"
+            placeholder="{% trans 'Search...' %}"
             aria-label="{% trans 'Search' %}"
         >
-        <button type="submit" aria-label="{% trans 'Search' %}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" id="searchToggleBtn" class="search-lens-btn" aria-label="{% trans 'Search' %}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
         </button>
     </form>
 
+    <!-- Mobile Header Language Selector -->
+    <details class="header-lang-mobile">
+        <summary>
+            {% for lang in LANGUAGES %}
+                {% if lang.0 == CURRENT_LANG %}{{ lang.0|upper }}{% endif %}
+            {% endfor %}
+        </summary>
+        <div class="header-lang-dropdown">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                {% for lang in LANGUAGES %}
+                    <button type="submit" name="language" value="{{ lang.0 }}">
+                        {{ lang.1 }}
+                    </button>
+                {% endfor %}
+            </form>
+        </div>
+    </details>
+
     <!-- Desktop Navigation Links -->
     <div class="nav-links">
 
-        <!-- Core Site Links (Visible to Everyone) -->
+        <!-- Core Site Links -->
         <a href="{% url 'home' %}">{% trans "Home" %}</a>
-        <a href="{% url 'about' %}">{% trans "About" %}</a>
+        <a href="{% url 'about' %}">{% trans "About Us" %}</a>
         <a href="{% url 'services' %}">{% trans "Services" %}</a>
-        <a href="{% url 'rooms' %}">{% trans "Meeting Rooms" %}</a>
-        <a href="{% url 'offices' %}">{% trans "Serviced Offices" %}</a>
-        <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
+        <a href="{% url 'features' %}">{% trans "Features" %}</a>
+        <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
 
-        <!-- Public Dropdown: "Explore" (Always Visible) -->
+        <!-- Public Dropdown -->
         <details class="nav-more">
             <summary>{% trans "Explore" %}</summary>
             <div class="nav-more-menu">
-                <a href="{% url 'features' %}">{% trans "Features" %}</a>
+                <a href="{% url 'rooms' %}">{% trans "Meeting Rooms" %}</a>
+                <a href="{% url 'offices' %}">{% trans "Serviced Offices" %}</a>
+                <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
                 <a href="{% url 'events' %}">{% trans "Events" %}</a>
                 <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
-                <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
                 <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
             </div>
         </details>
 
-        <!-- Authenticated Dropdown: "Engage" (Visible Only When Logged In) -->
         {% if user.is_authenticated %}
         <details class="nav-more">
             <summary>{% trans "Engage" %}</summary>
@@ -94,6 +113,7 @@
             </div>
         </details>
         {% endif %}
+
     </div>
 
     <!-- Right Side Actions (User, Language) -->
@@ -132,40 +152,62 @@
         </details>
     </div>
 
-    <!-- Mobile Menu (Hidden by default) -->
+    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <!-- Core Links -->
-        <a href="{% url 'home' %}">{% trans "Home" %}</a>
-        <a href="{% url 'about' %}">{% trans "About" %}</a>
-        <a href="{% url 'services' %}">{% trans "Services" %}</a>
-        <a href="{% url 'rooms' %}">{% trans "Meeting Rooms" %}</a>
-        <a href="{% url 'offices' %}">{% trans "Serviced Offices" %}</a>
-        <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
-        
-        <!-- Public Explore Links -->
-        <a href="{% url 'features' %}">{% trans "Features" %}</a>
-        <a href="{% url 'events' %}">{% trans "Events" %}</a>
-        <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
-        <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
-        <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
 
-        <!-- Authenticated Mobile Links -->
+        <!-- Main Pages -->
+        <a href="{% url 'home' %}">{% trans "Home" %}</a>
+        <a href="{% url 'about' %}">{% trans "About Us" %}</a>
+        <a href="{% url 'services' %}">{% trans "Services" %}</a>
+        <a href="{% url 'features' %}">{% trans "Features" %}</a>
+        <a href="{% url 'faqs' %}">{% trans "FAQ" %}</a>
+
+        <!-- Explore -->
+        <details class="nav-more">
+            <summary>{% trans "Explore" %}</summary>
+            <div class="nav-more-menu">
+                <a href="{% url 'rooms' %}">{% trans "Meeting Rooms" %}</a>
+                <a href="{% url 'offices' %}">{% trans "Serviced Offices" %}</a>
+                <a href="{% url 'branches' %}">{% trans "Branches" %}</a>
+                <a href="{% url 'events' %}">{% trans "Events" %}</a>
+                <a href="{% url 'gallery' %}">{% trans "Gallery" %}</a>
+                <a href="{% url 'contact' %}">{% trans "Contact" %}</a>
+            </div>
+        </details>
+
         {% if user.is_authenticated %}
-            <a href="{% url 'dashboard' %}" style="font-weight: bold;">{% trans "My Bookings" %}</a>
-            <a href="{% url 'visit' %}">{% trans "Visit" %}</a>
-            <a href="{% url 'referral_create' %}">{% trans "Referral" %}</a>
-            <a href="{% url 'business_register' %}">{% trans "CR Registration" %}</a>
-            <span class="welcome-user mobile-welcome">
-                {% blocktrans with username=user.username %}Welcome, {{ username }}{% endblocktrans %}
-            </span>
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button class="logout-btn" type="submit">{% trans "Logout" %}</button>
-            </form>
+        <details class="nav-more">
+            <summary>{% trans "Engage" %}</summary>
+            <div class="nav-more-menu">
+                <a href="{% url 'visit' %}">{% trans "Visit" %}</a>
+                <a href="{% url 'referral_create' %}">{% trans "Referral" %}</a>
+                <a href="{% url 'business_register' %}">{% trans "CR Registration" %}</a>
+            </div>
+        </details>
+
+        <a href="{% url 'dashboard' %}" class="mobile-dashboard">
+            {% trans "My Bookings" %}
+        </a>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="logout-btn" type="submit">
+                {% trans "Logout" %}
+            </button>
+        </form>
+
         {% else %}
-            <a href="{% url 'login' %}">{% trans "Login" %}</a>
-            <a href="{% url 'signup' %}">{% trans "Sign Up" %}</a>
+
+        <a href="{% url 'login' %}">
+            {% trans "Login" %}
+        </a>
+
+        <a href="{% url 'signup' %}">
+            {% trans "Sign Up" %}
+        </a>
+
         {% endif %}
+
     </div>
 
 </nav>
@@ -190,6 +232,48 @@
     function toggleMenu() {
         document.getElementById("mobileMenu").classList.toggle("active");
     }
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('siteSearchForm');
+    const searchInput = document.getElementById('site-search-input');
+    const searchToggleBtn = document.getElementById('searchToggleBtn');
+
+    if (searchForm && searchInput && searchToggleBtn) {
+        // Toggle search bar expansion
+        searchToggleBtn.addEventListener('click', function(e) {
+            if (!searchForm.classList.contains('active')) {
+                e.preventDefault();
+                searchForm.classList.add('active');
+                searchInput.focus();
+            } else {
+                if (searchInput.value.trim() !== '') {
+                    searchForm.submit();
+                } else {
+                    searchForm.classList.remove('active');
+                }
+            }
+        });
+
+        // Close search bar when clicking outside if input is empty
+        document.addEventListener('click', function(e) {
+            if (!searchForm.contains(e.target) && searchInput.value.trim() === '') {
+                searchForm.classList.remove('active');
+            }
+        });
+    }
+
+    // Close mobile header language selector when clicking outside
+    const mobileLangDropdown = document.querySelector('.header-lang-mobile');
+    if (mobileLangDropdown) {
+        document.addEventListener('click', function(e) {
+            if (!mobileLangDropdown.contains(e.target)) {
+                mobileLangDropdown.removeAttribute('open');
+            }
+        });
+    }
+});
 </script>
 
 </body>

@@ -5,7 +5,7 @@
 {% block content %}
 
 <!-- HERO SECTION -->
-<section class="hero" style="background-image: url('{% static 'images/hero-bg.png' %}');">
+<section class="hero">
     <div class="hero-content">
         <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
         <p>{% trans "Progress Business Centre helps entrepreneurs, startups, and international companies establish a professional business presence in Bahrain through premium virtual offices, serviced offices, and complete business support solutions." %}</p>
@@ -43,9 +43,9 @@
     </div>
 </section>
 
-<!-- GALLERY PREVIEW – Random images from your gallery -->
-<section class="gallery-preview">
-    <div class="gallery-preview-header">
+<!-- GALLERY PREVIEW -->
+<section class="gallery-section">
+    <div class="gallery-header">
         <h2>{% trans "Our Spaces in Action" %}</h2>
         <p>{% trans "Take a visual tour of our professional workspaces, meeting rooms, and facilities." %}</p>
     </div>
@@ -55,8 +55,7 @@
             <a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
                 <div class="gallery-image-wrapper">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                    <div class="gallery-overlay">
-                    </div>
+                    <div class="gallery-overlay"></div>
                 </div>
             </a>
         {% empty %}
@@ -94,32 +93,32 @@
     </div>
 </section>
 
-<!-- WHY BAHRAIN -->
-<section class="about-home">
-    <div>
+<!-- WHY CHOOSE BAHRAIN (NO EMOJIS) -->
+<section class="why-bahrain-section">
+    <div class="section-title">
         <h2>{% trans "Why Choose Bahrain?" %}</h2>
-        <p>{% trans "Bahrain is one of the GCC's most attractive business destinations, offering international investors a stable economy, competitive operating costs, and a strategic location connecting businesses to regional markets." %}</p>
+        <p>{% trans "Bahrain is one of the GCC's most attractive business destinations, offering international investors a stable economy and complete business freedom." %}</p>
     </div>
-</section>
 
-<!-- BAHRAIN FEATURES -->
-<section class="features-section">
-    <div class="card-grid">
-        <div class="feature-card">
-            <h4>{% trans "100% Foreign Ownership" %}</h4>
-            <p>{% trans "Many business activities allow full foreign ownership, making Bahrain an ideal destination for international investors." %}</p>
+    <div class="why-grid">
+        <div class="why-card">
+            <h3>{% trans "100% Foreign Ownership" %}</h3>
+            <p>{% trans "Full ownership rights for foreign investors across most commercial business activities without needing a local partner." %}</p>
         </div>
-        <div class="feature-card">
-            <h4>{% trans "Gateway to the GCC" %}</h4>
-            <p>{% trans "Expand into Saudi Arabia and the wider GCC market from one strategic business location." %}</p>
+
+        <div class="why-card">
+            <h3>{% trans "0% Corporate Tax" %}</h3>
+            <p>{% trans "Enjoy a highly competitive tax environment with zero corporate, income, or capital gains tax for most business sectors." %}</p>
         </div>
-        <div class="feature-card">
-            <h4>{% trans "Fast Company Formation" %}</h4>
-            <p>{% trans "Supportive regulations and streamlined company formation help businesses establish operations efficiently." %}</p>
+
+        <div class="why-card">
+            <h3>{% trans "Strategic GCC Hub" %}</h3>
+            <p>{% trans "Direct access to Saudi Arabia via the King Fahd Causeway and quick connectivity to all major Middle East markets." %}</p>
         </div>
-        <div class="feature-card">
-            <h4>{% trans "Professional Local Support" %}</h4>
-            <p>{% trans "Receive expert guidance with office solutions, business registration, and day-to-day administrative support." %}</p>
+
+        <div class="why-card">
+            <h3>{% trans "Low Operating Costs" %}</h3>
+            <p>{% trans "Up to 30% lower setup and operational costs compared to neighboring Gulf business hubs." %}</p>
         </div>
     </div>
 </section>
