@@ -1,43 +1,39 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 
-<section class="page-header">
+<!-- Hero Banner Section -->
+<section class="page-header page-header-services">
+    <div class="page-header-container">
+        <!-- Left Hero Content -->
+        <div class="hero-left">
+            <h1 class="page-title">{% trans "Services" %}</h1>
+            <div class="accent-bar"></div>
+            <nav class="breadcrumb">
+                <a href="{% url 'home' %}">{% trans "Home" %}</a>
+                <span class="separator">›</span>
+                <span class="current">{% trans "Services" %}</span>
+            </nav>
+        </div>
 
-    <h1>
-        {% trans "Business Solutions for Companies Expanding in Bahrain" %}
-    </h1>
-
-    <p>
-        {% trans "Explore flexible office solutions designed for international companies, startups and entrepreneurs looking to establish a professional presence in Bahrain." %}
-    </p>
-
+        <!-- Right Hero Text Content -->
+        <div class="hero-right">
+            <h2>{% trans "Business Solutions for Companies Expanding in Bahrain" %}</h2>
+            <p>{% trans "Explore flexible office solutions designed for international companies, startups and entrepreneurs looking to establish a professional presence in Bahrain." %}</p>
+        </div>
+    </div>
 </section>
 
-
+<!-- Card Grid Section -->
 <section class="card-grid">
-
-
     {% for service in services %}
-
     <div class="service-card">
-
-
-        <h3>
-            {{ service.title }}
-        </h3>
-
-
-        <p>
-            {{ service.description|truncatewords:25 }}
-        </p>
-
-
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description|truncatewords:25 }}</p>
         <a class="btn" href="{% url 'service_detail' service.id %}">
-
             {% trans "Explore Solution" %}
-
             <svg 
                 width="16" 
                 height="16" 
@@ -47,48 +43,22 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round">
-
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
-
             </svg>
-
         </a>
-
-
     </div>
-
-
     {% empty %}
-
-        <p>
-            {% trans "No services are available at the moment." %}
-        </p>
-
+        <p>{% trans "No services are available at the moment." %}</p>
     {% endfor %}
-
-
 </section>
 
-
-
-<section class="about-home">
-
-    <div>
-
-        <h2>
-            {% trans "Solutions That Grow With Your Business" %}
-        </h2>
-
-
-        <p>
-            {% trans "Whether you need a virtual business address, a fully equipped office or professional meeting facilities, Progress Business Centre provides flexible solutions that adapt to your company's growth." %}
-        </p>
-
-
+<!-- Growth / Bottom Banner Section -->
+<section class="services-growth-section">
+    <div class="services-growth-card">
+        <h2>{% trans "Solutions That Grow With Your Business" %}</h2>
+        <p>{% trans "Whether you need a virtual business address, a fully equipped office or professional meeting facilities, Progress Business Centre provides flexible solutions that adapt to your company's growth." %}</p>
     </div>
-
 </section>
-
 
 {% endblock %}

@@ -46,16 +46,22 @@
 <!-- GALLERY PREVIEW -->
 <section class="gallery-section">
     <div class="gallery-header">
+        <span class="gallery-badge">{% trans "PREMIUM FACILITIES" %}</span>
         <h2>{% trans "Our Spaces in Action" %}</h2>
-        <p>{% trans "Take a visual tour of our professional workspaces, meeting rooms, and facilities." %}</p>
+        <p>{% trans "Take a visual tour of our professional workspaces, meeting rooms, and business facilities in Bahrain." %}</p>
     </div>
 
-    <div class="gallery-grid">
-        {% for image in random_images %}
-            <a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
-                <div class="gallery-image-wrapper">
+    <!-- Full-Width Gallery Slideshow -->
+    <div class="gallery-slideshow-container">
+        {% for image in all_images %}
+            <a href="{% url 'gallery_detail' image.id %}" 
+               class="gallery-slide" 
+               style="display: {% if forloop.first %}block{% else %}none{% endif %};">
+                <div class="gallery-image-full-wrapper">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                    <div class="gallery-overlay"></div>
+                    <div class="gallery-overlay">
+                        <span class="overlay-text">{% trans "Explore Space" %} →</span>
+                    </div>
                 </div>
             </a>
         {% empty %}
@@ -175,5 +181,32 @@
         <a href="{% url 'services' %}" class="btn btn-outline">{% trans "Explore Services" %}</a>
     </div>
 </section>
+
+<!-- JavaScript for 3-Second Random Rotation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    
+    if (slides.length > 1) {
+        let currentIndex = 0; // The first image shown by default
+
+        setInterval(() => {
+            // 1. Hide the currently displayed image
+            slides[currentIndex].style.display = 'none';
+            
+            // 2. Pick a random next image (ensure it's not the same as the current one)
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * slides.length);
+            } while (nextIndex === currentIndex);
+            
+            // 3. Update the current index and show the new image
+            currentIndex = nextIndex;
+            slides[currentIndex].style.display = 'block';
+            
+        }, 3000); // 3000 milliseconds = 3 seconds
+    }
+});
+</script>
 
 {% endblock %}

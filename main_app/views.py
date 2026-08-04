@@ -24,9 +24,10 @@ import calendar
 # ---------- HOME ----------
 def home(request):
 
-    random_images = GalleryImage.objects.order_by('?')[:4]
+    all_images = GalleryImage.objects.all() 
 
-    context = {'random_images' : random_images,}
+    context = {'all_images' : all_images,}
+
     return render(request, 'index.html', context)
 
 

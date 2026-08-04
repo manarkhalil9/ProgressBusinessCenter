@@ -3,216 +3,144 @@
 
 {% block content %}
 
-<section class="detail-card">
+<!-- Hero Banner Section -->
+<section class="page-header page-header-services">
+    <div class="page-header-container">
+        <!-- Left Hero Content -->
+        <div class="hero-left">
+            <h1 class="page-title">{{ service.title }}</h1>
+            <div class="accent-bar"></div>
+            <nav class="breadcrumb">
+                <a href="{% url 'home' %}">{% trans "Home" %}</a>
+                <span class="separator">›</span>
+                <a href="{% url 'services' %}">{% trans "Services" %}</a>
+                <span class="separator">›</span>
+                <span class="current">{{ service.title }}</span>
+            </nav>
+        </div>
 
-<a href="{% url 'services' %}" class="back-link">
-
-    <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2">
-
-        <path d="M19 12H5"></path>
-        <path d="M12 19l-7-7 7-7"></path>
-
-    </svg>
-
-    {% trans "Back to Services" %}
-
-</a>
-
-
-<h1>{{ service.title }}</h1>
-
-
-<p class="detail-description">
-
-    {{ service.description }}
-
-</p>
-
-
-<div class="card-grid">
-
-    <div class="feature-card">
-
-        <h3>
-            {% trans "Business Benefits" %}
-        </h3>
-
-        <p>
-
-            {% trans "Designed to help businesses establish a professional presence, improve operational efficiency and support long-term growth in Bahrain." %}
-
-        </p>
-
+        <!-- Right Hero Text Content -->
+        <div class="hero-right">
+            <p>{{ service.description }}</p>
+        </div>
     </div>
-
-
-    <div class="feature-card">
-
-        <h3>
-            {% trans "Ideal For" %}
-        </h3>
-
-        <p>
-
-        {% if "Virtual" in service.title %}
-
-            {% trans "International companies, startups, freelancers and businesses entering the Bahrain market." %}
-
-        {% elif "Office" in service.title %}
-
-            {% trans "Companies requiring a fully serviced professional office with ready-to-use facilities." %}
-
-        {% elif "Meeting" in service.title %}
-
-            {% trans "Businesses hosting client meetings, presentations and professional discussions." %}
-
-        {% else %}
-
-            {% trans "Businesses seeking flexible workspace and business support solutions." %}
-
-        {% endif %}
-
-        </p>
-
-    </div>
-
-</div>
-
-
-<section class="card-grid">
-
-    <div class="feature-card">
-
-        <h3>
-            {% trans "Key Benefits" %}
-        </h3>
-
-        <p>
-
-        {% if "Virtual" in service.title %}
-
-            • {% trans "Prestigious Bahrain business address" %}<br>
-            • {% trans "Professional mail and call handling" %}<br>
-            • {% trans "Lower operating costs" %}<br>
-            • {% trans "Access to meeting facilities" %}
-
-        {% elif "Office" in service.title %}
-
-            • {% trans "Fully furnished workspace" %}<br>
-            • {% trans "Reception and administrative support" %}<br>
-            • {% trans "High-speed internet and utilities" %}<br>
-            • {% trans "Flexible business environment" %}
-
-        {% elif "Meeting" in service.title %}
-
-            • {% trans "Professional meeting environment" %}<br>
-            • {% trans "Ideal for presentations" %}<br>
-            • {% trans "Comfortable client experience" %}<br>
-            • {% trans "Flexible booking options" %}
-
-        {% else %}
-
-            • {% trans "Professional business support" %}<br>
-            • {% trans "Flexible solutions" %}<br>
-            • {% trans "Experienced team" %}<br>
-            • {% trans "Designed for business growth" %}
-
-        {% endif %}
-
-        </p>
-
-    </div>
-
-
-    <div class="feature-card">
-
-        <h3>
-            {% trans "Why Choose This Solution?" %}
-        </h3>
-
-        <p>
-
-        {% if "Virtual" in service.title %}
-
-            {% trans "Build your Bahrain presence with a prestigious business address, professional call handling, mail services and access to business facilities without the cost of maintaining a traditional office." %}
-
-        {% elif "Office" in service.title %}
-
-            {% trans "Operate from a fully equipped workspace supported by reception services, modern facilities and a professional business environment." %}
-
-        {% elif "Meeting" in service.title %}
-
-            {% trans "Host meetings, presentations and client discussions in a professional environment that reflects your company's image." %}
-
-        {% else %}
-
-            {% trans "Receive reliable business support through flexible workspace solutions designed around your company's needs." %}
-
-        {% endif %}
-
-        </p>
-
-    </div>
-
 </section>
 
+<!-- Main Detail Content -->
+<section class="detail-card">
 
-<div class="cta">
+    <!-- Back Link -->
+    <a href="{% url 'services' %}" class="back-link">
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2">
+            <path d="M19 12H5"></path>
+            <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+        {% trans "Back to Services" %}
+    </a>
 
-    <h2>
+    <!-- First Grid -->
+    <div class="card-grid">
+        <div class="feature-card">
+            <h3>{% trans "Business Benefits" %}</h3>
+            <p>
+                {% trans "Designed to help businesses establish a professional presence, improve operational efficiency and support long-term growth in Bahrain." %}
+            </p>
+        </div>
 
-        {% trans "Ready to Get Started?" %}
+        <div class="feature-card">
+            <h3>{% trans "Ideal For" %}</h3>
+            <p>
+            {% if "Virtual" in service.title %}
+                {% trans "International companies, startups, freelancers and businesses entering the Bahrain market." %}
+            {% elif "Office" in service.title %}
+                {% trans "Companies requiring a fully serviced professional office with ready-to-use facilities." %}
+            {% elif "Meeting" in service.title %}
+                {% trans "Businesses hosting client meetings, presentations and professional discussions." %}
+            {% else %}
+                {% trans "Businesses seeking flexible workspace and business support solutions." %}
+            {% endif %}
+            </p>
+        </div>
+    </div>
 
-    </h2>
+    <!-- Second Grid -->
+    <section class="card-grid">
+        <div class="feature-card">
+            <h3>{% trans "Key Benefits" %}</h3>
+            <p>
+            {% if "Virtual" in service.title %}
+                • {% trans "Prestigious Bahrain business address" %}<br>
+                • {% trans "Professional mail and call handling" %}<br>
+                • {% trans "Lower operating costs" %}<br>
+                • {% trans "Access to meeting facilities" %}
+            {% elif "Office" in service.title %}
+                • {% trans "Fully furnished workspace" %}<br>
+                • {% trans "Reception and administrative support" %}<br>
+                • {% trans "High-speed internet and utilities" %}<br>
+                • {% trans "Flexible business environment" %}
+            {% elif "Meeting" in service.title %}
+                • {% trans "Professional meeting environment" %}<br>
+                • {% trans "Ideal for presentations" %}<br>
+                • {% trans "Comfortable client experience" %}<br>
+                • {% trans "Flexible booking options" %}
+            {% else %}
+                • {% trans "Professional business support" %}<br>
+                • {% trans "Flexible solutions" %}<br>
+                • {% trans "Experienced team" %}<br>
+                • {% trans "Designed for business growth" %}
+            {% endif %}
+            </p>
+        </div>
 
-    <p>
+        <div class="feature-card">
+            <h3>{% trans "Why Choose This Solution?" %}</h3>
+            <p>
+            {% if "Virtual" in service.title %}
+                {% trans "Build your Bahrain presence with a prestigious business address, professional call handling, mail services and access to business facilities without the cost of maintaining a traditional office." %}
+            {% elif "Office" in service.title %}
+                {% trans "Operate from a fully equipped workspace supported by reception services, modern facilities and a professional business environment." %}
+            {% elif "Meeting" in service.title %}
+                {% trans "Host meetings, presentations and client discussions in a professional environment that reflects your company's image." %}
+            {% else %}
+                {% trans "Receive reliable business support through flexible workspace solutions designed around your company's needs." %}
+            {% endif %}
+            </p>
+        </div>
+    </section>
 
-        {% trans "Our team is ready to help you choose the right solution for your business in Bahrain." %}
+    <!-- Bottom CTA Banner -->
+    <div class="cta">
+        <h2>
+            {% trans "Ready to Get Started?" %}
+        </h2>
+        <p>
+            {% trans "Our team is ready to help you choose the right solution for your business in Bahrain." %}
+        </p>
 
-    </p>
-
-
-    {% if "Virtual" in service.title or "CR" in service.title %}
-
-        <a href="{% url 'business_register' %}" class="btn">
-
-            {% trans "Start Your Application" %}
-
-        </a>
-
-    {% elif "Meeting" in service.title %}
-
-        <a href="{% url 'rooms' %}" class="btn">
-
-            {% trans "Book a Meeting Room" %}
-
-        </a>
-
-    {% elif "Office" in service.title %}
-
-        <a href="{% url 'offices' %}" class="btn">
-
-            {% trans "Browse Offices" %}
-
-        </a>
-
-    {% else %}
-
-        <a href="{% url 'contact' %}" class="btn">
-
-            {% trans "Contact Our Team" %}
-
-        </a>
-
-    {% endif %}
-
-</div>
+        {% if "Virtual" in service.title or "CR" in service.title %}
+            <a href="{% url 'business_register' %}" class="btn">
+                {% trans "Start Your Application" %}
+            </a>
+        {% elif "Meeting" in service.title %}
+            <a href="{% url 'rooms' %}" class="btn">
+                {% trans "Browse Meeting Rooms" %}
+            </a>
+        {% elif "Office" in service.title %}
+            <a href="{% url 'offices' %}" class="btn">
+                {% trans "Browse Offices" %}
+            </a>
+        {% else %}
+            <a href="{% url 'contact' %}" class="btn">
+                {% trans "Contact Our Team" %}
+            </a>
+        {% endif %}
+    </div>
 
 </section>
 
