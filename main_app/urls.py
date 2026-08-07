@@ -15,7 +15,6 @@ urlpatterns = [
 
     # features
     path('features/', views.FeatureListView.as_view(), name='features'),
-    path('features/<int:pk>/', views.FeatureDetailView.as_view(), name='feature_detail'),
 
     # branches
     path('branches/', views.BranchListView.as_view(), name='branches'),
@@ -28,10 +27,6 @@ urlpatterns = [
     # offices
     path("offices/", views.OfficeListView.as_view(), name="offices"),
     path("offices/<int:pk>/", views.OfficeDetailView.as_view(), name="office_detail"),
-
-    # events
-    path('events/', views.EventListView.as_view(), name='events'),
-    path('events/<int:pk>/', views.EventDetailView.as_view(), name='event_detail'),
 
     # gallery
     path('gallery/', views.GalleryListView.as_view(), name='gallery'),

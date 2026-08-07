@@ -1,170 +1,102 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
 
-<div class="locations-container">
-
-
-<section class="page-header">
-
-    <h1>
-        {% trans "Business Centre Facilities & Features" %}
-    </h1>
-
-    <p>
-        {% trans "Explore the professional facilities and services available at Progress Business Centre to support your company's daily operations and growth." %}
-    </p>
-
+<!-- Hero Section -->
+<section class="features-hero">
+    <div class="hero-content">
+        <span class="hero-eyebrow">{% trans "Business Facilities" %}</span>
+        <h1>{% trans "Built for Modern Businesses" %}</h1>
+        <p>{% trans "Professional facilities and premium amenities designed to help companies work efficiently, welcome clients confidently, and grow successfully." %}</p>
+        <a href="{% url 'contact' %}" class="btn-cta">{% trans "Contact Us" %}</a>
+    </div>
 </section>
 
-
-
-<section class="features-section">
-
-<div class="card-grid">
-
-
-{% for feature in features %}
-
-
-<div class="feature-card">
-
-
-<div>
-
-
-<div class="card-header">
-
-
-<div class="icon-wrapper">
-
-<svg 
-width="22" 
-height="22" 
-viewBox="0 0 24 24" 
-fill="none" 
-stroke="currentColor" 
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round">
-
-<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-
-<polyline points="2 17 12 22 22 17"></polyline>
-
-<polyline points="2 12 12 17 22 12"></polyline>
-
-</svg>
-
-</div>
-
-
-<h3>
-{{ feature.title }}
-</h3>
-
-
-</div>
-
-
-
-<p class="branch-address">
-
-{{ feature.description|truncatewords:20 }}
-
-</p>
-
-
-</div>
-
-
-
-
-<a class="btn-branch" 
-href="{% url 'feature_detail' feature.id %}">
-
-
-{% trans "Explore Feature" %}
-
-
-<svg 
-width="16" 
-height="16" 
-viewBox="0 0 24 24" 
-fill="none" 
-stroke="currentColor" 
-stroke-width="2"
-stroke-linecap="round"
-stroke-linejoin="round">
-
-
-<line x1="5" y1="12" x2="19" y2="12"></line>
-
-<polyline points="12 5 19 12 12 19"></polyline>
-
-
-</svg>
-
-
-</a>
-
-
-
-</div>
-
-
-{% empty %}
-
-
-<div class="empty-state">
-
-<p>
-{% trans "No facilities are currently available." %}
-</p>
-
-</div>
-
-
-{% endfor %}
-
-
-</div>
-
-
+<!-- Introduction Section -->
+<section class="features-intro">
+    <div class="intro-container">
+        <h2>{% trans "Professional Facilities" %}</h2>
+        <p class="intro-text">
+            {% trans "At Progress Business Centre, every workspace is supported by carefully designed facilities that enhance productivity, professionalism, and comfort." %}
+        </p>
+        <p class="intro-subtext">
+            {% trans "Whether you are launching a startup or managing an international company, our business environment provides everything you need from day one." %}
+        </p>
+    </div>
 </section>
 
-
-
-
-<section class="about-home">
-
-
-<div>
-
-
-<h2>
-
-{% trans "Designed for Professional Business Operations" %}
-
-</h2>
-
-
-<p>
-
-{% trans "From workspace facilities to administrative support, Progress Business Centre provides the environment businesses need to operate efficiently and professionally in Bahrain." %}
-
-</p>
-
-
-</div>
-
-
+<!-- Features Grid Section -->
+<section class="features-grid-section">
+    <div class="grid-container">
+        {% for feature in features %}
+        <div class="premium-feature-card">
+            
+            {% if feature.image %}
+                <div class="card-image" style="background-image: url('{{ feature.image.url }}');"></div>
+            {% endif %}
+            
+            <div class="card-content">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+            </div>
+            
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <p>{% trans "No facilities are currently available." %}</p>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
+<!-- Why Businesses Choose Progress -->
+<section class="why-choose-section">
+    <div class="split-container">
+        <div class="split-image">
+            <img src="{% static 'images/progresscenter.png' %}" alt="{% trans 'Progress Business Centre' %}">
+        </div>
+        <div class="split-content">
+            <h2>{% trans "Why Businesses Choose Us" %}</h2>
+            <ul class="benefit-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> {% trans "Premium Business Environment" %}</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> {% trans "Professional Support Team" %}</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> {% trans "Modern Infrastructure" %}</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> {% trans "Flexible Business Solutions" %}</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> {% trans "Strategic Bahrain Location" %}</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
+<!-- Business Environment Section -->
+<section class="environment-section">
+    <div class="environment-container">
+        <h2>{% trans "Everything Your Business Needs" %}</h2>
+        <p>{% trans "From reception services and modern meeting rooms to fully equipped offices and administrative support, our facilities are designed to help your business operate efficiently from the very first day." %}</p>
+    </div>
+</section>
 
+<!-- Call To Action -->
+<section class="feature-cta-section">
+    <div class="cta-feature">
+        <h2>{% trans "Ready to Experience Progress Business Centre?" %}</h2>
+        <p>{% trans "Schedule a visit and discover how our facilities can support your business growth." %}</p>
+        <div class="cta-buttons">
+            <a href="{% url 'visit' %}" class="btn-cta">{% trans "Book a Visit" %}</a>
+            <a href="{% url 'contact' %}" class="btn-outline">{% trans "Contact Us" %}</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer Banner -->
+<div class="footer-banner">
+    <span>{% trans "Professional Facilities." %}</span>
+    <span class="dot">•</span>
+    <span>{% trans "Flexible Solutions." %}</span>
+    <span class="dot">•</span>
+    <span>{% trans "Business Growth." %}</span>
 </div>
-
 
 {% endblock %}

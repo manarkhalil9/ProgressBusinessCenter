@@ -3,23 +3,39 @@
 
 {% block content %}
 
-<section class="success-card">
-    <h1>{% trans "Booking Request Submitted" %}</h1>
+<!-- HERO / PAGE HEADER -->
+<div class="success-header">
+    <div class="success-header-container">
+        <span class="success-badge">{% trans "Confirmation" %}</span>
+        <h1>{% trans "Booking Confirmation" %}</h1>
+    </div>
+</div>
 
-    <p>
-        {% trans "Thank you. Our team will review your booking request and contact you shortly." %}
-    </p>
+<!-- MAIN CONTENT CARD -->
+<div class="success-container">
+    <section class="success-card">
+        <div class="success-icon-wrapper">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
 
-    {% if booking_type == 'office' %}
-        <a class="btn" href="{% url 'offices' %}">
-            {% trans "Back to Offices" %}
-        </a>
-        
-    {% else %}
-        <a class="btn" href="{% url 'rooms' %}">
-            {% trans "Back to Meeting Rooms" %}
-        </a>
-    {% endif %}
-</section>
+        <h2>{% trans "Booking Request Submitted" %}</h2>
+
+        <p>
+            {% trans "Thank you. Our team will review your booking request and contact you shortly." %}
+        </p>
+
+        {% if booking_type == 'office' %}
+            <a class="btn btn-cta" href="{% url 'offices' %}">
+                {% trans "Back to Offices" %}
+            </a>
+        {% else %}
+            <a class="btn btn-cta" href="{% url 'rooms' %}">
+                {% trans "Back to Meeting Rooms" %}
+            </a>
+        {% endif %}
+    </section>
+</div>
 
 {% endblock %}

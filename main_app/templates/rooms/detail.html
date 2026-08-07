@@ -1,51 +1,61 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block content %}
 
-<section class="page-header">
-    <h1>{{ room.name }}</h1>
-    <p>{% trans "Professional meeting facilities designed for productive business discussions." %}</p>
+<!-- Hero Section -->
+<section class="rooms-hero detail-hero">
+    <div class="hero-content">
+        <h1>{{ room.name }}</h1>
+        <p>{% trans "Professional meeting facilities designed for productive business discussions." %}</p>
+    </div>
 </section>
 
-<section class="detail-card">
-
-    {% if room.image %}
-        <img class="room-image detail-room-image" src="{{ room.image.url }}" alt="{{ room.name }}">
-    {% endif %}
-
-    {% if room.description %}
-        <p class="detail-description">{{ room.description }}</p>
-    {% endif %}
-
-    <div class="card-grid">
-        <div class="feature-card">
-            <h3>{% trans "Location" %}</h3>
-            <p>{{ room.branch.name }}</p>
+<!-- Room Details Section -->
+<section class="room-detail-container">
+    <div class="detail-card">
+        
+        {% if room.image %}
+        <div class="detail-image-wrapper">
+            <img class="room-image detail-room-image" src="{{ room.image.url }}" alt="{{ room.name }}">
         </div>
-        <div class="feature-card">
-            <h3>{% trans "Capacity" %}</h3>
-            <p>{{ room.capacity }} {% trans "People" %}</p>
+        {% endif %}
+
+        <div class="detail-content">
+            {% if room.description %}
+            <p class="detail-description">{{ room.description }}</p>
+            {% endif %}
+
+            <div class="room-features detail-features">
+                <div class="feature-item">
+                    <span class="feature-label">{% trans "Location" %}</span>
+                    <span class="feature-value">{{ room.branch.name }}</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-label">{% trans "Capacity" %}</span>
+                    <span class="feature-value">{{ room.capacity }} {% trans "People" %}</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-label">{% trans "Starting from" %}</span>
+                    <span class="feature-value">{{ room.price_per_hour }} BHD</span>
+                </div>
+            </div>
+
+            <!-- Availability & Booking -->
+            <div class="availability-section">
+                <h2>{% trans "Availability" %}</h2>
+                <p class="info-text">
+                    {% trans "View real‑time availability and book your preferred time slot using the calendar." %}
+                </p>
+                <div class="cta-buttons">
+                    <a href="{% url 'book' 'room' room.pk %}" class="btn btn-primary btn-large">
+                        {% trans "Check Availability & Book" %}
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>{% trans "Starting from" %}</h3>
-            <p>{{ room.price_per_hour }} BHD</p>
-        </div>
+
     </div>
-
-    <!-- ========== AVAILABILITY ========== -->
-    <section class="availability-section">
-        <h2>{% trans "Availability" %}</h2>
-        <p class="info-text">
-            {% trans "View real‑time availability and book your preferred time slot using the calendar." %}
-        </p>
-        <div class="cta-buttons" style="margin-top: 20px;">
-            <a href="{% url 'book' 'room' room.pk %}" class="btn btn-primary">
-                {% trans "Check Availability & Book" %}
-            </a>
-        </div>
-    </section>
-
 </section>
 
 {% endblock %}

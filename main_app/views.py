@@ -56,12 +56,6 @@ class FeatureListView(ListView):
     context_object_name = 'features'
 
 
-class FeatureDetailView(DetailView):
-    model = Feature
-    template_name = 'features/detail.html'
-    context_object_name = 'feature'
-
-
 # ---------- BRANCHES ----------
 class BranchListView(ListView):
     model = Branch
@@ -112,19 +106,6 @@ class OfficeDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['today'] = date.today()
         return context
-
-
-# ---------- EVENTS ----------
-class EventListView(ListView):
-    model = Event
-    template_name = 'events/index.html'
-    context_object_name = 'events'
-
-
-class EventDetailView(DetailView):
-    model = Event
-    template_name = 'events/detail.html'
-    context_object_name = 'event'
 
 
 # ---------- GALLERY ----------
@@ -261,7 +242,6 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
-        # Attach user and resource BEFORE form.is_valid() runs model clean()
         form.instance.user = self.request.user
         resource = self.get_resource()
         
@@ -289,66 +269,77 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         resource = self.get_resource()
 
         context["resource"] = resource
         context["resource_type"] = self.kwargs["resource_type"]
 
-        selected_date = date.today()
+        today = date.today()
+        context["today"] = today
 
-        if self.request.method == "POST":
-            date_str = self.request.POST.get("start_date")
+        # Provide a 5-year range for long-term leases (e.g., 2026 to 2031)
+        context["years"] = range(today.year, today.year + 6)
+
+        # Helper function to securely parse incoming date strings
+        def parse_date(date_str, default=None):
             if date_str:
                 try:
-                    selected_date = datetime.strptime(
-                        date_str,
-                        "%Y-%m-%d"
-                    ).date()
+                    return datetime.strptime(date_str, "%Y-%m-%d").date()
                 except ValueError:
                     pass
-        else:
-            date_str = self.request.GET.get("date")
-            if date_str:
-                try:
-                    selected_date = datetime.strptime(
-                        date_str,
-                        "%Y-%m-%d"
-                    ).date()
-                except ValueError:
-                    pass
+            return default
 
-        context["selected_date"] = selected_date
-        context["today"] = date.today()
+        # 1. Retrieve actively selected dates (from POST, GET parameters, or defaults)
+        selected_start_date = parse_date(
+            self.request.POST.get("start_date") or self.request.GET.get("start_date"), 
+            today
+        )
+        selected_end_date = parse_date(
+            self.request.POST.get("end_date") or self.request.GET.get("end_date"), 
+            None
+        )
 
-        year = selected_date.year
-        month = selected_date.month
+        context["selected_start_date"] = selected_start_date
+        context["selected_end_date"] = selected_end_date
 
-        cal = calendar.Calendar(firstweekday=6)
-        context["month_days"] = cal.monthdatescalendar(year, month)
-        context["month_name"] = calendar.month_name[month]
-        context["year"] = year
+        # 2. Retrieve independent view months for start and end calendars
+        start_view_date = parse_date(self.request.GET.get("start_view"), selected_start_date)
+        end_view_date = parse_date(self.request.GET.get("end_view"), selected_end_date or start_view_date)
 
+        context["start_view_date"] = start_view_date
+        context["end_view_date"] = end_view_date
+
+        # 3. Generate independent calendar data for BOTH views using prefixes
+        def get_cal_data(view_date, prefix):
+            year = view_date.year
+            month = view_date.month
+            cal = calendar.Calendar(firstweekday=6) # Sunday
+            
+            prev_month = date(year - 1, 12, 1) if month == 1 else date(year, month - 1, 1)
+            next_month = date(year + 1, 1, 1) if month == 12 else date(year, month + 1, 1)
+
+            return {
+                f"{prefix}_month_days": cal.monthdatescalendar(year, month),
+                f"{prefix}_month_name": calendar.month_name[month],
+                f"{prefix}_year": year,
+                f"{prefix}_month": month,
+                f"{prefix}_previous_month": prev_month.strftime("%Y-%m-%d"),
+                f"{prefix}_next_month": next_month.strftime("%Y-%m-%d"),
+            }
+
+        context.update(get_cal_data(start_view_date, "start"))
+        context.update(get_cal_data(end_view_date, "end"))
+
+        # 4. Handle unavailable dates and time slots
         if isinstance(resource, Office):
-            context["unavailable_dates"] = resource.get_unavailable_dates(year, month)
+            unavail_start = resource.get_unavailable_dates(start_view_date.year, start_view_date.month)
+            unavail_end = resource.get_unavailable_dates(end_view_date.year, end_view_date.month)
+            context["unavailable_dates"] = unavail_start.union(unavail_end)
         else:
             context["unavailable_dates"] = set()
 
-        if month == 1:
-            prev_month = date(year - 1, 12, 1)
-        else:
-            prev_month = date(year, month - 1, 1)
-
-        if month == 12:
-            next_month = date(year + 1, 1, 1)
-        else:
-            next_month = date(year, month + 1, 1)
-
-        context["previous_month"] = prev_month.strftime("%Y-%m-%d")
-        context["next_month"] = next_month.strftime("%Y-%m-%d")
-
         if isinstance(resource, MeetingRoom):
-            context["available_slots"] = resource.get_available_time_slots(selected_date)
+            context["available_slots"] = resource.get_available_time_slots(selected_start_date)
         else:
             context["available_slots"] = None
 
@@ -369,21 +360,14 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
             )
 
             is_free = resource.is_available(start_dt, end_dt)
-
-            # Determine duration string for meeting rooms
             duration_info = f"Time: {form.cleaned_data['start_time'].strftime('%I:%M %p')} to {form.cleaned_data['end_time'].strftime('%I:%M %p')}"
 
         else:
-            # Handle Office bookings: Fallback to start_date if end_date is missing for short-term/single-day
             start_date = form.cleaned_data.get("start_date")
             end_date = form.cleaned_data.get("end_date") or start_date
-            
-            # Ensure the form instance correctly reflects this default before saving
             form.instance.end_date = end_date
 
             is_free = resource.is_available(start_date, end_date)
-
-            # Determine duration string for offices
             duration_info = f"Duration: {start_date} to {end_date}"
 
         form.instance.status = "approved" if is_free else "pending"
@@ -391,13 +375,7 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
         response = super().form_valid(form)
         booking = self.object
 
-        # ---------------------------------------------------------
-        # 1. EMAIL TO ADMIN
-        # ---------------------------------------------------------
-        # Note: Replace 'phone' below if your model uses a different 
-        # field name for the contact number (e.g., 'contact_number')
         contact_number = getattr(booking, 'phone', 'Not provided')
-
         admin_subject = f"New Booking Request: {booking.client_name}"
         admin_message = (
             f"A new booking request has been submitted.\n\n"
@@ -420,20 +398,14 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
             fail_silently=True,
         )
 
-        # ---------------------------------------------------------
-        # 2. EMAIL TO CLIENT
-        # ---------------------------------------------------------
         if booking.status == "approved":
             client_subject = "Booking Confirmation - Progress Center"
             client_message = (
                 f"Dear {booking.client_name},\n\n"
                 f"Thank you for choosing Progress Center. Your booking for "
                 f"{booking.meeting_room or booking.office} has been successfully reserved.\n\n"
-                f"Our management team will contact you shortly to discuss the final details, "
-                f"customized pricing, and any specific requirements you may have.\n\n"
-                f"We look forward to hosting you.\n\n"
-                f"Best regards,\n"
-                f"The Progress Center Team"
+                f"Our management team will contact you shortly to discuss final details and pricing.\n\n"
+                f"Best regards,\nThe Progress Center Team"
             )
         else:
             client_subject = "Booking Request Received - Progress Center"
@@ -441,10 +413,8 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
                 f"Dear {booking.client_name},\n\n"
                 f"Thank you for your interest in Progress Center. We have received your booking request for "
                 f"{booking.meeting_room or booking.office}.\n\n"
-                f"Your request is currently under review. Our team will contact you shortly to confirm "
-                f"availability and discuss the final details, including customized pricing.\n\n"
-                f"Best regards,\n"
-                f"The Progress Center Team"
+                f"Our team will contact you shortly to confirm availability and discuss pricing.\n\n"
+                f"Best regards,\nThe Progress Center Team"
             )
 
         send_mail(
