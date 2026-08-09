@@ -143,7 +143,6 @@ class ContactView(DetailView):
     def get_object(self):
         return Contact.objects.first()
 
-
 # ---------- VISIT REQUESTS ----------
 class VisitCreateView(LoginRequiredMixin, CreateView):
     model = VisitRequest
@@ -153,7 +152,55 @@ class VisitCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        visit = self.object
+
+        # Retrieve information safely from visit or request user
+        user_email = getattr(visit, 'email', None) or self.request.user.email
+        client_name = getattr(visit, 'name', None) or self.request.user.get_full_name() or self.request.user.username
+        preferred_date = getattr(visit, 'preferred_date', getattr(visit, 'date', 'Not specified'))
+        preferred_time = getattr(visit, 'preferred_time', getattr(visit, 'time', 'Not specified'))
+
+        # 1. Admin Email
+        admin_subject = f"New Visit Request: {client_name}"
+        admin_message = (
+            f"A new visit/meeting request has been submitted.\n\n"
+            f"--- Visitor Details ---\n"
+            f"Name: {client_name}\n"
+            f"Email: {user_email}\n"
+            f"Phone: {getattr(visit, 'phone', 'Not provided')}\n"
+            f"Preferred Date: {preferred_date}\n"
+            f"Preferred Time: {preferred_time}\n"
+        )
+
+        send_mail(
+            subject=admin_subject,
+            message=admin_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.ADMIN_EMAIL],
+            fail_silently=True,
+        )
+
+        # 2. Client Confirmation Email
+        if user_email:
+            client_subject = "Visit Request Confirmation - Progress Center"
+            client_message = (
+                f"Dear {client_name},\n\n"
+                f"Thank you for arranging a visit to Progress Business Centre.\n\n"
+                f"We have received your meeting request for {preferred_date} at {preferred_time}.\n"
+                f"Our team will review your preferred schedule and reach out to you shortly to confirm.\n\n"
+                f"Best regards,\nThe Progress Center Team"
+            )
+
+            send_mail(
+                subject=client_subject,
+                message=client_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user_email],
+                fail_silently=True,
+            )
+
+        return response
 
 
 def visit_success(request):
@@ -169,7 +216,57 @@ class ReferralCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        referral = self.object
+
+        referrer_name = self.request.user.get_full_name() or self.request.user.username
+        referrer_email = self.request.user.email
+
+        referred_name = getattr(referral, 'referred_name', getattr(referral, 'name', 'N/A'))
+        referred_email = getattr(referral, 'referred_email', getattr(referral, 'email', 'N/A'))
+        referred_phone = getattr(referral, 'referred_phone', getattr(referral, 'phone', 'N/A'))
+
+        # 1. Admin Email
+        admin_subject = f"New Referral Received from {referrer_name}"
+        admin_message = (
+            f"A new referral has been submitted on the portal.\n\n"
+            f"--- Referrer (Submitted By) ---\n"
+            f"Name: {referrer_name}\n"
+            f"Email: {referrer_email}\n\n"
+            f"--- Referred Lead Info ---\n"
+            f"Name: {referred_name}\n"
+            f"Email: {referred_email}\n"
+            f"Phone: {referred_phone}\n"
+        )
+
+        send_mail(
+            subject=admin_subject,
+            message=admin_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.ADMIN_EMAIL],
+            fail_silently=True,
+        )
+
+        # 2. Referrer Confirmation Email
+        if referrer_email:
+            client_subject = "Thank You for Your Referral - Progress Center"
+            client_message = (
+                f"Dear {referrer_name},\n\n"
+                f"Thank you for referring {referred_name} to Progress Business Centre!\n\n"
+                f"We have received the referral information and our team will get in touch with them promptly.\n"
+                f"We appreciate your support and confidence in our workspace solutions.\n\n"
+                f"Best regards,\nThe Progress Center Team"
+            )
+
+            send_mail(
+                subject=client_subject,
+                message=client_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[referrer_email],
+                fail_silently=True,
+            )
+
+        return response
 
 
 def referral_success(request):
@@ -185,7 +282,51 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        registration = self.object
+
+        user_email = getattr(registration, 'email', None) or self.request.user.email
+        client_name = getattr(registration, 'full_name', None) or getattr(registration, 'client_name', None) or self.request.user.get_full_name() or self.request.user.username
+        company_name = getattr(registration, 'company_name', 'Business Setup Request')
+
+        # 1. Admin Email
+        admin_subject = f"New Business Registration: {company_name}"
+        admin_message = (
+            f"A new business registration application has been submitted.\n\n"
+            f"--- Client Information ---\n"
+            f"Name: {client_name}\n"
+            f"Company / Activity: {company_name}\n"
+            f"Email: {user_email}\n"
+            f"Phone: {getattr(registration, 'phone', 'Not provided')}\n"
+        )
+
+        send_mail(
+            subject=admin_subject,
+            message=admin_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.ADMIN_EMAIL],
+            fail_silently=True,
+        )
+
+        # 2. Client Confirmation Email
+        if user_email:
+            client_subject = "Business Registration Received - Progress Center"
+            client_message = (
+                f"Dear {client_name},\n\n"
+                f"Thank you for submitting your business registration request for {company_name}.\n\n"
+                f"Our corporate setup specialists will review your application and reach out to you shortly to assist with the next steps.\n\n"
+                f"Best regards,\nThe Progress Center Team"
+            )
+
+            send_mail(
+                subject=client_subject,
+                message=client_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user_email],
+                fail_silently=True,
+            )
+
+        return response
 
 
 def business_success(request):

@@ -3,41 +3,38 @@
 
 {% block content %}
 
-<section class="form-card">
-
-
-<h1>
-{% trans "Login" %}
-</h1>
-
-
-<form method="post">
-
-{% csrf_token %}
-
-{{ form.as_p }}
-
-
-<button class="btn" type="submit">
-{% trans "Login" %}
-</button>
-
-
-</form>
-
-
-
-<p>
-{% trans "Don't have an account?" %}
-
-<a href="{% url 'signup' %}">
-{% trans "Sign up" %}
-</a>
-
-</p>
-
-
+<!-- Hero Section with Image Background -->
+<section class="auth-hero">
+    <div class="hero-content">
+        <h1>{% trans "Welcome Back" %}</h1>
+        <p>{% trans "Sign in to access your dashboard, manage office bookings, and review registration progress." %}</p>
+    </div>
 </section>
 
+<!-- Authentication Container -->
+<div class="auth-container">
+    <div class="form-card">
+        <div class="form-header">
+            <h2>{% trans "Account Login" %}</h2>
+            <p>{% trans "Enter your credentials to continue." %}</p>
+        </div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="custom-form-p">
+                {{ form.as_p }}
+            </div>
+
+            <button class="btn-submit" type="submit">
+                {% trans "Login" %}
+            </button>
+        </form>
+
+        <div class="auth-footer-link">
+            <p>{% trans "Don't have an account?" %} <a href="{% url 'signup' %}">{% trans "Sign up" %}</a></p>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

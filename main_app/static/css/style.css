@@ -3808,38 +3808,56 @@ td.other-month .selectable-date,
 
 /* Mini Feature Grid inside List Cards */
 .feature-mini-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 22px;
-    padding: 12px 14px;
-    background-color: var(--color-bg-page, #F8FAFC);
-    border-radius: var(--radius-md, 10px);
-    border: 1px solid var(--color-border, #E5E7EB);
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 20px;
+    
+    /* Resetting previous outer wrapper styles */
+    background-color: transparent;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 0;
 }
 
 .feature-mini-grid .feature-card {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    
+    /* Remove any inner borders or shadows if they were applied in HTML */
+    border: none;
+    box-shadow: none;
 }
 
 .feature-title {
-    font-size: 0.75rem;
+    display: block;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--color-text-muted, #6B7280);
+    color: var(--color-text-muted, #666666);
     font-weight: 600;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
 .feature-val {
-    font-size: 0.92rem;
+    display: block;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-primary, #1D3557);
+    color: var(--color-primary, #001f3f);
 }
 
 .price-val {
-    color: var(--color-cta, #E63946);
+    color: var(--color-cta, #E63946); 
+    /* Note: If you want the office price to be dark blue just like the meeting rooms, 
+       you can delete this .price-val block completely! */
 }
 
 /* CTA Button Styling */
@@ -3994,6 +4012,1548 @@ td.other-month .selectable-date,
     }
 
     .cta-buttons .btn-cta {
+        width: 100%;
+    }
+}
+
+/* 1. Hero Section (Made Lighter) */
+.branches-hero {
+    /* Reduced opacity from 0.85/0.90 to 0.65/0.75 for a lighter overlay */
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
+                url('../images/branches-hero.png') center/cover no-repeat;
+    padding: 80px 20px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.branches-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.branches-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.branches-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Container & Layout Grid */
+.locations-container {
+    max-width: 1100px; /* Widened slightly to give side-by-side cards room */
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.branches-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* This places the two cards side-by-side */
+    gap: 40px; 
+}
+
+/* 3. The Branch Card (Image Top, Text Bottom) */
+.branch-location-grid {
+    display: flex;
+    flex-direction: column; /* Stacks the image on top of the text */
+    height: 100%; /* Guarantees both side-by-side cards stretch to match the tallest one */
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(15, 43, 72, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.branch-location-grid:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 43, 72, 0.12);
+}
+
+/* 4. Top Section: Image */
+.branch-image-wrapper {
+    width: 100%;
+    height: 280px; /* Sets a fixed identical height for all images */
+    background-color: var(--color-bg-light);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.branch-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+/* 5. Bottom Section: Content Details */
+.branch-visit-card {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows the text area to expand, filling the remaining card space */
+}
+
+.branch-visit-card .card-header h2 {
+    font-size: 1.6rem; /* Slightly smaller to fit side-by-side nicely */
+    color: var(--color-primary);
+    margin: 0 0 20px 0;
+    font-weight: 700;
+}
+
+.branch-info-details p {
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    margin-bottom: 14px;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+}
+
+.branch-info-details p strong {
+    color: var(--color-primary);
+    margin-right: 6px;
+    font-weight: 600;
+    min-width: 60px;
+}
+
+.branch-info-details a {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.branch-info-details a:hover {
+    color: var(--color-cta);
+}
+
+/* 6. Call to Action (CTA) Button */
+.actions-wrapper {
+    margin-top: auto; /* This magically pushes the button to the absolute bottom of the card */
+    padding-top: 25px;
+    border-top: 1px solid var(--color-border);
+}
+
+.btn-open-maps {
+    display: block; /* Makes the button take full width in the side-by-side layout */
+    text-align: center;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-open-maps:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+    color: #ffffff; 
+}
+
+/* 7. Empty State */
+.empty-state {
+    grid-column: 1 / -1; /* Ensures the empty message spans the full width */
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--color-bg-light);
+    border-radius: 12px;
+    border: 2px dashed var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+}
+
+/* 8. Mobile Responsiveness */
+@media (max-width: 768px) {
+    .branches-hero {
+        padding: 60px 20px;
+    }
+    
+    .branches-hero h1 {
+        font-size: 2rem;
+    }
+
+    .branches-list {
+        grid-template-columns: 1fr; /* Stacks the cards vertically on small screens */
+    }
+
+    .branch-image-wrapper, 
+    .image-placeholder {
+        height: 220px;
+    }
+}
+
+/* ==========================================================================
+   GALLERY PAGES STYLES
+   ========================================================================== */
+
+/* 1. Gallery Hero Section (Matches Branches Hero) */
+.gallery-hero {
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
+                url('../images/gallery-hero.png') center/cover no-repeat; /* Update this image path if needed */
+    padding: 80px 20px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.gallery-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.gallery-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.gallery-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Gallery Index Grid Layout */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.gallery-grid {
+    display: grid;
+    /* Auto-fills columns, ensuring cards are at least 300px wide */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* 3. Gallery Card Design */
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(15, 43, 72, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(15, 43, 72, 0.12);
+}
+
+.gallery-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    background-color: var(--color-bg-light);
+}
+
+.gallery-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .gallery-image-wrapper img {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Hover Overlay with CTA Button */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(29, 53, 87, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.btn-view {
+    background-color: var(--color-cta);
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transform: translateY(15px);
+    transition: transform 0.3s ease, background-color 0.2s;
+}
+
+.gallery-card:hover .btn-view {
+    transform: translateY(0);
+}
+
+.gallery-card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.gallery-card-content h3 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   GALLERY DETAIL PAGE STYLES
+   ========================================================================== */
+
+.gallery-detail-container {
+    max-width: 900px;
+    margin: 40px auto 80px;
+    padding: 0 20px;
+}
+
+/* Back Link Styling */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--color-cta); /* Turns red on hover */
+}
+
+/* Detail Card */
+.gallery-detail-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+}
+
+.gallery-detail-image-wrapper {
+    width: 100%;
+    /* Limits image height so user doesn't have to scroll forever */
+    max-height: 65vh; 
+    background-color: #000000; /* Dark background beautifully frames mixed aspect ratios */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-detail-image {
+    width: 100%;
+    height: 100%;
+    max-height: 65vh;
+    object-fit: contain; /* 'contain' ensures the whole image is visible without cropping */
+}
+
+.gallery-detail-content {
+    padding: 35px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.gallery-detail-title {
+    color: var(--color-primary);
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .gallery-hero {
+        padding: 60px 20px;
+    }
+    
+    .gallery-hero h1 {
+        font-size: 2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+
+    .gallery-detail-container {
+        margin-top: 20px;
+    }
+
+    .gallery-detail-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ==========================================================================
+   CONTACT PAGE STYLES
+   ========================================================================== */
+
+/* 1. Contact Hero Section (Matches Branches & Gallery) */
+.contact-hero {
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
+                url('../images/contact-hero.png') center/cover no-repeat; /* Make sure to add a background image! */
+    padding: 80px 20px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.contact-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.contact-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Main Container */
+.contact-main-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+/* 3. Contact Cards Grid Layout */
+.contact-card-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.info-row-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(15, 43, 72, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-row-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(15, 43, 72, 0.12);
+}
+
+/* Icons */
+.icon-box {
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-bg-light);
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* When hovering over the card, the icon gets the CTA background color */
+.info-row-card:hover .icon-box {
+    background-color: var(--color-cta);
+    color: #ffffff;
+}
+
+/* Special hover state for WhatsApp to make it branded green */
+.whatsapp-card:hover .whatsapp-icon {
+    background-color: #25D366; 
+    color: #ffffff;
+}
+
+/* Card Text */
+.contact-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.contact-value a {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.info-row-card:hover .contact-value a {
+    color: var(--color-cta); /* Links turn red on hover */
+}
+
+/* 4. About & CTA Informational Sections */
+/* Replace your existing .contact-about styles with these */
+
+.contact-about {
+    text-align: center;
+    padding: 60px 40px;
+    background: #ffffff; /* White background to pop against the page */
+    border-radius: 16px;
+    margin-bottom: 40px;
+    border: 1px solid var(--color-border);
+    border-top: 4px solid var(--color-cta); /* Beautiful accent line */
+    box-shadow: 0 10px 30px rgba(15, 43, 72, 0.08); /* Soft shadow */
+}
+
+.contact-about h2 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.contact-about p {
+    color: var(--color-primary); /* Darker text for readability */
+    font-size: 1.25rem; /* Larger font size */
+    line-height: 1.8;
+    font-weight: 500;
+    font-style: italic; /* Gives it a welcoming, quoted feel */
+    margin: 0 auto;
+    max-width: 750px;
+}
+
+/* 5. The Final CTA Button */
+.contact-cta-section p {
+    margin-bottom: 30px; /* Space above button */
+}
+
+.btn-cta {
+    display: inline-block;
+    background-color: var(--color-cta); /* Uses your bright red */
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+    color: #ffffff;
+}
+
+/* 6. Mobile Layout Adjustments */
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 60px 20px;
+    }
+    
+    .contact-hero h1 {
+        font-size: 2rem;
+    }
+
+    .contact-about, 
+    .contact-cta-section {
+        padding: 40px 20px;
+    }
+
+    .contact-card-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   MEETING & SUCCESS PAGE STYLES
+   ========================================================================== */
+
+/* 1. Hero Sections */
+.meeting-hero {
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
+    url('../images/visit-hero.png') center/cover no-repeat;
+    padding: 150px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.success-hero {
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.85) 0%, rgba(15, 43, 72, 0.85) 100%), 
+                url('../images/success-hero.png') center/cover no-repeat;
+}
+
+.meeting-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.meeting-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.meeting-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Main Container */
+.meeting-container {
+    max-width: 800px; /* Slightly narrower than other pages to frame the form well */
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+/* 3. Form Card Styling */
+.form-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.form-header h2 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.form-header p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* 4. Django Form Styling (.custom-form) */
+/* Targets the <p> tags generated by Django's {{ form.as_p }} */
+.custom-form p {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.custom-form label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Styles all standard input types Django will generate */
+.custom-form input[type="text"],
+.custom-form input[type="email"],
+.custom-form input[type="tel"],
+.custom-form input[type="number"],
+.custom-form input[type="date"],
+.custom-form input[type="time"],
+.custom-form select,
+.custom-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text-dark);
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+/* Focus states for when a user clicks inside an input */
+.custom-form input:focus,
+.custom-form select:focus,
+.custom-form textarea:focus {
+    outline: none;
+    border-color: var(--color-cta);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15); /* Soft red glow using your CTA color */
+    background-color: #ffffff;
+}
+
+.custom-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Custom Submit Button (matching CTA styles) */
+.btn-submit {
+    width: 100%;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+}
+
+/* 5. Success Card Styling */
+.success-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+    border-top: 6px solid #25D366; /* Bright validation green */
+}
+
+.success-icon {
+    color: #25D366;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.success-card h2 {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    font-weight: 800;
+}
+
+.success-card p {
+    color: var(--color-text-dark);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 auto 40px;
+    max-width: 500px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .meeting-hero {
+        padding: 60px 20px;
+    }
+    
+    .meeting-hero h1 {
+        font-size: 2rem;
+    }
+
+    .form-card {
+        padding: 30px 20px;
+    }
+    
+    .success-card {
+        padding: 40px 20px;
+    }
+}
+
+/* ==========================================================================
+   REFERRAL & SUCCESS PAGE STYLES
+   ========================================================================== */
+
+/* 1. Hero Sections */
+.referral-hero {
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
+    url('../images/referral-hero.png') center/cover no-repeat;
+    padding: 150px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.success-hero {
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.85) 0%, rgba(15, 43, 72, 0.85) 100%), 
+                url('../images/success-hero.png') center/cover no-repeat;
+    padding: 150px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.referral-hero .hero-content,
+.success-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.referral-hero h1,
+.success-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.referral-hero p,
+.success-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Main Container */
+.referral-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+/* 3. Form Card Styling */
+.form-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.form-header h2 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.form-header p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* 4. Form Fields & Elements */
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-card input[type="text"],
+.form-card input[type="email"],
+.form-card input[type="tel"],
+.form-card input[type="number"],
+.form-card input[type="date"],
+.form-card input[type="time"],
+.form-card select,
+.form-card textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text-dark);
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+    outline: none;
+    border-color: var(--color-cta);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+    background-color: #ffffff;
+}
+
+.form-card textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.error-msg {
+    display: block;
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* Custom Submit Button */
+.btn-submit {
+    width: 100%;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+}
+
+/* 5. Success Card Styling */
+.success-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+    border-top: 6px solid #25D366;
+}
+
+.success-icon {
+    color: #25D366;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    font-size: 64px;
+    line-height: 1;
+}
+
+.success-card h2 {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    font-weight: 800;
+}
+
+.success-text {
+    color: var(--color-text-dark);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 auto 40px;
+    max-width: 500px;
+}
+
+.success-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background-color: var(--color-cta);
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: rgba(15, 43, 72, 0.05);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .referral-hero,
+    .success-hero {
+        padding: 60px 20px;
+    }
+    
+    .referral-hero h1,
+    .success-hero h1 {
+        font-size: 2rem;
+    }
+
+    .form-card {
+        padding: 30px 20px;
+    }
+    
+    .success-card {
+        padding: 40px 20px;
+    }
+}
+
+/* ==========================================================================
+   BUSINESS REGISTRATION & SUCCESS PAGE STYLES
+   ========================================================================== */
+
+/* 1. Hero Sections with Background Images */
+.business-hero {
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.70) 0%, rgba(15, 43, 72, 0.80) 100%), 
+    url('../images/business-hero.png') center/cover no-repeat;
+    padding: 150px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.success-hero {
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.80) 0%, rgba(15, 43, 72, 0.85) 100%), 
+    url('../images/success-hero.png') center/cover no-repeat;
+    padding: 150px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.business-hero .hero-content,
+.success-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.business-hero h1,
+.success-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.business-hero p,
+.success-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Main Wrapper Container */
+.business-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+/* 3. Form Card Styling */
+.form-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.form-header h2 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.form-header p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* 4. Form Fields Layout & Controls */
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-card input[type="text"],
+.form-card input[type="email"],
+.form-card input[type="tel"],
+.form-card input[type="number"],
+.form-card input[type="date"],
+.form-card input[type="file"],
+.form-card select,
+.form-card textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text-dark);
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+    outline: none;
+    border-color: var(--color-cta);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+    background-color: #ffffff;
+}
+
+.custom-file-wrapper input[type="file"] {
+    padding: 10px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+/* Custom Submit Button */
+.btn-submit {
+    width: 100%;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+}
+
+/* 5. Success Card Styling */
+.success-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+    border-top: 6px solid #25D366;
+}
+
+.success-icon {
+    color: #25D366;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    font-size: 64px;
+    line-height: 1;
+}
+
+.success-card h2 {
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    font-weight: 800;
+}
+
+.success-text {
+    color: var(--color-text-dark);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0 auto 40px;
+    max-width: 500px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background-color: var(--color-cta);
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background-color: rgba(15, 43, 72, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .business-hero,
+    .success-hero {
+        padding: 60px 20px;
+    }
+    
+    .business-hero h1,
+    .success-hero h1 {
+        font-size: 2rem;
+    }
+
+    .form-card {
+        padding: 30px 20px;
+    }
+    
+    .success-card {
+        padding: 40px 20px;
+    }
+}
+
+/* ==========================================================================
+   AUTHENTICATION PAGES (SIGNUP & LOGIN) STYLES
+   ========================================================================== */
+
+/* 1. Hero Section with Image Background */
+.auth-hero {
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.70) 0%, rgba(15, 43, 72, 0.80) 100%), 
+    url('../images/signup-hero.png') center/cover no-repeat;
+    padding: 150px 40px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.auth-hero .hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.auth-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.auth-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 2. Main Layout Wrapper */
+.auth-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+/* 3. Form Card Styling */
+.form-card {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(15, 43, 72, 0.08);
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.form-header h2 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.form-header p {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* 4. Form Fields & Elements */
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Targets Django's form.as_p tags in login */
+.custom-form-p p {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.custom-form-p label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-card input[type="text"],
+.form-card input[type="password"],
+.form-card input[type="email"],
+.custom-form-p input[type="text"],
+.custom-form-p input[type="password"],
+.custom-form-p input[type="email"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--color-text-dark);
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-card input:focus,
+.custom-form-p input:focus {
+    outline: none;
+    border-color: var(--color-cta);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+    background-color: #ffffff;
+}
+
+.error-msg {
+    display: block;
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* 5. Button Row & Social Logins */
+.button-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-submit {
+    flex: 1;
+    min-width: 200px;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.25);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-submit:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+}
+
+.btn-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.google-icon {
+    flex-shrink: 0;
+}
+
+/* 6. Footer Links */
+.auth-footer-link {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.auth-footer-link p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.auth-footer-link a {
+    color: var(--color-cta);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-footer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .auth-hero {
+        padding: 60px 20px;
+    }
+    
+    .auth-hero h1 {
+        font-size: 2rem;
+    }
+
+    .form-card {
+        padding: 30px 20px;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .btn-submit {
         width: 100%;
     }
 }

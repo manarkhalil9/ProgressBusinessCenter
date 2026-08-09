@@ -2,24 +2,32 @@
 {% load i18n %}
 
 {% block content %}
-<section class="success-card" style="text-align: center; padding: 50px;">
-    <div class="success-icon" style="font-size: 50px; color: #1f9d55; margin-bottom: 20px;">
-        ✓
-    </div>
-    
-    <!-- Updated the H1 to be more specific to the service -->
-    <h1>{% trans "Virtual Office Application Received!" %}</h1>
-    
-    <p>{% trans "Your application for professional business services has been submitted for review. Our team will contact you shortly." %}</p>
 
-    <br>
-    
-    <div class="hero-buttons">
-        <!-- Changed link text to match the new service name -->
-        <a href="{% url 'dashboard' %}" class="btn btn-light">{% trans "Track My Application" %}</a>
-
-        <a href="{% url 'offices' %}" class="btn">{% trans "Browse Offices" %}</a>
-        <a href="{% url 'rooms' %}" class="btn">{% trans "Browse Meeting Rooms" %}</a>
+<!-- Hero Section with Success Image Background -->
+<section class="success-hero">
+    <div class="hero-content">
+        <h1>{% trans "Virtual Office Application Received!" %}</h1>
+        <p>{% trans "Your application for professional business services has been successfully submitted." %}</p>
     </div>
 </section>
+
+<!-- Success Card Container -->
+<div class="business-container">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        
+        <h2>{% trans "Application Under Review" %}</h2>
+        
+        <p class="success-text">
+            {% trans "Our corporate setup team is reviewing your documents and application details. We will contact you shortly to complete the process." %}
+        </p>
+
+        <div class="hero-buttons success-actions">
+            <a href="{% url 'dashboard' %}" class="btn-primary">{% trans "Track My Application" %}</a>
+            <a href="{% url 'offices' %}" class="btn-outline">{% trans "Browse Offices" %}</a>
+            <a href="{% url 'rooms' %}" class="btn-outline">{% trans "Browse Meeting Rooms" %}</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

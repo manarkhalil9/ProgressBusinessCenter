@@ -58,9 +58,6 @@
                     class="gallery-slide {% if forloop.first %}active{% endif %}">
                         <div class="gallery-image-full-wrapper">
                             <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                            <div class="gallery-overlay">
-                                <span class="overlay-text">{% trans "Explore Space" %} →</span>
-                            </div>
                         </div>
                     </a>
                 {% empty %}

@@ -3,24 +3,37 @@
 
 {% block content %}
 
-<section class="page-header">
-    <h1>{% trans "Gallery" %}</h1>
-    <p>{% trans "Explore our workspace, facilities, and events through our image collection." %}</p>
+<!-- 1. Gallery Hero Section -->
+<section class="gallery-hero">
+    <div class="hero-content">
+        <h1>{% trans "Gallery" %}</h1>
+        <p>{% trans "Explore our workspace, facilities, and events through our image collection." %}</p>
+    </div>
 </section>
 
-<section class="gallery-grid">
-    {% for image in gallery %}
-        <a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
-            <div class="gallery-image-wrapper">
-                <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                <div class="gallery-overlay">
+<!-- 2. Gallery Grid Container -->
+<div class="gallery-container">
+    <section class="gallery-grid">
+        {% for image in gallery %}
+            <a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
+                <div class="gallery-image-wrapper">
+                    <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                    <!-- Hover overlay with CTA style -->
+                    <div class="gallery-overlay">
+                        <span class="btn-view">{% trans "View Image" %}</span>
+                    </div>
                 </div>
+                <div class="gallery-card-content">
+                    <h3>{{ image.title }}</h3>
+                </div>
+            </a>
+        {% empty %}
+            <!-- Reusing the empty state style from the branches page -->
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <p>{% trans "No images available yet." %}</p>
             </div>
-            <h3>{{ image.title }}</h3>
-        </a>
-    {% empty %}
-        <p class="empty">{% trans "No images available yet." %}</p>
-    {% endfor %}
-</section>
+        {% endfor %}
+    </section>
+</div>
 
 {% endblock %}

@@ -3,29 +3,44 @@
 
 {% block content %}
 
-<div class="page-header">
-    <h1>{% trans "Refer a Business" %}</h1>
-    <p>{% trans "Know someone looking for a professional workspace? Refer them to us!" %}</p>
+<!-- Hero Section -->
+<section class="referral-hero">
+    <div class="hero-content">
+        <h1>{% trans "Refer a Business" %}</h1>
+        <p>{% trans "Know someone looking for a professional workspace? Refer them to us!" %}</p>
+    </div>
+</section>
+
+<!-- Form Container -->
+<div class="referral-container">
+    <div class="form-card">
+        <div class="form-header">
+            <h2>{% trans "Referral Details" %}</h2>
+            <p>{% trans "Fill out the information below to introduce a new business to our network." %}</p>
+        </div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+                    
+                    <div class="field-wrapper">
+                        {{ field }}
+                    </div>
+                    
+                    {% if field.errors %}
+                        <span class="error-msg">{{ field.errors.0 }}</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-submit">{% trans "Submit Referral" %}</button>
+        </form>
+    </div>
 </div>
 
-<div class="form-card">
-    <form method="post" novalidate>
-        {% csrf_token %}
-        
-        {% for field in form %}
-            <div>
-                <label for="{{ field.id_for_label }}" style="font-weight: 600; color: #003366;">
-                    {{ field.label }}
-                </label>
-                {{ field }}
-                
-                {% if field.errors %}
-                    <span class="error">{{ field.errors.0 }}</span>
-                {% endif %}
-            </div>
-        {% endfor %}
-
-        <button type="submit">{% trans "Submit Referral" %}</button>
-    </form>
-</div>
 {% endblock %}

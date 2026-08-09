@@ -3,33 +3,35 @@
 
 {% block content %}
 
-<section class="form-card">
-
-<h1>
-{% trans "Arrange a Meeting" %}
-</h1>
-
-
-<p>
-{% trans "Complete the form below and choose your preferred meeting date and time." %}
-</p>
-
-
-<form method="POST">
-
-{% csrf_token %}
-
-{{ form.as_p }}
-
-
-<button type="submit">
-{% trans "Arrange Meeting" %}
-</button>
-
-
-</form>
-
-
+<!-- 1. Meeting Hero Section -->
+<section class="meeting-hero">
+    <div class="hero-content">
+        <h1>{% trans "Arrange a Meeting" %}</h1>
+        <p>{% trans "Complete the form below and choose your preferred meeting date and time." %}</p>
+    </div>
 </section>
+
+<!-- 2. Form Container -->
+<div class="meeting-container">
+    <section class="form-card">
+        
+        <div class="form-header">
+            <h2>{% trans "Schedule Your Visit" %}</h2>
+            <p>{% trans "We look forward to showing you our workspace solutions." %}</p>
+        </div>
+        
+        <form method="POST" class="custom-form">
+            {% csrf_token %}
+            
+            <!-- Django Form Output -->
+            {{ form.as_p }}
+
+            <button type="submit" class="btn-submit">
+                {% trans "Arrange Meeting" %}
+            </button>
+        </form>
+
+    </section>
+</div>
 
 {% endblock %}
