@@ -3,12 +3,9 @@
 {% load static %}
 
 {% block content %}
-
-<!-- FAQ Hero Section -->
 <section class="faq-hero">
-            {% include 'hero_social.html' %}
+    {% include 'hero_social.html' %}
     <div class="hero-container">
-        <!-- Hero Left Column -->
         <div class="hero-left">
             <h1 class="hero-title">{% trans "FAQ" %}</h1>
             <div class="hero-line"></div>
@@ -18,16 +15,13 @@
                 <span class="current">{% trans "FAQ" %}</span>
             </nav>
         </div>
-
-        <!-- Hero Right Column -->
         <div class="hero-right">
-            <h2>{% trans "Answers to Your Business & Booking Questions" %}</h2>
-            <p>{% trans "Explore answers to common questions about flexible office solutions, administrative support, and booking procedures at Progress Business Centre." %}</p>
+            <h2>{% trans "Quick Answers" %}</h2>
+            <p>{% trans "Explore flexible office solutions and booking procedures at Progress Business Centre." %}</p>
         </div>
     </div>
 </section>
 
-<!-- FAQ Accordion Container -->
 <div class="faq-container">
     <div class="faq-list">
         {% for faq in faqs %}
@@ -35,39 +29,27 @@
             <summary class="faq-summary">
                 <span class="question-text">{{ faq.question }}</span>
                 <span class="icon-wrap">
-                    <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </span>
             </summary>
-            
             <div class="faq-content">
                 <p>{{ faq.answer }}</p>
-                
                 {% if faq.id %}
                 <a href="{% url 'faq_detail' faq.id %}" class="faq-footer-link">
-                    {% trans "Permalink" %}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                    {% trans "Permalink" %} →
                 </a>
                 {% endif %}
             </div>
         </details>
         {% empty %}
-        <div class="empty-state">
-            <p>{% trans "No questions available right now." %}</p>
-        </div>
+        <div class="empty-state"><p>{% trans "No questions available." %}</p></div>
         {% endfor %}
     </div>
 
-    <!-- Contact Support Callout Box -->
     <div class="support-box">
         <h3>{% trans "Still have questions?" %}</h3>
-        <p>{% trans "If you couldn't find the answer you were looking for, feel free to reach out to our support team." %}</p>
+        <p>{% trans "Reach out to our support team for personalized assistance." %}</p>
         <a href="{% url 'contact' %}" class="btn-cta">{% trans "Contact Support" %}</a>
     </div>
 </div>
-
 {% endblock %}

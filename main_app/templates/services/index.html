@@ -6,7 +6,7 @@
 
 <!-- Hero Banner Section -->
 <section class="page-header page-header-services">
-            {% include 'hero_social.html' %}
+    {% include 'hero_social.html' %}
     <div class="page-header-container">
         <!-- Left Hero Content -->
         <div class="hero-left">
@@ -21,8 +21,8 @@
 
         <!-- Right Hero Text Content -->
         <div class="hero-right">
-            <h2>{% trans "Business Solutions for Companies Expanding in Bahrain" %}</h2>
-            <p>{% trans "Explore flexible office solutions designed for international companies, startups and entrepreneurs looking to establish a professional presence in Bahrain." %}</p>
+            <h2>{% trans "Workspace & Corporate Solutions in Bahrain" %}</h2>
+            <p>{% trans "Flexible, premium environments engineered for global enterprises, startups, and agile founders." %}</p>
         </div>
     </div>
 </section>
@@ -32,18 +32,10 @@
     {% for service in services %}
     <div class="service-card">
         <h3>{{ service.title }}</h3>
-        <p>{{ service.description|truncatewords:25 }}</p>
+        <p>{{ service.description|truncatewords:20 }}</p>
         <a class="btn" href="{% url 'service_detail' service.id %}">
-            {% trans "Explore Solution" %}
-            <svg 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
+            <span>{% trans "Explore Solution" %}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
             </svg>
@@ -56,9 +48,14 @@
 
 <!-- Growth / Bottom Banner Section -->
 <section class="services-growth-section">
-    <div class="services-growth-card">
-        <h2>{% trans "Solutions That Grow With Your Business" %}</h2>
-        <p>{% trans "Whether you need a virtual business address, a fully equipped office or professional meeting facilities, Progress Business Centre provides flexible solutions that adapt to your company's growth." %}</p>
+    <div class="services-growth-card split-growth">
+        <div class="growth-text">
+            <h2>{% trans "Built to Scale With Your Ambitions" %}</h2>
+            <p>{% trans "Whether launching a new venture or expanding operations, our adaptable office spaces and support solutions grow alongside your company." %}</p>
+        </div>
+        <div class="growth-image-wrapper">
+            <img src="{% static 'images/services-growth.png' %}" alt="{% trans 'Office Space View' %}">
+        </div>
     </div>
 </section>
 

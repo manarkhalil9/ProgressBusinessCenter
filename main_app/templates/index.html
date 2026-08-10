@@ -1,236 +1,130 @@
-        {% extends 'base.html' %}
-        {% load static %}
-        {% load i18n %}
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
 
-        {% block content %}
+{% block content %}
 
 <!-- HERO SECTION -->
-        <section class="hero">
-        {% include 'hero_social.html' %}
-    <!-- Centered hero content -->
+<section class="hero">
+    {% include 'hero_social.html' %}
     <div class="hero-content">
+        <!-- Floating decorative shape -->
+        <div class="hero-blob"></div>
         <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
-        <p>{% trans "Progress Business Centre helps entrepreneurs, startups, and international companies establish a professional business presence in Bahrain through premium virtual offices, serviced offices, and complete business support solutions." %}</p>
+        <p>{% trans "Establish a prestigious presence in Seef District. From flexible virtual offices to fully serviced suites, we provide complete, ready-to-use workspace solutions." %}</p>
         <div class="hero-buttons">
-            <a href="{% url 'services' %}" class="btn">{% trans "Explore Our Solutions" %}</a>
-            <a href="{% url 'business_register' %}" class="btn btn-light">{% trans "Establish Your Presence" %}</a>
+            <a href="{% url 'services' %}" class="btn-solid-teal">{% trans "Explore Solutions" %}</a>
+            <a href="{% url 'business_register' %}" class="btn-outline-white">{% trans "Establish Your Presence" %}</a>
         </div>
     </div>
 </section>
 
-        <!-- BUSINESS SETUP PROCESS -->
-        <section class="setup-process">
-            <h2>{% trans "Your Business Setup Process" %}</h2>
-            <div class="card-grid">
-                <div class="setup-step">
-                    <div class="step-number">1</div>
-                    <h4>{% trans "Choose Your Solution" %}</h4>
-                    <p>{% trans "Select the workspace or business solution that best suits your company's needs." %}</p>
-                </div>
-                <div class="setup-step">
-                    <div class="step-number">2</div>
-                    <h4>{% trans "Submit Your Requirements" %}</h4>
-                    <p>{% trans "Share your business information and our team will guide you through the setup process." %}</p>
-                </div>
-                <div class="setup-step">
-                    <div class="step-number">3</div>
-                    <h4>{% trans "Complete Your Setup" %}</h4>
-                    <p>{% trans "Our team prepares your workspace and business services so you're ready to begin operating." %}</p>
-                </div>
-                <div class="setup-step">
-                    <div class="step-number">4</div>
-                    <h4>{% trans "Start Operating" %}</h4>
-                    <p>{% trans "Begin operating with confidence using our professional facilities and ongoing business support." %}</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- GALLERY PREVIEW -->
-<section class="gallery-section">
-
-    <div class="gallery-header">
-        <span class="gallery-badge">
-            {% trans "OUR SPACES" %}
-        </span>
-
-        <h2>
-            {% trans "A Professional Space to Move Your Business Forward" %}
-        </h2>
-
-        <p>
-            {% trans "Explore the workspaces, meeting rooms, and professional facilities available at Progress Business Centre." %}
-        </p>
+<!-- WORKSPACE SOLUTIONS -->
+<section class="services-section">
+    <div class="section-title text-center">
+        <h2>{% trans "Tailored Workspace Solutions" %}</h2>
     </div>
-
-    <div class="gallery-slideshow-container">
-
-        {% for image in all_images %}
-            <div class="gallery-slide {% if forloop.first %}active{% endif %}">
-
-                <div class="gallery-image-full-wrapper">
-                    <img
-                        src="{{ image.image.url }}"
-                        alt="{{ image.title|default:'Progress Business Centre facility' }}"
-                        loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    >
-                </div>
-
-                {% if image.title %}
-                    <div class="gallery-caption">
-                        <span>{{ image.title }}</span>
-                    </div>
-                {% endif %}
-
+    <div class="reboot-card-grid">
+        <div class="reboot-card">
+            <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </div>
-
-        {% empty %}
-
-            <div class="gallery-empty">
-                <p>{% trans "Our facilities will be showcased here soon." %}</p>
+            <h3>{% trans "Virtual Offices" %}</h3>
+            <p>{% trans "A prestigious Seef address, dedicated phone line, and professional mail handling without the physical lease overhead." %}</p>
+        </div>
+        <div class="reboot-card">
+            <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
             </div>
-
-        {% endfor %}
-
+            <h3>{% trans "Serviced Suites" %}</h3>
+            <p>{% trans "Fully furnished, private executive suites with high-speed Wi-Fi, daily maintenance, and utility coverage included." %}</p>
+        </div>
+        <div class="reboot-card">
+            <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>{% trans "Meeting & Boardrooms" %}</h3>
+            <p>{% trans "Equipped conference facilities available on-demand for client meetings and seamless team collaborations." %}</p>
+        </div>
     </div>
-
-    <!-- <div class="gallery-preview-cta">
-        <a href="{% url 'gallery' %}" class="btn btn-outline">
-            {% trans "Explore Our Gallery" %}
-            <span aria-hidden="true">→</span>
-        </a>
-    </div> -->
-
 </section>
 
-        <!-- WORKSPACE SOLUTIONS -->
-        <section class="services-preview">
-            <h2>{% trans "Workspace Solutions" %}</h2>
-            <div class="card-grid">
-                <div class="service-card">
-                    <h3>{% trans "Virtual Offices" %}</h3>
-                    <p>{% trans "Establish a professional business presence in Bahrain with a prestigious address, call handling, mail services, meeting room access, and administrative support without renting a physical office." %}</p>
-                </div>
-                <div class="service-card">
-                    <h3>{% trans "Serviced Offices" %}</h3>
-                    <p>{% trans "Fully furnished private offices with reception services, utilities, cleaning, internet access, and professional facilities designed for growing businesses." %}</p>
-                </div>
-                <div class="service-card">
-                    <h3>{% trans "Meeting Rooms" %}</h3>
-                    <p>{% trans "Professional meeting spaces available for client meetings, business discussions, and presentations whenever your company needs them." %}</p>
-                </div>
-                <div class="service-card">
-                    <h3>{% trans "Coworking Spaces" %}</h3>
-                    <p>{% trans "Flexible workspace solutions for entrepreneurs, freelancers, and startups looking for a professional environment to work and grow." %}</p>
-                </div>
+<!-- THE PROGRESS ADVANTAGE (Full-width Teal band with Image/Text split, eliminating cards completely) -->
+<section class="advantage-banner">
+    <div class="advantage-container">
+        <div class="advantage-image">
+            <!-- USE YOUR AI GENERATED IMAGE HERE -->
+            <img src="{% static 'images/advantage-image.png' %}" alt="Team collaborating">
+        </div>
+        <div class="advantage-content">
+            <span class="sub-badge">{% trans "The Progress Way" %}</span>
+            <h2>{% trans "Everything your business needs from day one." %}</h2>
+            <p>{% trans "We replace the friction of traditional office setups with an ecosystem designed for immediate productivity. We manage the overhead so you can manage your growth." %}</p>
+            <ul class="advantage-list">
+                <li><strong>{% trans "Prime Location:" %}</strong> {% trans "Located in the prestigious Alraya Building." %}</li>
+                <li><strong>{% trans "Secretarial Support:" %}</strong> {% trans "Bilingual receptionists managing your calls." %}</li>
+                <li><strong>{% trans "End-to-End Setup:" %}</strong> {% trans "Assistance with CR, legal, and IT." %}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- WHY CHOOSE BAHRAIN (Reduced from 4 cards to 2 high-impact Reboot-style cards) -->
+<section class="why-bahrain-section">
+    <div class="section-title text-center">
+        <h2>{% trans "Why Choose Bahrain?" %}</h2>
+        <p>{% trans "The Middle East's most favorable economic environment for foreign investors." %}</p>
+    </div>
+    
+    <div class="two-card-grid">
+        <div class="reboot-card card-wide">
+            <div class="card-icon bg-navy">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
             </div>
-        </section>
+            <h3>{% trans "100% Foreign Ownership" %}</h3>
+            <p>{% trans "Enjoy full commercial ownership of your enterprise without requiring a local partner. Bahrain acts as your direct gateway to Saudi Arabia and rapid connections to all major Middle Eastern markets." %}</p>
+        </div>
 
-        <!-- WHY CHOOSE BAHRAIN (NO EMOJIS) -->
-        <section class="why-bahrain-section">
-            <div class="section-title">
-                <h2>{% trans "Why Choose Bahrain?" %}</h2>
-                <p>{% trans "Bahrain is one of the GCC's most attractive business destinations, offering international investors a stable economy and complete business freedom." %}</p>
+        <div class="reboot-card card-wide">
+            <div class="card-icon bg-coral">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
             </div>
+            <h3>{% trans "Unmatched Profitability" %}</h3>
+            <p>{% trans "Maximize profitability in a 0% corporate and personal income tax environment, paired with highly competitive setup, rental, and utility costs compared to neighboring GCC business hubs." %}</p>
+        </div>
+    </div>
+</section>
 
-            <div class="why-grid">
-                <div     class="why-card">
-                    <h3>{% trans "100% Foreign Ownership" %}</h3>
-                    <p>{% trans "Full ownership rights for foreign investors across most commercial business activities without needing a local partner." %}</p>
-                </div>
+<!-- STATS SECTION (Updated text, added hover interactions) -->
+<section class="stats-reboot">
+    <div class="stat-box">
+        <h2 class="counter">500+</h2>
+        <p>{% trans "Businesses Supported" %}</p>
+    </div>
+    <div class="stat-box">
+        <h2>{% trans "Prime" %}</h2>
+        <p>{% trans "Seef District Location" %}</p>
+    </div>
+    <div class="stat-box">
+        <h2>100%</h2>
+        <p>{% trans "Foreign Ownership" %}</p>
+    </div>
+    <div class="stat-box">
+        <h2>{% trans "Zero" %}</h2>
+        <!-- Replaced "Full-Service Business Center" -->
+        <p>{% trans "Setup Friction" %}</p> 
+    </div>
+</section>
 
-                <div class="why-card">
-                    <h3>{% trans "0% Corporate Tax" %}</h3>
-                    <p>{% trans "Enjoy a highly competitive tax environment with zero corporate, income, or capital gains tax for most business sectors." %}</p>
-                </div>
+<!-- CTA SECTION -->
+<section class="cta-reboot">
+    <div class="cta-inner">
+        <h2>{% trans "Ready to Establish Your Business?" %}</h2>
+        <p>{% trans "Contact our team today to find the ideal workspace for your growth." %}</p>
+        <div class="cta-buttons">
+            <a href="{% url 'contact' %}" class="btn-solid-coral">{% trans "Talk to Our Consultants" %}</a>
+        </div>
+    </div>
+</section>
 
-                <div class="why-card">
-                    <h3>{% trans "Strategic GCC Hub" %}</h3>
-                    <p>{% trans "Direct access to Saudi Arabia via the King Fahd Causeway and quick connectivity to all major Middle East markets." %}</p>
-                </div>
-
-                <div class="why-card">
-                    <h3>{% trans "Low Operating Costs" %}</h3>
-                    <p>{% trans "Up to 30% lower setup and operational costs compared to neighboring Gulf business hubs." %}</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- WHY PROGRESS BUSINESS CENTRE -->
-        <section class="services-preview">
-            <h2>{% trans "Why Progress Business Centre?" %}</h2>
-            <div class="card-grid">
-                <div class="service-card">
-                    <h3>{% trans "Prestigious Seef Address" %}</h3>
-                    <p>{% trans "Operate from one of Bahrain's leading commercial districts to strengthen your company's professional image." %}</p>
-                </div>
-                <div class="service-card">
-                    <h3>{% trans "Dedicated Call Answering" %}</h3>
-                    <p>{% trans "Professional bilingual receptionists answer calls in your company name and manage your business communications." %}</p>
-                </div>
-                <div class="service-card">
-                    <h3>{% trans "Business Support Services" %}</h3>
-                    <p>{% trans "Mail handling, administration, documentation support, and business services from one trusted provider." %}</p>
-                </div>
-                <div class="service-card">
-                    <h3>{% trans "Grow With Your Business" %}</h3>
-                    <p>{% trans "Start with a virtual office and upgrade to a serviced office whenever your business expands." %}</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- STATS -->
-        <section class="stats">
-            <div>
-                <h2>500+</h2>
-                <p>{% trans "Businesses Supported" %}</p>
-            </div>
-            <div>
-                <h2>{% trans "Flexible" %}</h2>
-                <p>{% trans "Workspace Solutions" %}</p>
-            </div>
-            <div>
-                <h2>{% trans "Professional" %}</h2>
-                <p>{% trans "Business Support" %}</p>
-            </div>
-            <div>
-                <h2>{% trans "Seef" %}</h2>
-                <p>{% trans "Prime Business District" %}</p>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta">
-            <h2>{% trans "Need Help Choosing the Right Solution?" %}</h2>
-            <p>{% trans "Our team will help you choose the right office solution and business services to establish and grow your presence in Bahrain." %}</p>
-            <div class="cta-buttons">
-                <a href="{% url 'contact' %}" class="btn">{% trans "Talk to Our Consultants" %}</a>
-                <a href="{% url 'services' %}" class="btn btn-outline">{% trans "Explore Services" %}</a>
-            </div>
-        </section>
-
-        <!-- JavaScript for 3-Second Random Rotation -->
-         <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    const slides = document.querySelectorAll('.gallery-slide');
-
-    if (slides.length <= 1) {
-        return;
-    }
-
-    let currentIndex = 0;
-
-    setInterval(function () {
-
-        slides[currentIndex].classList.remove('active');
-
-        currentIndex = (currentIndex + 1) % slides.length;
-
-        slides[currentIndex].classList.add('active');
-
-    }, 5000);
-
-});
-</script>
-
-        {% endblock %}                             
+{% endblock %}

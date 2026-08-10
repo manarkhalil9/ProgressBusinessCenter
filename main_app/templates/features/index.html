@@ -5,44 +5,34 @@
 {% block content %}
 
 <!-- Hero Section -->
-<section class="features-hero">
-            {% include 'hero_social.html' %}
+<section class="features-hero animate-fade-in">
+    {% include 'hero_social.html' %}
     <div class="hero-content">
         <span class="hero-eyebrow">{% trans "Business Facilities" %}</span>
         <h1>{% trans "Built for Modern Businesses" %}</h1>
-        <p>{% trans "Professional facilities and premium amenities designed to help companies work efficiently, welcome clients confidently, and grow successfully." %}</p>
+        <p>{% trans "Premium amenities designed to help you work efficiently, welcome clients confidently, and grow successfully." %}</p>
         <a href="{% url 'contact' %}" class="btn-cta">{% trans "Contact Us" %}</a>
-    </div>
-</section>
-
-<!-- Introduction Section -->
-<section class="features-intro">
-    <div class="intro-container">
-        <h2>{% trans "Professional Facilities" %}</h2>
-        <p class="intro-text">
-            {% trans "At Progress Business Centre, every workspace is supported by carefully designed facilities that enhance productivity, professionalism, and comfort." %}
-        </p>
-        <p class="intro-subtext">
-            {% trans "Whether you are launching a startup or managing an international company, our business environment provides everything you need from day one." %}
-        </p>
     </div>
 </section>
 
 <!-- Features Grid Section -->
 <section class="features-grid-section">
+    <div class="section-title-wrapper animate-fade-in">
+        <span class="section-badge">{% trans "Infrastructure" %}</span>
+        <h2>{% trans "Professional Facilities" %}</h2>
+        <p>{% trans "Every workspace is equipped with high-end amenities to elevate productivity and comfort." %}</p>
+    </div>
+
     <div class="grid-container">
         {% for feature in features %}
-        <div class="premium-feature-card">
-            
+        <div class="premium-feature-card animate-fade-in">
             {% if feature.image %}
                 <div class="card-image" style="background-image: url('{{ feature.image.url }}');"></div>
             {% endif %}
-            
             <div class="card-content">
                 <h3>{{ feature.title }}</h3>
                 <p>{{ feature.description }}</p>
             </div>
-            
         </div>
         {% empty %}
         <div class="empty-state">
@@ -52,13 +42,14 @@
     </div>
 </section>
 
-<!-- Why Businesses Choose Progress -->
+<!-- Why Choose Us Section -->
 <section class="why-choose-section">
     <div class="split-container">
-        <div class="split-image">
+        <div class="split-image animate-fade-in">
             <img src="{% static 'images/progresscenter.png' %}" alt="{% trans 'Progress Business Centre' %}">
         </div>
-        <div class="split-content">
+        <div class="split-content animate-fade-in">
+            <span class="section-badge">{% trans "Advantages" %}</span>
             <h2>{% trans "Why Businesses Choose Us" %}</h2>
             <ul class="benefit-list">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> {% trans "Premium Business Environment" %}</li>
@@ -73,17 +64,17 @@
 
 <!-- Business Environment Section -->
 <section class="environment-section">
-    <div class="environment-container">
-        <h2>{% trans "Everything Your Business Needs" %}</h2>
-        <p>{% trans "From reception services and modern meeting rooms to fully equipped offices and administrative support, our facilities are designed to help your business operate efficiently from the very first day." %}</p>
+    <div class="environment-container animate-fade-in">
+        <h2>{% trans "Plug and Play Readiness" %}</h2>
+        <p>{% trans "From fast internet and printing stations to complimentary hospitality and daily cleaning, we handle the logistics so you can focus entirely on growth." %}</p>
     </div>
 </section>
 
 <!-- Call To Action -->
 <section class="feature-cta-section">
-    <div class="cta-feature">
-        <h2>{% trans "Ready to Experience Progress Business Centre?" %}</h2>
-        <p>{% trans "Schedule a visit and discover how our facilities can support your business growth." %}</p>
+    <div class="cta-feature animate-fade-in">
+        <h2>{% trans "Ready to Experience Our Facilities?" %}</h2>
+        <p>{% trans "Schedule a visit and discover your new workspace today." %}</p>
         <div class="cta-buttons">
             <a href="{% url 'visit' %}" class="btn-cta">{% trans "Book a Visit" %}</a>
             <a href="{% url 'contact' %}" class="btn-outline">{% trans "Contact Us" %}</a>
