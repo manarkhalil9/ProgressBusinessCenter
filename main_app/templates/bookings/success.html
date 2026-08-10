@@ -5,6 +5,7 @@
 
 <!-- HERO / PAGE HEADER -->
 <div class="success-header">
+            {% include 'hero_social.html' %}
     <div class="success-header-container">
         <span class="success-badge">{% trans "Confirmation" %}</span>
         <h1>{% trans "Booking Confirmation" %}</h1>
@@ -26,15 +27,10 @@
             {% trans "Thank you. Our team will review your booking request and contact you shortly." %}
         </p>
 
-        {% if booking_type == 'office' %}
-            <a class="btn btn-cta" href="{% url 'offices' %}">
-                {% trans "Back to Offices" %}
-            </a>
-        {% else %}
-            <a class="btn btn-cta" href="{% url 'rooms' %}">
-                {% trans "Back to Meeting Rooms" %}
-            </a>
-        {% endif %}
+        <a class="btn btn-cta" href="{% url 'home' %}">
+    {% trans "Back to Home" %}
+</a>
+
     </section>
 </div>
 

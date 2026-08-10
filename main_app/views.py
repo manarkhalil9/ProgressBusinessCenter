@@ -61,13 +61,7 @@ class BranchListView(ListView):
     model = Branch
     template_name = 'branches/index.html'
     context_object_name = 'branches'
-
-
-class BranchDetailView(DetailView):
-    model = Branch
-    template_name = 'branches/detail.html'
-    context_object_name = 'branch'
-
+    
 
 # ---------- MEETING ROOMS ----------
 class MeetingRoomListView(ListView):

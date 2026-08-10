@@ -4,17 +4,19 @@
 
         {% block content %}
 
-        <!-- HERO SECTION -->
+<!-- HERO SECTION -->
         <section class="hero">
-            <div class="hero-content">
-                <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
-                <p>{% trans "Progress Business Centre helps entrepreneurs, startups, and international companies establish a professional business presence in Bahrain through premium virtual offices, serviced offices, and complete business support solutions." %}</p>
-                <div class="hero-buttons">
-                    <a href="{% url 'services' %}" class="btn">{% trans "Explore Our Solutions" %}</a>
-                    <a href="{% url 'business_register' %}" class="btn btn-light">{% trans "Establish Your Presence" %}</a>
-                </div>
-            </div>
-        </section>
+        {% include 'hero_social.html' %}
+    <!-- Centered hero content -->
+    <div class="hero-content">
+        <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
+        <p>{% trans "Progress Business Centre helps entrepreneurs, startups, and international companies establish a professional business presence in Bahrain through premium virtual offices, serviced offices, and complete business support solutions." %}</p>
+        <div class="hero-buttons">
+            <a href="{% url 'services' %}" class="btn">{% trans "Explore Our Solutions" %}</a>
+            <a href="{% url 'business_register' %}" class="btn btn-light">{% trans "Establish Your Presence" %}</a>
+        </div>
+    </div>
+</section>
 
         <!-- BUSINESS SETUP PROCESS -->
         <section class="setup-process">
@@ -44,33 +46,61 @@
         </section>
 
         <!-- GALLERY PREVIEW -->
-        <section class="gallery-section">
-            <div class="gallery-header">
-                <span class="gallery-badge">{% trans "PREMIUM FACILITIES" %}</span>
-                <h2>{% trans "Our Spaces in Action" %}</h2>
-                <p>{% trans "Take a visual tour of our professional workspaces, meeting rooms, and business facilities in Bahrain." %}</p>
+<section class="gallery-section">
+
+    <div class="gallery-header">
+        <span class="gallery-badge">
+            {% trans "OUR SPACES" %}
+        </span>
+
+        <h2>
+            {% trans "A Professional Space to Move Your Business Forward" %}
+        </h2>
+
+        <p>
+            {% trans "Explore the workspaces, meeting rooms, and professional facilities available at Progress Business Centre." %}
+        </p>
+    </div>
+
+    <div class="gallery-slideshow-container">
+
+        {% for image in all_images %}
+            <div class="gallery-slide {% if forloop.first %}active{% endif %}">
+
+                <div class="gallery-image-full-wrapper">
+                    <img
+                        src="{{ image.image.url }}"
+                        alt="{{ image.title|default:'Progress Business Centre facility' }}"
+                        loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    >
+                </div>
+
+                {% if image.title %}
+                    <div class="gallery-caption">
+                        <span>{{ image.title }}</span>
+                    </div>
+                {% endif %}
+
             </div>
 
-            <!-- Full-Width Gallery Slideshow -->
-            <div class="gallery-slideshow-container">
-                {% for image in all_images %}
-                    <a href="{% url 'gallery_detail' image.id %}" 
-                    class="gallery-slide {% if forloop.first %}active{% endif %}">
-                        <div class="gallery-image-full-wrapper">
-                            <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                        </div>
-                    </a>
-                {% empty %}
-                    <p class="empty">{% trans "No images available yet." %}</p>
-                {% endfor %}
+        {% empty %}
+
+            <div class="gallery-empty">
+                <p>{% trans "Our facilities will be showcased here soon." %}</p>
             </div>
 
-            <div class="gallery-preview-cta">
-                <a href="{% url 'gallery' %}" class="btn btn-outline">
-                    {% trans "View Full Gallery" %} →
-                </a>
-            </div>
-        </section>
+        {% endfor %}
+
+    </div>
+
+    <!-- <div class="gallery-preview-cta">
+        <a href="{% url 'gallery' %}" class="btn btn-outline">
+            {% trans "Explore Our Gallery" %}
+            <span aria-hidden="true">→</span>
+        </a>
+    </div> -->
+
+</section>
 
         <!-- WORKSPACE SOLUTIONS -->
         <section class="services-preview">
@@ -179,30 +209,28 @@
         </section>
 
         <!-- JavaScript for 3-Second Random Rotation -->
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.gallery-slide');
-            
-            if (slides.length > 1) {
-                let currentIndex = 0; // The first image shown by default
+         <script>
+document.addEventListener('DOMContentLoaded', function () {
 
-                setInterval(() => {
-                    // 1. Hide the currently displayed image
-                    slides[currentIndex].style.display = 'none';
-                    
-                    // 2. Pick a random next image (ensure it's not the same as the current one)
-                    let nextIndex;
-                    do {
-                        nextIndex = Math.floor(Math.random() * slides.length);
-                    } while (nextIndex === currentIndex);
-                    
-                    // 3. Update the current index and show the new image
-                    currentIndex = nextIndex;
-                    slides[currentIndex].style.display = 'block';
-                    
-                }, 3000); // 3000 milliseconds = 3 seconds
-            }
-        });
-        </script>
+    const slides = document.querySelectorAll('.gallery-slide');
+
+    if (slides.length <= 1) {
+        return;
+    }
+
+    let currentIndex = 0;
+
+    setInterval(function () {
+
+        slides[currentIndex].classList.remove('active');
+
+        currentIndex = (currentIndex + 1) % slides.length;
+
+        slides[currentIndex].classList.add('active');
+
+    }, 5000);
+
+});
+</script>
 
         {% endblock %}                             

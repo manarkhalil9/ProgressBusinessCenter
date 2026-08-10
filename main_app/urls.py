@@ -18,7 +18,6 @@ urlpatterns = [
 
     # branches
     path('branches/', views.BranchListView.as_view(), name='branches'),
-    path('branches/<int:pk>/', views.BranchDetailView.as_view(), name='branch_detail'),
 
     # rooms
     path('rooms/', views.MeetingRoomListView.as_view(), name='rooms'),
