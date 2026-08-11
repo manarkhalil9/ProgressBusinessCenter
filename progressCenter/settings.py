@@ -35,11 +35,12 @@ LOCALE_PATHS = [
 SECRET_KEY = 'django-insecure-qbk@%#&9($g1c@*dmsgm+he9bf7&t*49ggv4=r_r3o8-2(**#$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    'progressbusinesscenter.pythonanywhere.com',
-]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
