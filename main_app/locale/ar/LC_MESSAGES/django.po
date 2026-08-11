@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 08:43+0300\n"
+"POT-Creation-Date: 2026-08-11 12:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,8 +155,8 @@ msgid ""
 "More than just a workspace. We are a strategic partner for businesses "
 "looking to establish a powerful, lasting presence in the Kingdom of Bahrain."
 msgstr ""
-"أكثر من مجرد مساحة عمل. نحن شريك استراتيجي للشركات التي تسعى لتأسيس حضور "
-"قوي ودائم في مملكة البحرين."
+"أكثر من مجرد مساحة عمل. نحن شريك استراتيجي للشركات التي تسعى لتأسيس حضور قوي "
+"ودائم في مملكة البحرين."
 
 #: .\main_app\templates\about.html:33
 msgid "Who We Are"
@@ -169,8 +169,7 @@ msgstr "نقود النجاح في قلب البحرين"
 #: .\main_app\templates\about.html:35
 msgid ""
 "Built on a foundation of agility, professionalism, and modern infrastructure."
-msgstr ""
-"مبني على أسس من المرونة والاحترافية والبنية التحتية الحديثة."
+msgstr "مبني على أسس من المرونة والاحترافية والبنية التحتية الحديثة."
 
 #: .\main_app\templates\about.html:49
 msgid "Our Mission"
@@ -194,8 +193,8 @@ msgid ""
 "To be the cornerstone of corporate growth in Bahrain, recognized globally as "
 "the ultimate hub for business excellence and seamless market entry."
 msgstr ""
-"أن نكون حجر الأساس للنمو المؤسسي في البحرين، ونحظى باعتراف عالمي كمركز "
-"رئيسي للتميز في الأعمال ودخول الأسواق بسلاسة."
+"أن نكون حجر الأساس للنمو المؤسسي في البحرين، ونحظى باعتراف عالمي كمركز رئيسي "
+"للتميز في الأعمال ودخول الأسواق بسلاسة."
 
 #: .\main_app\templates\about.html:76
 msgid "Who We Serve"
@@ -696,8 +695,8 @@ msgstr ""
 "لإكمال العملية."
 
 #: .\main_app\templates\business\success.html:27
-msgid "Track My Application"
-msgstr "تتبع طلبي"
+msgid "Back To Home"
+msgstr "العودة إلى الرئيسية"
 
 #: .\main_app\templates\contact\detail.html:10
 msgid "Contact Progress Business Centre"
@@ -816,8 +815,7 @@ msgstr "إجابات سريعة"
 msgid ""
 "Explore flexible office solutions and booking procedures at Progress "
 "Business Centre."
-msgstr ""
-"استكشف حلول المكاتب المرنة وإجراءات الحجز في مركز بروجريس للأعمال."
+msgstr "استكشف حلول المكاتب المرنة وإجراءات الحجز في مركز بروجريس للأعمال."
 
 #: .\main_app\templates\faq\index.html:39
 msgid "Permalink"
@@ -872,8 +870,7 @@ msgstr "مرافق احترافية"
 msgid ""
 "Every workspace is equipped with high-end amenities to elevate productivity "
 "and comfort."
-msgstr ""
-"كل مساحة عمل مجهزة بوسائل راحة راقية لتعزيز الإنتاجية والراحة."
+msgstr "كل مساحة عمل مجهزة بوسائل راحة راقية لتعزيز الإنتاجية والراحة."
 
 #: .\main_app\templates\features\index.html:39
 msgid "No facilities are currently available."
@@ -1081,8 +1078,7 @@ msgstr "لماذا تختار البحرين؟"
 #: .\main_app\templates\index.html:76
 msgid ""
 "The Middle East's most favorable economic environment for foreign investors."
-msgstr ""
-"البيئة الاقتصادية الأكثر تفضيلاً في الشرق الأوسط للمستثمرين الأجانب."
+msgstr "البيئة الاقتصادية الأكثر تفضيلاً في الشرق الأوسط للمستثمرين الأجانب."
 
 #: .\main_app\templates\index.html:84
 #, python-format
@@ -1095,9 +1091,9 @@ msgid ""
 "partner. Bahrain acts as your direct gateway to Saudi Arabia and rapid "
 "connections to all major Middle Eastern markets."
 msgstr ""
-"تمتع بالملكية التجارية الكاملة لمؤسستك دون الحاجة إلى شريك محلي. تشكل البحرين "
-"بوابتك المباشرة إلى المملكة العربية السعودية وروابط سريعة لجميع أسواق الشرق "
-"الأوسط الرئيسية."
+"تمتع بالملكية التجارية الكاملة لمؤسستك دون الحاجة إلى شريك محلي. تشكل "
+"البحرين بوابتك المباشرة إلى المملكة العربية السعودية وروابط سريعة لجميع "
+"أسواق الشرق الأوسط الرئيسية."
 
 #: .\main_app\templates\index.html:92
 msgid "Unmatched Profitability"
@@ -1221,8 +1217,7 @@ msgstr "تفاصيل الإحالة"
 #: .\main_app\templates\referrals\index.html:20
 msgid ""
 "Fill out the information below to introduce a new business to our network."
-msgstr ""
-"املأ المعلومات أدناه لتقديم نشاط تجاري جديد إلى شبكتنا."
+msgstr "املأ المعلومات أدناه لتقديم نشاط تجاري جديد إلى شبكتنا."
 
 #: .\main_app\templates\referrals\index.html:42
 msgid "Submit Referral"
@@ -1347,8 +1342,8 @@ msgstr "التوفر"
 msgid ""
 "View real‑time availability and book your preferred time slot using the "
 "calendar."
-msgstr "اطلع على التوفر الفعلي واحجز الفترة الزمنية التي تفضلها باستخدام "
-"التقويم."
+msgstr ""
+"اطلع على التوفر الفعلي واحجز الفترة الزمنية التي تفضلها باستخدام التقويم."
 
 #: .\main_app\templates\rooms\index.html:10
 msgid "Professional Meeting Rooms"
@@ -1395,8 +1390,9 @@ msgstr "الأثر الأساسي"
 msgid ""
 "Establish immediate credibility, optimize overhead, and accelerate "
 "operational efficiency in Bahrain."
-msgstr "أسس المصداقية الفورية، وحسّن التكاليف التشغيلية، وسرّع الكفاءة "
-"التشغيلية في البحرين."
+msgstr ""
+"أسس المصداقية الفورية، وحسّن التكاليف التشغيلية، وسرّع الكفاءة التشغيلية في "
+"البحرين."
 
 #: .\main_app\templates\services\detail.html:50
 msgid "Designed For"
@@ -1406,22 +1402,25 @@ msgstr "مصمم لـ"
 msgid ""
 "Startups, remote teams, and global firms entering the Bahrain market cost-"
 "effectively."
-msgstr "الشركات الناشئة والفرق عن بُعد والشركات العالمية التي تدخل السوق "
-"البحريني بتكلفة فعالة."
+msgstr ""
+"الشركات الناشئة والفرق عن بُعد والشركات العالمية التي تدخل السوق البحريني "
+"بتكلفة فعالة."
 
 #: .\main_app\templates\services\detail.html:55
 msgid ""
 "Growing companies requiring a fully serviced, private workspace ready for "
 "immediate use."
-msgstr "الشركات المتنامية التي تحتاج إلى مساحة عمل خاصة ومخدومة بالكامل "
-"وجاهزة للاستخدام الفوري."
+msgstr ""
+"الشركات المتنامية التي تحتاج إلى مساحة عمل خاصة ومخدومة بالكامل وجاهزة "
+"للاستخدام الفوري."
 
 #: .\main_app\templates\services\detail.html:57
 msgid ""
 "Professionals hosting impactful client pitches, board meetings, and "
 "collaborative workshops."
-msgstr "المحترفون الذين يستضيفون عروضاً تقديمية مؤثرة للعملاء واجتماعات "
-"المجالس وورش العمل التعاونية."
+msgstr ""
+"المحترفون الذين يستضيفون عروضاً تقديمية مؤثرة للعملاء واجتماعات المجالس وورش "
+"العمل التعاونية."
 
 #: .\main_app\templates\services\detail.html:59
 msgid "Dynamic enterprises seeking flexible workspace and customized support."
@@ -1503,15 +1502,16 @@ msgstr "لماذا تختارنا"
 msgid ""
 "Secure a premier corporate footprint in Bahrain without the heavy "
 "expenditure of maintaining a physical office."
-msgstr "احصل على بصمة مؤسسية متميزة في البحرين دون النفقات الباهظة لصيانة "
-"مكتب فعلي."
+msgstr ""
+"احصل على بصمة مؤسسية متميزة في البحرين دون النفقات الباهظة لصيانة مكتب فعلي."
 
 #: .\main_app\templates\services\detail.html:100
 msgid ""
 "Step into a turnkey workspace supported by professional reception services "
 "and modern infrastructure."
-msgstr "انطلق في مساحة عمل جاهزة بالكامل مدعومة بخدمات استقبال احترافية "
-"وبنية تحتية حديثة."
+msgstr ""
+"انطلق في مساحة عمل جاهزة بالكامل مدعومة بخدمات استقبال احترافية وبنية تحتية "
+"حديثة."
 
 #: .\main_app\templates\services\detail.html:102
 msgid ""
@@ -1523,8 +1523,8 @@ msgstr "أبهر أصحاب المصلحة في بيئات مجهزة بالكا
 msgid ""
 "Rely on agile workspace options built to adapt seamlessly to your evolving "
 "business trajectory."
-msgstr "اعتمد على خيارات مساحات عمل مرنة مصممة للتكيف بسلاسة مع مسار عملك "
-"المتطور."
+msgstr ""
+"اعتمد على خيارات مساحات عمل مرنة مصممة للتكيف بسلاسة مع مسار عملك المتطور."
 
 #: .\main_app\templates\services\detail.html:112
 msgid "Ready to Take the Next Step?"
@@ -1559,8 +1559,9 @@ msgstr "حلول مساحات العمل والمؤسسات في البحرين"
 msgid ""
 "Flexible, premium environments engineered for global enterprises, startups, "
 "and agile founders."
-msgstr "بيئات مرنة ومتميزة مصممة للمؤسسات العالمية والشركات الناشئة "
-"والمؤسسين المرنين."
+msgstr ""
+"بيئات مرنة ومتميزة مصممة للمؤسسات العالمية والشركات الناشئة والمؤسسين "
+"المرنين."
 
 #: .\main_app\templates\services\index.html:37
 msgid "Explore Solution"
@@ -1624,3 +1625,6 @@ msgid ""
 "Thank you for your submission. Our team will contact you shortly to confirm "
 "your booking details."
 msgstr "شكراً لتقديمك. سيتواصل معك فريقنا قريباً لتأكيد تفاصيل حجزك."
+
+#~ msgid "Track My Application"
+#~ msgstr "تتبع طلبي"

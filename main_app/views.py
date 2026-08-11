@@ -15,7 +15,7 @@ from .forms import (
 from django.db.models import Q
 from django.http import Http404
 from django.views import View
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from datetime import date, datetime, timedelta
 import calendar
@@ -61,7 +61,7 @@ class BranchListView(ListView):
     model = Branch
     template_name = 'branches/index.html'
     context_object_name = 'branches'
-    
+
 
 # ---------- MEETING ROOMS ----------
 class MeetingRoomListView(ListView):
@@ -158,7 +158,7 @@ class VisitCreateView(LoginRequiredMixin, CreateView):
         # 1. Admin Email
         admin_subject = f"New Visit Request: {client_name}"
         admin_message = (
-            f"A new visit/meeting request has been submitted.\n\n"
+            f"A new visit request has been submitted.\n\n"
             f"--- Visitor Details ---\n"
             f"Name: {client_name}\n"
             f"Email: {user_email}\n"
@@ -276,6 +276,9 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        
+        # super().form_valid(form) saves the object to the database, 
+        # which means the files are now successfully uploaded and accessible.
         response = super().form_valid(form)
         registration = self.object
 
@@ -283,7 +286,7 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
         client_name = getattr(registration, 'full_name', None) or getattr(registration, 'client_name', None) or self.request.user.get_full_name() or self.request.user.username
         company_name = getattr(registration, 'company_name', 'Business Setup Request')
 
-        # 1. Admin Email
+        # 1. Admin Email (Updated to use EmailMessage for attachments)
         admin_subject = f"New Business Registration: {company_name}"
         admin_message = (
             f"A new business registration application has been submitted.\n\n"
@@ -294,15 +297,32 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
             f"Phone: {getattr(registration, 'phone', 'Not provided')}\n"
         )
 
-        send_mail(
+        # Initialize the EmailMessage object
+        admin_email = EmailMessage(
             subject=admin_subject,
-            message=admin_message,
+            body=admin_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[settings.ADMIN_EMAIL],
-            fail_silently=True,
+            to=[settings.ADMIN_EMAIL],
         )
 
-        # 2. Client Confirmation Email
+        # Attach CPR Document if the user uploaded one
+        if registration.cpr_document:
+            admin_email.attach(
+                registration.cpr_document.name,
+                registration.cpr_document.read()
+            )
+
+        # Attach Passport Document if the user uploaded one
+        if registration.passport_document:
+            admin_email.attach(
+                registration.passport_document.name,
+                registration.passport_document.read()
+            )
+
+        # Send the admin email with attachments
+        admin_email.send(fail_silently=True)
+
+        # 2. Client Confirmation Email (Can remain as send_mail since there are no attachments)
         if user_email:
             client_subject = "Business Registration Received - Progress Center"
             client_message = (
