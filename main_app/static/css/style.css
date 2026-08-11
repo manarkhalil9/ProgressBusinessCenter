@@ -577,104 +577,8 @@ a {
     box-shadow: 0 6px 18px rgba(230, 57, 70, 0.35);
 }
 
-/* ----- RESPONSIVE / MOBILE VIEW ----- */
-@media (max-width: 768px) {
-    .hero, 
-    .hero-section, 
-    section[class*="hero"] {
-        min-height: 75vh;
-        padding: 110px 6% 80px;
-    }
-
-    .hero-content h1 {
-        font-size: 2.35rem;
-        letter-spacing: -0.8px;
-        line-height: 1.15;
-    }
-
-    .hero-content p {
-        font-size: 0.98rem;
-        line-height: 1.65;
-        margin-bottom: 30px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .hero-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-    }
-
-/* ----- RESPONSIVE / MOBILE VIEW FIXES ----- */
-@media (max-width: 768px) {
-    .hero, 
-    .hero-section, 
-    section[class*="hero"] {
-        min-height: 75vh;
-        padding: 110px 6% 80px;
-    }
-
-    .hero-content {
-        max-width: 100%;
-        padding-right: 35px; /* Prevents text from colliding with the right-side social icons */
-    }
-
-    .hero-content h1 {
-        font-size: 2.35rem;
-        letter-spacing: -0.8px;
-        line-height: 1.15;
-    }
-
-    .hero-content p {
-        font-size: 0.98rem;
-        line-height: 1.65;
-        margin-bottom: 30px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-    }
-
-    .hero-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    /* Keeps social icons neatly on the right-hand side on mobile */
-    .hero-social {
-        position: absolute;
-        top: 120px;
-        right: 12px;
-        transform: none;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.6rem;
-        margin-top: 0;
-        padding-top: 0;
-        border-top: none;
-        width: auto;
-        z-index: 10;
-    }
-
-    .hero-social-icon {
-        width: 36px;
-        height: 36px;
-    }
-
-    .hero-social-icon svg {
-        width: 16px;
-        height: 16px;
-    }
-}
-}
-
 /* ==========================================================================
-   3. HOME PAGE
+   3. HOME PAGE & UNIFIED HERO BASE
    ========================================================================== */
 /* Keyframe Animations */
 @keyframes fadeInUp {
@@ -708,22 +612,60 @@ a {
     }
 }
 
-.hero {
+/* ----- UNIFIED HERO STYLES ----- */
+/* Applied to all hero sections to ensure consistent padding, height, and flex layout */
+.hero, .page-header, .page-header-services, .features-hero, .faq-hero, .rooms-hero, .booking-hero, .dashboard-hero, .office-hero, .branches-hero, .gallery-hero, .contact-hero, .meeting-hero, .referral-hero, .business-hero, .auth-hero, .success-hero {
     position: relative;
-    /* Lightened the gradient opacity so the background image is brighter */
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/home-hero.png') center / cover no-repeat;
-    min-height: 80vh;
-    padding: 160px 5% 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 50vh;
+    padding: 140px 5% 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-white);
     overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Background Images assigned to individual sections */
+.hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/home-hero.png'); }
+.page-header { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/about-hero.png'); }
+.page-header-services { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/services-hero.png'); }
+.features-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/features-hero.png'); }
+.faq-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/faq-hero.png'); }
+.rooms-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/rooms-hero.png'); }
+.booking-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/booking-hero.png'); }
+.dashboard-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/dashboard-hero.png'); }
+.office-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/offices-hero.png'); }
+.branches-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/branches-hero.png'); }
+.gallery-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/gallery-hero.png'); }
+.contact-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/contact-hero.png'); }
+.meeting-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/visit-hero.png'); }
+.referral-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/referral-hero.png'); }
+.business-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/business-hero.png'); }
+.auth-hero { background-image: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/signup-hero.png'); }
+
+/* Inner content alignment and padding from social icons */
+.hero-content, .page-header-left, .page-header-right, .hero-left, .hero-right {
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+}
+
+/* Add padding on the right side to prevent text from overlapping social icons (LTR) */
+.hero-content, .page-header-left, .hero-left {
+    padding-right: 60px;
+}
+/* Add padding on the left side to prevent text from overlapping social icons (RTL) */
+[dir="rtl"] .hero-content, [dir="rtl"] .page-header-left, [dir="rtl"] .hero-left {
+    padding-right: 0;
+    padding-left: 80px;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
     text-align: center;
     max-width: 800px;
     animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -735,7 +677,7 @@ a {
     line-height: 1.1;
     margin-bottom: 24px;
     letter-spacing: -1px;
-    color: var(--color-white); /* Forces the heading to be crisp white */
+    color: var(--color-white);
 }
 
 .hero-content p {
@@ -779,12 +721,10 @@ a {
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    /* Changed border to the CTA color to make it exist in the hero */
-    border: 2px solid var(--color-cta); 
+    border: 2px solid var(--color-cta);
 }
 
 .btn-outline-white:hover {
-    /* Fills with CTA color on hover for a strong interactive effect */
     background-color: var(--color-cta);
     color: var(--color-white) !important;
     border-color: var(--color-cta);
@@ -807,6 +747,83 @@ a {
     background-color: var(--color-cta-hover);
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+}
+
+/* ----- RESPONSIVE / MOBILE VIEW (Unified for all Heroes) ----- */
+@media (max-width: 768px) {
+    /* Apply consistent padding to all hero sections on mobile */
+    .hero, .page-header, .page-header-services, .features-hero, .faq-hero, .rooms-hero, .booking-hero, .dashboard-hero, .office-hero, .branches-hero, .gallery-hero, .contact-hero, .meeting-hero, .referral-hero, .business-hero, .auth-hero {
+        min-height: 75vh;
+        padding: 100px 6% 60px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Add padding to prevent text overlapping social icons on mobile */
+    .hero-content, .page-header-left, .page-header-right, .hero-left, .hero-right {
+        max-width: 100%;
+        padding-right: 35px;
+    }
+    [dir="rtl"] .hero-content, [dir="rtl"] .page-header-left, [dir="rtl"] .page-header-right, [dir="rtl"] .hero-left, [dir="rtl"] .hero-right {
+        padding-right: 0;
+        padding-left: 120px;
+        padding-top: 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.35rem;
+        letter-spacing: -0.8px;
+        line-height: 1.15;
+    }
+
+    .hero-content p {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Keeps social icons neatly on the right-hand side on mobile */
+    .hero-social {
+        position: absolute;
+        top: 120px;
+        right: 12px;
+        transform: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+        width: auto;
+        z-index: 10;
+    }
+    
+    [dir="rtl"] .hero-social {
+        right: auto !important;
+        left: 12px;
+    }
+
+    .hero-social-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .hero-social-icon svg {
+        width: 16px;
+        height: 16px;
+    }
 }
 
 /* ----- CARD STYLES (Floating Icons) ----- */
@@ -872,11 +889,9 @@ a {
 .reboot-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    /* Soft Cerulean border glow on hover */
-    border-color: rgba(69, 123, 157, 0.4); 
+    border-color: rgba(69, 123, 157, 0.4);
 }
 
-/* The overlapping circular icon */
 .card-icon {
     position: absolute;
     top: -35px;
@@ -1000,8 +1015,7 @@ a {
 .advantage-list li::before {
     content: "→";
     margin-right: 12px;
-    /* High contrast bullet point against the Cerulean background */
-    color: var(--color-bg-light); 
+    color: var(--color-bg-light);
     font-weight: bold;
 }
 
@@ -1037,8 +1051,7 @@ a {
 }
 
 .stat-box h2 {
-    /* Frosted Blue contrasts beautifully against the Oxford Navy background */
-    color: var(--color-accent-light); 
+    color: var(--color-accent-light);
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 10px;
@@ -1052,13 +1065,11 @@ a {
     margin: 0;
 }
 
-/* Stat Box Hover Animation */
 .stat-box:hover {
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    /* Soft Frosted Blue glow on hover */
-    border-color: rgba(168, 218, 220, 0.4); 
+    border-color: rgba(168, 218, 220, 0.4);
 }
 .stat-box:hover h2 {
     color: var(--color-white);
@@ -1075,8 +1086,7 @@ a {
 .cta-inner {
     max-width: 800px;
     margin: 0 auto;
-    /* Changed from --color-primary to --color-secondary for a lighter look */
-    background-color: var(--color-border); 
+    background-color: var(--color-border);
     border-radius: var(--radius-lg);
     padding: 60px 40px;
     color: var(--color-white);
@@ -1126,17 +1136,9 @@ a {
     opacity: 0;
 }
 
-/* Page Header Hero */
+/* Page Header Hero - Layout props handled by base hero, background maintained here */
 .page-header {
-    position: relative;
-    background: linear-gradient(135deg, rgba(10, 25, 45, 0.90) 0%, rgba(29, 53, 87, 0.80) 100%), 
-    url('../images/about-hero.png') center/cover no-repeat;
-    padding: 160px 8% 100px;
-    color: var(--color-white);
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
+    /* background set in base .page-header rule */
 }
 
 .hero-glow-shape {
@@ -1213,8 +1215,8 @@ a {
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.92);
     margin: 0;
-    padding-left: 20px;
-    border-left: 3px solid var(--color-cta);
+    padding-inline-start: 20px;    /* Changes side based on language */
+    border-inline-start: 3px solid var(--color-cta); /* Changes side based on language */
 }
 
 /* About Grid Section */
@@ -1389,7 +1391,7 @@ a {
 
 .stats-row {
     display: flex;
-    gap: 30px;
+    gap: 150px;
 }
 
 .stat-item h3 {
@@ -1482,7 +1484,6 @@ a {
     pointer-events: none;
 }
 
-/* Fixed H2 visibility inside the dark CTA container background */
 .cta-container h2 {
     font-size: 2.2rem;
     font-weight: 800;
@@ -1528,11 +1529,6 @@ a {
     .about-grid {
         grid-template-columns: 1fr;
     }
-
-    .page-header {
-        padding: 130px 6% 70px;
-        min-height: 40vh;
-    }
     
     .page-header-left h1 {
         font-size: 2.3rem;
@@ -1543,8 +1539,12 @@ a {
     }
     
     .stats-row {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        gap: 80px;
+    }
+
+    .stats-row p {
+        text-align: center;
     }
 }
 
@@ -1576,15 +1576,7 @@ a {
 }
 
 .page-header-services {
-    position: relative;
-    width: 100%;
-    min-height: 320px;
-    padding: 110px 8% 70px;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(180deg, rgba(15, 32, 67, 0.82) 0%, rgba(10, 22, 48, 0.92) 100%),
-                url('../images/services-hero.png') center/cover no-repeat;
-    box-sizing: border-box;
+    /* background set in base .page-header-services rule */
 }
 
 .page-header-container {
@@ -2002,11 +1994,6 @@ a {
    ========================================================================== */
 
 @media (max-width: 768px) {
-    .page-header-services {
-        padding: 90px 5% 40px;
-        min-height: auto;
-    }
-
     .page-header-container {
         flex-direction: column;
         align-items: flex-start;
@@ -2120,17 +2107,8 @@ a {
     opacity: 0;
 }
 
-/* Hero Section */
+/* Hero Section - Layout handled by base */
 .features-hero {
-    position: relative;
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.92) 0%, rgba(69, 123, 157, 0.85) 100%), 
-    url('../images/features-hero.png') center/cover no-repeat;
-    padding: 160px 8% 100px;
-    color: var(--color-white);
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
     text-align: center;
 }
 
@@ -2512,11 +2490,7 @@ a {
 }
 
 .faq-hero {
-    position: relative;
-    background: linear-gradient(rgba(15, 28, 48, 0.88), rgba(15, 28, 48, 0.88)), url('../images/faq-hero.png') center/cover no-repeat;
-    padding: 100px 5%;
-    color: #ffffff;
-    box-sizing: border-box;
+    /* Layout handled by base, background set previously */
 }
 
 .hero-container {
@@ -2823,14 +2797,8 @@ a {
    ========================================================================== */
 
 .rooms-hero {
-    background-image: linear-gradient(rgba(0, 31, 63, 0.7), rgba(0, 31, 63, 0.7)), url('../images/rooms-hero.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 80px 20px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: var(--color-white, #ffffff);
-    margin-bottom: 50px;
 }
 
 .rooms-hero .hero-content {
@@ -2841,7 +2809,7 @@ a {
 .rooms-hero h1 {
     font-size: 2.5rem;
     margin-top: 40px;
-    color: var(--color-white, #ffffff);
+    color: var(--color-white);
 }
 
 .rooms-hero p {
@@ -3053,18 +3021,8 @@ a.btn-primary:visited:hover {
    ========================================================================== */
 
 .booking-hero {
-    position: relative;
-    background-image: url('../images/booking-hero.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    min-height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    padding: 80px 40px;
-    color: #ffffff;
 }
 
 .hero-overlay {
@@ -3179,7 +3137,10 @@ a.btn-primary:visited:hover {
     align-items: center;
     gap: 14px;
     margin-bottom: 28px;
+    justify-content: flex-start;
 }
+
+
 
 .step-number {
     width: 36px;
@@ -3202,6 +3163,7 @@ a.btn-primary:visited:hover {
     color: var(--color-cta);
     margin: 0;
     letter-spacing: -0.3px;
+    text-align: start;
 }
 
 .form-row {
@@ -3653,8 +3615,7 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .success-header {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.72) 0%, rgba(15, 43, 72, 0.65) 100%),
-    url('../images/success-hero.png') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/success-hero.png') center/cover no-repeat;
     padding: 100px 20px 85px;
     min-height: 280px;
     text-align: center;
@@ -3780,16 +3741,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .dashboard-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(15, 43, 72, 0.68) 100%),
-                url('../images/dashboard-hero.png') center/cover no-repeat;
-    padding: 100px 20px 85px;
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
-    box-sizing: border-box;
 }
 
 .dashboard-hero .hero-content {
@@ -4018,7 +3971,7 @@ td.other-month .selectable-date,
 
 @media (max-width: 768px) {
     .dashboard-hero {
-        padding: 70px 20px 60px;
+        padding: 100px 20px 60px;
         min-height: 220px;
     }
     .dashboard-hero h1 {
@@ -4034,8 +3987,7 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .cancel-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(15, 43, 72, 0.68) 100%),
-                url('../images/dashboard-hero.png') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/dashboard-hero.png') center/cover no-repeat;
     padding: 100px 20px 85px;
     min-height: 280px;
     display: flex;
@@ -4210,16 +4162,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .office-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(15, 43, 72, 0.68) 100%),
-                url('../images/offices-hero.png') center/cover no-repeat;
-    padding: 100px 20px 85px;
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
-    box-sizing: border-box;
 }
 
 .office-hero .hero-content {
@@ -4527,12 +4471,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .branches-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
-                url('../images/branches-hero.png') center/cover no-repeat;
-    padding: 80px 20px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
-    margin-bottom: 60px;
 }
 
 .branches-hero .hero-content {
@@ -4558,7 +4498,7 @@ td.other-month .selectable-date,
 .locations-container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 80px 20px 80px;
 }
 
 .branches-list {
@@ -4709,12 +4649,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .gallery-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
-                url('../images/gallery-hero.png') center/cover no-repeat;
-    padding: 80px 20px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
-    margin-bottom: 60px;
 }
 
 .gallery-hero .hero-content {
@@ -4740,7 +4676,7 @@ td.other-month .selectable-date,
 .gallery-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 80px 20px 80px;
 }
 
 .gallery-grid {
@@ -4915,12 +4851,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .contact-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
-                url('../images/contact-hero.png') center/cover no-repeat;
-    padding: 80px 20px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
-    margin-bottom: 60px;
 }
 
 .contact-hero .hero-content {
@@ -4946,7 +4878,7 @@ td.other-month .selectable-date,
 .contact-main-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 80px 20px 80px;
 }
 
 .contact-card-box {
@@ -5093,17 +5025,13 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .meeting-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
-    url('../images/visit-hero.png') center/cover no-repeat;
-    padding: 150px 40px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
     margin-bottom: 60px;
 }
 
 .success-hero {
-    background: linear-gradient(135deg, rgba(39, 174, 96, 0.85) 0%, rgba(15, 43, 72, 0.85) 100%), 
-                url('../images/success-hero.png') center/cover no-repeat;
+    background: linear-gradient(135deg, rgba(29, 53, 87, 0.75) 0%, rgba(69, 123, 157, 0.60) 100%), url('../images/success-hero.png') center/cover no-repeat;
 }
 
 .meeting-hero .hero-content {
@@ -5261,7 +5189,7 @@ td.other-month .selectable-date,
 
 @media (max-width: 768px) {
     .meeting-hero {
-        padding: 60px 20px;
+        padding: 40px 20px;
     }
     .meeting-hero h1 {
         font-size: 2rem;
@@ -5279,11 +5207,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .referral-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.65) 0%, rgba(15, 43, 72, 0.75) 100%), 
-    url('../images/referral-hero.png') center/cover no-repeat;
-    padding: 150px 40px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
     margin-bottom: 60px;
 }
 
@@ -5310,7 +5235,7 @@ td.other-month .selectable-date,
 .referral-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 40px 20px 80px;
 }
 
 .form-card {
@@ -5510,11 +5435,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .business-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.70) 0%, rgba(15, 43, 72, 0.80) 100%), 
-    url('../images/business-hero.png') center/cover no-repeat;
-    padding: 150px 40px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
     margin-bottom: 60px;
 }
 
@@ -5541,7 +5463,7 @@ td.other-month .selectable-date,
 .business-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 40px 20px 80px;
 }
 
 .form-card {
@@ -5737,11 +5659,8 @@ td.other-month .selectable-date,
    ========================================================================== */
 
 .auth-hero {
-    background: linear-gradient(135deg, rgba(29, 53, 87, 0.70) 0%, rgba(15, 43, 72, 0.80) 100%), 
-    url('../images/signup-hero.png') center/cover no-repeat;
-    padding: 150px 40px;
+    /* Layout handled by base, background set previously */
     text-align: center;
-    color: #ffffff;
     margin-bottom: 60px;
 }
 
@@ -5954,4 +5873,98 @@ td.other-month .selectable-date,
     .btn-submit {
         width: 100%;
     }
+}
+
+/* ==========================================================================
+   RTL OVERRIDES (Arabic / Right-to-Left)
+   ========================================================================== */
+
+/* 1. Flip directional arrows, chevrons, and separators */
+[dir="rtl"] .advantage-list li::before,
+[dir="rtl"] .breadcrumb .separator,
+[dir="rtl"] .nav-more summary::after,
+[dir="rtl"] .btn-nav.prev,
+[dir="rtl"] .btn-nav.next,
+[dir="rtl"] .back-link::before,
+[dir="rtl"] .service-card .btn svg,
+[dir="rtl"] .detail-card .back-link svg,
+[dir="rtl"] .faq-summary .icon-wrap,
+[dir="rtl"] .calendar-year-summary::after {
+    transform: scaleX(-1);
+    display: inline-block;  /* needed for inline elements */
+}
+
+/* 2. Flip specific calendar navigation arrows if they use text symbols */
+[dir="rtl"] .btn-nav.prev,
+[dir="rtl"] .btn-nav.next {
+    transform: scaleX(-1);
+}
+
+/* 3. Adjust spacing using logical properties (auto-adapts to RTL) */
+[dir="rtl"] .advantage-list li {
+    padding-right: 0;
+    padding-left: 0;
+}
+[dir="rtl"] .advantage-list li::before {
+    margin-right: 0;
+    margin-left: 12px;  /* space after the arrow in RTL */
+}
+
+[dir="rtl"] .back-link {
+    flex-direction: row-reverse;  /* keep arrow on the left side */
+}
+[dir="rtl"] .back-link svg {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+[dir="rtl"] .service-card .btn svg {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+[dir="rtl"] .faq-summary .question-text {
+    padding-right: 0;
+    padding-left: 15px;
+}
+
+/* 4. Fix hero social icons – they are brand logos, do NOT flip */
+[dir="rtl"] .hero-social-icon svg {
+    transform: scaleX(1) !important;  /* keep original orientation */
+}
+
+/* Move hero social icons to the left side in RTL */
+[dir="rtl"] .hero-social {
+    right: auto !important;
+    left: 5%;
+}
+
+/* 5. Ensure dropdown menus align correctly */
+[dir="rtl"] .nav-more-menu {
+    left: auto;
+    right: 0;
+}
+[dir="rtl"] .header-lang-dropdown {
+    right: auto;
+    left: 0;
+}
+
+/* 6. General safe fallback for any other directional icons */
+[dir="rtl"] .icon-arrow,
+[dir="rtl"] .icon-chevron,
+[dir="rtl"] .icon-caret {
+    transform: scaleX(-1);
+    display: inline-block;
+}
+
+[dir="rtl"] .hero-content, [dir="rtl"] .page-header-left, [dir="rtl"] .page-header-right, [dir="rtl"] .hero-left, [dir="rtl"] .hero-right {
+    padding-right: 0;
+    padding-left: 70px; /* Increased from 50px to safely clear the icons on mobile */
+    padding-top: 30px;
+}
+
+/* 8. Move the red vertical line to the right side explicitly for RTL */
+[dir="rtl"] .page-header-right p {
+    border-inline-start: 3px solid var(--color-cta);
+    padding-inline-start: 20px;
 }
