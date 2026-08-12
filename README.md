@@ -55,7 +55,6 @@ The system is designed to simplify the customer journey by providing information
 * HTML5
 * CSS3
 * Git & GitHub
-* Trello (Project Management)
 
 ---
 
