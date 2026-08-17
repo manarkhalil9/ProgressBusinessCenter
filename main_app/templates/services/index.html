@@ -27,24 +27,82 @@
     </div>
 </section>
 
-<!-- Card Grid Section -->
-<section class="card-grid">
+<!-- Services Journey Timeline -->
+<div class="services-journey-container">
     {% for service in services %}
-    <div class="service-card">
-        <h3>{{ service.title }}</h3>
-        <p>{{ service.description|truncatewords:20 }}</p>
-        <a class="btn" href="{% url 'service_detail' service.id %}">
-            <span>{% trans "Explore Solution" %}</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-            </svg>
-        </a>
+    <div class="service-card-horizontal">
+        
+        <!-- Left Overlapping Circular Image -->
+        <div class="card-image-left">
+            {% if "Virtual" in service.title or "افتراضي" in service.title or "CR" in service.title %}
+                <img src="{% static 'images/virtual-offices.png' %}" alt="{{ service.title }}">
+            {% elif "Meeting" in service.title or "اجتماعات" in service.title %}
+                <img src="{% static 'images/meeting-rooms.png' %}" alt="{{ service.title }}">
+            {% elif "Office" in service.title or "Private" in service.title or "مكاتب" in service.title or "خاصة" in service.title %}
+                <img src="{% static 'images/private-offices.png' %}" alt="{{ service.title }}">
+            {% else %}
+                <img src="{% static 'images/virtual-offices.png' %}" alt="{{ service.title }}">
+            {% endif %}
+        </div>
+        
+        <!-- Right Side Content -->
+        <div class="card-content">
+            <h3>{{ service.title }}</h3>
+            <p class="service-desc">{{ service.description }}</p>
+
+            <div class="features-action-row">
+                <!-- Features List -->
+                <ul class="service-features">
+                    {% if "Virtual" in service.title or "افتراضي" in service.title or "CR" in service.title %}
+                        <li>{% trans "Prestigious business address" %}</li>
+                        <li>{% trans "Expert mail & call routing" %}</li>
+                        <li>{% trans "Zero real estate upkeep" %}</li>
+                    {% elif "Office" in service.title or "Private" in service.title or "مكاتب" in service.title or "خاصة" in service.title %}
+                        <li>{% trans "Fully furnished private layouts" %}</li>
+                        <li>{% trans "Dedicated front desk reception" %}</li>
+                        <li>{% trans "High-speed secure internet" %}</li>
+                    {% elif "Meeting" in service.title or "اجتماعات" in service.title %}
+                        <li>{% trans "State-of-the-art tech" %}</li>
+                        <li>{% trans "Acoustic privacy & comfort" %}</li>
+                        <li>{% trans "Flexible hourly scheduling" %}</li>
+                    {% else %}
+                        <li>{% trans "Tailored business support" %}</li>
+                        <li>{% trans "Scalable terms" %}</li>
+                        <li>{% trans "Experienced local team" %}</li>
+                    {% endif %}
+                </ul>
+                
+                <!-- Action Button -->
+                <div class="card-action">
+                    {% if "Virtual" in service.title or "افتراضي" in service.title or "CR" in service.title %}
+                        <a href="{% url 'business_register' %}" class="btn">
+                            <span>{% trans "Start Application" %}</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                        </a>
+                    {% elif "Meeting" in service.title or "اجتماعات" in service.title %}
+                        <a href="{% url 'rooms' %}" class="btn">
+                            <span>{% trans "Book a Room" %}</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                        </a>
+                    {% elif "Office" in service.title or "Private" in service.title or "مكاتب" in service.title or "خاصة" in service.title %}
+                        <a href="{% url 'offices' %}" class="btn">
+                            <span>{% trans "Browse Offices" %}</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'contact' %}" class="btn">
+                            <span>{% trans "Contact Us" %}</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
     {% empty %}
         <p>{% trans "No services are available at the moment." %}</p>
     {% endfor %}
-</section>
+</div>
 
 <!-- Growth / Bottom Banner Section -->
 <section class="services-growth-section">

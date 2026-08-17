@@ -34,11 +34,6 @@
             </summary>
             <div class="faq-content">
                 <p>{{ faq.answer }}</p>
-                {% if faq.id %}
-                <a href="{% url 'faq_detail' faq.id %}" class="faq-footer-link">
-                    {% trans "Permalink" %} →
-                </a>
-                {% endif %}
             </div>
         </details>
         {% empty %}

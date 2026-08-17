@@ -43,12 +43,6 @@ class ServiceList(ListView):
     context_object_name = 'services'
 
 
-class ServiceDetail(DetailView):
-    model = Service
-    template_name = 'services/detail.html'
-    context_object_name = 'service'
-
-
 # ---------- FEATURES ----------
 class FeatureListView(ListView):
     model = Feature
@@ -120,12 +114,6 @@ class FAQListView(ListView):
     model = FAQ
     template_name = 'faq/index.html'
     context_object_name = 'faqs'
-
-
-class FAQDetailView(DetailView):
-    model = FAQ
-    template_name = 'faq/detail.html'
-    context_object_name = 'faq'
 
 
 # ---------- CONTACT ----------

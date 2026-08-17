@@ -11,7 +11,6 @@ urlpatterns = [
 
     # services
     path('services/', views.ServiceList.as_view(), name='services'),
-    path('services/<int:pk>/', views.ServiceDetail.as_view(), name='service_detail'),
 
     # features
     path('features/', views.FeatureListView.as_view(), name='features'),
@@ -33,7 +32,6 @@ urlpatterns = [
 
     # faq
     path('faqs/', views.FAQListView.as_view(), name='faqs'),
-    path('faqs/<int:pk>/', views.FAQDetailView.as_view(), name='faq_detail'),
 
     # contact
     path('contact/', views.ContactView.as_view(), name='contact'),
