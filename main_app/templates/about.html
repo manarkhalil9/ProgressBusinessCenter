@@ -4,39 +4,33 @@
 
 {% block content %}
 
-<!-- PAGE HEADER HERO -->
+<!-- HERO -->
 <section class="page-header">
     {% include 'hero_social.html' %}
     <div class="page-header-inner">
-        <!-- Left Side: Title & Breadcrumb -->
         <div class="page-header-left animate-fade-in">
             <h1>{% trans "About Us" %}</h1>
-            <div class="page-breadcrumb">
-                {% trans "Home" %} <span>›</span> {% trans "About Us" %}
-            </div>
         </div>
-
-        <!-- Right Side: Description -->
         <div class="page-header-right animate-fade-in-delay">
             <p>
-                {% trans "More than just a workspace. We are a strategic partner for businesses looking to establish a powerful, lasting presence in the Kingdom of Bahrain." %}
+                {% trans "Professional workspaces and business support designed to help companies establish and grow in Bahrain." %}
             </p>
         </div>
     </div>
     <div class="hero-glow-shape"></div>
 </section>
 
-<!-- ABOUT GRID SECTION -->
+<!-- WHO WE ARE -->
 <section class="about-grid-section">
     <div class="about-container">
         <div class="section-title-wrapper">
             <span class="section-badge">{% trans "Who We Are" %}</span>
-            <h2>{% trans "Driving Success in the Heart of Bahrain" %}</h2>
-            <p>{% trans "Built on a foundation of agility, professionalism, and modern infrastructure." %}</p>
+            <h2>{% trans "Built for Business in Bahrain" %}</h2>
+            <p>{% trans "Flexible workspaces, professional support, and a business environment designed for growth." %}</p>
         </div>
 
         <div class="about-grid">
-            <!-- Card 1: Mission -->
+            <!-- Mission -->
             <div class="about-card">
                 <div class="about-card-glow"></div>
                 <div class="about-card-icon">
@@ -47,10 +41,10 @@
                     </svg>
                 </div>
                 <h3>{% trans "Our Mission" %}</h3>
-                <p>{% trans "To deliver agile workspace solutions and seamless administrative support, empowering businesses to scale efficiently and operate with absolute professionalism." %}</p>
+                <p>{% trans "We provide flexible workspaces and professional support that help businesses operate smoothly and grow with confidence." %}</p>
             </div>
 
-            <!-- Card 2: Vision -->
+            <!-- Vision -->
             <div class="about-card">
                 <div class="about-card-glow"></div>
                 <div class="about-card-icon">
@@ -60,10 +54,10 @@
                     </svg>
                 </div>
                 <h3>{% trans "Our Vision" %}</h3>
-                <p>{% trans "To be the cornerstone of corporate growth in Bahrain, recognized globally as the ultimate hub for business excellence and seamless market entry." %}</p>
+                <p>{% trans "To be a trusted business hub in Bahrain for companies seeking a professional and seamless setup experience." %}</p>
             </div>
 
-            <!-- Card 3: Who We Serve -->
+            <!-- Who We Serve -->
             <div class="about-card">
                 <div class="about-card-glow"></div>
                 <div class="about-card-icon">
@@ -74,16 +68,16 @@
                     </svg>
                 </div>
                 <h3>{% trans "Who We Serve" %}</h3>
-                <p>{% trans "Tailored environments for a diverse range of ambitious professionals:" %}</p>
+                <p>{% trans "We support startups, entrepreneurs, SMEs, remote teams, and international businesses entering Bahrain." %}</p>
                 <ul class="about-list">
-                    <li><span>✓</span> {% trans "Local Entrepreneurs & Startups" %}</li>
-                    <li><span>✓</span> {% trans "Freelancers & Remote Teams" %}</li>
-                    <li><span>✓</span> {% trans "Regional SMEs scaling operations" %}</li>
-                    <li><span>✓</span> {% trans "International corporations entering GCC" %}</li>
+                    <li><span>✓</span> {% trans "Entrepreneurs & Startups" %}</li>
+                    <li><span>✓</span> {% trans "Freelancers & Teams" %}</li>
+                    <li><span>✓</span> {% trans "Growing SMEs" %}</li>
+                    <li><span>✓</span> {% trans "International Companies" %}</li>
                 </ul>
             </div>
 
-            <!-- Card 4: Our Commitment -->
+            <!-- Our Commitment -->
             <div class="about-card">
                 <div class="about-card-glow"></div>
                 <div class="about-card-icon">
@@ -92,60 +86,75 @@
                     </svg>
                 </div>
                 <h3>{% trans "Our Commitment" %}</h3>
-                <p>{% trans "Eliminating operational friction so you can focus on core growth:" %}</p>
+                <p>{% trans "We focus on reliability, flexibility, privacy, and responsive support to create a smooth client experience." %}</p>
                 <ul class="about-list">
-                    <li><span>✓</span> {% trans "Transparent, flexible pricing" %}</li>
-                    <li><span>✓</span> {% trans "Uncompromising data privacy" %}</li>
-                    <li><span>✓</span> {% trans "Dedicated ongoing client support" %}</li>
-                    <li><span>✓</span> {% trans "Professional welcoming environment" %}</li>
+                    <li><span>✓</span> {% trans "Flexible solutions" %}</li>
+                    <li><span>✓</span> {% trans "Reliable support" %}</li>
+                    <li><span>✓</span> {% trans "Professional environment" %}</li>
+                    <li><span>✓</span> {% trans "Client privacy" %}</li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-<!-- VISUAL FEATURE BANNER -->
-<section class="about-visual-banner">
-    <div class="visual-banner-content">
-        <div class="visual-text">
-            <span class="section-badge">{% trans "Excellence in Seef" %}</span>
-            <h2>{% trans "Designed for Productivity & Growth" %}</h2>
-            <p>{% trans "Located in the prime business district of Bahrain, our facilities combine luxury, modern aesthetics, and fully equipped workspaces to give your business the professional edge it deserves." %}</p>
-            
-            <div class="stats-row">
-                <div class="stat-item">
-                    <h3>100%</h3>
-                    <p>{% trans "Prime Location" %}</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>{% trans "Secure Access" %}</p>
-                </div>
-                <div class="stat-item">
-                    <h3>5★</h3>
-                    <p>{% trans "Client Support" %}</p>
-                </div>
-            </div>
+<!-- WORKSPACE FEATURES -->
+<section class="about-features-section">
+    <div class="about-features-container">
+        <div class="section-title-wrapper">
+            <span class="section-badge">{% trans "Workspace Features" %}</span>
+            <h2>{% trans "Everything You Need to Work Professionally" %}</h2>
+            <p>{% trans "Thoughtfully equipped spaces and services that make everyday business easier." %}</p>
         </div>
-        
-        <div class="visual-image-card">
-            <div class="image-wrapper">
-                <img src="{% static 'images/about-feature.png' %}" alt="Progress Business Centre Office" />
-                <div class="floating-badge">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                    <span>{% trans "Premium Facilities" %}</span>
+
+        <div class="about-features-network">
+            <svg class="feature-connectors" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+                <path class="feature-connector feature-connector-blue" d="M34 194 C 118 112, 202 268, 283 212"></path>
+                <path class="feature-connector feature-connector-coral" d="M283 212 C 366 286, 455 100, 542 200"></path>
+                <path class="feature-connector feature-connector-blue" d="M542 200 C 628 116, 715 280, 801 218"></path>
+            </svg>
+
+            <div class="about-features-grid">
+                {% for feature in features|slice:":4" %}
+                <article class="about-feature-card">
+                    <div class="about-feature-media about-feature-image">
+                        {% if feature.image %}
+                        <img src="{{ feature.image.url }}" alt="{{ feature.title }}">
+                        {% else %}
+                        <div class="about-feature-image-fallback" aria-hidden="true"></div>
+                        {% endif %}
+                    </div>
+                    <div class="about-feature-label">
+                        <span class="about-feature-icon" aria-hidden="true">
+                            {% if forloop.counter == 1 %}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M8 4v16M8 9h13M12 14h5"></path></svg>
+                            {% elif forloop.counter == 2 %}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20v-2a5 5 0 0 1 10 0v2M14 20v-1.5a4 4 0 0 1 7-2.6"></path></svg>
+                            {% elif forloop.counter == 3 %}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5l8-3 8 3v16M9 21v-4h6v4"></path><path d="M8 8h1M15 8h1M8 12h1M15 12h1"></path></svg>
+                            {% else %}
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 20h.01"></path></svg>
+                            {% endif %}
+                        </span>
+                        <h3>{{ feature.title }}</h3>
+                    </div>
+                </article>
+                {% empty %}
+                <div class="empty-state">
+                    <p>{% trans "No facilities are currently available." %}</p>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 </section>
 
-<!-- BOTTOM CTA SECTION -->
+<!-- CTA -->
 <section class="about-cta-section">
     <div class="cta-container">
         <div class="cta-glow"></div>
-        <h2>{% trans "Ready to Establish Your Presence?" %}</h2>
-        <p>{% trans "Join the growing network of successful businesses operating from Progress Business Centre." %}</p>
+        <h2>{% trans "Ready to Find Your Workspace?" %}</h2>
+        <p>{% trans "Explore flexible solutions designed around your business." %}</p>
         <a href="{% url 'services' %}" class="btn">
             {% trans "Explore Our Solutions" %}
         </a>

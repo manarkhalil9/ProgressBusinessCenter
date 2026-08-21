@@ -4,16 +4,16 @@
 
 {% block content %}
 
-<!-- Hero Section with Image Background -->
+
 <section class="auth-hero">
-            {% include 'hero_social.html' %}
+    {% include 'hero_social.html' %}
     <div class="hero-content">
         <h1>{% trans "Create Account" %}</h1>
         <p>{% trans "Join our community and get access to professional workspaces, virtual offices, and meeting rooms." %}</p>
     </div>
 </section>
 
-<!-- Authentication Container -->
+
 <div class="auth-container">
     <div class="form-card">
         <div class="form-header">
@@ -21,7 +21,7 @@
             <p>{% trans "Create your account to manage bookings and applications." %}</p>
         </div>
 
-        <!-- Main signup form -->
+
         <form method="post" action="{% url 'signup' %}" id="signup_form" novalidate>
             {% csrf_token %}
 
@@ -50,7 +50,7 @@
             </div>
         </form>
 
-        <!-- Button Row: Create Account + Google side by side -->
+
         <div class="button-row">
             <button class="btn-submit" type="submit" form="signup_form">
                 {% trans "Create Account" %}
@@ -70,7 +70,7 @@
             </form>
         </div>
 
-        <!-- Footer Link -->
+
         <div class="auth-footer-link">
             <p>{% trans "Already have an account?" %} <a href="{% url 'login' %}">{% trans "Login" %}</a></p>
         </div>

@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- Hero Section with Image Background -->
+
 <section class="business-hero">
             {% include 'hero_social.html' %}
     <div class="hero-content">
@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<!-- Form Container -->
+
 <div class="business-container">
     <div class="form-card">
         <div class="form-header">
@@ -22,7 +22,7 @@
 
         <form method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
-            
+
             <div class="form-group">
                 <label><b>{% trans "Request Type" %}</b></label>
                 {{ form.request_type }}
@@ -56,7 +56,7 @@
                 {{ form.cpr_number }}
             </div>
 
-            <!-- Documentation Section -->
+
             <div class="form-group">
                 <label><b>{{ form.cpr_document.label }}</b></label>
                 <div class="custom-file-wrapper">

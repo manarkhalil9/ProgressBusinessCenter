@@ -8,13 +8,12 @@ from .models import (
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import (
     BusinessRegistrationForm, VisitRequestForm, BookingForm, ReferralForm
 )
 from django.db.models import Q
 from django.http import Http404
-from django.views import View
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from datetime import date, datetime, timedelta
@@ -33,7 +32,14 @@ def home(request):
 
 # ---------- ABOUT ----------
 def about(request):
-    return render(request, 'about.html')
+    # Get all features, limit to 6 (no 'available' filter)
+    features = Feature.objects.all()[:6]
+    
+    return render(
+        request,
+        'about.html',
+        {'features': features}
+    )
 
 
 # ---------- SERVICES ----------
@@ -41,20 +47,6 @@ class ServiceList(ListView):
     model = Service
     template_name = 'services/index.html'
     context_object_name = 'services'
-
-
-# ---------- FEATURES ----------
-class FeatureListView(ListView):
-    model = Feature
-    template_name = 'features/index.html'
-    context_object_name = 'features'
-
-
-# ---------- BRANCHES ----------
-class BranchListView(ListView):
-    model = Branch
-    template_name = 'branches/index.html'
-    context_object_name = 'branches'
 
 
 # ---------- MEETING ROOMS ----------
@@ -124,6 +116,11 @@ class ContactView(DetailView):
 
     def get_object(self):
         return Contact.objects.first()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['branches'] = Branch.objects.all()
+        return context
 
 # ---------- VISIT REQUESTS ----------
 class VisitCreateView(LoginRequiredMixin, CreateView):
@@ -333,36 +330,6 @@ class BusinessRegistrationCreateView(LoginRequiredMixin, CreateView):
 
 def business_success(request):
     return render(request, 'business/success.html')
-
-
-# ---------- SEARCH ----------
-def search(request):
-    query = request.GET.get("q", "").strip()
-    services = Service.objects.none()
-    rooms = MeetingRoom.objects.none()
-    faqs = FAQ.objects.none()
-
-    if query:
-        services = Service.objects.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query)
-        )
-        rooms = MeetingRoom.objects.filter(
-            Q(name__icontains=query) |
-            Q(branch__name__icontains=query)
-        )
-        faqs = FAQ.objects.filter(
-            Q(question__icontains=query) |
-            Q(answer__icontains=query)
-        )
-
-    context = {
-        "query": query,
-        "services": services,
-        "rooms": rooms,
-        "faqs": faqs,
-    }
-    return render(request, "search/results.html", context)
 
 
 # ---------- BOOKING ----------
@@ -582,57 +549,6 @@ class BookingCreateView(LoginRequiredMixin, CreateView):
 def booking_success(request):
     return render(request, "bookings/success.html")
 
-# ---------- CANCEL BOOKING ----------
-class BookingCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
-    def get(self, request, pk):
-        booking = get_object_or_404(Booking, pk=pk)
-        return render(request, "bookings/confirm_cancel.html", {"booking": booking})
-
-    def post(self, request, pk):
-        booking = get_object_or_404(Booking, pk=pk)
-        booking.status = "cancelled"
-        booking.save()
-        return redirect("dashboard")
-
-    def test_func(self):
-        booking = get_object_or_404(Booking, pk=self.kwargs['pk'])
-        return booking.user == self.request.user
-
-
-# ---------- CANCEL BUSINESS REGISTRATION ----------
-class BusinessRegistrationCancelView(LoginRequiredMixin, UserPassesTestMixin, View):
-    def post(self, request, pk):
-        registration = get_object_or_404(BusinessRegistration, pk=pk)
-        registration.delete()
-        return redirect("dashboard")
-
-    def test_func(self):
-        registration = get_object_or_404(BusinessRegistration, pk=self.kwargs['pk'])
-        return registration.user == self.request.user
-
-
-# ---------- USER DASHBOARD ----------
-class UserDashboardView(LoginRequiredMixin, ListView):
-    model = Booking
-    template_name = "dashboard/index.html"
-    context_object_name = "bookings"
-
-    def get_queryset(self):
-        return (
-            Booking.objects.filter(user=self.request.user)
-            .select_related("meeting_room", "office")
-            .order_by("-created_at")
-        )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context["corporate_registrations"] = (
-            BusinessRegistration.objects.filter(user=self.request.user)
-            .order_by("-submitted_at")
-        )
-
-        return context
 
 # ---------- SIGNUP ----------
 def signup(request):

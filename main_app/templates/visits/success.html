@@ -3,32 +3,32 @@
 
 {% block content %}
 
-<!-- 1. Success Hero Section (Optional green tint via CSS) -->
+
 <section class="meeting-hero success-hero">
     {% include 'hero_social.html' %}
     <div class="hero-content">
-        <!-- REMOVED THE DUPLICATE INCLUDE HERE -->
+
         <h1>{% trans "Request Received" %}</h1>
         <p>{% trans "You're one step closer to your new workspace." %}</p>
     </div>
 </section>
 
-<!-- 2. Success Card Container -->
+
 <div class="meeting-container">
     <section class="success-card">
-        
-        <!-- Animated / Scaled SVG Icon -->
+
+
         <div class="success-icon">
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
             </svg>
         </div>
-        
+
         <h2>{% trans "Meeting Request Submitted" %}</h2>
         <p>{% trans "Thank you for your submission. Our team will contact you shortly to confirm your booking details." %}</p>
-        
-        <!-- Reusing the CTA button from your Contact page -->
+
+
         <a href="{% url 'home' %}" class="btn-cta">
             {% trans "Back Home" %}
         </a>

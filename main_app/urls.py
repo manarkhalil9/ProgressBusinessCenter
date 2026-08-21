@@ -12,12 +12,6 @@ urlpatterns = [
     # services
     path('services/', views.ServiceList.as_view(), name='services'),
 
-    # features
-    path('features/', views.FeatureListView.as_view(), name='features'),
-
-    # branches
-    path('branches/', views.BranchListView.as_view(), name='branches'),
-
     # rooms
     path('rooms/', views.MeetingRoomListView.as_view(), name='rooms'),
     path('rooms/<int:pk>/', views.MeetingRoomDetailView.as_view(), name='room_detail'),
@@ -48,20 +42,12 @@ urlpatterns = [
     path('register/', views.BusinessRegistrationCreateView.as_view(), name='business_register'),
     path('register/success/', views.business_success, name='business_success'),
 
-    # search bar
-    path("search/", views.search, name="search"),
-
     # bookings
     path("book/<str:resource_type>/<int:pk>/", views.BookingCreateView.as_view(), name="book"),
     path("book/success/", views.booking_success, name="booking_success"),
     
     # payment page
     # path("booking/<int:pk>/payment/", views.booking_payment, name="booking_payment"),
-
-    # dashboard
-    path('dashboard/', views.UserDashboardView.as_view(), name='dashboard'),
-    path('booking/<int:pk>/cancel/', views.BookingCancelView.as_view(), name='booking_cancel'),
-    path('dashboard/cancel-registration/<int:pk>/', views.BusinessRegistrationCancelView.as_view(), name='cancel_registration'),
 
     # auth
     path('accounts/signup/', views.signup, name='signup'),

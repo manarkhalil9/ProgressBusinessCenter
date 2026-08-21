@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- HERO HEADER -->
+
 <div class="office-hero">
             {% include 'hero_social.html' %}
     <div class="hero-content">
@@ -13,12 +13,12 @@
     </div>
 </div>
 
-<!-- MAIN CONTAINER -->
+
 <div class="office-container">
     <section class="office-grid">
         {% for office in offices %}
             <div class="service-card">
-                
+
                 {% if office.image %}
                     <div class="card-image-wrapper">
                         <img class="office-image" src="{{ office.image.url }}" alt="{{ office.name }}">

@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- Hero Section -->
+
 <section class="booking-hero">
             {% include 'hero_social.html' %}
     <div class="hero-overlay"></div>
@@ -30,13 +30,13 @@
     </div>
 </section>
 
-<!-- Main Form Container -->
+
 <section class="booking-container">
     <div class="form-card">
         <form method="post" novalidate>
             {% csrf_token %}
 
-            <!-- Form Validation Alerts -->
+
             {% if form.errors or form.non_field_errors %}
             <div class="form-errors-alert">
                 <div class="alert-header">{% trans "Please review the highlighted issues:" %}</div>
@@ -53,13 +53,13 @@
             </div>
             {% endif %}
 
-            <!-- SECTION 1: CLIENT INFORMATION -->
+
             <div class="form-section">
                 <div class="section-header">
                     <span class="step-number">1</span>
                     <h3>{% trans "Your Contact Information" %}</h3>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="{{ form.client_name.id_for_label }}">{% trans "Full Name" %}</label>
@@ -97,7 +97,7 @@
                 {% endif %}
             </div>
 
-            <!-- SECTION 2: DATE & TIME SELECTION -->
+
             <div class="form-section">
                 <div class="section-header">
                     <span class="step-number">2</span>
@@ -111,7 +111,7 @@
                 </div>
 
                 {% if resource_type == "room" %}
-                    <!-- MEETING ROOM: SINGLE CALENDAR -->
+
                     <div class="booking-grid-layout single-col">
                         <div class="calendar-wrapper">
                             <label class="calendar-title">{% trans "1. Select Meeting Date" %}</label>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
 
-                        <!-- Time Slot Selection -->
+
                         <div class="time-selection-wrapper">
                             <label class="calendar-title">{% trans "2. Select Time Slot" %}</label>
                             {% if available_slots %}
@@ -193,10 +193,10 @@
                     </div>
 
                 {% else %}
-                    <!-- OFFICE: TWO INDEPENDENT CALENDARS -->
+
                     <div class="booking-grid-layout double-col">
-                        
-                        <!-- Start Date Calendar -->
+
+
                         <div class="calendar-wrapper">
                             <label class="calendar-title">{% trans "1. Lease Start Date" %}</label>
                             <div class="booking-calendar start-calendar">
@@ -246,7 +246,7 @@
                             </div>
                         </div>
 
-                        <!-- End Date Calendar -->
+
                         <div class="calendar-wrapper">
                             <label class="calendar-title">{% trans "2. Lease End Date" %}</label>
                             <div class="booking-calendar end-calendar">
@@ -303,7 +303,7 @@
                 {% endif %}
             </div>
 
-            <!-- SUBMIT BUTTON -->
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-cta btn-full">
                     {% trans "Confirm & Submit Booking Request" %}
@@ -374,7 +374,7 @@
                 const selectedYear = this.dataset.year;
                 const currentMonth = String(this.dataset.currentMonth).padStart(2, '0');
                 const newViewDate = `${selectedYear}-${currentMonth}-01`;
-                
+
                 const startDate = this.dataset.startDate;
                 const endDate = this.dataset.endDate;
                 const otherView = this.dataset.otherView;

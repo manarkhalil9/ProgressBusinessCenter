@@ -4,35 +4,43 @@
 
 {% block content %}
 
-<!-- Hero Banner Section -->
+
 <section class="page-header page-header-services">
     {% include 'hero_social.html' %}
     <div class="page-header-container">
-        <!-- Left Hero Content -->
+
         <div class="hero-left">
             <h1 class="page-title">{% trans "Services" %}</h1>
             <div class="accent-bar"></div>
-            <nav class="breadcrumb">
-                <a href="{% url 'home' %}">{% trans "Home" %}</a>
-                <span class="separator">›</span>
-                <span class="current">{% trans "Services" %}</span>
-            </nav>
         </div>
 
-        <!-- Right Hero Text Content -->
+
         <div class="hero-right">
+            <span class="services-hero-accent" aria-hidden="true"></span>
             <h2>{% trans "Workspace & Corporate Solutions in Bahrain" %}</h2>
             <p>{% trans "Flexible, premium environments engineered for global enterprises, startups, and agile founders." %}</p>
         </div>
     </div>
 </section>
 
-<!-- Services Journey Timeline -->
-<div class="services-journey-container">
+<section class="services-intro">
+    <div class="services-intro-inner">
+        <span class="section-badge">{% trans "Our Services" %}</span>
+        <h2>{% trans "Flexible Solutions for Every Stage of Business" %}</h2>
+        <p>{% trans "From establishing your presence to finding the right workspace, our services are designed to make business in Bahrain simpler." %}</p>
+    </div>
+</section>
+
+<div class="services-journey-container" id="services-showcase">
+    <svg class="services-connectors" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true">
+        <path class="services-connector services-connector-blue" d="M80 170 C 230 55, 315 300, 455 185"></path>
+        <path class="services-connector services-connector-coral" d="M405 325 C 560 430, 650 90, 795 210"></path>
+        <path class="services-connector services-connector-blue" d="M750 335 C 900 430, 1000 120, 1140 225"></path>
+    </svg>
     {% for service in services %}
     <div class="service-card-horizontal">
-        
-        <!-- Left Overlapping Circular Image -->
+
+
         <div class="card-image-left">
             {% if "Virtual" in service.title or "افتراضي" in service.title or "CR" in service.title %}
                 <img src="{% static 'images/virtual-offices.png' %}" alt="{{ service.title }}">
@@ -44,14 +52,15 @@
                 <img src="{% static 'images/virtual-offices.png' %}" alt="{{ service.title }}">
             {% endif %}
         </div>
-        
-        <!-- Right Side Content -->
+
+
         <div class="card-content">
+            <span class="service-eyebrow">{% trans "Business Solution" %}</span>
             <h3>{{ service.title }}</h3>
             <p class="service-desc">{{ service.description }}</p>
 
             <div class="features-action-row">
-                <!-- Features List -->
+
                 <ul class="service-features">
                     {% if "Virtual" in service.title or "افتراضي" in service.title or "CR" in service.title %}
                         <li>{% trans "Prestigious business address" %}</li>
@@ -71,8 +80,8 @@
                         <li>{% trans "Experienced local team" %}</li>
                     {% endif %}
                 </ul>
-                
-                <!-- Action Button -->
+
+
                 <div class="card-action">
                     {% if "Virtual" in service.title or "افتراضي" in service.title or "CR" in service.title %}
                         <a href="{% url 'business_register' %}" class="btn">
@@ -104,15 +113,28 @@
     {% endfor %}
 </div>
 
-<!-- Growth / Bottom Banner Section -->
+
 <section class="services-growth-section">
     <div class="services-growth-card split-growth">
         <div class="growth-text">
-            <h2>{% trans "Built to Scale With Your Ambitions" %}</h2>
-            <p>{% trans "Whether launching a new venture or expanding operations, our adaptable office spaces and support solutions grow alongside your company." %}</p>
+            <span class="section-badge">{% trans "Built to Grow" %}</span>
+            <h2>{% trans "Solutions That Grow With Your Business" %}</h2>
+            <p>{% trans "Start with what you need today and scale your workspace and support as your business evolves." %}</p>
         </div>
         <div class="growth-image-wrapper">
             <img src="{% static 'images/services-growth.png' %}" alt="{% trans 'Office Space View' %}">
+        </div>
+    </div>
+</section>
+
+<section class="services-final-cta">
+    <div class="services-final-cta-inner">
+        <span class="services-cta-eyebrow">{% trans "Ready to Get Started?" %}</span>
+        <h2>{% trans "Find the Right Solution for Your Business" %}</h2>
+        <p>{% trans "Tell us what you need and our team will help you choose the right workspace or support service." %}</p>
+        <div class="services-cta-actions">
+            <a href="{% url 'contact' %}" class="btn-solid-coral">{% trans "Contact Our Team" %}</a>
+            <a href="{% url 'business_register' %}" class="btn-outline-white">{% trans "Establish Your Presence" %}</a>
         </div>
     </div>
 </section>

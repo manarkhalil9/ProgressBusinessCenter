@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- 1. Gallery Hero Section -->
+
 <section class="gallery-hero">
             {% include 'hero_social.html' %}
     <div class="hero-content">
@@ -12,24 +12,36 @@
     </div>
 </section>
 
-<!-- 2. Gallery Grid Container -->
-<div class="gallery-container">
+
+<div class="gallery-container gallery-showcase">
+    <div class="gallery-intro">
+        <span class="section-badge">{% trans "Inside Progress" %}</span>
+        <h2>{% trans "Spaces made for ambitious work" %}</h2>
+        <p>{% trans "A closer look at the spaces, details, and atmosphere behind your next business address." %}</p>
+    </div>
     <section class="gallery-grid">
         {% for image in gallery %}
-            <a href="{% url 'gallery_detail' image.id %}" class="gallery-card">
+            <a href="{% url 'gallery_detail' image.id %}" class="gallery-card gallery-card-{{ forloop.counter }}">
                 <div class="gallery-image-wrapper">
                     <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                    <!-- Hover overlay with CTA style -->
+
                     <div class="gallery-overlay">
+                        <span class="gallery-view-icon" aria-hidden="true">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                                <path d="M15 3h6v6"></path><path d="M21 3l-7 7"></path>
+                                <path d="M9 21H3v-6"></path><path d="M3 21l7-7"></path>
+                            </svg>
+                        </span>
                         <span class="btn-view">{% trans "View Image" %}</span>
                     </div>
                 </div>
                 <div class="gallery-card-content">
+                    <span class="gallery-index">0{{ forloop.counter }}</span>
                     <h3>{{ image.title }}</h3>
                 </div>
             </a>
         {% empty %}
-            <!-- Reusing the empty state style from the branches page -->
+
             <div class="empty-state" style="grid-column: 1 / -1;">
                 <p>{% trans "No images available yet." %}</p>
             </div>

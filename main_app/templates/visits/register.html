@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<!-- 1. Meeting Hero Section -->
+
 <section class="meeting-hero">
             {% include 'hero_social.html' %}
     <div class="hero-content">
@@ -12,19 +12,19 @@
     </div>
 </section>
 
-<!-- 2. Form Container -->
+
 <div class="meeting-container">
     <section class="form-card">
-        
+
         <div class="form-header">
             <h2>{% trans "Schedule Your Visit" %}</h2>
             <p>{% trans "We look forward to showing you our workspace solutions." %}</p>
         </div>
-        
+
         <form method="POST" class="custom-form">
             {% csrf_token %}
-            
-            <!-- Django Form Output -->
+
+
             {{ form.as_p }}
 
             <button type="submit" class="btn-submit">

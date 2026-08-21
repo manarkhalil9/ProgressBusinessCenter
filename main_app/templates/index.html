@@ -4,14 +4,17 @@
 
 {% block content %}
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero">
     {% include 'hero_social.html' %}
     <div class="hero-content">
-        <!-- Floating decorative shape -->
         <div class="hero-blob"></div>
-        <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
-        <p>{% trans "Establish a prestigious presence in Seef District. From flexible virtual offices to fully serviced suites, we provide complete, ready-to-use workspace solutions." %}</p>
+        
+        <div class="hero-copy">
+            <h1>{% trans "Your Gateway to Doing Business in Bahrain" %}</h1>
+            <p>{% trans "Establish your business in Seef District with flexible, fully supported workspace solutions designed for professional growth." %}</p>
+        </div>
+
         <div class="hero-buttons">
             <a href="{% url 'services' %}" class="btn-solid-teal">{% trans "Explore Solutions" %}</a>
             <a href="{% url 'business_register' %}" class="btn-outline-white">{% trans "Establish Your Presence" %}</a>
@@ -19,27 +22,27 @@
     </div>
 </section>
 
-<!-- WORKSPACE SOLUTIONS -->
+<!-- SERVICES -->
 <section class="services-section">
     <div class="section-title text-center">
         <h2>{% trans "Tailored Workspace Solutions" %}</h2>
     </div>
-    <div class="reboot-card-grid">
-        <div class="reboot-card">
+    <div class="home-card-grid">
+        <div class="home-card">
             <div class="card-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </div>
             <h3>{% trans "Virtual Offices" %}</h3>
             <p>{% trans "A prestigious Seef address, dedicated phone line, and professional mail handling without the physical lease overhead." %}</p>
         </div>
-        <div class="reboot-card">
+        <div class="home-card">
             <div class="card-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
             </div>
             <h3>{% trans "Serviced Suites" %}</h3>
             <p>{% trans "Fully furnished, private executive suites with high-speed Wi-Fi, daily maintenance, and utility coverage included." %}</p>
         </div>
-        <div class="reboot-card">
+        <div class="home-card">
             <div class="card-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             </div>
@@ -49,35 +52,50 @@
     </div>
 </section>
 
-<!-- THE PROGRESS ADVANTAGE (Full-width Teal band with Image/Text split, eliminating cards completely) -->
+<!-- THE PROGRESS WAY -->
 <section class="advantage-banner">
     <div class="advantage-container">
         <div class="advantage-image">
-            <!-- USE YOUR AI GENERATED IMAGE HERE -->
-            <img src="{% static 'images/advantage-image.png' %}" alt="Team collaborating">
+            <img src="{% static 'images/advantage-image.png' %}" alt="Business professionals working at Progress Business Centre">
         </div>
+
         <div class="advantage-content">
             <span class="sub-badge">{% trans "The Progress Way" %}</span>
-            <h2>{% trans "Everything your business needs from day one." %}</h2>
-            <p>{% trans "We replace the friction of traditional office setups with an ecosystem designed for immediate productivity. We manage the overhead so you can manage your growth." %}</p>
-            <ul class="advantage-list">
-                <li><strong>{% trans "Prime Location:" %}</strong> {% trans "Located in the prestigious Alraya Building." %}</li>
-                <li><strong>{% trans "Secretarial Support:" %}</strong> {% trans "Bilingual receptionists managing your calls." %}</li>
-                <li><strong>{% trans "End-to-End Setup:" %}</strong> {% trans "Assistance with CR, legal, and IT." %}</li>
-            </ul>
+            <h2>{% trans "Business Made Simple from Day One" %}</h2>
+            <p class="advantage-intro">{% trans "Flexible workspaces and professional support that help your business start faster, operate smoothly, and grow with confidence." %}</p>
+
+            <div class="advantage-list">
+                <div class="advantage-item">
+                    <span class="advantage-number" aria-hidden="true">01</span>
+                    <h3>{% trans "Prime Location" %}</h3>
+                    <p>{% trans "Professional workspace in Bahrain's Seef business district." %}</p>
+                </div>
+
+                <div class="advantage-item">
+                    <span class="advantage-number" aria-hidden="true">02</span>
+                    <h3>{% trans "Business Support" %}</h3>
+                    <p>{% trans "Reception, call handling, and administrative assistance when you need it." %}</p>
+                </div>
+
+                <div class="advantage-item">
+                    <span class="advantage-number" aria-hidden="true">03</span>
+                    <h3>{% trans "Ready to Operate" %}</h3>
+                    <p>{% trans "Fully equipped spaces and essential support prepared from day one." %}</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- WHY CHOOSE BAHRAIN (Reduced from 4 cards to 2 high-impact Reboot-style cards) -->
+<!-- WHY BAHRAIN -->
 <section class="why-bahrain-section">
     <div class="section-title text-center">
         <h2>{% trans "Why Choose Bahrain?" %}</h2>
         <p>{% trans "The Middle East's most favorable economic environment for foreign investors." %}</p>
     </div>
-    
+
     <div class="two-card-grid">
-        <div class="reboot-card card-wide">
+        <div class="home-card card-wide">
             <div class="card-icon bg-navy">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
             </div>
@@ -85,7 +103,7 @@
             <p>{% trans "Enjoy full commercial ownership of your enterprise without requiring a local partner. Bahrain acts as your direct gateway to Saudi Arabia and rapid connections to all major Middle Eastern markets." %}</p>
         </div>
 
-        <div class="reboot-card card-wide">
+        <div class="home-card card-wide">
             <div class="card-icon bg-coral">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
             </div>
@@ -95,29 +113,8 @@
     </div>
 </section>
 
-<!-- STATS SECTION (Updated text, added hover interactions) -->
-<section class="stats-reboot">
-    <div class="stat-box">
-        <h2 class="counter">500+</h2>
-        <p>{% trans "Businesses Supported" %}</p>
-    </div>
-    <div class="stat-box">
-        <h2>{% trans "Prime" %}</h2>
-        <p>{% trans "Seef District Location" %}</p>
-    </div>
-    <div class="stat-box">
-        <h2>100%</h2>
-        <p>{% trans "Foreign Ownership" %}</p>
-    </div>
-    <div class="stat-box">
-        <h2>{% trans "Zero" %}</h2>
-        <!-- Replaced "Full-Service Business Center" -->
-        <p>{% trans "Setup Friction" %}</p> 
-    </div>
-</section>
-
-<!-- CTA SECTION -->
-<section class="cta-reboot">
+<!-- CTA -->
+<section class="cta-home">
     <div class="cta-inner">
         <h2>{% trans "Ready to Establish Your Business?" %}</h2>
         <p>{% trans "Contact our team today to find the ideal workspace for your growth." %}</p>

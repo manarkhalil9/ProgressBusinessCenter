@@ -3,20 +3,20 @@
 
 {% block content %}
 
-<!-- 1. Detail Page Hero Section -->
+
 <section class="gallery-hero">
             {% include 'hero_social.html' %}
     <div class="hero-content">
-        <!-- Dynamically pulling the image title into the hero -->
+
         <h1>{{ image.title }}</h1>
         <p>{% trans "A closer look at our workspace and facilities." %}</p>
     </div>
 </section>
 
-<!-- 2. Main Image Container -->
+
 <section class="gallery-detail-container">
-    
-    <!-- Back Navigation -->
+
+
     <a href="{% url 'gallery' %}" class="back-link">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -25,13 +25,13 @@
         {% trans "Back to Gallery" %}
     </a>
 
-    <!-- Main Detail Card -->
+
     <div class="gallery-detail-card">
         <div class="gallery-detail-image-wrapper">
             <img src="{{ image.image.url }}" alt="{{ image.title }}" class="gallery-detail-image">
         </div>
-        
-        <!-- Optional: You can remove this entire div if you don't want the title repeating below the image, since it's now in the Hero! -->
+
+
         <div class="gallery-detail-content">
             <h2 class="gallery-detail-title">{{ image.title }}</h2>
         </div>
